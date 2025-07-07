@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:flint"
+  ],
+  "result": {
+    "count": 2,
+    "id": "paleolithic-era:flint_shard"
+  }
+}

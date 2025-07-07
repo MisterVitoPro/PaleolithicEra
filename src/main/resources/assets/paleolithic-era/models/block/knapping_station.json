@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "paleolithic-era:block/knapping_station"
+  }
+}
