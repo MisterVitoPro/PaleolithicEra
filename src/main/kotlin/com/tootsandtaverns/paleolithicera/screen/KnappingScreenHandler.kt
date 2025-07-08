@@ -3,6 +3,7 @@ package com.tootsandtaverns.paleolithicera.screen
 import com.tootsandtaverns.paleolithicera.Constants.MOD_ID
 import com.tootsandtaverns.paleolithicera.PaleolithicEra.logger
 import com.tootsandtaverns.paleolithicera.recipe.KnapRecipe
+import com.tootsandtaverns.paleolithicera.recipe.KnapRecipeInput
 import com.tootsandtaverns.paleolithicera.registry.ModRecipes
 import com.tootsandtaverns.paleolithicera.registry.ModScreenHandlers
 import net.minecraft.entity.player.PlayerEntity
@@ -11,9 +12,9 @@ import net.minecraft.inventory.CraftingInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.recipe.RecipeType
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
+
 
 /**
  * Screen handler for the Knapping Station. Manages the input/output inventory and updates crafting output.
@@ -82,18 +83,15 @@ class KnappingScreenHandler(
         val server = world.server ?: return
         val recipeManager = server.recipeManager
 
-        // Fill a CraftingInventory from the 4 input slots
-        val craftingInventory = CraftingInventory(this, 2, 2).apply {
-            for (i in 0 until 4) {
-                setStack(i, inventory.getStack(i))
-            }
-        }
+        val recipeInput: KnapRecipeInput = (0 until 4)
+            .map { inventory.getStack(it) }
+            .firstOrNull { !it.isEmpty }
+            ?.let { KnapRecipeInput(it) }
+            ?: KnapRecipeInput(ItemStack.EMPTY)
 
-        // Convert CraftingInventory into a valid CraftingRecipeInput
-        val recipeInput = craftingInventory.createRecipeInput()
 
         recipeManager.getAllMatches(ModRecipes.KNAPPING_RECIPE_TYPE, recipeInput, world).forEach {
-            logger.info("Found recipe: ${it}")
+            logger.info("Found recipe: $it")
         }
 
         // Now get all matching recipes using the proper input
@@ -109,7 +107,9 @@ class KnappingScreenHandler(
 
         logger.info("Crafted result: ${result?.count}x ${result?.item}")
 
-        inventory.setStack(4, result)
+        if(result != null) {
+            inventory.setStack(4, result)
+        }
         sendContentUpdates()
     }
 

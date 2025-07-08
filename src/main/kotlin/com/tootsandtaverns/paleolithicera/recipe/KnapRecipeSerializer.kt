@@ -2,35 +2,34 @@ package com.tootsandtaverns.paleolithicera.recipe
 
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import com.tootsandtaverns.paleolithicera.recipe.KnapRecipeSerializer.CODEC
+import com.tootsandtaverns.paleolithicera.recipe.KnapRecipeSerializer.PACKET_CODEC
 import net.minecraft.item.ItemStack
 import net.minecraft.network.RegistryByteBuf
 import net.minecraft.network.codec.PacketCodec
+import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeSerializer
-import net.minecraft.util.Identifier
+import java.util.function.BiFunction
+import java.util.function.Function
 
 object KnapRecipeSerializer : RecipeSerializer<KnapRecipe> {
-    val CODEC: MapCodec<KnapRecipe> = RecordCodecBuilder.mapCodec { instance ->
-        instance.group(
-            Identifier.CODEC.fieldOf("id").forGetter(KnapRecipe::id),
-            ItemStack.CODEC.fieldOf("input").forGetter { it.inputItem },
-            ItemStack.CODEC.fieldOf("result").forGetter { it.output }
-        ).apply(instance, ::KnapRecipe)
-    }
 
-    val PACKET_CODEC: PacketCodec<RegistryByteBuf, KnapRecipe> =
-        PacketCodec.of(
-            { recipe, buf ->
-                Identifier.PACKET_CODEC.encode(buf, recipe.id)
-                ItemStack.PACKET_CODEC.encode(buf, recipe.inputItem)
-                ItemStack.PACKET_CODEC.encode(buf, recipe.output)
-            },
-            { buf ->
-                val id = Identifier.PACKET_CODEC.decode(buf)
-                val input = ItemStack.PACKET_CODEC.decode(buf)
-                val output = ItemStack.PACKET_CODEC.decode(buf)
-                KnapRecipe(id, output, input)
-            }
-        )
+    val CODEC: MapCodec<KnapRecipe> =
+        RecordCodecBuilder.mapCodec { inst: RecordCodecBuilder.Instance<KnapRecipe> ->
+            inst.group(
+                Ingredient.CODEC.fieldOf("ingredient")
+                    .forGetter(KnapRecipe::inputItem),
+                ItemStack.CODEC.fieldOf("result")
+                    .forGetter(KnapRecipe::output)
+            ).apply(
+                inst
+            ) { inputItem: Ingredient, output: ItemStack -> KnapRecipe(output, inputItem) }
+        }
+
+    val PACKET_CODEC: PacketCodec<RegistryByteBuf, KnapRecipe> = 
+        PacketCodec.tuple(
+            Ingredient.PACKET_CODEC, KnapRecipe::inputItem,
+            ItemStack.PACKET_CODEC, KnapRecipe::output) { inputItem: Ingredient, output: ItemStack -> KnapRecipe(output, inputItem) }
 
     override fun codec(): MapCodec<KnapRecipe> = CODEC
 

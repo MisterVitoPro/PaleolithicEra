@@ -48,7 +48,6 @@ class KnappingStationBlock(settings: Settings) : BlockWithEntity(settings) {
         player: PlayerEntity,
         hit: BlockHitResult
     ): ActionResult {
-        logger.info("I am a Knapping Station getting clicked on!")
         if (!world.isClient) {
             val factory = state.createScreenHandlerFactory(world, pos)
             if (factory != null) {

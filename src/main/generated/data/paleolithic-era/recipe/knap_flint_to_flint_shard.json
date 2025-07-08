@@ -1,11 +1,8 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    "minecraft:flint"
-  ],
+  "type": "paleolithic-era:knapping",
+  "ingredient": "minecraft:flint",
   "result": {
-    "count": 2,
+    "count": 1,
     "id": "paleolithic-era:flint_shard"
   }
 }

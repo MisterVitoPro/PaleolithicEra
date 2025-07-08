@@ -51,7 +51,7 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity
     fun getInventory(): SimpleInventory = inventory
 
     override fun getDisplayName(): Text? {
-        return Text.translatable("block.paleolithic-era.knapping_station")
+        return Text.translatable("Knapping Station")
     }
 
     override fun createMenu(
