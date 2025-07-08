@@ -1,5 +1,6 @@
 package com.tootsandtaverns.paleolithicera.recipe
 
+import com.tootsandtaverns.paleolithicera.PaleolithicEra.logger
 import com.tootsandtaverns.paleolithicera.registry.ModRecipes
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.Ingredient
@@ -18,17 +19,17 @@ class KnapRecipe(
 ) : Recipe<KnapRecipeInput> {
 
     override fun matches(
-        input: KnapRecipeInput?,
+        input: KnapRecipeInput,
         world: World
     ): Boolean {
-        if ((input == null || input.size() < 4)
-            && world.isClient())
+        if (world.isClient())
             return false
 
         // Match: at least one of the first 4 slots contains the input item
         for (i in 0 until 4) {
-            val stack = input!!.getStackInSlot(i)
-            if (!stack.isEmpty && stack.item == inputItem) {
+            logger.info("Test Match for Slot $i="+inputItem.test(input.getStackInSlot(i)))
+            val stack = input.getStackInSlot(i)
+            if (!stack.isEmpty && inputItem.test(input.getStackInSlot(i))) {
                 return true
             }
         }
