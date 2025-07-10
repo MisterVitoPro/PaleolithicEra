@@ -1,6 +1,8 @@
 package com.tootsandtaverns.paleolithicera.registry
 
 import com.tootsandtaverns.paleolithicera.Constants.MOD_ID
+import com.tootsandtaverns.paleolithicera.item.FireDrillItem
+import com.tootsandtaverns.paleolithicera.item.ModToolMaterials
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries
@@ -12,11 +14,17 @@ import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier
+import java.util.function.Function
 
 
 object ModItems {
-    val BONE_SPEAR: Item = register("bone_spear", { settings: Item.Settings -> TridentItem(settings) }, Item.Settings())
-    val FLINT_SHARD : Item = register("flint_shard", { settings: Item.Settings -> Item(settings)}, Item.Settings())
+    val BARK: Item = register("bark", { settings: Item.Settings -> Item(settings) })
+    val BONE_SPEAR: Item = register("bone_spear", { settings: Item.Settings -> TridentItem(settings) })
+    val BONE_SPEARHEAD: Item = register("bone_spearhead", { settings: Item.Settings -> Item(settings) })
+    val CRUDE_KNIFE : Item = register("crude_knife", { settings: Item.Settings -> Item(settings.sword(ModToolMaterials.CRUDE_KNIFE_MATERIAL, 0.5f, -2.4f))})
+    val FIRE_DRILL: Item = register("fire_drill", { settings: Item.Settings -> FireDrillItem(settings.maxCount(1).maxDamage(10)) })
+    val FLINT_SHARD : Item = register("flint_shard", { settings: Item.Settings -> Item(settings)})
+    val PLANT_FIBER : Item = register("plant_fiber", { settings: Item.Settings -> Item(settings)})
 
     fun initialize() {
         // Get the event for modifying entries in the ingredients group.
@@ -25,9 +33,9 @@ object ModItems {
             .register(ModifyEntries { itemGroup: FabricItemGroupEntries -> itemGroup.add(BONE_SPEAR) })
     }
 
-    fun register(name: String, itemFactory: (Item.Settings) -> Item, settings: Item.Settings): Item {
+    fun register(name: String, itemFactory: (Item.Settings) -> Item, settings: Item.Settings = Item.Settings()): Item {
         // Create the item key.
-        val itemKey = RegistryKey.of<Item>(RegistryKeys.ITEM, Identifier.of(MOD_ID, name))
+        val itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(MOD_ID, name))
 
         // Create the item instance.
         val item: Item = itemFactory(settings.registryKey(itemKey))

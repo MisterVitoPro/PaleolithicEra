@@ -12,8 +12,10 @@ import net.minecraft.inventory.CraftingInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
+import net.minecraft.recipe.RecipeEntry
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
+import java.util.Optional
 
 
 /**
@@ -34,8 +36,8 @@ class KnappingScreenHandler(
             val x = 30 + (i % 2) * 18
             val y = 17 + (i / 2) * 18
             addSlot(object : Slot(inventory, i, x, y) {
-                override fun setStack(stack: ItemStack) {
-                    super.setStack(stack)
+                override fun markDirty() {
+                    super.markDirty()
                     updateResult()
                 }
             })
@@ -75,41 +77,28 @@ class KnappingScreenHandler(
 
     override fun canUse(player: PlayerEntity): Boolean = true
 
-    /**
-     * Tries to find a matching shapeless vanilla recipe with prefix "knap_" and sets the output.
-     */
     private fun updateResult() {
         val world = playerInventory.player.world
         val server = world.server ?: return
         val recipeManager = server.recipeManager
 
-        val recipeInput: KnapRecipeInput = (0 until 4)
-            .map { inventory.getStack(it) }
-            .firstOrNull { !it.isEmpty }
-            ?.let { KnapRecipeInput(it) }
-            ?: KnapRecipeInput(ItemStack.EMPTY)
+        val inputStacks = (0 until 4).map { inventory.getStack(it).copy() }
+        val recipeInput = KnapRecipeInput(inputStacks)
 
-
-        recipeManager.getAllMatches(ModRecipes.KNAPPING_RECIPE_TYPE, recipeInput, world).forEach {
-            logger.info("Found recipe: $it")
-        }
-
-        // Now get all matching recipes using the proper input
-        val recipe: KnapRecipe? = recipeManager
+        // Get the first matching recipe entry
+        val recipeEntry = recipeManager
             .getAllMatches(ModRecipes.KNAPPING_RECIPE_TYPE, recipeInput, world)
-            .toList()
-            .firstOrNull { it.id.value.namespace == MOD_ID && it.id.value.path.startsWith("knap_") }
-            ?.value
+            .findFirst()
 
-        val result = recipe
-            ?.craft(recipeInput, world.registryManager)
-            ?.copy()
+        // Unwrap entry and call .craft on the recipe itself
+        val result: ItemStack = recipeEntry
+            .map { it.value.craft(recipeInput, world.registryManager) }
+            .orElse(ItemStack.EMPTY)!!
+            .copy()
 
-        logger.info("Crafted result: ${result?.count}x ${result?.item}")
+        logger.info("Crafted result: ${result.count}x ${result.item}")
 
-        if(result != null) {
-            inventory.setStack(4, result)
-        }
+        inventory.setStack(4, result)
         sendContentUpdates()
     }
 

@@ -1,0 +1,11 @@
+{
+  "type": "paleolithic-era:knapping",
+  "ingredient": [
+    "minecraft:stick",
+    "paleolithic-era:flint_shard"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:crude_knife"
+  }
+}

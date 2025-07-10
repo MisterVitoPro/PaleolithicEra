@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": "paleolithic-era:bark",
+    "F": "paleolithic-era:plant_fiber",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "S S",
+    " D ",
+    " F "
+  ],
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:fire_drill"
+  }
+}

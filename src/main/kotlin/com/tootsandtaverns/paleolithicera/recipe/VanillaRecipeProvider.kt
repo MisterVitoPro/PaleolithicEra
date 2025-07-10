@@ -23,6 +23,16 @@ class VanillaRecipeProvider(output: FabricDataOutput, registriesFuture: Completa
                     .input('S', Items.STICK)
                     .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem(ModItems.BONE_SPEAR))
                     .offerTo(exporter)
+
+                createShaped(RecipeCategory.COMBAT, ModItems.FIRE_DRILL, 1)
+                    .pattern("S S")
+                    .pattern(" D ")
+                    .pattern(" F ")
+                    .input('D', ModItems.BARK)
+                    .input('S', Items.STICK)
+                    .input('F', ModItems.PLANT_FIBER)
+                    .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem(ModItems.BONE_SPEAR))
+                    .offerTo(exporter)
             }
         }
     }

@@ -1,2 +1,15 @@
 // 1.21.7	-999999999-01-01T00:00:00	Paleolithic Era/Block Loot Tables
+888e8d9bf6ba752afbdc2db4908d70d66baf901f data/minecraft/loot_table/blocks/acacia_log.json
+06818b30ff529fd40f1bac35a6d85528f1034a11 data/minecraft/loot_table/blocks/bamboo_block.json
+c1679f5cfb591b0a0d2e57e29a8294cf58022716 data/minecraft/loot_table/blocks/birch_log.json
+6d972e41b031e9f40318ab580ebbcd41441b8f7d data/minecraft/loot_table/blocks/cherry_log.json
+abdd672061cbbf51a51b3ead8f98f20956ae1b20 data/minecraft/loot_table/blocks/crimson_stem.json
+99623cbfb45f272305c7816319b8eec2770913e8 data/minecraft/loot_table/blocks/dark_oak_log.json
+96fb5360cf4258488f1ccb2b80ec3de99b939d34 data/minecraft/loot_table/blocks/jungle_log.json
+02bd0ee7f8b4f03d075c8cd939a53f3afe472887 data/minecraft/loot_table/blocks/large_fern.json
+a886758c447c896f585835ef8b19ad1bca7b008d data/minecraft/loot_table/blocks/mangrove_log.json
+1e83caa7d2d7af447b9302c80d7414c1953846fa data/minecraft/loot_table/blocks/oak_log.json
+ae49ee21cdfb3e2ecbeb70c84b32ff785abd035d data/minecraft/loot_table/blocks/spruce_log.json
+86426cf06176afeacf9fdca467368254cf105dd2 data/minecraft/loot_table/blocks/tall_grass.json
+0bcbdf92a6a2e0e546c399ee95784b8c62ceb789 data/minecraft/loot_table/blocks/warped_stem.json
 80aa4bf06e69967dfe20ca5d4f0a58939cbd21cb data/paleolithic-era/loot_table/blocks/knapping_station.json
