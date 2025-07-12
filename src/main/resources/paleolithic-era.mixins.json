@@ -1,9 +1,9 @@
 {
 	"required": true,
-	"package": "com.tootsandtaverns.mixin",
+	"package": "com.toolsandtaverns.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+      "com.toolsandtaverns.mixin.ExampleMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

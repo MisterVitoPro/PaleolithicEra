@@ -5,7 +5,7 @@ import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
-import com.tootsandtaverns.paleolithicera.screen.KnappingScreenHandler
+import com.toolsandtaverns.paleolithicera.screen.KnappingScreenHandler
 import net.minecraft.client.gl.RenderPipelines
 
 class KnappingStationScreen(

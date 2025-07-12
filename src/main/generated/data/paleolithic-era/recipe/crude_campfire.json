@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "paleolithic-era:bark",
+    "F": "paleolithic-era:plant_fiber",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "SBS",
+    "BFB",
+    "SBS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:crude_campfire"
+  }
+}

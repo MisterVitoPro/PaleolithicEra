@@ -2,11 +2,13 @@
   "item.paleolithic-era.bark": "Bark",
   "item.paleolithic-era.bone_spear": "Bone Spear",
   "item.paleolithic-era.bone_spearhead": "Bone Spearhead",
+  "item.paleolithic-era.crude_knife": "Crude Knife",
+  "item.paleolithic-era.crude_campfire": "Crude Campfire",
   "item.paleolithic-era.flint_shard": "Flint Shard",
   "item.paleolithic-era.fire_drill": "Fire Drill",
-  "item.paleolithic-era.crude_knife": "Crude Knife",
   "item.paleolithic-era.knapping_station": "Knapping Station",
   "block.paleolithic-era.knapping_station": "Knapping Station",
+  "block.paleolithic-era.crude_campfire": "Crude Campfire",
   "container.paleolithic-era.knapping_station": "Knapping Station",
   "item.paleolithic-era.plant_fiber": "Plant Fiber"
 }
