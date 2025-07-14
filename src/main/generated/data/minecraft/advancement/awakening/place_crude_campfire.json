@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:awakening/craft_fire_drill",
+  "criteria": {
+    "placed_crude_campfire": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:crude_campfire"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.place_crude_campfire.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:crude_campfire"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.place_crude_campfire.title"
+    }
+  },
+  "requirements": [
+    [
+      "placed_crude_campfire"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

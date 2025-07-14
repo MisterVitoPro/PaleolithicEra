@@ -24,14 +24,15 @@ import net.minecraft.util.Identifier
 object ModBlocks {
 
     val KNAPPING_STATION: Block = register("knapping_station", ::KnappingStationBlock, AbstractBlock.Settings.create())
-    val CRUDE_CAMPFIRE: Block = register("crude_campfire", ::CrudeCampFireBlock,
+    val CRUDE_CAMPFIRE: Block = register(
+        "crude_campfire", ::CrudeCampFireBlock,
         AbstractBlock.Settings.create()
-                .mapColor(MapColor.TERRACOTTA_BROWN)
-                .strength(1.0f)
-                .nonOpaque()
-                .pistonBehavior(PistonBehavior.DESTROY)
-                .sounds(BlockSoundGroup.WOOD)
-                .luminance { state -> if (state.get(Properties.LIT)) 15 else 0 })
+            .mapColor(MapColor.TERRACOTTA_BROWN)
+            .strength(1.0f)
+            .nonOpaque()
+            .pistonBehavior(PistonBehavior.DESTROY)
+            .sounds(BlockSoundGroup.WOOD)
+            .luminance { state -> if (state.get(Properties.LIT)) 15 else 0 })
 
     fun initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL)

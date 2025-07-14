@@ -7,6 +7,7 @@ import net.minecraft.block.CampfireBlock
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.RecipeType
@@ -82,8 +83,8 @@ class CrudeCampFireBlock(settings: Settings) : CampfireBlock(false, 1, settings)
         world: World,
         pos: BlockPos,
         state: BlockState,
-        placer: net.minecraft.entity.LivingEntity?,
-        itemStack: net.minecraft.item.ItemStack
+        placer: LivingEntity?,
+        itemStack: ItemStack
     ) {
         // Make sure it's placed unlit by default
         world.setBlockState(pos, state.with(Properties.LIT, false), 3)

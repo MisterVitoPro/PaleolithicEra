@@ -12,11 +12,10 @@ import net.minecraft.recipe.book.RecipeBookCategory
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.world.World
 import java.util.Optional
-import kotlin.jvm.optionals.toList
 
 class KnapRecipe(
     val output: ItemStack,
-    val inputs: List<Ingredient>,
+    inputs: List<Ingredient>,
     val isShaped: Boolean = false
 ) : Recipe<KnapRecipeInput> {
 

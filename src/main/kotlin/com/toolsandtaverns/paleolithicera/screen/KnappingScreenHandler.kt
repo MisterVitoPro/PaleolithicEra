@@ -1,21 +1,16 @@
 package com.toolsandtaverns.paleolithicera.screen
 
-import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
-import com.toolsandtaverns.paleolithicera.PaleolithicEra.logger
-import com.toolsandtaverns.paleolithicera.recipe.KnapRecipe
+import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
 import com.toolsandtaverns.paleolithicera.recipe.KnapRecipeInput
 import com.toolsandtaverns.paleolithicera.registry.ModRecipes
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.inventory.CraftingInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.recipe.RecipeEntry
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
-import java.util.Optional
 
 
 /**
@@ -96,7 +91,7 @@ class KnappingScreenHandler(
             .orElse(ItemStack.EMPTY)!!
             .copy()
 
-        logger.info("Crafted result: ${result.count}x ${result.item}")
+        LOGGER.info("Crafted result: ${result.count}x ${result.item}")
 
         inventory.setStack(4, result)
         sendContentUpdates()

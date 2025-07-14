@@ -3,7 +3,7 @@
 	"package": "com.toolsandtaverns.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-      "com.toolsandtaverns.mixin.ExampleMixin"
+		"ExampleMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

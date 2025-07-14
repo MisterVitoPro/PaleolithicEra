@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:awakening/gather_plant_fiber",
+  "criteria": {
+    "crafted_fire_drill": {
+      "conditions": {
+        "recipe": "paleolithic-era:fire_drill"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.craft_fire_drill.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:flint_and_steel"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.craft_fire_drill.title"
+    }
+  },
+  "requirements": [
+    [
+      "crafted_fire_drill"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

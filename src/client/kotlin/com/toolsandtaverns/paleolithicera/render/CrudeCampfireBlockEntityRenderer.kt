@@ -1,4 +1,4 @@
-package com.toolsandtaverns.paleolithicera.client.render
+package com.toolsandtaverns.paleolithicera.render
 
 import com.toolsandtaverns.paleolithicera.block.entity.CrudeCampfireBlockEntity
 import net.minecraft.block.CampfireBlock
@@ -8,12 +8,9 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.item.ItemDisplayContext
-import net.minecraft.item.ItemStack
 import net.minecraft.util.math.Direction
-import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RotationAxis
 import net.minecraft.util.math.Vec3d
-import net.minecraft.world.World
 
 /**
  * Custom renderer for the Crude Campfire. Displays cooking items above the fire.
@@ -33,8 +30,7 @@ class CrudeCampfireBlockEntityRenderer(
         overlay: Int,
         cameraPos: Vec3d?
     ) {
-        if (entity == null || matrices == null || vertexConsumers == null) return
-        val world: World = entity.world ?: return
+        if (entity == null || entity.world == null || matrices == null || vertexConsumers == null) return
         val state = entity.cachedState
 
         if (!state.get(CampfireBlock.LIT)) return

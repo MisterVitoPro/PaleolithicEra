@@ -37,6 +37,11 @@ loom {
 	}
 }
 
+kotlin {
+	sourceSets["client"].kotlin.srcDir("src/client/kotlin")
+	sourceSets["main"].kotlin.srcDir("src/main/kotlin")
+}
+
 tasks {
 
 	processResources {

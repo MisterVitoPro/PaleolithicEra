@@ -4,6 +4,9 @@ import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
+import net.minecraft.advancement.AdvancementCriterion
+import net.minecraft.advancement.AdvancementRewards
+import net.minecraft.advancement.criterion.InventoryChangedCriterion
 import net.minecraft.data.recipe.RecipeExporter
 import net.minecraft.data.recipe.RecipeGenerator
 import net.minecraft.item.ItemStack
@@ -22,31 +25,57 @@ class KnappingRecipeProvider(
     registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>
 ) : FabricRecipeProvider(output, registriesFuture) {
 
+    private fun buildDefaultKnapRecipe(
+        exporter: RecipeExporter,
+        recipeId: String,
+        recipe: KnapRecipe,
+        criterionName: String,
+        criterion: AdvancementCriterion<InventoryChangedCriterion.Conditions>
+    ) {
+        val identifier = Identifier.of(MOD_ID, recipeId)
+        val key = RegistryKey.of(RegistryKeys.RECIPE, identifier)
+        return exporter.accept(
+            key,
+            recipe,
+            exporter.advancementBuilder
+                .criterion(criterionName, criterion)
+                .rewards(AdvancementRewards.Builder.recipe(key))
+                .build(identifier)
+        )
+    }
+
     override fun getRecipeGenerator(
         registryLookup: RegistryWrapper.WrapperLookup,
         exporter: RecipeExporter
     ): RecipeGenerator {
+
         return object : RecipeGenerator(registryLookup, exporter) {
             override fun generate() {
                 // Flint -> Flint Shard ×2
-                exporter.accept(
-                    RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(MOD_ID, "knap_flint_to_flint_shard")),
-                    KnapRecipe(ItemStack(ModItems.FLINT_SHARD, 2), Items.FLINT),
-                    null
+                buildDefaultKnapRecipe(
+                    exporter = exporter,
+                    recipeId = "knap_flint_to_flint_shard",
+                    recipe = KnapRecipe(ItemStack(ModItems.FLINT_SHARD, 2), Items.FLINT),
+                    criterionName = "has_flint",
+                    criterion = InventoryChangedCriterion.Conditions.items(Items.FLINT)
                 )
-                
+
                 // Flint Shard + Stick -> Crude Knife
-                exporter.accept(
-                    RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(MOD_ID, "knap_crude_knife")),
-                    KnapRecipe(ItemStack(ModItems.CRUDE_KNIFE), Items.STICK, ModItems.FLINT_SHARD),
-                    null
+                buildDefaultKnapRecipe(
+                    exporter = exporter,
+                    recipeId = "knap_crude_knife",
+                    recipe = KnapRecipe(ItemStack(ModItems.CRUDE_KNIFE), Items.STICK, ModItems.FLINT_SHARD),
+                    criterionName = "has_flint_shard",
+                    criterion = InventoryChangedCriterion.Conditions.items(ModItems.FLINT_SHARD)
                 )
 
                 // Flint Shard + Bone -> Bone Spearhead
-                exporter.accept(
-                    RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(MOD_ID, "knap_bone_spearhead")),
-                    KnapRecipe(ItemStack(ModItems.BONE_SPEARHEAD), Items.BONE),
-                    null
+                buildDefaultKnapRecipe(
+                    exporter = exporter,
+                    recipeId = "knap_bone_spearhead",
+                    recipe = KnapRecipe(ItemStack(ModItems.BONE_SPEARHEAD), Items.BONE),
+                    criterionName = "has_flint_shard",
+                    criterion = InventoryChangedCriterion.Conditions.items(ModItems.FLINT_SHARD)
                 )
             }
         }

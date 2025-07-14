@@ -1,12 +1,9 @@
 package com.toolsandtaverns.paleolithicera.recipe
 
 import net.minecraft.item.ItemStack
-import net.minecraft.recipe.input.CraftingRecipeInput
 import net.minecraft.recipe.input.RecipeInput
 
 class KnapRecipeInput(val inputItemStacks: List<ItemStack>) : RecipeInput {
-
-    val isShaped: Boolean = false
 
     override fun getStackInSlot(slot: Int): ItemStack {
         return inputItemStacks.getOrElse(slot) { ItemStack.EMPTY }

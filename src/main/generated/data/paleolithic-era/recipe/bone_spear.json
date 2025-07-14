@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "B": "minecraft:bone",
+    "B": "paleolithic-era:bone_spearhead",
     "S": "minecraft:stick"
   },
   "pattern": [

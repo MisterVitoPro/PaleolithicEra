@@ -1,8 +1,6 @@
 package com.toolsandtaverns.paleolithicera.block
 
 import com.mojang.serialization.MapCodec
-import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
-import com.toolsandtaverns.paleolithicera.PaleolithicEra.logger
 import com.toolsandtaverns.paleolithicera.block.entity.KnappingStationBlockEntity
 import com.toolsandtaverns.paleolithicera.registry.ModBlockEntities
 import net.minecraft.block.*
@@ -15,14 +13,17 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import org.slf4j.LoggerFactory
 
 class KnappingStationBlock(settings: Settings) : BlockWithEntity(settings) {
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity =
         KnappingStationBlockEntity(pos, state)
 
-    override fun createScreenHandlerFactory(state: BlockState, world: World, pos: BlockPos): NamedScreenHandlerFactory? {
+    override fun createScreenHandlerFactory(
+        state: BlockState,
+        world: World,
+        pos: BlockPos
+    ): NamedScreenHandlerFactory? {
         val blockEntity = world.getBlockEntity(pos)
         return blockEntity as? KnappingStationBlockEntity
     }
@@ -58,10 +59,9 @@ class KnappingStationBlock(settings: Settings) : BlockWithEntity(settings) {
     }
 
 
-
     companion object {
         val CODEC: MapCodec<KnappingStationBlock> by lazy {
-            createCodec { KnappingStationBlock(AbstractBlock.Settings.create().strength(2.0f)) }
+            createCodec { KnappingStationBlock(Settings.create().strength(2.0f)) }
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.toolsandtaverns.paleolithicera.item
 
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
+import com.toolsandtaverns.paleolithicera.registry.ModCriteria
 import net.minecraft.block.BlockState
 import net.minecraft.block.CampfireBlock
 import net.minecraft.entity.LivingEntity
@@ -8,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.consume.UseAction
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.state.property.Properties
@@ -49,6 +51,10 @@ class FireDrillItem(settings: Settings) : Item(settings) {
                     null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE,
                     SoundCategory.BLOCKS, 1.0f, 1.0f
                 )
+
+                if (!world.isClient && user is ServerPlayerEntity) {
+                    ModCriteria.LIT_CRUDE_CAMPFIRE.trigger(user)
+                }
 
                 // Damage item (break after 10 uses)
                 stack.damage(1, user, Hand.MAIN_HAND)

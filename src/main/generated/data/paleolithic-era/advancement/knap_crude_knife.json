@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_flint_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:flint_shard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_flint_shard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "paleolithic-era:knap_crude_knife"
+    ]
+  }
+}

@@ -17,7 +17,19 @@ object ModToolMaterials {
         5,                                   // Enchantability
         TagKey.of(
             RegistryKeys.ITEM,
-            Identifier.of(MOD_ID,"flint_tools")
+            Identifier.of(MOD_ID, "flint_tools")
+        )
+    )
+
+    val BONE_KNIFE_MATERIAL = ToolMaterial(
+        BlockTags.INCORRECT_FOR_WOODEN_TOOL, // Blocks it cannot mine properly
+        20,                                  // Durability
+        1.0f,                                // Mining speed
+        0.5f,                                // Attack damage bonus
+        2,                                   // Enchantability
+        TagKey.of(
+            RegistryKeys.ITEM,
+            Identifier.of(MOD_ID, "bone_tools")
         )
     )
 

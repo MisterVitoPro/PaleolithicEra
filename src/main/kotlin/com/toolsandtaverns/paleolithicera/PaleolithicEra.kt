@@ -6,22 +6,27 @@ import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.ModRecipes
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
+import com.toolsandtaverns.paleolithicera.datagen.PlantFiberLootModifier
+import com.toolsandtaverns.paleolithicera.registry.ModCriteria
 import net.fabricmc.api.ModInitializer
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 object PaleolithicEra : ModInitializer {
 
-    val logger = LoggerFactory.getLogger(MOD_ID)
+    val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
 
-	override fun onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
-		logger.info("Initializing Paleolithic Era")
-		ModBlocks.initialize()
-		ModItems.initialize()
-		ModBlockEntities.initialize()
-		ModScreenHandlers.initialize()
-		ModRecipes.initialize()
-	}
+    override fun onInitialize() {
+        // This code runs as soon as Minecraft is in a mod-load-ready state.
+        // However, some things (like resources) may still be uninitialized.
+        // Proceed with mild caution.
+        LOGGER.info("Initializing Paleolithic Era")
+        ModBlocks.initialize()
+        ModItems.initialize()
+        ModBlockEntities.initialize()
+        ModScreenHandlers.initialize()
+        ModRecipes.initialize()
+        ModCriteria.initialize()
+        PlantFiberLootModifier.initialize()
+    }
 }

@@ -22,14 +22,16 @@ object ModBlockEntities {
 
     fun initialize() {
         KNAPPING_STATION = register(
-        "knapping_station",
-        ::KnappingStationBlockEntity,
-        ModBlocks.KNAPPING_STATION)
+            "knapping_station",
+            ::KnappingStationBlockEntity,
+            ModBlocks.KNAPPING_STATION
+        )
 
         CRUDE_CAMPFIRE = register(
             name = "crude_campfire",
             entityFactory = ::CrudeCampfireBlockEntity,
-            ModBlocks.CRUDE_CAMPFIRE)
+            ModBlocks.CRUDE_CAMPFIRE
+        )
     }
 
     private fun <T : BlockEntity> register(

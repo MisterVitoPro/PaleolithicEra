@@ -17,6 +17,7 @@ object ModScreenHandlers {
         KNAPPING = Registry.register(
             Registries.SCREEN_HANDLER,
             Identifier.of(MOD_ID, "knapping"),
-            ScreenHandlerType(::KnappingScreenHandler, FeatureSet.empty()))
+            ScreenHandlerType(::KnappingScreenHandler, FeatureSet.empty())
+        )
     }
 }

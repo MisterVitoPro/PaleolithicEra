@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:awakening/light_crude_campfire",
+  "criteria": {
+    "cooked_meat": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:cooked_beef"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.cook_meat.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:cooked_beef"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.cook_meat.title"
+    }
+  },
+  "requirements": [
+    [
+      "cooked_meat"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

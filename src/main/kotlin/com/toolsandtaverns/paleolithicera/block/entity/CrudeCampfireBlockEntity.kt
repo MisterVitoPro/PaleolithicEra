@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.block.entity
 
-import com.mojang.logging.LogUtils
+import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
 import com.toolsandtaverns.paleolithicera.registry.ModBlockEntities
 import net.minecraft.block.BlockState
 import net.minecraft.block.CampfireBlock
@@ -34,13 +34,13 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
-import org.slf4j.Logger
 import java.util.*
 import java.util.function.Consumer
 import java.util.function.Function
 import kotlin.math.min
 
-class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) : BlockEntity(ModBlockEntities.CRUDE_CAMPFIRE, pos, state),
+class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
+    BlockEntity(ModBlockEntities.CRUDE_CAMPFIRE, pos, state),
     Clearable {
     val itemsBeingCooked: DefaultedList<ItemStack?> = DefaultedList.ofSize<ItemStack?>(4, ItemStack.EMPTY)
     private val cookingTimes: IntArray = IntArray(4)
@@ -58,7 +58,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) : BlockEntity(
                 0,
                 min(this.cookingTotalTimes.size, `is`!!.size)
             )
-        }, Runnable { Arrays.fill(this.cookingTimes, 0) })
+        }) { Arrays.fill(this.cookingTimes, 0) }
         view.getOptionalIntArray("CookingTotalTimes").ifPresentOrElse(Consumer { `is`: IntArray? ->
             System.arraycopy(
                 `is`,
@@ -67,7 +67,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) : BlockEntity(
                 0,
                 min(this.cookingTotalTimes.size, `is`!!.size)
             )
-        }, Runnable { Arrays.fill(this.cookingTotalTimes, 0) })
+        }) { Arrays.fill(this.cookingTotalTimes, 0) }
     }
 
     override fun writeData(view: WriteView) {
@@ -94,7 +94,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) : BlockEntity(
             val itemStack = this.itemsBeingCooked[i]
             if (itemStack.isEmpty) {
                 val optional = world.recipeManager
-                    .getFirstMatch<SingleStackRecipeInput?, CampfireCookingRecipe?>(
+                    .getFirstMatch(
                         RecipeType.CAMPFIRE_COOKING,
                         SingleStackRecipeInput(stack),
                         world
@@ -137,7 +137,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) : BlockEntity(
 
     override fun readComponents(components: ComponentsAccess) {
         super.readComponents(components)
-        (components.getOrDefault<ContainerComponent?>(
+        (components.getOrDefault(
             DataComponentTypes.CONTAINER,
             ContainerComponent.DEFAULT
         ) as ContainerComponent).copyTo(
@@ -147,7 +147,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) : BlockEntity(
 
     override fun addComponents(builder: ComponentMap.Builder) {
         super.addComponents(builder)
-        builder.add<ContainerComponent?>(
+        builder.add(
             DataComponentTypes.CONTAINER,
             ContainerComponent.fromStacks(this.itemsBeingCooked)
         )
@@ -159,9 +159,6 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) : BlockEntity(
     }
 
     companion object {
-        private val LOGGER: Logger = LogUtils.getLogger()
-        private const val field_31330 = 2
-        private const val field_31331 = 4
         fun litServerTick(
             world: ServerWorld,
             pos: BlockPos,
@@ -172,7 +169,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) : BlockEntity(
             var bl = false
 
             for (i in blockEntity.itemsBeingCooked.indices) {
-                val itemStack = blockEntity.itemsBeingCooked.get(i)
+                val itemStack = blockEntity.itemsBeingCooked[i]
                 if (!itemStack.isEmpty) {
                     bl = true
                     val var10002: Int = blockEntity.cookingTimes[i]++
@@ -224,7 +221,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) : BlockEntity(
         }
 
         fun clientTick(world: World, pos: BlockPos, state: BlockState, campfire: CrudeCampfireBlockEntity) {
-            if (!state.get(CampfireBlock.LIT)) return  // 🔥 Don't render smoke if not lit
+            if (!state.get(CampfireBlock.LIT)) return
 
             val random = world.random
             if (random.nextFloat() < 0.11f) {

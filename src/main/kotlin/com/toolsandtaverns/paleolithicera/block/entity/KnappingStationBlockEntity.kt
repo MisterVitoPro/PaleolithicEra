@@ -20,7 +20,8 @@ import net.minecraft.util.math.BlockPos
 /**
  * Block entity that stores inventory and handles logic for the Knapping Station.
  */
-class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity(ModBlockEntities.KNAPPING_STATION, pos, state),
+class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
+    BlockEntity(ModBlockEntities.KNAPPING_STATION, pos, state),
     NamedScreenHandlerFactory {
 
     private val inventory = SimpleInventory(5)
@@ -39,13 +40,6 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) : BlockEntity
             list[i] = inventory.getStack(i)
         }
         Inventories.writeData(view, list)
-    }
-
-    /**
-     * Called every game tick (server-side). Used to update the output slot.
-     */
-    fun tick() {
-        // Recipe logic (already handled in the ScreenHandler for now)
     }
 
     fun getInventory(): SimpleInventory = inventory

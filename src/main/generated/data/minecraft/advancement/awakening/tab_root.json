@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:gui/advancements/backgrounds/stone",
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:tab_icon"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.title"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

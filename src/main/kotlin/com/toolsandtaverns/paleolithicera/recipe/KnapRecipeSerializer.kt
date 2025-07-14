@@ -16,7 +16,7 @@ object KnapRecipeSerializer : RecipeSerializer<KnapRecipe> {
         RecordCodecBuilder.mapCodec { inst: RecordCodecBuilder.Instance<KnapRecipe> ->
             inst.group(
                 Ingredient.CODEC.listOf().fieldOf("ingredient")
-                    .forGetter{ it.getRawInputs() } ,
+                    .forGetter { it.getRawInputs() },
                 ItemStack.CODEC.fieldOf("result")
                     .forGetter(KnapRecipe::output),
                 Codec.BOOL.optionalFieldOf("isShaped", false)
@@ -28,7 +28,7 @@ object KnapRecipeSerializer : RecipeSerializer<KnapRecipe> {
 
     val PACKET_CODEC: PacketCodec<RegistryByteBuf, KnapRecipe> =
         PacketCodec.tuple(
-            PacketCodecs.collection({ ArrayList<Ingredient>() }, Ingredient.PACKET_CODEC),
+            PacketCodecs.collection({ ArrayList() }, Ingredient.PACKET_CODEC),
             KnapRecipe::getRawInputs,
 
             ItemStack.PACKET_CODEC,

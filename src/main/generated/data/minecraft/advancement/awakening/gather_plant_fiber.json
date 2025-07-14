@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:awakening/craft_bone_knife",
+  "criteria": {
+    "gather_plant_fiber": {
+      "conditions": {
+        "recipe": "paleolithic-era:plant_fiber"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.gather_plant_fiber.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:plant_fiber"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.gather_plant_fiber.title"
+    }
+  },
+  "requirements": [
+    [
+      "gather_plant_fiber"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
