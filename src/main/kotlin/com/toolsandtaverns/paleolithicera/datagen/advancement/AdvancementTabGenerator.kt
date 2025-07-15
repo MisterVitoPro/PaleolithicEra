@@ -80,10 +80,7 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
                 true, true, false
             )
             .criterion(
-                "craft_bone_knife",
-                RecipeUnlockedCriterion.create(
-                    RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(MOD_ID, "bone_knife"))
-                )
+                "craft_bone_knife", InventoryChangedCriterion.Conditions.items(ModItems.BONE_KNIFE)
             )
             .build(consumer, "awakening/craft_bone_knife")
 
@@ -99,10 +96,7 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
                 true, true, false
             )
             .criterion(
-                "gather_plant_fiber",
-                RecipeUnlockedCriterion.create(
-                    RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(MOD_ID, "plant_fiber"))
-                )
+                "gather_plant_fiber", InventoryChangedCriterion.Conditions.items(ModItems.PLANT_FIBER)
             )
             .build(consumer, "awakening/gather_plant_fiber")
 
@@ -118,9 +112,7 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
             )
             .criterion(
                 "crafted_fire_drill",
-                RecipeUnlockedCriterion.create(
-                    RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(MOD_ID, "fire_drill"))
-                )
+                InventoryChangedCriterion.Conditions.items(ModItems.FIRE_DRILL)
             )
             .build(consumer, "awakening/craft_fire_drill")
 

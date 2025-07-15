@@ -46,6 +46,9 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
     private val cookingTimes: IntArray = IntArray(4)
     private val cookingTotalTimes: IntArray = IntArray(4)
 
+    private var burnTicksRemaining: Int = 0
+    private val totalBurnTicks: Int = 1200
+
     override fun readData(view: ReadView) {
         super.readData(view)
         this.itemsBeingCooked.clear()
@@ -68,6 +71,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
                 min(this.cookingTotalTimes.size, `is`!!.size)
             )
         }) { Arrays.fill(this.cookingTotalTimes, 0) }
+        burnTicksRemaining = view.getInt("BurnTicksRemaining", 0)
     }
 
     override fun writeData(view: WriteView) {
@@ -75,6 +79,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
         Inventories.writeData(view, this.itemsBeingCooked, true)
         view.putIntArray("CookingTimes", this.cookingTimes)
         view.putIntArray("CookingTotalTimes", this.cookingTotalTimes)
+        view.putInt("BurnTicksRemaining", burnTicksRemaining)
     }
 
     override fun toUpdatePacket(): BlockEntityUpdateS2CPacket? {
@@ -158,6 +163,11 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
         view.remove("Items")
     }
 
+    fun startBurnTimer() {
+        this.burnTicksRemaining = totalBurnTicks
+        markDirty()
+    }
+
     companion object {
         fun litServerTick(
             world: ServerWorld,
@@ -167,6 +177,16 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
             recipeMatchGetter: MatchGetter<SingleStackRecipeInput?, CampfireCookingRecipe?>
         ) {
             var bl = false
+
+            if (blockEntity.burnTicksRemaining > 0) {
+                blockEntity.burnTicksRemaining--
+
+                if (blockEntity.burnTicksRemaining == 0) {
+                    world.setBlockState(pos, state.with(CampfireBlock.LIT, false), 3)
+                    return
+                }
+            }
+
 
             for (i in blockEntity.itemsBeingCooked.indices) {
                 val itemStack = blockEntity.itemsBeingCooked[i]
@@ -240,14 +260,14 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
             for (j in campfire.itemsBeingCooked.indices) {
                 if (!campfire.itemsBeingCooked[j].isEmpty && random.nextFloat() < 0.2f) {
                     val direction = Direction.fromHorizontalQuarterTurns(Math.floorMod(j + i, 4))
-                    val f = 0.3125f
+                    val fixed = 0.3125f
                     val d = pos.x.toDouble() + 0.5 - (direction.offsetX
-                        .toFloat() * 0.3125f).toDouble() + (direction.rotateYClockwise().offsetX
-                        .toFloat() * 0.3125f).toDouble()
+                        .toFloat() * fixed).toDouble() + (direction.rotateYClockwise().offsetX
+                        .toFloat() * fixed).toDouble()
                     val e = pos.y.toDouble() + 0.5
                     val g = pos.z.toDouble() + 0.5 - (direction.offsetZ
-                        .toFloat() * 0.3125f).toDouble() + (direction.rotateYClockwise().offsetZ
-                        .toFloat() * 0.3125f).toDouble()
+                        .toFloat() * fixed).toDouble() + (direction.rotateYClockwise().offsetZ
+                        .toFloat() * fixed).toDouble()
 
                     (0..3).forEach { k ->
                         world.addParticleClient(ParticleTypes.SMOKE, d, e, g, 0.0, 5.0E-4, 0.0)

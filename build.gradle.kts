@@ -47,8 +47,7 @@ tasks {
 	processResources {
 		inputs.property("version", project.version)
 		filesMatching("fabric.mod.json") {
-			expand(getProperties())
-			expand(mutableMapOf("version" to project.version))
+			expand(mapOf("version" to project.version))
 		}
 	}
 
@@ -66,12 +65,6 @@ tasks {
 					builtBy(remapSourcesJar)
 				}
 			}
-		}
-
-		// select the repositories you want to publish to
-		repositories {
-			// uncomment to publish to the local maven
-			// mavenLocal()
 		}
 	}
 

@@ -27,7 +27,7 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
     private val inventory = SimpleInventory(5)
 
     override fun readData(view: ReadView) {
-        val list = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY)
+        val list: DefaultedList<ItemStack> = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY)
         Inventories.readData(view, list)
         for (i in 0 until list.size) {
             inventory.setStack(i, list[i])
@@ -35,7 +35,7 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
     }
 
     override fun writeData(view: WriteView) {
-        val list = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY)
+        val list: DefaultedList<ItemStack> = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY)
         for (i in 0 until inventory.size()) {
             list[i] = inventory.getStack(i)
         }

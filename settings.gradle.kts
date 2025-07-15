@@ -7,12 +7,12 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 
-	val loomVersion: String by settings
-	val fabricKotlinVersion: String by settings
+	val loom_version: String by settings
+	val fabric_kotlin_version: String by settings
 	plugins {
-		id("fabric-loom") version loomVersion
+		id("fabric-loom") version loom_version
 		id("org.jetbrains.kotlin.jvm") version
-		fabricKotlinVersion
+				fabric_kotlin_version
 				.split("+kotlin.")[1] // Grabs the sentence after `+kotlin.`
 				.split("+")[0] // Ensures sentences like `+build.1` are ignored
 	}

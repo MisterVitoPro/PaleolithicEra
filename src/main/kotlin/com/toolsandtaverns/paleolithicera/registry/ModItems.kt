@@ -2,6 +2,7 @@ package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.item.FireDrillItem
+import com.toolsandtaverns.paleolithicera.item.KnifeItem
 import com.toolsandtaverns.paleolithicera.item.ModToolMaterials
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
@@ -18,12 +19,12 @@ import net.minecraft.util.Identifier
 
 object ModItems {
     val BARK: Item = register("bark", { settings: Item.Settings -> Item(settings) })
-    val BONE_KNIFE: Item = register("bone_knife", { settings: Item.Settings -> AxeItem(ModToolMaterials.BONE_KNIFE_MATERIAL, 0.25f, -2.4f, settings) })
+    val BONE_KNIFE: Item = register("bone_knife", { settings: Item.Settings -> KnifeItem(settings, ModToolMaterials.BONE_MATERIAL) })
     val BONE_SPEAR: Item = register("bone_spear", { settings: Item.Settings -> TridentItem(settings) })
     val BONE_SPEARHEAD: Item = register("bone_spearhead", { settings: Item.Settings -> Item(settings) })
     val CRUDE_KNIFE: Item = register(
         "crude_knife",
-        { settings: Item.Settings -> Item(settings.sword(ModToolMaterials.CRUDE_KNIFE_MATERIAL, 0.5f, -2.4f)) })
+        { settings: Item.Settings -> KnifeItem(settings, ModToolMaterials.FLINT_MATERIAL) })
     val FIRE_DRILL: Item =
         register("fire_drill", { settings: Item.Settings -> FireDrillItem(settings.maxCount(1).maxDamage(10)) })
     val FLINT_SHARD: Item = register("flint_shard", { settings: Item.Settings -> Item(settings) })

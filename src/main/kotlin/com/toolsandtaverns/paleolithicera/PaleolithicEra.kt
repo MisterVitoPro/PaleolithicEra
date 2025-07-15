@@ -1,12 +1,13 @@
 package com.toolsandtaverns.paleolithicera
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
+import com.toolsandtaverns.paleolithicera.datagen.loot.MobLootModifier
 import com.toolsandtaverns.paleolithicera.registry.ModBlockEntities
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.ModRecipes
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
-import com.toolsandtaverns.paleolithicera.datagen.PlantFiberLootModifier
+import com.toolsandtaverns.paleolithicera.datagen.loot.PlantFiberLootModifier
 import com.toolsandtaverns.paleolithicera.registry.ModCriteria
 import net.fabricmc.api.ModInitializer
 import org.slf4j.Logger
@@ -28,5 +29,6 @@ object PaleolithicEra : ModInitializer {
         ModRecipes.initialize()
         ModCriteria.initialize()
         PlantFiberLootModifier.initialize()
+        MobLootModifier.initialize()
     }
 }

@@ -1,5 +1,6 @@
 package com.toolsandtaverns.paleolithicera.item
 
+import com.toolsandtaverns.paleolithicera.block.entity.CrudeCampfireBlockEntity
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModCriteria
 import net.minecraft.block.BlockState
@@ -19,13 +20,12 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 /**
- * A primitive tool that lights unlit campfires when crouching and holding use for 3 seconds.
- * Breaks after 10 uses.
+ * A primitive tool that lights unlit campfires when crouching and holding use for n seconds.
  */
 class FireDrillItem(settings: Settings) : Item(settings) {
 
     override fun getMaxUseTime(stack: ItemStack, user: LivingEntity): Int {
-        return 60 // 3 seconds (20 ticks/sec)
+        return 60 // seconds (20 ticks/sec)
     }
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): ActionResult {
@@ -52,11 +52,16 @@ class FireDrillItem(settings: Settings) : Item(settings) {
                     SoundCategory.BLOCKS, 1.0f, 1.0f
                 )
 
+                val blockEntity: CrudeCampfireBlockEntity? = world.getBlockEntity(pos) as? CrudeCampfireBlockEntity
+                blockEntity?.startBurnTimer()
+
+
+
                 if (!world.isClient && user is ServerPlayerEntity) {
                     ModCriteria.LIT_CRUDE_CAMPFIRE.trigger(user)
                 }
 
-                // Damage item (break after 10 uses)
+                // Damage item
                 stack.damage(1, user, Hand.MAIN_HAND)
             }
         }

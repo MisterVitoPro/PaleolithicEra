@@ -1,6 +1,6 @@
-package com.toolsandtaverns.paleolithicera.datagen
+package com.toolsandtaverns.paleolithicera.datagen.loot
 
-import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
+import com.toolsandtaverns.paleolithicera.Constants
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents
 import net.minecraft.item.Item
 import net.minecraft.loot.LootPool
@@ -24,8 +24,8 @@ object PlantFiberLootModifier {
         LootTableEvents.MODIFY.register { id, tableBuilder, _, registryLookup ->
             if (listOfBlocksForDrops.contains(id.value)) {
                 val itemLookup: RegistryEntryLookup<Item> = registryLookup.getOrThrow(RegistryKeys.ITEM)
-                val boneKnife = Registries.ITEM.get(Identifier.of(MOD_ID, "bone_knife"))
-                val plantFiber = Registries.ITEM.get(Identifier.of(MOD_ID, "plant_fiber"))
+                val boneKnife = Registries.ITEM.get(Identifier.of(Constants.MOD_ID, "bone_knife"))
+                val plantFiber = Registries.ITEM.get(Identifier.of(Constants.MOD_ID, "plant_fiber"))
 
                 val fiberDrop = ItemEntry.builder(plantFiber)
                     .conditionally(

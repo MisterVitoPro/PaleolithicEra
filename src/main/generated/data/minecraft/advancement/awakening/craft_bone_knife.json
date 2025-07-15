@@ -3,9 +3,13 @@
   "criteria": {
     "craft_bone_knife": {
       "conditions": {
-        "recipe": "paleolithic-era:bone_knife"
+        "items": [
+          {
+            "items": "paleolithic-era:bone_knife"
+          }
+        ]
       },
-      "trigger": "minecraft:recipe_unlocked"
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {

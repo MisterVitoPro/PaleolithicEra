@@ -1,4 +1,4 @@
-package com.toolsandtaverns.paleolithicera.datagen
+package com.toolsandtaverns.paleolithicera.datagen.loot
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
@@ -18,7 +18,7 @@ import net.minecraft.registry.RegistryWrapper
 import net.minecraft.util.Identifier
 import java.util.concurrent.CompletableFuture
 
-class LootTableGenerator(
+class LootTableProvider(
     output: FabricDataOutput,
     registryLookup: CompletableFuture<RegistryWrapper.WrapperLookup>
 ) : FabricBlockLootTableProvider(output, registryLookup) {

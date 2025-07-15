@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera
 
-import com.toolsandtaverns.paleolithicera.datagen.LootTableGenerator
+import com.toolsandtaverns.paleolithicera.datagen.loot.LootTableProvider
 import com.toolsandtaverns.paleolithicera.datagen.ModAdvancementProvider
 import com.toolsandtaverns.paleolithicera.recipe.KnappingRecipeProvider
 import com.toolsandtaverns.paleolithicera.recipe.VanillaRecipeProvider
@@ -13,7 +13,7 @@ object PaleolithicEraDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::VanillaRecipeProvider)
         pack.addProvider(::KnappingRecipeProvider)
 
-        pack.addProvider(::LootTableGenerator)
+        pack.addProvider(::LootTableProvider)
         pack.addProvider(::ModAdvancementProvider)
     }
 }

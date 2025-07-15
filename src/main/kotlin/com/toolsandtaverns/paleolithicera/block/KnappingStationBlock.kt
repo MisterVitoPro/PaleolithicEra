@@ -23,19 +23,9 @@ class KnappingStationBlock(settings: Settings) : BlockWithEntity(settings) {
         state: BlockState,
         world: World,
         pos: BlockPos
-    ): NamedScreenHandlerFactory? {
-        val blockEntity = world.getBlockEntity(pos)
-        return blockEntity as? KnappingStationBlockEntity
-    }
-
-    override fun <T : BlockEntity> getTicker(
-        world: World,
-        state: BlockState,
-        type: BlockEntityType<T>
-    ): BlockEntityTicker<T>? {
-        return validateTicker(type, ModBlockEntities.KNAPPING_STATION) { w, p, s, be ->
-            if (be is KnappingStationBlockEntity) be.tick()
-        }
+    ): NamedScreenHandlerFactory {
+        val blockEntity: BlockEntity? = world.getBlockEntity(pos)
+        return blockEntity as KnappingStationBlockEntity
     }
 
     override fun getRenderType(state: BlockState): BlockRenderType = BlockRenderType.MODEL

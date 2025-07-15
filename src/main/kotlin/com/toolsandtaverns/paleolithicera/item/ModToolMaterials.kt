@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier
 
 object ModToolMaterials {
 
-    val CRUDE_KNIFE_MATERIAL = ToolMaterial(
+    val FLINT_MATERIAL = ToolMaterial(
         BlockTags.INCORRECT_FOR_WOODEN_TOOL, // Blocks it cannot mine properly
         35,                                  // Durability
         1.0f,                                // Mining speed
@@ -21,7 +21,7 @@ object ModToolMaterials {
         )
     )
 
-    val BONE_KNIFE_MATERIAL = ToolMaterial(
+    val BONE_MATERIAL = ToolMaterial(
         BlockTags.INCORRECT_FOR_WOODEN_TOOL, // Blocks it cannot mine properly
         20,                                  // Durability
         1.0f,                                // Mining speed

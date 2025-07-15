@@ -3,9 +3,13 @@
   "criteria": {
     "gather_plant_fiber": {
       "conditions": {
-        "recipe": "paleolithic-era:plant_fiber"
+        "items": [
+          {
+            "items": "paleolithic-era:plant_fiber"
+          }
+        ]
       },
-      "trigger": "minecraft:recipe_unlocked"
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {

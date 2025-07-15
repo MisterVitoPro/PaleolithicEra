@@ -1,6 +1,7 @@
 package com.toolsandtaverns.paleolithicera.render
 
 import com.toolsandtaverns.paleolithicera.block.entity.CrudeCampfireBlockEntity
+import net.minecraft.block.BlockState
 import net.minecraft.block.CampfireBlock
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.block.entity.BlockEntityRenderer
@@ -15,14 +16,12 @@ import net.minecraft.util.math.Vec3d
 /**
  * Custom renderer for the Crude Campfire. Displays cooking items above the fire.
  */
-class CrudeCampfireBlockEntityRenderer(
-    context: BlockEntityRendererFactory.Context
-) : BlockEntityRenderer<CrudeCampfireBlockEntity> {
+class CrudeCampfireBlockEntityRenderer(context: BlockEntityRendererFactory.Context) : BlockEntityRenderer<CrudeCampfireBlockEntity> {
 
     private val itemRenderer: ItemRenderer = context.itemRenderer
 
     override fun render(
-        entity: CrudeCampfireBlockEntity?,
+        entity: CrudeCampfireBlockEntity,
         tickDelta: Float,
         matrices: MatrixStack?,
         vertexConsumers: VertexConsumerProvider?,
@@ -30,13 +29,13 @@ class CrudeCampfireBlockEntityRenderer(
         overlay: Int,
         cameraPos: Vec3d?
     ) {
-        if (entity == null || entity.world == null || matrices == null || vertexConsumers == null) return
-        val state = entity.cachedState
+        if (entity.world == null || matrices == null || vertexConsumers == null) return
+        val state: BlockState = entity.cachedState
 
         if (!state.get(CampfireBlock.LIT)) return
 
-        val facing = state.get(CampfireBlock.FACING)
-        val rotationBase = facing.horizontalQuarterTurns
+        val facing: Direction = state.get(CampfireBlock.FACING)
+        val rotationBase: Int = facing.horizontalQuarterTurns
 
         for ((index, stack) in entity.itemsBeingCooked.withIndex()) {
             if (stack == null || stack.isEmpty) continue

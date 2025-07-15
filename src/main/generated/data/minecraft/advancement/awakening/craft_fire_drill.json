@@ -3,9 +3,13 @@
   "criteria": {
     "crafted_fire_drill": {
       "conditions": {
-        "recipe": "paleolithic-era:fire_drill"
+        "items": [
+          {
+            "items": "paleolithic-era:fire_drill"
+          }
+        ]
       },
-      "trigger": "minecraft:recipe_unlocked"
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
