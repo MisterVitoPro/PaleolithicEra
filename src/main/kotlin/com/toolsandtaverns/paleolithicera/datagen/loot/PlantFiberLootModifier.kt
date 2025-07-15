@@ -16,7 +16,13 @@ import net.minecraft.util.Identifier
 
 object PlantFiberLootModifier {
 
-    val listOfBlocksForDrops: List<Identifier> = listOf("blocks/tall_grass", "blocks/large_fern", "blocks/short_grass")
+    val listOfBlocksForDrops: List<Identifier> = listOf(
+        "blocks/tall_grass",
+        "blocks/large_fern",
+        "blocks/short_grass",
+        "blocks/short_dry_grass",
+        "blocks/tall_dry_grass",
+        )
         .map { Identifier.ofVanilla( it) }
         .toList()
 

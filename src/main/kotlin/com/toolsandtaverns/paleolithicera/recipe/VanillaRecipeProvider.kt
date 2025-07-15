@@ -27,7 +27,7 @@ class VanillaRecipeProvider(
                     .pattern(" S")
                     .input('B', Items.BONE)
                     .input('S', Items.STICK)
-                    .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem(Items.BONE))
+                    .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
                     .offerTo(exporter)
 
                 createShaped(RecipeCategory.COMBAT, ModItems.BONE_SPEAR, 1)

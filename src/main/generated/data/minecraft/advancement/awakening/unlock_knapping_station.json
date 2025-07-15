@@ -18,7 +18,7 @@
     },
     "icon": {
       "count": 1,
-      "id": "minecraft:stonecutter"
+      "id": "paleolithic-era:knapping_station"
     },
     "title": {
       "translate": "advancement.paleolithic-era.awakening.unlock_knapping.title"

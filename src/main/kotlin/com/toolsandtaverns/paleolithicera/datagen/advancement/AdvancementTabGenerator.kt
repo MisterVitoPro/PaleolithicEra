@@ -161,14 +161,14 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
             )
             .criterion(
                 "cooked_meat",
-                InventoryChangedCriterion.Conditions.items(Items.COOKED_BEEF)
+                InventoryChangedCriterion.Conditions.items(Items.COOKED_BEEF, Items.COOKED_CHICKEN)
             )
             .build(consumer, "awakening/cook_meat")
 
         Advancement.Builder.create()
             .parent(lightCrudeCampfire)
             .display(
-                Items.STONECUTTER, // Placeholder for Knapping Station
+                ModBlocks.KNAPPING_STATION, // Placeholder for Knapping Station
                 Text.translatable("advancement.$MOD_ID.awakening.unlock_knapping.title"),
                 Text.translatable("advancement.$MOD_ID.awakening.unlock_knapping.description"),
                 null,
