@@ -27,11 +27,6 @@ object MobLootModifier {
             // Look up entity type
             val entityType: EntityType<*> = Registries.ENTITY_TYPE.get(entityId)
 
-            LOGGER.info("ENTITY:${entityId.path}")
-            LOGGER.info("ENTITY:${entityId}")
-            LOGGER.info("TYPE:${entityType.spawnGroup}")
-            LOGGER.info("CLASS:${entityType.javaClass}")
-
             if (entityType.spawnGroup.isPeaceful) {
                 LOGGER.info("Adding bone drop to: $id")
                 builder.pool(

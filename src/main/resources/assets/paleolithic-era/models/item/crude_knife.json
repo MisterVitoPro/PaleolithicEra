@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "paleolithic-era:item/crude_knife"
+    "layer0": "paleolithic-era:item/flint_knife"
   }
 }

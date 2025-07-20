@@ -1,9 +1,10 @@
 {
 	"required": true,
-	"package": "com.toolsandtaverns.mixin",
+	"package": "com.toolsandtaverns.paleolithicera.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"LeafAndLogBehaviorMixin",
+		"LogPunchBlockerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -1,4 +1,4 @@
-package com.toolsandtaverns.paleolithicera.recipe
+package com.toolsandtaverns.paleolithicera.datagen.recipe
 
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems

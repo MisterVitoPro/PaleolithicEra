@@ -2,8 +2,8 @@ package com.toolsandtaverns.paleolithicera
 
 import com.toolsandtaverns.paleolithicera.datagen.loot.LootTableProvider
 import com.toolsandtaverns.paleolithicera.datagen.ModAdvancementProvider
-import com.toolsandtaverns.paleolithicera.recipe.KnappingRecipeProvider
-import com.toolsandtaverns.paleolithicera.recipe.VanillaRecipeProvider
+import com.toolsandtaverns.paleolithicera.datagen.recipe.KnappingRecipeProvider
+import com.toolsandtaverns.paleolithicera.datagen.recipe.VanillaRecipeProvider
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 

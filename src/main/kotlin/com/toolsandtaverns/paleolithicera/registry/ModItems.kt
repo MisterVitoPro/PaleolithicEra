@@ -3,11 +3,10 @@ package com.toolsandtaverns.paleolithicera.registry
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.item.FireDrillItem
 import com.toolsandtaverns.paleolithicera.item.KnifeItem
-import com.toolsandtaverns.paleolithicera.item.ModToolMaterials
+import com.toolsandtaverns.paleolithicera.item.ToolMaterialsMod
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries
-import net.minecraft.item.AxeItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroups
 import net.minecraft.item.TridentItem
@@ -19,16 +18,25 @@ import net.minecraft.util.Identifier
 
 object ModItems {
     val BARK: Item = register("bark", { settings: Item.Settings -> Item(settings) })
-    val BONE_KNIFE: Item = register("bone_knife", { settings: Item.Settings -> KnifeItem(settings, ModToolMaterials.BONE_MATERIAL) })
+    val PLANT_FIBER: Item = register("plant_fiber", { settings: Item.Settings -> Item(settings) })
+    val FLINT_SHARD: Item = register("flint_shard", { settings: Item.Settings -> Item(settings) })
+
+    val BONE_KNIFE: Item = register("bone_knife", { settings: Item.Settings -> KnifeItem(settings, ToolMaterialsMod.BONE_MATERIAL) })
     val BONE_SPEAR: Item = register("bone_spear", { settings: Item.Settings -> TridentItem(settings) })
     val BONE_SPEARHEAD: Item = register("bone_spearhead", { settings: Item.Settings -> Item(settings) })
-    val CRUDE_KNIFE: Item = register(
-        "crude_knife",
-        { settings: Item.Settings -> KnifeItem(settings, ModToolMaterials.FLINT_MATERIAL) })
+    val FLINT_KNIFE: Item = register(
+        "flint_knife",
+        { settings: Item.Settings -> KnifeItem(settings, ToolMaterialsMod.FLINT_MATERIAL) })
     val FIRE_DRILL: Item =
         register("fire_drill", { settings: Item.Settings -> FireDrillItem(settings.maxCount(1).maxDamage(10)) })
-    val FLINT_SHARD: Item = register("flint_shard", { settings: Item.Settings -> Item(settings) })
-    val PLANT_FIBER: Item = register("plant_fiber", { settings: Item.Settings -> Item(settings) })
+
+    val RAW_ELDERBERRIES = register("raw_elderberries") {
+        FoodComponent.Builder()
+            .hunger(2)
+            .saturationModifier(0.1f)
+            .statusEffect(StatusEffectInstance(StatusEffects.POISON, 60), 1.0f)
+            .build()
+    }
 
     val TAB_ICON_ITEM: Item = register("tab_icon", { settings: Item.Settings -> Item(settings.maxCount(1)) })
 

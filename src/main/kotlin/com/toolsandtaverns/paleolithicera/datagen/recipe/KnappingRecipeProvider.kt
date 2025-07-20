@@ -1,6 +1,7 @@
-package com.toolsandtaverns.paleolithicera.recipe
+package com.toolsandtaverns.paleolithicera.datagen.recipe
 
-import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
+import com.toolsandtaverns.paleolithicera.Constants
+import com.toolsandtaverns.paleolithicera.recipe.KnapRecipe
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
@@ -32,7 +33,7 @@ class KnappingRecipeProvider(
         criterionName: String,
         criterion: AdvancementCriterion<InventoryChangedCriterion.Conditions>
     ) {
-        val identifier = Identifier.of(MOD_ID, recipeId)
+        val identifier = Identifier.of(Constants.MOD_ID, recipeId)
         val key = RegistryKey.of(RegistryKeys.RECIPE, identifier)
         return exporter.accept(
             key,
@@ -63,8 +64,8 @@ class KnappingRecipeProvider(
                 // Flint Shard + Stick -> Crude Knife
                 buildDefaultKnapRecipe(
                     exporter = exporter,
-                    recipeId = "knap_crude_knife",
-                    recipe = KnapRecipe(ItemStack(ModItems.CRUDE_KNIFE), Items.STICK, ModItems.FLINT_SHARD),
+                    recipeId = "knap_flint_knife",
+                    recipe = KnapRecipe(ItemStack(ModItems.FLINT_KNIFE), Items.STICK, ModItems.FLINT_SHARD),
                     criterionName = "has_flint_shard",
                     criterion = InventoryChangedCriterion.Conditions.items(ModItems.FLINT_SHARD)
                 )
