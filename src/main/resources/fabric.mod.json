@@ -29,7 +29,7 @@
 		],
 		"fabric-datagen": [
 			{
-				"value": "com.toolsandtaverns.paleolithicera.PaleolithicEraDataGenerator",
+				"value": "com.toolsandtaverns.paleolithicera.PaleolithicEraDataGeneratorClient",
 				"adapter": "kotlin"
 			}
 		]

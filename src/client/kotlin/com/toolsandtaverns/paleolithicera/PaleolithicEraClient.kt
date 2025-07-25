@@ -20,6 +20,7 @@ object PaleolithicEraClient : ClientModInitializer {
 
         HandledScreens.register(ModScreenHandlers.KNAPPING, ::KnappingStationScreen)
         BlockRenderLayerMap.putBlock(ModBlocks.CRUDE_CAMPFIRE, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.ELDERBERRY_BUSH, BlockRenderLayer.CUTOUT)
 
     }
 }

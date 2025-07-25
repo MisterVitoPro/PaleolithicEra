@@ -31,5 +31,8 @@
   "block.paleolithic-era.knapping_station": "Knapping Station",
   "block.paleolithic-era.crude_campfire": "Crude Campfire",
   "container.paleolithic-era.knapping_station": "Knapping Station",
-  "item.paleolithic-era.plant_fiber": "Plant Fiber"
+  "item.paleolithic-era.plant_fiber": "Plant Fiber",
+  "block.paleolithic-era.elderberry_bush": "Elderberry Bush",
+  "item.paleolithic-era.raw_elderberries": "Raw Elderberries",
+  "item.paleolithic-era.cooked_elderberries": "Cooked Elderberries"
 }

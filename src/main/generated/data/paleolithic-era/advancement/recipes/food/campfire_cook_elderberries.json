@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_elderberries": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:raw_elderberries"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "paleolithic-era:campfire_cook_elderberries"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_elderberries"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "paleolithic-era:campfire_cook_elderberries"
+    ]
+  }
+}

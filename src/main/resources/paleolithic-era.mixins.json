@@ -4,7 +4,8 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"LeafAndLogBehaviorMixin",
-		"LogPunchBlockerMixin"
+		"LogPunchBlockerMixin",
+		"LogPunchForeverMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

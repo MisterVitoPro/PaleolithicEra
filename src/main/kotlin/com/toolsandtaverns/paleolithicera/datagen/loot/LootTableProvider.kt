@@ -2,17 +2,21 @@ package com.toolsandtaverns.paleolithicera.datagen.loot
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
+import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
+import net.minecraft.block.SweetBerryBushBlock
 import net.minecraft.item.Item
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
+import net.minecraft.loot.condition.BlockStatePropertyLootCondition
 import net.minecraft.loot.condition.RandomChanceLootCondition
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.entry.LeafEntry
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
+import net.minecraft.predicate.StatePredicate
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.util.Identifier
@@ -43,6 +47,8 @@ class LootTableProvider(
         )
 
         knownLogs.forEach { addBarkToLogDrop(it, bark) }
+
+        addDrop(ModBlocks.ELDERBERRY_BUSH, addElderberryBushesDrop(ModItems.RAW_ELDERBERRIES, Blocks.SWEET_BERRY_BUSH))
     }
 
 
@@ -58,6 +64,18 @@ class LootTableProvider(
 
         val lootTable: LootTable.Builder = LootTable.builder().pool(pool)
         addDrop(log, lootTable)
+    }
+
+    private fun addElderberryBushesDrop(dropItem: Item, baseBush: Block): LootTable.Builder {
+        return LootTable.builder()
+            .pool(
+                LootPool.builder()
+                    .conditionally(
+                        BlockStatePropertyLootCondition.builder(baseBush)
+                        .properties(StatePredicate.Builder.create().exactMatch(SweetBerryBushBlock.AGE, 3)))
+                    .rolls(ConstantLootNumberProvider.create(1f))
+                    .with(ItemEntry.builder(dropItem))
+            )
     }
 
 }

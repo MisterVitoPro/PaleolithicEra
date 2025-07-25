@@ -4,8 +4,11 @@ import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.BlockState
 import net.minecraft.block.SweetBerryBushBlock
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityCollisionHandler
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.state.property.IntProperty
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
@@ -36,5 +39,20 @@ class ElderberryBushBlock(settings: Settings) : SweetBerryBushBlock(settings) {
             return ActionResult.SUCCESS
         }
         return ActionResult.PASS
+    }
+
+    override fun onEntityCollision(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        entity: Entity,
+        handler: EntityCollisionHandler
+    ) {
+        // We do not want to damage or slow player
+        return
+    }
+
+    companion object {
+        val AGE: IntProperty = SweetBerryBushBlock.AGE
     }
 }

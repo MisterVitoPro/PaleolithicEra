@@ -1,14 +1,22 @@
 package com.toolsandtaverns.paleolithicera.datagen.recipe
 
+import com.toolsandtaverns.paleolithicera.Constants
+import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
+import net.minecraft.advancement.criterion.InventoryChangedCriterion
+import net.minecraft.data.recipe.CookingRecipeJsonBuilder
 import net.minecraft.data.recipe.RecipeExporter
 import net.minecraft.data.recipe.RecipeGenerator
 import net.minecraft.item.Items
+import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.book.RecipeCategory
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
+import net.minecraft.util.Identifier
 import java.util.concurrent.CompletableFuture
 
 class VanillaRecipeProvider(
@@ -69,6 +77,28 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem { ModItems.PLANT_FIBER })
                     .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem { ModItems.BARK })
                     .offerTo(exporter)
+
+                val raw = ModItems.RAW_ELDERBERRIES
+                val cooked = ModItems.COOKED_ELDERBERRIES
+                // Smelting (Furnace)
+                CookingRecipeJsonBuilder.createSmelting(
+                    Ingredient.ofItems(raw),
+                    RecipeCategory.FOOD,
+                    cooked,
+                    0.35f,
+                    200
+                ).criterion("has_raw_elderberries", InventoryChangedCriterion.Conditions.items(raw))
+                    .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE,Identifier.of(MOD_ID, "smelt_elderberries")))
+
+                // Campfire Cooking
+                CookingRecipeJsonBuilder.createCampfireCooking(
+                    Ingredient.ofItems(raw),
+                    RecipeCategory.FOOD,
+                    cooked,
+                    0.35f,
+                    600
+                ).criterion("has_raw_elderberries", InventoryChangedCriterion.Conditions.items(raw))
+                    .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE,Identifier.of(MOD_ID, "campfire_cook_elderberries")))
             }
         }
     }
