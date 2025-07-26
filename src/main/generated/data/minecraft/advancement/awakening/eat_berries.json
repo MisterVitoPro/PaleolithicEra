@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:awakening/harvest_berries",
+  "criteria": {
+    "eaten_berries": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:cooked_elderberries"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.eat_berries.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:cooked_elderberries"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.eat_berries.title"
+    }
+  },
+  "requirements": [
+    [
+      "eaten_berries"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

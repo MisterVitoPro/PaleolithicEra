@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.toolsandtaverns.paleolithicera.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ClientBlockBreakBlockerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

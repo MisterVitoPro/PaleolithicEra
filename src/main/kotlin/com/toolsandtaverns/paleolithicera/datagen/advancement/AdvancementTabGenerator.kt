@@ -40,6 +40,8 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
             .criterion("tick", TickCriterion.Conditions.createTick())
             .build(consumer, "awakening/tab_root")
 
+        ElderberryAdvancements.generate(tabRoot, consumer)
+
         // Get Stick
         val root: AdvancementEntry = Advancement.Builder.create()
             .parent(tabRoot)
@@ -100,25 +102,8 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
             )
             .build(consumer, "awakening/gather_plant_fiber")
 
-        val craftFireDrill: AdvancementEntry = Advancement.Builder.create()
-            .parent(gatherPlantFiber)
-            .display(
-                Items.FLINT_AND_STEEL, // Replace with your custom Fire Drill item
-                Text.translatable("advancement.$MOD_ID.awakening.craft_fire_drill.title"),
-                Text.translatable("advancement.$MOD_ID.awakening.craft_fire_drill.description"),
-                null,
-                AdvancementFrame.TASK,
-                true, true, false
-            )
-            .criterion(
-                "crafted_fire_drill",
-                InventoryChangedCriterion.Conditions.items(ModItems.FIRE_DRILL)
-            )
-            .build(consumer, "awakening/craft_fire_drill")
-
-
         val placeFirePit: AdvancementEntry = Advancement.Builder.create()
-            .parent(craftFireDrill)
+            .parent(gatherPlantFiber)
             .display(
                 ModBlocks.CRUDE_CAMPFIRE, // Replace with your custom Fire Pit item
                 Text.translatable("advancement.$MOD_ID.awakening.place_crude_campfire.title"),

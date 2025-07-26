@@ -22,13 +22,12 @@ object PaleolithicEraDataGeneratorClient : DataGeneratorEntrypoint {
         pack.addProvider(::VanillaRecipeProvider)
         pack.addProvider(::KnappingRecipeProvider)
         pack.addProvider(::LootTableProvider)
-        pack.addProvider(::ModAdvancementProvider)
         pack.addProvider(::ModRegistryDataGenerator)
         pack.addProvider(::ModModelProvider)
         pack.addProvider { output, registriesFuture ->
             PaleolithicBlockTagProvider(output, registriesFuture)
         }
-
+        pack.addProvider(::ModAdvancementProvider)
     }
 
     override fun buildRegistry(registryBuilder: RegistryBuilder) {

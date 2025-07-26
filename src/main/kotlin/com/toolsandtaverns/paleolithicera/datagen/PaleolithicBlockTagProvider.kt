@@ -1,12 +1,12 @@
 package com.toolsandtaverns.paleolithicera.datagen
 
-import com.toolsandtaverns.paleolithicera.PaleolithicEra.id
+import com.toolsandtaverns.paleolithicera.util.tagKeyOfBlock
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
+import net.minecraft.block.Block
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
-import net.minecraft.registry.tag.BlockTags
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
 import java.util.concurrent.CompletableFuture
@@ -20,7 +20,7 @@ class PaleolithicBlockTagProvider(
 ) : FabricTagProvider.BlockTagProvider(output, registriesFuture) {
 
     override fun configure(wrapperLookup: RegistryWrapper.WrapperLookup) {
-        val unbreakableTag = TagKey.of(RegistryKeys.BLOCK, id("unbreakable_without_tool"))
+        val unbreakableTag = tagKeyOfBlock("unbreakable_without_tool")
 
         builder(unbreakableTag)
             .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("oak_log")))
@@ -41,6 +41,10 @@ class PaleolithicBlockTagProvider(
             .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("stripped_mangrove_log")))
             .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("stripped_cherry_log")))
 
+    }
+
+    fun shouldReplace(tag: TagKey<Block>): Boolean {
+        return false
     }
 
     override fun getName(): String = "Paleolithic Block Tags"

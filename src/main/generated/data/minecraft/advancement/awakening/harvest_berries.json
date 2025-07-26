@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:awakening/tab_root",
+  "criteria": {
+    "has_berries": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:raw_elderberries"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.harvest_berries.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:raw_elderberries"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.harvest_berries.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_berries"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

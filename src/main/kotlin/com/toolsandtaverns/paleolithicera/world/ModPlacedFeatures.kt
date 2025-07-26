@@ -1,18 +1,12 @@
 package com.toolsandtaverns.paleolithicera.world
 
-import com.toolsandtaverns.paleolithicera.Constants
-import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
-import com.toolsandtaverns.paleolithicera.PaleolithicEra.id
-import net.minecraft.block.Blocks
+import com.toolsandtaverns.paleolithicera.util.id
 import net.minecraft.registry.Registerable
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
-import net.minecraft.util.Identifier
-import net.minecraft.world.gen.blockpredicate.BlockPredicate
 import net.minecraft.world.gen.feature.PlacedFeature
 import net.minecraft.world.gen.feature.PlacedFeatures
 import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier
-import net.minecraft.world.gen.placementmodifier.BlockFilterPlacementModifier
 import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier
 import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier
 

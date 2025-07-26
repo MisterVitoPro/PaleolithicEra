@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:awakening/craft_fire_drill",
+  "parent": "minecraft:awakening/gather_plant_fiber",
   "criteria": {
     "placed_crude_campfire": {
       "conditions": {

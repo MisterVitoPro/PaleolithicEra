@@ -1,7 +1,6 @@
 package com.toolsandtaverns.paleolithicera.block
 
 import com.toolsandtaverns.paleolithicera.registry.ModItems
-import net.minecraft.block.AbstractBlock
 import net.minecraft.block.BlockState
 import net.minecraft.block.SweetBerryBushBlock
 import net.minecraft.entity.Entity
@@ -10,10 +9,10 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.state.property.IntProperty
 import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraft.world.WorldView
 import kotlin.random.Random
 
 /**
@@ -21,6 +20,10 @@ import kotlin.random.Random
  * Behaves similarly to SweetBerryBushBlock but applies poison when eaten raw.
  */
 class ElderberryBushBlock(settings: Settings) : SweetBerryBushBlock(settings) {
+
+    public override fun getPickStack(world: WorldView, pos: BlockPos, state: BlockState, b: Boolean): ItemStack {
+        return ItemStack(ModItems.RAW_ELDERBERRIES)
+    }
 
     override fun onUse(
         state: BlockState,

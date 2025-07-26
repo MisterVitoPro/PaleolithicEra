@@ -30,7 +30,4 @@ object PaleolithicEra : ModInitializer {
         ModWorldgen.initialize()
     }
 
-    fun id(path: String): Identifier {
-        return Identifier.of(MOD_ID, path)
-    }
 }

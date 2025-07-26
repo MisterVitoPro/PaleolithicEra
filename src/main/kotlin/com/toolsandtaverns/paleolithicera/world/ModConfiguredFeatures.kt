@@ -1,18 +1,13 @@
 package com.toolsandtaverns.paleolithicera.world
 
-import com.toolsandtaverns.paleolithicera.PaleolithicEra
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
+import com.toolsandtaverns.paleolithicera.util.id
 import net.minecraft.block.Blocks
 import net.minecraft.block.SweetBerryBushBlock
 import net.minecraft.registry.Registerable
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
-import net.minecraft.world.gen.feature.ConfiguredFeature
-import net.minecraft.world.gen.feature.ConfiguredFeatures
-import net.minecraft.world.gen.feature.Feature
-import net.minecraft.world.gen.feature.FeatureConfig
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig
-import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig
+import net.minecraft.world.gen.feature.*
 import net.minecraft.world.gen.stateprovider.BlockStateProvider
 
 object ModConfiguredFeatures {
@@ -35,7 +30,7 @@ object ModConfiguredFeatures {
     }
 
     fun registerKey(name: String): RegistryKey<ConfiguredFeature<*, *>> {
-        return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, PaleolithicEra.id(name))
+        return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, id(name))
     }
 
     private fun <FC : FeatureConfig, F : Feature<FC>> register(

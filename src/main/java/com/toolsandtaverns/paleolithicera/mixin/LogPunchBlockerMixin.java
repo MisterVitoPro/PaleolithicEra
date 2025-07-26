@@ -51,7 +51,7 @@ public abstract class LogPunchBlockerMixin {
                 long last = lastWarnTime.getOrDefault(player.getUuid(), 0L);
 
                 if (now - last > COOLDOWN_MS) {
-                    player.sendMessage(Text.literal("You need an axe to harvest wood."), true);
+                    player.sendMessage(Text.literal("You need an axe to harvest logs."), true);
                     lastWarnTime.put(player.getUuid(), now);
                 }
 

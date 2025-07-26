@@ -88,15 +88,9 @@ object ModItems {
     fun register(name: String,
                  itemFactory: (Item.Settings) -> Item,
                  settings: Item.Settings = Item.Settings()): Item {
-        // Create the item key.
         val itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(MOD_ID, name))
-
-        // Create the item instance.
         val item: Item = itemFactory(settings.registryKey(itemKey))
-
-        // Register the item.
         Registry.register(Registries.ITEM, itemKey, item)
-
         return item
     }
 
