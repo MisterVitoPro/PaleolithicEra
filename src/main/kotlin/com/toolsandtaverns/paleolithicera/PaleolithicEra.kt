@@ -3,6 +3,7 @@ package com.toolsandtaverns.paleolithicera
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.datagen.loot.MobLootModifier
 import com.toolsandtaverns.paleolithicera.datagen.loot.PlantFiberLootModifier
+import com.toolsandtaverns.paleolithicera.datagen.loot.RockChunkLootModifier
 import com.toolsandtaverns.paleolithicera.registry.*
 import com.toolsandtaverns.paleolithicera.world.gen.ModWorldgen
 import net.fabricmc.api.ModInitializer
@@ -27,6 +28,7 @@ object PaleolithicEra : ModInitializer {
         ModCriteria.initialize()
         PlantFiberLootModifier.initialize()
         MobLootModifier.initialize()
+        RockChunkLootModifier.initialize()
         ModWorldgen.initialize()
     }
 

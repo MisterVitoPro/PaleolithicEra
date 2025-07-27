@@ -51,10 +51,29 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
                 Text.translatable("advancement.$MOD_ID.awakening.get_stick.description"),
                 null,
                 AdvancementFrame.TASK,
-                true, true, false
+                true, false, false
             )
             .criterion("get_stick", InventoryChangedCriterion.Conditions.items(Items.STICK))
             .build(consumer, "awakening/get_stick")
+
+        val getRockChunk = Advancement.Builder.create()
+            .parent(tabRoot)
+            .display(
+                ModItems.ROCK_CHUNK, // Replace with your actual item reference
+                Text.translatable("advancement.$MOD_ID.awakening.get_rock_chunk.title"),
+                Text.translatable("advancement.$MOD_ID.awakening.get_rock_chunk.description"),
+                null,
+                AdvancementFrame.TASK,
+                true, // show toast
+                false, // announce to chat
+                false // not hidden
+            )
+            .criterion(
+                "has_rock_chunk",
+                InventoryChangedCriterion.Conditions.items(ModItems.ROCK_CHUNK)
+            )
+            .build(consumer, "awakening/has_rock_chunk")
+
 
         // Get Bone
         val getBone: AdvancementEntry = Advancement.Builder.create()

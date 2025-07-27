@@ -28,6 +28,8 @@ object ModItems {
     val BARK: Item = register("bark", { settings: Item.Settings -> Item(settings) })
     val PLANT_FIBER: Item = register("plant_fiber", { settings: Item.Settings -> Item(settings) })
     val FLINT_SHARD: Item = register("flint_shard", { settings: Item.Settings -> Item(settings) })
+    val ROCK_CHUNK: Item = register("rock_chunk", { settings: Item.Settings -> Item(settings) })
+
 
     val BONE_KNIFE: Item = register("bone_knife", { settings: Item.Settings -> KnifeItem(settings, ToolMaterialsMod.BONE_MATERIAL) })
     val BONE_SPEAR: Item = register("bone_spear", { settings: Item.Settings -> TridentItem(settings) })

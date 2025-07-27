@@ -33,6 +33,7 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.FIRE_DRILL, Models.HANDHELD)
         itemModelGenerator.register(ModItems.FLINT_SHARD, Models.GENERATED)
         itemModelGenerator.register(ModItems.PLANT_FIBER, Models.GENERATED)
+        itemModelGenerator.register(ModItems.ROCK_CHUNK, Models.GENERATED)
         itemModelGenerator.register(ModItems.RAW_ELDERBERRIES, Models.GENERATED)
         itemModelGenerator.register(ModItems.COOKED_ELDERBERRIES, Models.GENERATED)
     }

@@ -29,7 +29,6 @@ public class ClientBlockBreakBlockerMixin {
 
     @Inject(method = "updateBlockBreakingProgress", at = @At("HEAD"), cancellable = true)
     private void preventBreakingProgress(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        System.out.println("[ClientBlockBreakBlockerMixin] updateBlockBreakingProgress triggered!");
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player == null) return;
 

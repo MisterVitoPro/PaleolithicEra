@@ -1,7 +1,9 @@
 package com.toolsandtaverns.paleolithicera.datagen.loot
 
 import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
+import com.toolsandtaverns.paleolithicera.registry.ModItems.ROCK_CHUNK
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents
+import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.loot.entry.ItemEntry
@@ -10,10 +12,15 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.util.Identifier
 import net.minecraft.item.Items
 import net.minecraft.loot.LootTable
+import net.minecraft.loot.condition.LocationCheckLootCondition
+import net.minecraft.loot.condition.RandomChanceLootCondition
+import net.minecraft.loot.function.SetCountLootFunction
+import net.minecraft.predicate.entity.LocationPredicate
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKey
 
 object MobLootModifier {
+
     fun initialize() {
         LootTableEvents.MODIFY.register { id: RegistryKey<LootTable>, builder, source, registries ->
             if (!source.isBuiltin) return@register
@@ -28,7 +35,6 @@ object MobLootModifier {
             val entityType: EntityType<*> = Registries.ENTITY_TYPE.get(entityId)
 
             if (entityType.spawnGroup.isPeaceful) {
-                LOGGER.info("Adding bone drop to: $id")
                 builder.pool(
                     LootPool.builder()
                         .with(ItemEntry.builder(Items.BONE))

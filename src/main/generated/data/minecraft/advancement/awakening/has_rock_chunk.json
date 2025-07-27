@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:awakening/tab_root",
   "criteria": {
-    "get_stick": {
+    "has_rock_chunk": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:stick"
+            "items": "paleolithic-era:rock_chunk"
           }
         ]
       },
@@ -15,19 +15,19 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancement.paleolithic-era.awakening.get_stick.description"
+      "translate": "advancement.paleolithic-era.awakening.get_rock_chunk.description"
     },
     "icon": {
       "count": 1,
-      "id": "minecraft:stick"
+      "id": "paleolithic-era:rock_chunk"
     },
     "title": {
-      "translate": "advancement.paleolithic-era.awakening.get_stick.title"
+      "translate": "advancement.paleolithic-era.awakening.get_rock_chunk.title"
     }
   },
   "requirements": [
     [
-      "get_stick"
+      "has_rock_chunk"
     ]
   ],
   "sends_telemetry_event": true

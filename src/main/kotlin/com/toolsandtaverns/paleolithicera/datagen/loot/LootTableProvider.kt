@@ -29,10 +29,9 @@ class LootTableProvider(
 
     override fun generate() {
         addDrop(ModBlocks.KNAPPING_STATION)
+        addDrop(ModBlocks.ELDERBERRY_BUSH, addElderberryBushesDrop(ModItems.RAW_ELDERBERRIES))
 
-        val bark: Item = Registries.ITEM.get(Identifier.of(MOD_ID, "bark"))
-
-        val knownLogs: List<Block> = listOf(
+        listOf(
             Blocks.OAK_LOG,
             Blocks.SPRUCE_LOG,
             Blocks.BIRCH_LOG,
@@ -44,11 +43,9 @@ class LootTableProvider(
             Blocks.BAMBOO_BLOCK,
             Blocks.CRIMSON_STEM,
             Blocks.WARPED_STEM
-        )
+        ).forEach { addBarkToLogDrop(it, Registries.ITEM.get(Identifier.of(MOD_ID, "bark"))) }
 
-        knownLogs.forEach { addBarkToLogDrop(it, bark) }
 
-        addDrop(ModBlocks.ELDERBERRY_BUSH, addElderberryBushesDrop(ModItems.RAW_ELDERBERRIES, Blocks.SWEET_BERRY_BUSH))
     }
 
 
@@ -66,12 +63,12 @@ class LootTableProvider(
         addDrop(log, lootTable)
     }
 
-    private fun addElderberryBushesDrop(dropItem: Item, baseBush: Block): LootTable.Builder {
+    private fun addElderberryBushesDrop(dropItem: Item): LootTable.Builder {
         return LootTable.builder()
             .pool(
                 LootPool.builder()
                     .conditionally(
-                        BlockStatePropertyLootCondition.builder(baseBush)
+                        BlockStatePropertyLootCondition.builder(Blocks.SWEET_BERRY_BUSH)
                         .properties(StatePredicate.Builder.create().exactMatch(SweetBerryBushBlock.AGE, 3)))
                     .rolls(ConstantLootNumberProvider.create(1f))
                     .with(ItemEntry.builder(dropItem))

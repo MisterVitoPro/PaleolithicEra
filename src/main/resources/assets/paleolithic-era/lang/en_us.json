@@ -1,8 +1,10 @@
 {
   "advancement.paleolithic-era.awakening.title": "Paleolithic Era",
   "advancement.paleolithic-era.awakening.description": "Begin your survival journey with primitive tools.",
-  "advancement.paleolithic-era.awakening.get_stick.title": "Collect Stick",
-  "advancement.paleolithic-era.awakening.get_stick.description": "The base of most tools you will create.",
+
+  "advancement.paleolithic-era.awakening.get_stick.title": "Gather Wood",
+  "advancement.paleolithic-era.awakening.get_stick.description": "You found your first stick. It’s rough, but it’s something.",
+
   "advancement.paleolithic-era.awakening.get_bone.title": "Collect Bone",
   "advancement.paleolithic-era.awakening.get_bone.description": "Hunt animals with your bare hands.",
   "advancement.paleolithic-era.awakening.craft_bone_knife.title": "Craft Bone Knife",
@@ -17,10 +19,15 @@
   "advancement.paleolithic-era.awakening.cook_meat.description": "Use your campfire to cook raw meat. It's safer and tastier this way.",
   "advancement.paleolithic-era.awakening.unlock_knapping.title": "Shape the Stone",
   "advancement.paleolithic-era.awakening.unlock_knapping.description": "Craft a Knapping Station to begin shaping sharper tools.",
+
   "advancement.paleolithic-era.awakening.harvest_berries.title": "Forage the Bush",
   "advancement.paleolithic-era.awakening.harvest_berries.description": "Find and harvest elderberries from the bush.",
   "advancement.paleolithic-era.awakening.eat_berries.title": "Tart But Tasty",
   "advancement.paleolithic-era.awakening.eat_berries.description": "Cook them berries up!",
+
+  "advancement.paleolithic-era.awakening.get_rock_chunk.title": "Rock n' Roll",
+  "advancement.paleolithic-era.awakening.get_rock_chunk.description": "Sand and Gravel contain more.",
+
   "item.paleolithic-era.bark": "Bark",
   "item.paleolithic-era.bone_knife": "Bone Knife",
   "item.paleolithic-era.bone_spear": "Bone Spear",
@@ -34,6 +41,7 @@
   "block.paleolithic-era.crude_campfire": "Crude Campfire",
   "container.paleolithic-era.knapping_station": "Knapping Station",
   "item.paleolithic-era.plant_fiber": "Plant Fiber",
+  "item.paleolithic-era.rock_chunk": "Rock Chunk",
   "block.paleolithic-era.elderberry_bush": "Elderberry Bush",
   "item.paleolithic-era.raw_elderberries": "Raw Elderberries",
   "item.paleolithic-era.cooked_elderberries": "Cooked Elderberries"
