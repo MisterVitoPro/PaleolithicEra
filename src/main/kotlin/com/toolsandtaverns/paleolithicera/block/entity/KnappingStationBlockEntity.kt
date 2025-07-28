@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.block.entity
 
-import com.toolsandtaverns.paleolithicera.registry.ModBlockEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntities
 import com.toolsandtaverns.paleolithicera.screen.KnappingScreenHandler
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -21,7 +21,7 @@ import net.minecraft.util.math.BlockPos
  * Block entity that stores inventory and handles logic for the Knapping Station.
  */
 class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
-    BlockEntity(ModBlockEntities.KNAPPING_STATION, pos, state),
+    BlockEntity(ModEntities.KNAPPING_STATION, pos, state),
     NamedScreenHandlerFactory {
 
     private val inventory = SimpleInventory(5)

@@ -7,9 +7,8 @@
     "S": "minecraft:stick"
   },
   "pattern": [
-    "SBS",
-    "BFB",
-    "SBS"
+    "SF",
+    "BB"
   ],
   "result": {
     "count": 1,

@@ -2,13 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "paleolithic-era:bark",
-    "F": "paleolithic-era:plant_fiber",
+    "R": "paleolithic-era:rock_chunk",
     "S": "minecraft:stick"
   },
   "pattern": [
     "SS",
-    "BF"
+    "RR"
   ],
   "result": {
     "count": 1,

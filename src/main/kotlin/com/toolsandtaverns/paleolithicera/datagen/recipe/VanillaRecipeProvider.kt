@@ -31,8 +31,8 @@ class VanillaRecipeProvider(
         return object : RecipeGenerator(registryLookup, exporter) {
             override fun generate() {
                 createShaped(RecipeCategory.TOOLS, ModItems.BONE_KNIFE, 1)
-                    .pattern("B ")
-                    .pattern(" S")
+                    .pattern(" B")
+                    .pattern("S ")
                     .input('B', Items.BONE)
                     .input('S', Items.STICK)
                     .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
@@ -47,58 +47,59 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem(ModItems.BONE_SPEARHEAD))
                     .offerTo(exporter)
 
+                createShaped(RecipeCategory.COMBAT, ModItems.WOODEN_SPEAR, 1)
+                    .pattern(" S")
+                    .pattern("S ")
+                    .input('S', Items.STICK)
+                    .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+                    .offerTo(exporter)
+
                 createShaped(RecipeCategory.TOOLS, ModItems.FIRE_DRILL, 1)
-                    .pattern("S S")
-                    .pattern(" D ")
-                    .pattern(" F ")
-                    .input('D', ModItems.BARK)
+                    .pattern("SF")
+                    .pattern("SS")
                     .input('S', Items.STICK)
                     .input('F', ModItems.PLANT_FIBER)
                     .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem(ModItems.PLANT_FIBER))
                     .offerTo(exporter)
 
                 createShaped(RecipeCategory.MISC, ModBlocks.CRUDE_CAMPFIRE, 1)
-                    .pattern("SBS")
-                    .pattern("BFB")
-                    .pattern("SBS")
+                    .pattern("SF")
+                    .pattern("BB")
                     .input('S', Items.STICK)
                     .input('B', ModItems.BARK)
                     .input('F', ModItems.PLANT_FIBER)
-                    .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem(ModItems.BARK))
-                    .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem(ModItems.PLANT_FIBER))
+                    .criterion(hasItem(ModItems.BARK), conditionsFromItem(ModItems.BARK))
+                    .criterion(hasItem(ModItems.PLANT_FIBER), conditionsFromItem(ModItems.PLANT_FIBER))
                     .offerTo(exporter)
 
                 createShaped(RecipeCategory.MISC, ModBlocks.KNAPPING_STATION, 1)
                     .pattern("SS")
-                    .pattern("BF")
+                    .pattern("RR")
                     .input('S', Items.STICK)
-                    .input('B', ModItems.BARK)
-                    .input('F', ModItems.PLANT_FIBER)
-                    .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem { ModItems.PLANT_FIBER })
-                    .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem { ModItems.BARK })
+                    .input('R', ModItems.ROCK_CHUNK)
+                    .criterion(hasItem(ModItems.ROCK_CHUNK), conditionsFromItem { ModItems.ROCK_CHUNK })
                     .offerTo(exporter)
 
-                val raw = ModItems.RAW_ELDERBERRIES
-                val cooked = ModItems.COOKED_ELDERBERRIES
                 // Smelting (Furnace)
                 CookingRecipeJsonBuilder.createSmelting(
-                    Ingredient.ofItems(raw),
+                    Ingredient.ofItems(ModItems.RAW_ELDERBERRIES),
                     RecipeCategory.FOOD,
-                    cooked,
+                    ModItems.COOKED_ELDERBERRIES,
                     0.35f,
                     200
-                ).criterion("has_raw_elderberries", InventoryChangedCriterion.Conditions.items(raw))
+                ).criterion("has_raw_elderberries", InventoryChangedCriterion.Conditions.items(ModItems.RAW_ELDERBERRIES))
                     .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE,Identifier.of(MOD_ID, "smelt_elderberries")))
 
                 // Campfire Cooking
                 CookingRecipeJsonBuilder.createCampfireCooking(
-                    Ingredient.ofItems(raw),
+                    Ingredient.ofItems(ModItems.RAW_ELDERBERRIES),
                     RecipeCategory.FOOD,
-                    cooked,
+                    ModItems.COOKED_ELDERBERRIES,
                     0.35f,
                     600
-                ).criterion("has_raw_elderberries", InventoryChangedCriterion.Conditions.items(raw))
+                ).criterion("has_raw_elderberries", InventoryChangedCriterion.Conditions.items(ModItems.RAW_ELDERBERRIES))
                     .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE,Identifier.of(MOD_ID, "campfire_cook_elderberries")))
+
             }
         }
     }

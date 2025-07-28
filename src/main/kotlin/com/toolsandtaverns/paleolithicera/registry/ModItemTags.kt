@@ -11,6 +11,8 @@ object ModItemTags {
     val BONE_TOOL_MATERIALS = of("bone_tool_materials")
     val FLINT_TOOL_MATERIALS = of("flint_tool_materials")
 
+    val SPEARS = of("spears")
+
     /**
      * Creates an Identifier for item tags under the mod's namespace.
      */

@@ -52,31 +52,22 @@ class KnappingRecipeProvider(
 
         return object : RecipeGenerator(registryLookup, exporter) {
             override fun generate() {
-                // Flint -> Flint Shard ×2
+                // Flint -> Flint Shard
                 buildDefaultKnapRecipe(
                     exporter = exporter,
-                    recipeId = "knap_flint_to_flint_shard",
-                    recipe = KnapRecipe(ItemStack(ModItems.FLINT_SHARD, 2), Items.FLINT),
+                    recipeId = "knap_flint_to_flint_biface",
+                    recipe = KnapRecipe(ItemStack(ModItems.FLINT_BIFACE, 1), Items.FLINT),
                     criterionName = "has_flint",
                     criterion = InventoryChangedCriterion.Conditions.items(Items.FLINT)
                 )
 
-                // Flint Shard + Stick -> Crude Knife
-                buildDefaultKnapRecipe(
-                    exporter = exporter,
-                    recipeId = "knap_flint_knife",
-                    recipe = KnapRecipe(ItemStack(ModItems.FLINT_KNIFE), Items.STICK, ModItems.FLINT_SHARD),
-                    criterionName = "has_flint_shard",
-                    criterion = InventoryChangedCriterion.Conditions.items(ModItems.FLINT_SHARD)
-                )
-
-                // Flint Shard + Bone -> Bone Spearhead
+                // Bone -> Bone Spearhead
                 buildDefaultKnapRecipe(
                     exporter = exporter,
                     recipeId = "knap_bone_spearhead",
                     recipe = KnapRecipe(ItemStack(ModItems.BONE_SPEARHEAD), Items.BONE),
-                    criterionName = "has_flint_shard",
-                    criterion = InventoryChangedCriterion.Conditions.items(ModItems.FLINT_SHARD)
+                    criterionName = "has_bone",
+                    criterion = InventoryChangedCriterion.Conditions.items(ModItems.BONE_SPEARHEAD)
                 )
             }
         }

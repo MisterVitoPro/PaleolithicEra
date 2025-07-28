@@ -1,21 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bark": {
+    "has_stick": {
       "conditions": {
         "items": [
           {
-            "items": "paleolithic-era:bark"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_plant_fiber": {
-      "conditions": {
-        "items": [
-          {
-            "items": "paleolithic-era:plant_fiber"
+            "items": "minecraft:stick"
           }
         ]
       },
@@ -23,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paleolithic-era:crude_campfire"
+        "recipe": "paleolithic-era:wooden_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -31,13 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_bark",
-      "has_plant_fiber"
+      "has_stick"
     ]
   ],
   "rewards": {
     "recipes": [
-      "paleolithic-era:crude_campfire"
+      "paleolithic-era:wooden_spear"
     ]
   }
 }

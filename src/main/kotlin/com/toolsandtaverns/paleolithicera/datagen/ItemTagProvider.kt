@@ -20,5 +20,10 @@ class ModItemTagProvider(output: FabricDataOutput, val registries: CompletableFu
 
         getTagBuilder(ModItemTags.FLINT_TOOL_MATERIALS)
             .add(Registries.ITEM.getId(ModItems.FLINT_KNIFE))
+
+        // Tag: spears
+        getTagBuilder(ModItemTags.SPEARS)
+            .add(Registries.ITEM.getId(ModItems.WOODEN_SPEAR))
+            .add(Registries.ITEM.getId(ModItems.BONE_SPEAR))
     }
 }

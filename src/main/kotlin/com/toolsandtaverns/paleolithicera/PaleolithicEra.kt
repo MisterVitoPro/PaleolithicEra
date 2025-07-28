@@ -7,7 +7,6 @@ import com.toolsandtaverns.paleolithicera.datagen.loot.RockChunkLootModifier
 import com.toolsandtaverns.paleolithicera.registry.*
 import com.toolsandtaverns.paleolithicera.world.gen.ModWorldgen
 import net.fabricmc.api.ModInitializer
-import net.minecraft.util.Identifier
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -22,7 +21,7 @@ object PaleolithicEra : ModInitializer {
         LOGGER.info("Initializing Paleolithic Era")
         ModBlocks.initialize()
         ModItems.initialize()
-        ModBlockEntities.initialize()
+        ModEntities.initialize()
         ModScreenHandlers.initialize()
         ModRecipes.initialize()
         ModCriteria.initialize()

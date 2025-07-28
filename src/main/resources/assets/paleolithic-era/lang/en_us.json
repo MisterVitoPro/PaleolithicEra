@@ -4,6 +4,8 @@
 
   "advancement.paleolithic-era.awakening.get_stick.title": "Gather Wood",
   "advancement.paleolithic-era.awakening.get_stick.description": "You found your first stick. It’s rough, but it’s something.",
+  "advancement.paleolithic-era.awakening.craft_knapping_station.title": "Craft Knapping Station",
+  "advancement.paleolithic-era.awakening.craft_knapping_station.description": "Sharpen your tools",
 
   "advancement.paleolithic-era.awakening.get_bone.title": "Collect Bone",
   "advancement.paleolithic-era.awakening.get_bone.description": "Hunt animals with your bare hands.",
@@ -28,13 +30,16 @@
   "advancement.paleolithic-era.awakening.get_rock_chunk.title": "Rock n' Roll",
   "advancement.paleolithic-era.awakening.get_rock_chunk.description": "Sand and Gravel contain more.",
 
+  "advancement.paleolithic-era.awakening.craft_wooden_spear.title": "Craft a Wooden Spear",
+  "advancement.paleolithic-era.awakening.craft_wooden_spear.description": "Poke 'em, man!",
+
   "item.paleolithic-era.bark": "Bark",
   "item.paleolithic-era.bone_knife": "Bone Knife",
   "item.paleolithic-era.bone_spear": "Bone Spear",
   "item.paleolithic-era.bone_spearhead": "Bone Spearhead",
   "item.paleolithic-era.flint_knife": "Flint Knife",
   "item.paleolithic-era.crude_campfire": "Crude Campfire",
-  "item.paleolithic-era.flint_shard": "Flint Shard",
+  "item.paleolithic-era.flint_biface": "Flint Biface",
   "item.paleolithic-era.fire_drill": "Fire Drill",
   "item.paleolithic-era.knapping_station": "Knapping Station",
   "block.paleolithic-era.knapping_station": "Knapping Station",
@@ -44,5 +49,7 @@
   "item.paleolithic-era.rock_chunk": "Rock Chunk",
   "block.paleolithic-era.elderberry_bush": "Elderberry Bush",
   "item.paleolithic-era.raw_elderberries": "Raw Elderberries",
-  "item.paleolithic-era.cooked_elderberries": "Cooked Elderberries"
+  "item.paleolithic-era.cooked_elderberries": "Cooked Elderberries",
+  "item.paleolithic-era.wooden_spear": "Wooden Spear",
+  "tooltip.paleolithic-era.wooden_spear": "Melee or throw it. Your choice."
 }

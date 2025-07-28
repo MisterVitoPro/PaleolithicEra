@@ -2,11 +2,8 @@ package com.toolsandtaverns.paleolithicera.block
 
 import com.mojang.serialization.MapCodec
 import com.toolsandtaverns.paleolithicera.block.entity.KnappingStationBlockEntity
-import com.toolsandtaverns.paleolithicera.registry.ModBlockEntities
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.block.entity.BlockEntityTicker
-import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.util.ActionResult

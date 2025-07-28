@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:awakening/get_stick",
+  "criteria": {
+    "craft_knap_station": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:knapping_station"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.craft_knapping_station.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:knapping_station"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.craft_knapping_station.title"
+    }
+  },
+  "requirements": [
+    [
+      "craft_knap_station"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

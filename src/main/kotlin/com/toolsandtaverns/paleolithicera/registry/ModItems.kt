@@ -4,6 +4,7 @@ import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.item.FireDrillItem
 import com.toolsandtaverns.paleolithicera.item.KnifeItem
 import com.toolsandtaverns.paleolithicera.item.ToolMaterialsMod
+import com.toolsandtaverns.paleolithicera.item.WoodenSpearItem
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries
@@ -27,9 +28,10 @@ import net.minecraft.util.Identifier
 object ModItems {
     val BARK: Item = register("bark", { settings: Item.Settings -> Item(settings) })
     val PLANT_FIBER: Item = register("plant_fiber", { settings: Item.Settings -> Item(settings) })
-    val FLINT_SHARD: Item = register("flint_shard", { settings: Item.Settings -> Item(settings) })
+    val FLINT_BIFACE: Item = register("flint_biface", { settings: Item.Settings -> Item(settings) })
     val ROCK_CHUNK: Item = register("rock_chunk", { settings: Item.Settings -> Item(settings) })
 
+    val WOODEN_SPEAR: Item = register("wooden_spear", { settings: Item.Settings -> WoodenSpearItem(settings) })
 
     val BONE_KNIFE: Item = register("bone_knife", { settings: Item.Settings -> KnifeItem(settings, ToolMaterialsMod.BONE_MATERIAL) })
     val BONE_SPEAR: Item = register("bone_spear", { settings: Item.Settings -> TridentItem(settings) })

@@ -1,7 +1,7 @@
 package com.toolsandtaverns.paleolithicera.block.entity
 
 import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
-import com.toolsandtaverns.paleolithicera.registry.ModBlockEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntities
 import net.minecraft.block.BlockState
 import net.minecraft.block.CampfireBlock
 import net.minecraft.block.entity.BlockEntity
@@ -40,7 +40,7 @@ import java.util.function.Function
 import kotlin.math.min
 
 class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
-    BlockEntity(ModBlockEntities.CRUDE_CAMPFIRE, pos, state),
+    BlockEntity(ModEntities.CRUDE_CAMPFIRE, pos, state),
     Clearable {
     val itemsBeingCooked: DefaultedList<ItemStack?> = DefaultedList.ofSize<ItemStack?>(4, ItemStack.EMPTY)
     private val cookingTimes: IntArray = IntArray(4)

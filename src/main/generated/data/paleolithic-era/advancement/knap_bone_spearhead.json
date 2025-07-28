@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_flint_shard": {
+    "has_bone": {
       "conditions": {
         "items": [
           {
-            "items": "paleolithic-era:flint_shard"
+            "items": "paleolithic-era:bone_spearhead"
           }
         ]
       },
@@ -14,7 +14,7 @@
   },
   "requirements": [
     [
-      "has_flint_shard"
+      "has_bone"
     ]
   ],
   "rewards": {

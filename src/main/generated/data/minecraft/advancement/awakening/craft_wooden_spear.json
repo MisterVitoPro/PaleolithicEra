@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:awakening/get_stick",
+  "criteria": {
+    "craft_wooden_spear": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:wooden_spear"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.craft_wooden_spear.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:wooden_spear"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.craft_wooden_spear.title"
+    }
+  },
+  "requirements": [
+    [
+      "craft_wooden_spear"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
