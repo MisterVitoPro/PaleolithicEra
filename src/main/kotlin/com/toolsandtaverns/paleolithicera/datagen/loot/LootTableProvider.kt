@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.SweetBerryBushBlock
+import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
@@ -45,9 +46,7 @@ class LootTableProvider(
             Blocks.WARPED_STEM
         ).forEach { addBarkToLogDrop(it, Registries.ITEM.get(Identifier.of(MOD_ID, "bark"))) }
 
-
     }
-
 
     private fun addBarkToLogDrop(log: Block, bark: Item) {
         val logDrop: LeafEntry.Builder<*> = ItemEntry.builder(log.asItem())

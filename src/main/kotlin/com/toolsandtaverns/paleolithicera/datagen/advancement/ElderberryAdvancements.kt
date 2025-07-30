@@ -6,6 +6,7 @@ import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.minecraft.advancement.Advancement
 import net.minecraft.advancement.AdvancementEntry
 import net.minecraft.advancement.AdvancementFrame
+import net.minecraft.advancement.AdvancementRewards
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
 import net.minecraft.text.Text
 import java.util.function.Consumer
@@ -25,6 +26,7 @@ object ElderberryAdvancements {
                 true, true, false
             )
             .criterion("has_berries", InventoryChangedCriterion.Conditions.items(ModItems.RAW_ELDERBERRIES))
+            .rewards(AdvancementRewards.Builder.experience(8))
             .build(consumer, "awakening/harvest_berries")
 
         Advancement.Builder.create()
@@ -38,6 +40,7 @@ object ElderberryAdvancements {
                 true, true, false
             )
             .criterion("eaten_berries", InventoryChangedCriterion.Conditions.items(ModItems.COOKED_ELDERBERRIES))
+            .rewards(AdvancementRewards.Builder.experience(3))
             .build(consumer, "awakening/eat_berries")
     }
 }

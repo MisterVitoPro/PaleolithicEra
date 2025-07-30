@@ -151,7 +151,6 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
     }
 
     override fun addComponents(builder: ComponentMap.Builder) {
-        super.addComponents(builder)
         builder.add(
             DataComponentTypes.CONTAINER,
             ContainerComponent.fromStacks(this.itemsBeingCooked)

@@ -3,6 +3,8 @@ package com.toolsandtaverns.paleolithicera
 import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
 import com.toolsandtaverns.paleolithicera.datagen.loot.LootTableProvider
 import com.toolsandtaverns.paleolithicera.datagen.ModAdvancementProvider
+import com.toolsandtaverns.paleolithicera.datagen.ModEntityTypeTagProvider
+import com.toolsandtaverns.paleolithicera.datagen.ModItemTagProvider
 import com.toolsandtaverns.paleolithicera.datagen.ModModelProvider
 import com.toolsandtaverns.paleolithicera.datagen.ModRegistryDataGenerator
 import com.toolsandtaverns.paleolithicera.datagen.PaleolithicBlockTagProvider
@@ -24,10 +26,10 @@ object PaleolithicEraDataGeneratorClient : DataGeneratorEntrypoint {
         pack.addProvider(::LootTableProvider)
         pack.addProvider(::ModRegistryDataGenerator)
         pack.addProvider(::ModModelProvider)
-        pack.addProvider { output, registriesFuture ->
-            PaleolithicBlockTagProvider(output, registriesFuture)
-        }
+        pack.addProvider(::ModItemTagProvider)
+        pack.addProvider(::PaleolithicBlockTagProvider)
         pack.addProvider(::ModAdvancementProvider)
+        pack.addProvider(::ModEntityTypeTagProvider)
     }
 
     override fun buildRegistry(registryBuilder: RegistryBuilder) {

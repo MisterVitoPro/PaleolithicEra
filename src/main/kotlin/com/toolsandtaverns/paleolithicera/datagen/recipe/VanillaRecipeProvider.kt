@@ -4,6 +4,7 @@ import com.toolsandtaverns.paleolithicera.Constants
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
+import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
@@ -99,6 +100,22 @@ class VanillaRecipeProvider(
                     600
                 ).criterion("has_raw_elderberries", InventoryChangedCriterion.Conditions.items(ModItems.RAW_ELDERBERRIES))
                     .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE,Identifier.of(MOD_ID, "campfire_cook_elderberries")))
+
+                createShaped(RecipeCategory.COMBAT, ModItems.RAWHIDE_TUNIC, 1)
+                    .pattern("RF")
+                    .pattern("RR")
+                    .input('R', ModItems.RAWHIDE)
+                    .input('F', ModItems.PLANT_FIBER)
+                    .criterion(hasItem(ModItems.RAWHIDE), conditionsFromItem(ModItems.RAWHIDE))
+                    .offerTo(exporter)
+
+                createShaped(RecipeCategory.COMBAT, ModItems.RAWHIDE_LEGGINGS, 1)
+                    .pattern("RR")
+                    .pattern("FF")
+                    .input('R', ModItems.RAWHIDE)
+                    .input('F', ModItems.PLANT_FIBER)
+                    .criterion(hasItem(ModItems.RAWHIDE), conditionsFromItem(ModItems.RAWHIDE))
+                    .offerTo(exporter)
 
             }
         }

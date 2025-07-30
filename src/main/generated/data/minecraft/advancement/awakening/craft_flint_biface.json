@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:awakening/craft_knap_station",
+  "criteria": {
+    "craft_flint_biface": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:flint_biface"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.craft_flint_biface.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:flint_biface"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.craft_flint_biface.title"
+    }
+  },
+  "requirements": [
+    [
+      "craft_flint_biface"
+    ]
+  ],
+  "rewards": {
+    "experience": 2
+  },
+  "sends_telemetry_event": true
+}

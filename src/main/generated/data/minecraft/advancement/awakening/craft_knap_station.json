@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:awakening/get_stick",
+  "parent": "minecraft:awakening/has_rock_chunk",
   "criteria": {
     "craft_knap_station": {
       "conditions": {
@@ -30,5 +30,8 @@
       "craft_knap_station"
     ]
   ],
+  "rewards": {
+    "experience": 3
+  },
   "sends_telemetry_event": true
 }

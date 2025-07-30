@@ -25,7 +25,7 @@ import net.minecraft.world.World
 class FireDrillItem(settings: Settings) : Item(settings) {
 
     override fun getMaxUseTime(stack: ItemStack, user: LivingEntity): Int {
-        return 60 // seconds (20 ticks/sec)
+        return 20 // seconds (20 ticks/sec)
     }
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): ActionResult {

@@ -7,6 +7,8 @@ import com.toolsandtaverns.paleolithicera.registry.ModCriteria
 import net.minecraft.advancement.Advancement
 import net.minecraft.advancement.AdvancementEntry
 import net.minecraft.advancement.AdvancementFrame
+import net.minecraft.advancement.AdvancementRequirements
+import net.minecraft.advancement.AdvancementRewards
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
 import net.minecraft.advancement.criterion.TickCriterion
 import net.minecraft.data.advancement.AdvancementTabGenerator
@@ -38,25 +40,13 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
             .build(consumer, "awakening/tab_root")
 
         ElderberryAdvancements.generate(tabRoot, consumer)
-
-        // Get Stick
-        val getStick: AdvancementEntry = Advancement.Builder.create()
-            .parent(tabRoot)
-            .display(
-                Items.STICK,
-                Text.translatable("advancement.$MOD_ID.awakening.get_stick.title"),
-                Text.translatable("advancement.$MOD_ID.awakening.get_stick.description"),
-                null,
-                AdvancementFrame.TASK,
-                true, false, false
-            )
-            .criterion("get_stick", InventoryChangedCriterion.Conditions.items(Items.STICK))
-            .build(consumer, "awakening/get_stick")
+        GatherStickAdvancements.generate(tabRoot, consumer)
+        HuntingAdvancements.generate(tabRoot, consumer, registries)
 
         val getRockChunk = Advancement.Builder.create()
             .parent(tabRoot)
             .display(
-                ModItems.ROCK_CHUNK, // Replace with your actual item reference
+                ModItems.ROCK_CHUNK,
                 Text.translatable("advancement.$MOD_ID.awakening.get_rock_chunk.title"),
                 Text.translatable("advancement.$MOD_ID.awakening.get_rock_chunk.description"),
                 null,
@@ -69,13 +59,13 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
                 "has_rock_chunk",
                 InventoryChangedCriterion.Conditions.items(ModItems.ROCK_CHUNK)
             )
+            .rewards(AdvancementRewards.Builder.experience(2))
             .build(consumer, "awakening/has_rock_chunk")
 
         val craftKnapping = Advancement.Builder.create()
             .parent(getRockChunk)
-            .parent(getStick)
             .display(
-                ModBlocks.KNAPPING_STATION, // Replace with your actual item reference
+                ModBlocks.KNAPPING_STATION,
                 Text.translatable("advancement.$MOD_ID.awakening.craft_knapping_station.title"),
                 Text.translatable("advancement.$MOD_ID.awakening.craft_knapping_station.description"),
                 null,
@@ -88,54 +78,31 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
                 "craft_knap_station",
                 InventoryChangedCriterion.Conditions.items(ModBlocks.KNAPPING_STATION)
             )
+            .rewards(AdvancementRewards.Builder.experience(3))
             .build(consumer, "awakening/craft_knap_station")
 
-        val craftWoodenSpear: AdvancementEntry = Advancement.Builder.create()
-            .parent(getStick)
+        val craftFlintBiface: AdvancementEntry = Advancement.Builder.create()
+            .parent(craftKnapping)
             .display(
-                ModItems.WOODEN_SPEAR,
-                Text.translatable("advancement.$MOD_ID.awakening.craft_wooden_spear.title"),
-                Text.translatable("advancement.$MOD_ID.awakening.craft_wooden_spear.description"),
+                ModItems.FLINT_BIFACE,
+                Text.translatable("advancement.$MOD_ID.awakening.craft_flint_biface.title"),
+                Text.translatable("advancement.$MOD_ID.awakening.craft_flint_biface.description"),
                 null,
                 AdvancementFrame.TASK,
-                true, true, false
-            )
-            .criterion("craft_wooden_spear", InventoryChangedCriterion.Conditions.items(ModItems.WOODEN_SPEAR))
-            .build(consumer, "awakening/craft_wooden_spear")
-
-        // Get Bone
-        val getBone: AdvancementEntry = Advancement.Builder.create()
-            .parent(getStick)
-            .display(
-                Items.BONE,
-                Text.translatable("advancement.$MOD_ID.awakening.get_bone.title"),
-                Text.translatable("advancement.$MOD_ID.awakening.get_bone.description"),
-                null,
-                AdvancementFrame.TASK,
-                true, true, false
-            )
-            .criterion("get_bone", InventoryChangedCriterion.Conditions.items(Items.BONE))
-            .build(consumer, "awakening/get_bone")
-
-        // Craft Bone Knife
-        val craftBoneKnife: AdvancementEntry = Advancement.Builder.create()
-            .parent(getBone)
-            .display(
-                Registries.ITEM.get(Identifier.of(MOD_ID, "bone_knife")),
-                Text.translatable("advancement.$MOD_ID.awakening.craft_bone_knife.title"),
-                Text.translatable("advancement.$MOD_ID.awakening.craft_bone_knife.description"),
-                null,
-                AdvancementFrame.TASK,
-                true, true, false
+                true, // show toast
+                true, // announce to chat
+                false // not hidden
             )
             .criterion(
-                "craft_bone_knife", InventoryChangedCriterion.Conditions.items(ModItems.BONE_KNIFE)
+                "craft_flint_biface",
+                InventoryChangedCriterion.Conditions.items(ModItems.FLINT_BIFACE)
             )
-            .build(consumer, "awakening/craft_bone_knife")
+            .rewards(AdvancementRewards.Builder.experience(2))
+            .build(consumer, "awakening/craft_flint_biface")
 
         // Gather Plant Fiber
         val gatherPlantFiber: AdvancementEntry = Advancement.Builder.create()
-            .parent(craftBoneKnife)
+            .parent(craftFlintBiface)
             .display(
                 Registries.ITEM.get(Identifier.of(MOD_ID, "plant_fiber")),
                 Text.translatable("advancement.$MOD_ID.awakening.gather_plant_fiber.title"),
@@ -147,12 +114,13 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
             .criterion(
                 "gather_plant_fiber", InventoryChangedCriterion.Conditions.items(ModItems.PLANT_FIBER)
             )
+            .rewards(AdvancementRewards.Builder.experience(2))
             .build(consumer, "awakening/gather_plant_fiber")
 
         val placeFirePit: AdvancementEntry = Advancement.Builder.create()
             .parent(gatherPlantFiber)
             .display(
-                ModBlocks.CRUDE_CAMPFIRE, // Replace with your custom Fire Pit item
+                ModBlocks.CRUDE_CAMPFIRE,
                 Text.translatable("advancement.$MOD_ID.awakening.place_crude_campfire.title"),
                 Text.translatable("advancement.$MOD_ID.awakening.place_crude_campfire.description"),
                 null,
@@ -163,12 +131,13 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
                 "placed_crude_campfire",
                 InventoryChangedCriterion.Conditions.items(ModBlocks.CRUDE_CAMPFIRE)
             )
+            .rewards(AdvancementRewards.Builder.experience(5))
             .build(consumer, "awakening/place_crude_campfire")
 
         val lightCrudeCampfire: AdvancementEntry = Advancement.Builder.create()
             .parent(placeFirePit)
             .display(
-                ModItems.FIRE_DRILL, // Replace with your Fire Drill if needed
+                ModItems.FIRE_DRILL,
                 Text.translatable("advancement.$MOD_ID.awakening.light_crude_campfire.title"),
                 Text.translatable("advancement.$MOD_ID.awakening.light_crude_campfire.description"),
                 null,
@@ -178,8 +147,9 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
             .criterion(
                 "lit_crude_campfire",
                 ModCriteria.LIT_CRUDE_CAMPFIRE.create()
-            ).build(consumer, "awakening/light_crude_campfire")
-
+            )
+            .rewards(AdvancementRewards.Builder.experience(3))
+            .build(consumer, "awakening/light_crude_campfire")
 
         Advancement.Builder.create()
             .parent(lightCrudeCampfire)
@@ -191,28 +161,25 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
                 AdvancementFrame.TASK,
                 true, true, false
             )
-            .criterion(
-                "cooked_meat",
-                InventoryChangedCriterion.Conditions.items(Items.COOKED_BEEF, Items.COOKED_CHICKEN)
-            )
+            .criterion("cooked_beef", InventoryChangedCriterion.Conditions.items(Items.COOKED_BEEF))
+            .criterion("cooked_chicken", InventoryChangedCriterion.Conditions.items(Items.COOKED_CHICKEN))
+            .criterion("cooked_mutton", InventoryChangedCriterion.Conditions.items(Items.COOKED_MUTTON))
+            .criterion("cooked_rabbit", InventoryChangedCriterion.Conditions.items(Items.COOKED_RABBIT))
+            .criterion("cooked_porkchop", InventoryChangedCriterion.Conditions.items(Items.COOKED_PORKCHOP))
+            .criterion("cooked_cod", InventoryChangedCriterion.Conditions.items(Items.COOKED_COD))
+            .criterion("cooked_salmon", InventoryChangedCriterion.Conditions.items(Items.COOKED_SALMON))
+            .requirements(AdvancementRequirements.anyOf(
+                listOf(
+                    "cooked_beef",
+                    "cooked_chicken",
+                    "cooked_mutton",
+                    "cooked_rabbit",
+                    "cooked_porkchop",
+                    "cooked_cod",
+                    "cooked_salmon"
+                )))
+            .rewards(AdvancementRewards.Builder.experience(3))
             .build(consumer, "awakening/cook_meat")
-
-        Advancement.Builder.create()
-            .parent(lightCrudeCampfire)
-            .display(
-                ModBlocks.KNAPPING_STATION, // Placeholder for Knapping Station
-                Text.translatable("advancement.$MOD_ID.awakening.unlock_knapping.title"),
-                Text.translatable("advancement.$MOD_ID.awakening.unlock_knapping.description"),
-                null,
-                AdvancementFrame.TASK,
-                true, true, false
-            )
-            .criterion(
-                "has_knapping_station",
-                InventoryChangedCriterion.Conditions.items(ModBlocks.KNAPPING_STATION)
-            )
-            .build(consumer, "awakening/unlock_knapping_station")
-
 
     }
 

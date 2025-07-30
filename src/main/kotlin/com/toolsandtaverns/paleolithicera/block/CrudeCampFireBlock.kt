@@ -10,6 +10,7 @@ import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.recipe.RecipePropertySet
 import net.minecraft.recipe.RecipeType
 import net.minecraft.recipe.ServerRecipeManager
 import net.minecraft.server.world.ServerWorld
@@ -106,7 +107,7 @@ class CrudeCampFireBlock(settings: Settings) : CampfireBlock(false, 1, settings)
         val blockEntity = world.getBlockEntity(pos)
 
         if (blockEntity is CrudeCampfireBlockEntity && world is ServerWorld) {
-            val recipeSet = world.recipeManager.getPropertySet(net.minecraft.recipe.RecipePropertySet.CAMPFIRE_INPUT)
+            val recipeSet = world.recipeManager.getPropertySet(RecipePropertySet.CAMPFIRE_INPUT)
 
             if (recipeSet.canUse(stack)) {
                 if (blockEntity.addItem(world, player, stack)) {

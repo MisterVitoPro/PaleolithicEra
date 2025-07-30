@@ -29,5 +29,8 @@
       "craft_wooden_spear"
     ]
   ],
+  "rewards": {
+    "experience": 2
+  },
   "sends_telemetry_event": true
 }

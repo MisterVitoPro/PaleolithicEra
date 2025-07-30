@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:awakening/tab_root",
+  "criteria": {
+    "hunt_animal": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "#paleolithic-era:huntable"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.hunt_aggressive.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:wooden_spear"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.hunt_aggressive.title"
+    }
+  },
+  "requirements": [
+    [
+      "hunt_animal"
+    ]
+  ],
+  "rewards": {
+    "experience": 2
+  },
+  "sends_telemetry_event": true
+}

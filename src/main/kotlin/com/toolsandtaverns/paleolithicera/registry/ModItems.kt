@@ -3,6 +3,7 @@ package com.toolsandtaverns.paleolithicera.registry
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.item.FireDrillItem
 import com.toolsandtaverns.paleolithicera.item.KnifeItem
+import com.toolsandtaverns.paleolithicera.item.ModArmorMaterials.RAWHIDE_MATERIAL
 import com.toolsandtaverns.paleolithicera.item.ToolMaterialsMod
 import com.toolsandtaverns.paleolithicera.item.WoodenSpearItem
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
@@ -18,6 +19,7 @@ import net.minecraft.item.ItemGroups
 import net.minecraft.item.TridentItem
 import net.minecraft.item.consume.ApplyEffectsConsumeEffect
 import net.minecraft.item.consume.UseAction
+import net.minecraft.item.equipment.EquipmentType
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
@@ -28,17 +30,26 @@ import net.minecraft.util.Identifier
 object ModItems {
     val BARK: Item = register("bark", { settings: Item.Settings -> Item(settings) })
     val PLANT_FIBER: Item = register("plant_fiber", { settings: Item.Settings -> Item(settings) })
-    val FLINT_BIFACE: Item = register("flint_biface", { settings: Item.Settings -> Item(settings) })
     val ROCK_CHUNK: Item = register("rock_chunk", { settings: Item.Settings -> Item(settings) })
+    val RAWHIDE: Item = register("rawhide", { settings: Item.Settings -> Item(settings) })
+
+    val RAWHIDE_TUNIC: Item = register("rawhide_tunic", { settings: Item.Settings ->
+        Item(settings.armor(RAWHIDE_MATERIAL, EquipmentType.CHESTPLATE))
+    })
+
+    val RAWHIDE_LEGGINGS: Item = register("rawhide_leggings", { settings: Item.Settings ->
+        Item(settings.armor(RAWHIDE_MATERIAL, EquipmentType.LEGGINGS))
+    })
 
     val WOODEN_SPEAR: Item = register("wooden_spear", { settings: Item.Settings -> WoodenSpearItem(settings) })
 
-    val BONE_KNIFE: Item = register("bone_knife", { settings: Item.Settings -> KnifeItem(settings, ToolMaterialsMod.BONE_MATERIAL) })
+    val FLINT_BIFACE: Item = register("flint_biface", { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.FLINT_MATERIAL, 0.0f, settings.maxDamage(15)) })
+    val BONE_KNIFE: Item = register("bone_knife", { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.BONE_MATERIAL, 0.5f, settings) })
     val BONE_SPEAR: Item = register("bone_spear", { settings: Item.Settings -> TridentItem(settings) })
     val BONE_SPEARHEAD: Item = register("bone_spearhead", { settings: Item.Settings -> Item(settings) })
     val FLINT_KNIFE: Item = register(
         "flint_knife",
-        { settings: Item.Settings -> KnifeItem(settings, ToolMaterialsMod.FLINT_MATERIAL) })
+        { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.FLINT_MATERIAL, 1.0f ,settings) })
     val FIRE_DRILL: Item =
         register("fire_drill", { settings: Item.Settings -> FireDrillItem(settings.maxCount(1).maxDamage(10)) })
 

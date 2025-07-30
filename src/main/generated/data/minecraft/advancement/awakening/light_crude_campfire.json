@@ -22,5 +22,8 @@
       "lit_crude_campfire"
     ]
   ],
+  "rewards": {
+    "experience": 3
+  },
   "sends_telemetry_event": true
 }

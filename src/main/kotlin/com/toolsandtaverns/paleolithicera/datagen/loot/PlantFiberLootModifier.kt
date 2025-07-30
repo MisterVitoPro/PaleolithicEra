@@ -1,6 +1,7 @@
 package com.toolsandtaverns.paleolithicera.datagen.loot
 
 import com.toolsandtaverns.paleolithicera.Constants
+import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents
 import net.minecraft.item.Item
 import net.minecraft.loot.LootPool
@@ -12,6 +13,7 @@ import net.minecraft.predicate.item.ItemPredicate
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryEntryLookup
 import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
 
 object PlantFiberLootModifier {
@@ -30,16 +32,15 @@ object PlantFiberLootModifier {
         LootTableEvents.MODIFY.register { id, tableBuilder, _, registryLookup ->
             if (listOfBlocksForDrops.contains(id.value)) {
                 val itemLookup: RegistryEntryLookup<Item> = registryLookup.getOrThrow(RegistryKeys.ITEM)
-                val boneKnife = Registries.ITEM.get(Identifier.of(Constants.MOD_ID, "bone_knife"))
-                val plantFiber = Registries.ITEM.get(Identifier.of(Constants.MOD_ID, "plant_fiber"))
-
+                val plantFiber = Registries.ITEM.get(id( "plant_fiber"))
+                val knifeTag = TagKey.of(RegistryKeys.ITEM, id("knives"))
                 val fiberDrop = ItemEntry.builder(plantFiber)
                     .conditionally(
                         MatchToolLootCondition.builder(
-                            ItemPredicate.Builder.create().items(itemLookup, boneKnife)
+                            ItemPredicate.Builder.create().tag(itemLookup, knifeTag)
                         )
                     )
-                    .conditionally(RandomChanceLootCondition.builder(0.5f))
+                    .conditionally(RandomChanceLootCondition.builder(0.4f))
 
                 val fiberPool = LootPool.builder()
                     .rolls(ConstantLootNumberProvider.create(1f))

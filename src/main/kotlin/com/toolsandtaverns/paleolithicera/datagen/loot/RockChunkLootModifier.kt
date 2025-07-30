@@ -32,7 +32,7 @@ object RockChunkLootModifier {
                 // Inject a new loot pool with a random drop chance
                 val rockChunkPool = LootPool.builder()
                     .with(ItemEntry.builder(ROCK_CHUNK)
-                        .conditionally(RandomChanceLootCondition.builder(0.10f))
+                        .conditionally(RandomChanceLootCondition.builder(0.20f))
                         .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1f)))
                     )
                     .rolls(ConstantLootNumberProvider.create(1f))

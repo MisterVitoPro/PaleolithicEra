@@ -1,47 +1,41 @@
 package com.toolsandtaverns.paleolithicera.datagen.loot
 
-import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
-import com.toolsandtaverns.paleolithicera.registry.ModItems.ROCK_CHUNK
+import com.toolsandtaverns.paleolithicera.registry.ModEntityTags.HUNTABLE_TAG
+import com.toolsandtaverns.paleolithicera.registry.ModItems.RAWHIDE
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents
-import net.minecraft.block.Blocks
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.passive.AnimalEntity
+import net.fabricmc.fabric.api.loot.v3.LootTableSource
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.util.Identifier
 import net.minecraft.item.Items
 import net.minecraft.loot.LootTable
-import net.minecraft.loot.condition.LocationCheckLootCondition
-import net.minecraft.loot.condition.RandomChanceLootCondition
-import net.minecraft.loot.function.SetCountLootFunction
-import net.minecraft.predicate.entity.LocationPredicate
 import net.minecraft.registry.Registries
-import net.minecraft.registry.RegistryKey
 
 object MobLootModifier {
 
     fun initialize() {
-        LootTableEvents.MODIFY.register { id: RegistryKey<LootTable>, builder, source, registries ->
+        LootTableEvents.MODIFY.register { id, builder: LootTable.Builder, source: LootTableSource, _ ->
             if (!source.isBuiltin) return@register
-
-            // Loot tables for mobs follow this path
             if (!id.value.path.startsWith("entities/")) return@register
 
-            // Extract entity ID
             val entityId = Identifier.ofVanilla(id.value.path)
+            val entityType = Registries.ENTITY_TYPE.get(entityId)
 
-            // Look up entity type
-            val entityType: EntityType<*> = Registries.ENTITY_TYPE.get(entityId)
-
-            if (entityType.spawnGroup.isPeaceful) {
+            if (entityType.isIn(HUNTABLE_TAG)) {
+                // Add Raw Hide instead
                 builder.pool(
                     LootPool.builder()
-                        .with(ItemEntry.builder(Items.BONE))
-                        .rolls(ConstantLootNumberProvider.create(1f))
-                        .build()
+                        .with(ItemEntry.builder(RAWHIDE))
+                        .rolls(ConstantLootNumberProvider.create(0.5f)) // 50% chance
                 )
+                    .pool(
+                        LootPool.builder()
+                            .with(ItemEntry.builder(Items.BONE))
+                            .rolls(ConstantLootNumberProvider.create(0.6f)) // 60% chance
+                    )
             }
         }
     }
+
 }

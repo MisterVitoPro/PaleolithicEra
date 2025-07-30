@@ -29,5 +29,8 @@
       "placed_crude_campfire"
     ]
   ],
+  "rewards": {
+    "experience": 5
+  },
   "sends_telemetry_event": true
 }

@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "paleolithic-era:rawhide"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "paleolithic-era:rawhide"
+      }
+    ]
+  }
+}

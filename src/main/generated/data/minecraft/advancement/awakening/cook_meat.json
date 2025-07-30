@@ -1,14 +1,71 @@
 {
   "parent": "minecraft:awakening/light_crude_campfire",
   "criteria": {
-    "cooked_meat": {
+    "cooked_beef": {
       "conditions": {
         "items": [
           {
             "items": "minecraft:cooked_beef"
-          },
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cooked_chicken": {
+      "conditions": {
+        "items": [
           {
             "items": "minecraft:cooked_chicken"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cooked_cod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:cooked_cod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cooked_mutton": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:cooked_mutton"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cooked_porkchop": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:cooked_porkchop"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cooked_rabbit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:cooked_rabbit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cooked_salmon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:cooked_salmon"
           }
         ]
       },
@@ -29,8 +86,17 @@
   },
   "requirements": [
     [
-      "cooked_meat"
+      "cooked_beef",
+      "cooked_chicken",
+      "cooked_mutton",
+      "cooked_rabbit",
+      "cooked_porkchop",
+      "cooked_cod",
+      "cooked_salmon"
     ]
   ],
+  "rewards": {
+    "experience": 3
+  },
   "sends_telemetry_event": true
 }

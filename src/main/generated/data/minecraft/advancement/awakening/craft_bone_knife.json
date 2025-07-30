@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:awakening/get_bone",
+  "parent": "minecraft:awakening/hunt_aggressive",
   "criteria": {
     "craft_bone_knife": {
       "conditions": {
@@ -29,5 +29,8 @@
       "craft_bone_knife"
     ]
   ],
+  "rewards": {
+    "experience": 2
+  },
   "sends_telemetry_event": true
 }
