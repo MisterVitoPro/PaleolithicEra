@@ -12,9 +12,9 @@ object ToolMaterialsMod {
     // Tier 0
     val BONE_MATERIAL = ToolMaterial(
         BlockTags.INCORRECT_FOR_WOODEN_TOOL,       // Blocks it cannot mine properly
-        30,                                             // Durability
+        25,                                             // Durability
         0.5f,                                           // Mining speed
-        0.25f,                                           // Attack damage bonus
+        0.2f,                                           // Attack damage bonus
         3,                                              // Enchantability
         TagKey.of(
             RegistryKeys.ITEM,
@@ -25,7 +25,7 @@ object ToolMaterialsMod {
     // Tier 1
     val FLINT_MATERIAL = ToolMaterial(
         BlockTags.INCORRECT_FOR_WOODEN_TOOL, // Blocks it cannot mine properly
-        45,                                  // Durability
+        40,                                  // Durability
         1.0f,                                // Mining speed
         0.5f,                               // Attack damage bonus
         5,                                   // Enchantability

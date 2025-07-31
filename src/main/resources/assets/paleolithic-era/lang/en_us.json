@@ -40,6 +40,8 @@
   "advancement.paleolithic-era.awakening.wear_rawhide_armor.title": "Protection First",
   "advancement.paleolithic-era.awakening.wear_rawhide_armor.description": "Limited coverage, but anything will help at this point.",
 
+  "message.paleolithic-era.caught_item": "you caught a %s!",
+
   "item.paleolithic-era.bark": "Bark",
   "item.paleolithic-era.bone_knife": "Bone Knife",
   "item.paleolithic-era.bone_spear": "Bone Spear",
@@ -63,5 +65,10 @@
   "item.paleolithic-era.wooden_spear": "Wooden Spear",
   "tooltip.paleolithic-era.wooden_spear": "Melee or throw it. Your choice.",
 
-  "tag.item.paleolithic-era.repairs_rawhide_armor": "Rawhide Repair Material"
+  "item.paleolithic-era.wooden_harpoon": "Wooden Harpoon",
+  "item.paleolithic-era.wooden_harpoon.tooltip": "Use near water to fish. Time your strike!",
+
+  "tag.item.paleolithic-era.repairs_rawhide_armor": "Rawhide Repair Material",
+  "tag.item.paleolithic-era.knife": "Knife",
+  "tag.item.paleolithic-era.spears": "Spears"
 }

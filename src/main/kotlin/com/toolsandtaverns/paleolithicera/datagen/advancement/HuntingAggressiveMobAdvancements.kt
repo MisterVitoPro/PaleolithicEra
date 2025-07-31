@@ -65,8 +65,8 @@ object HuntingAdvancements {
             .parent(huntAggressiveMob)
             .display(
                ModItems.RAWHIDE_TUNIC,
-                Text.translatable("advancement.paleolithic-era.wear_rawhide_armor.title"),
-                Text.translatable("advancement.paleolithic-era.wear_rawhide_armor.description"),
+                Text.translatable("advancement.$MOD_ID.awakening.wear_rawhide_armor.title"),
+                Text.translatable("advancement.$MOD_ID.awakening.wear_rawhide_armor.description"),
                 null,
                 AdvancementFrame.TASK,
                 true,

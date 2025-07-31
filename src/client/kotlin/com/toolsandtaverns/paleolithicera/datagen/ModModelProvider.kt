@@ -11,7 +11,17 @@ import net.minecraft.client.data.Models
 
 class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
+    /**
+     * Generates block state models for mod blocks.
+     * 
+     * This function is called during data generation to create the necessary block state
+     * model files for blocks added by this mod.
+     * 
+     * @param blockStateModelGenerator The generator to register block models with
+     */
     override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
+        // Register the elderberry bush with age stages (0-3) as a cross-type block
+        // NOT_TINTED is used because we don't need biome coloring for this plant
         blockStateModelGenerator.registerTintableCrossBlockStateWithStages(
             ModBlocks.ELDERBERRY_BUSH,
             BlockStateModelGenerator.CrossType.NOT_TINTED,
@@ -19,21 +29,38 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         )
     }
 
+    /**
+     * Generates item models for mod items.
+     * 
+     * This function registers all custom items with appropriate model types:
+     * - GENERATED: For items displayed flat in hand (resources, materials, etc.)
+     * - HANDHELD: For items displayed as tools/weapons held in hand
+     * 
+     * @param itemModelGenerator The generator to register item models with
+     */
     override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {
+        // Register resource/material items with GENERATED model type
         itemModelGenerator.register(ModItems.BARK, Models.GENERATED)
+        itemModelGenerator.register(ModItems.PLANT_FIBER, Models.GENERATED)
+        itemModelGenerator.register(ModItems.ROCK_CHUNK, Models.GENERATED)
+        itemModelGenerator.register(ModItems.RAWHIDE, Models.GENERATED)
+        itemModelGenerator.register(ModItems.BONE_SPEARHEAD, Models.GENERATED)
+        itemModelGenerator.register(ModItems.FLINT_BIFACE, Models.GENERATED)
+
+        // Register food items with GENERATED model type
+        itemModelGenerator.register(ModItems.RAW_ELDERBERRIES, Models.GENERATED)
+        itemModelGenerator.register(ModItems.COOKED_ELDERBERRIES, Models.GENERATED)
+
+        // Register armor items with GENERATED model type
+        itemModelGenerator.register(ModItems.RAWHIDE_LEGGINGS, Models.GENERATED)
+        itemModelGenerator.register(ModItems.RAWHIDE_TUNIC, Models.GENERATED)
+
+        // Register tools and weapons with HANDHELD model type
         itemModelGenerator.register(ModItems.BONE_KNIFE, Models.HANDHELD)
         itemModelGenerator.register(ModItems.WOODEN_SPEAR, Models.HANDHELD)
         itemModelGenerator.register(ModItems.BONE_SPEAR, Models.HANDHELD)
-        itemModelGenerator.register(ModItems.BONE_SPEARHEAD, Models.GENERATED)
         itemModelGenerator.register(ModItems.FIRE_DRILL, Models.HANDHELD)
-        itemModelGenerator.register(ModItems.FLINT_BIFACE, Models.GENERATED)
-        itemModelGenerator.register(ModItems.PLANT_FIBER, Models.GENERATED)
-        itemModelGenerator.register(ModItems.RAWHIDE, Models.GENERATED)
-        itemModelGenerator.register(ModItems.RAWHIDE_LEGGINGS, Models.GENERATED)
-        itemModelGenerator.register(ModItems.RAWHIDE_TUNIC, Models.GENERATED)
-        itemModelGenerator.register(ModItems.ROCK_CHUNK, Models.GENERATED)
-        itemModelGenerator.register(ModItems.RAW_ELDERBERRIES, Models.GENERATED)
-        itemModelGenerator.register(ModItems.COOKED_ELDERBERRIES, Models.GENERATED)
+        itemModelGenerator.register(ModItems.WOODEN_HARPOON, Models.HANDHELD)
     }
 
 }

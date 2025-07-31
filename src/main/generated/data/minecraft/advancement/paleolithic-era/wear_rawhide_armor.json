@@ -24,14 +24,14 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.paleolithic-era.wear_rawhide_armor.description"
+      "translate": "advancement.paleolithic-era.awakening.wear_rawhide_armor.description"
     },
     "icon": {
       "count": 1,
       "id": "paleolithic-era:rawhide_tunic"
     },
     "title": {
-      "translate": "advancement.paleolithic-era.wear_rawhide_armor.title"
+      "translate": "advancement.paleolithic-era.awakening.wear_rawhide_armor.title"
     }
   },
   "requirements": [
