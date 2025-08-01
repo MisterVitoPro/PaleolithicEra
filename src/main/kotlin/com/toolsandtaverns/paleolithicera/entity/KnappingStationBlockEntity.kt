@@ -1,4 +1,4 @@
-package com.toolsandtaverns.paleolithicera.block.entity
+package com.toolsandtaverns.paleolithicera.entity
 
 import com.toolsandtaverns.paleolithicera.recipe.KnapRecipe
 import com.toolsandtaverns.paleolithicera.recipe.KnapRecipeInput

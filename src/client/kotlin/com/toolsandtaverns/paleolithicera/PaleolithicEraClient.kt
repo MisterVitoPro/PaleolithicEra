@@ -9,6 +9,7 @@ import com.toolsandtaverns.paleolithicera.registry.ModEntities
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.screen.KnappingStationScreen
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
+import com.toolsandtaverns.paleolithicera.screen.HideDryerScreen
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
@@ -60,6 +61,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
         // Register the screen for the knapping station
         // This connects the container handler to its GUI implementation
         HandledScreens.register(ModScreenHandlers.KNAPPING, ::KnappingStationScreen)
+        HandledScreens.register(ModScreenHandlers.HIDE_DRYER, ::HideDryerScreen)
 
         // Set the render layers for blocks with transparency
         // CUTOUT is used for blocks with binary transparency (fully transparent or fully opaque pixels)

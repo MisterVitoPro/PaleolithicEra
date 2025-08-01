@@ -50,8 +50,8 @@ class VanillaRecipeProvider(
             override fun generate() {
                 // Bone Knife - diagonal crafting pattern with bone and stick
                 createShaped(RecipeCategory.TOOLS, ModItems.BONE_KNIFE, 1)
-                    .pattern(" B") // B = bone in top-right
-                    .pattern("S ") // S = stick in bottom-left
+                    .pattern(" B")
+                    .pattern("S ")
                     .input('B', Items.BONE)
                     .input('S', Items.STICK)
                     .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
@@ -59,9 +59,9 @@ class VanillaRecipeProvider(
 
                 // Bone Spear - diagonal design with bone spearhead at the tip
                 createShaped(RecipeCategory.COMBAT, ModItems.BONE_SPEAR, 1)
-                    .pattern("  B") // B = bone spearhead at top-right
-                    .pattern(" S ") // S = stick in middle
-                    .pattern("S  ") // S = stick at bottom-left
+                    .pattern("  B")
+                    .pattern(" S ")
+                    .pattern("S  ")
                     .input('B', ModItems.BONE_SHARD)
                     .input('S', Items.STICK)
                     .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem(ModItems.BONE_SHARD))
@@ -69,16 +69,16 @@ class VanillaRecipeProvider(
 
                 // Wooden Spear - simple diagonal pattern with sticks
                 createShaped(RecipeCategory.COMBAT, ModItems.WOODEN_SPEAR, 1)
-                    .pattern(" S") // S = stick in top-right
-                    .pattern("S ") // S = stick in bottom-left
+                    .pattern(" S")
+                    .pattern("S ")
                     .input('S', Items.STICK)
                     .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
                     .offerTo(exporter)
 
                 // Fire Drill - crafted with sticks and plant fiber
                 createShaped(RecipeCategory.TOOLS, ModItems.FIRE_DRILL, 1)
-                    .pattern("SF") // S = stick, F = plant fiber in top row
-                    .pattern("SS") // SS = two sticks in bottom row
+                    .pattern("SF")
+                    .pattern("SS")
                     .input('S', Items.STICK)
                     .input('F', ModItems.PLANT_FIBER)
                     .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem(ModItems.PLANT_FIBER))
@@ -86,8 +86,8 @@ class VanillaRecipeProvider(
 
                 // Crude Campfire - primitive version of the vanilla campfire
                 createShaped(RecipeCategory.MISC, ModBlocks.CRUDE_CAMPFIRE, 1)
-                    .pattern("SF") // S = stick, F = plant fiber in top row
-                    .pattern("BB") // BB = two bark items in bottom row
+                    .pattern("SF")
+                    .pattern("BB")
                     .input('S', Items.STICK)
                     .input('B', ModItems.BARK)
                     .input('F', ModItems.PLANT_FIBER)
@@ -98,8 +98,8 @@ class VanillaRecipeProvider(
 
                 // Knapping Station - crafting block for stone tools
                 createShaped(RecipeCategory.MISC, ModBlocks.KNAPPING_STATION, 1)
-                    .pattern("SS") // SS = two sticks in top row
-                    .pattern("RR") // RR = two rock chunks in bottom row
+                    .pattern("SS")
+                    .pattern("RR")
                     .input('S', Items.STICK)
                     .input('R', ModItems.ROCK_CHUNK)
                     .criterion(hasItem(ModItems.ROCK_CHUNK), conditionsFromItem { ModItems.ROCK_CHUNK })
@@ -136,8 +136,8 @@ class VanillaRecipeProvider(
 
                 // Rawhide Tunic (chestplate) - crafted with rawhide and plant fiber
                 createShaped(RecipeCategory.COMBAT, ModItems.RAWHIDE_TUNIC, 1)
-                    .pattern("RF") // R = rawhide, F = plant fiber in top row
-                    .pattern("RR") // RR = two rawhide in bottom row
+                    .pattern("RF")
+                    .pattern("RR")
                     .input('R', ModItems.RAWHIDE)
                     .input('F', ModItems.PLANT_FIBER)
                     .criterion(hasItem(ModItems.RAWHIDE), conditionsFromItem(ModItems.RAWHIDE))
@@ -145,8 +145,8 @@ class VanillaRecipeProvider(
 
                 // Rawhide Leggings - crafted with rawhide and plant fiber
                 createShaped(RecipeCategory.COMBAT, ModItems.RAWHIDE_LEGGINGS, 1)
-                    .pattern("RR") // RR = two rawhide in top row
-                    .pattern("FF") // FF = two plant fiber in bottom row
+                    .pattern("RR")
+                    .pattern("FF")
                     .input('R', ModItems.RAWHIDE)
                     .input('F', ModItems.PLANT_FIBER)
                     .criterion(hasItem(ModItems.RAWHIDE), conditionsFromItem(ModItems.RAWHIDE))

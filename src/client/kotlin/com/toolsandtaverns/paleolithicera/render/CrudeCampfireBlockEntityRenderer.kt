@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.render
 
-import com.toolsandtaverns.paleolithicera.block.entity.CrudeCampfireBlockEntity
+import com.toolsandtaverns.paleolithicera.entity.CrudeCampfireBlockEntity
 import net.minecraft.block.BlockState
 import net.minecraft.block.CampfireBlock
 import net.minecraft.client.render.VertexConsumerProvider

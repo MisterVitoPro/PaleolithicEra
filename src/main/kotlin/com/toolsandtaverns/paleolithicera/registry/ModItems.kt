@@ -44,6 +44,7 @@ object ModItems {
     val PLANT_FIBER: Item = register("plant_fiber", { settings: Item.Settings -> Item(settings) })
     val ROCK_CHUNK: Item = register("rock_chunk", { settings: Item.Settings -> Item(settings) })
     val RAWHIDE: Item = register("rawhide", { settings: Item.Settings -> Item(settings) })
+    val DRY_HIDE: Item = register("dry_hide", { settings: Item.Settings -> Item(settings) })
 
     val RAWHIDE_TUNIC: Item = register("rawhide_tunic", { settings: Item.Settings ->
         Item(settings.armor(RAWHIDE_MATERIAL, EquipmentType.CHESTPLATE))

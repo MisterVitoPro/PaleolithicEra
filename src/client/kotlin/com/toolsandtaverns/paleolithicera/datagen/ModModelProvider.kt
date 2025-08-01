@@ -42,6 +42,17 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 .put(TextureKey.DOWN, Identifier.ofVanilla("block/dirt"))
                 .put(TextureKey.PARTICLE, Identifier.ofVanilla("block/dirt"))
         }
+
+        blockStateModelGenerator.registerCubeWithCustomTextures(
+            ModBlocks.HIDE_DRYER,
+            ModBlocks.HIDE_DRYER // Same block used as texture source
+        ) { block, _ ->
+            TextureMap()
+                .put(TextureKey.UP, id("block/hide_dryer_top"))
+                .put(TextureKey.SIDE, id("block/hide_dryer_side"))
+                .put(TextureKey.DOWN, id("block/hide_dryer_side"))
+                .put(TextureKey.PARTICLE, id("block/hide_dryer_side"))
+        }
     }
 
     /**
@@ -59,6 +70,7 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.PLANT_FIBER, Models.GENERATED)
         itemModelGenerator.register(ModItems.ROCK_CHUNK, Models.GENERATED)
         itemModelGenerator.register(ModItems.RAWHIDE, Models.GENERATED)
+        itemModelGenerator.register(ModItems.DRY_HIDE, Models.GENERATED)
         itemModelGenerator.register(ModItems.BONE_SHARD, Models.GENERATED)
         itemModelGenerator.register(ModItems.FLINT_BIFACE, Models.GENERATED)
 

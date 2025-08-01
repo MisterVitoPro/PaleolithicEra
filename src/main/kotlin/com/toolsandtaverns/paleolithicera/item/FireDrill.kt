@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.item
 
-import com.toolsandtaverns.paleolithicera.block.entity.CrudeCampfireBlockEntity
+import com.toolsandtaverns.paleolithicera.entity.CrudeCampfireBlockEntity
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModCriteria
 import net.minecraft.block.BlockState

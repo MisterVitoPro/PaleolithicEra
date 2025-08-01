@@ -1,69 +1,70 @@
 package com.toolsandtaverns.paleolithicera.screen
 
-import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
+import com.toolsandtaverns.paleolithicera.entity.HideDryerBlockEntity
+import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
 import net.minecraft.util.math.BlockPos
 
-
 /**
- * Screen handler for the Knapping Station. Manages the input/output inventory and updates crafting output.
+ * Handles server-side inventory logic for the Hide Dryer UI.
+ * Supports progress tracking and input/output access.
  */
-class KnappingScreenHandler(
+class HideDryerScreenHandler(
     syncId: Int,
     playerInventory: PlayerInventory,
-    val blockEntity: KnappingStationBlockEntity
-) : ScreenHandler(ModScreenHandlers.KNAPPING, syncId) {
+    pos: BlockPos,
+) : ScreenHandler(ModScreenHandlers.HIDE_DRYER, syncId) {
 
-    private val inventory = blockEntity.getInventory()
-
-    constructor(syncId: Int, inventory: PlayerInventory, pos: BlockPos) : this(
-        syncId,
-        inventory,
-        inventory.player.world.getBlockEntity(pos) as KnappingStationBlockEntity,
-    )
+    private val entity = playerInventory.player.world.getBlockEntity(pos) as HideDryerBlockEntity
+    private val inventory: SimpleInventory = entity.inventory
 
     init {
         checkSize(inventory, 2)
         inventory.onOpen(playerInventory.player)
 
-        // Input slot (0)
-        addSlot(object : Slot(inventory, 0, 54, 34) {
-            override fun canInsert(stack: ItemStack): Boolean = true
+        // Input slot (left)
+        this.addSlot(object : Slot(inventory, 0, 44, 35) {
+            override fun canInsert(stack: ItemStack): Boolean {
+                return stack.isOf(ModItems.RAWHIDE)
+            }
         })
 
-        // Output slot (1)
-        addSlot(object : Slot(inventory, 1, 104, 34) {
-            override fun canInsert(stack: ItemStack): Boolean = false
+        // Output slot (right)
+        this.addSlot(object : Slot(inventory, 1, 116, 35) {
+            override fun canInsert(stack: ItemStack) = false
         })
 
-        // Player inventory (3 rows × 9)
+        // Player inventory slots
         for (row in 0..2) {
             for (col in 0..8) {
-                addSlot(Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 84 + row * 18))
+                this.addSlot(Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 84 + row * 18))
             }
         }
 
-        // Hotbar
+        // Hotbar slots
         for (col in 0..8) {
-            addSlot(Slot(playerInventory, col, 8 + col * 18, 142))
+            this.addSlot(Slot(playerInventory, col, 8 + col * 18, 142))
         }
+        addProperties(entity.propertyDelegate)
     }
 
-    override fun canUse(player: PlayerEntity): Boolean = true
-
-    override fun quickMove(player: PlayerEntity, index: Int): ItemStack {
-        val slot = slots.getOrNull(index) ?: return ItemStack.EMPTY
+    override fun quickMove(
+        player: PlayerEntity?,
+        slotIndx: Int
+    ): ItemStack? {
+        val slot = slots.getOrNull(slotIndx) ?: return ItemStack.EMPTY
         if (!slot.hasStack()) return ItemStack.EMPTY
 
         val originalStack = slot.stack
         val newStack = originalStack.copy()
 
-        return when (index) {
+        return when (slotIndx) {
             // Input slot (0)
             0 -> {
                 if (!insertItem(originalStack, 2, 38, false)) return ItemStack.EMPTY // Back to player inventory
@@ -98,9 +99,13 @@ class KnappingScreenHandler(
         }
     }
 
-    override fun onClosed(player: PlayerEntity) {
-        super.onClosed(player)
-        inventory.onClose(player)
-    }
+    override fun canUse(player: PlayerEntity): Boolean = inventory.canPlayerUse(player)
 
+    /**
+     * Returns progress as a percent from 0 to 100.
+     */
+    fun getScaledProgress(maxWidth: Int): Int {
+        val progress = entity.propertyDelegate.get(0)
+        return (progress * maxWidth) / HideDryerBlockEntity.DRYING_DURATION_TICKS
+    }
 }

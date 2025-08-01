@@ -3,6 +3,7 @@ package com.toolsandtaverns.paleolithicera.registry
 import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
 import com.toolsandtaverns.paleolithicera.block.CrudeCampFireBlock
 import com.toolsandtaverns.paleolithicera.block.ElderberryBushBlock
+import com.toolsandtaverns.paleolithicera.block.HideDryerBlock
 import com.toolsandtaverns.paleolithicera.block.KnappingStationBlock
 import com.toolsandtaverns.paleolithicera.util.id
 import com.toolsandtaverns.paleolithicera.util.regKeyOfBlock
@@ -24,6 +25,7 @@ import net.minecraft.state.property.Properties
 
 object ModBlocks {
 
+    val HIDE_DRYER: Block = register("hide_dryer", ::HideDryerBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
     val KNAPPING_STATION: Block = register("knapping_station", ::KnappingStationBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
     val CRUDE_CAMPFIRE: Block = register(
         "crude_campfire", ::CrudeCampFireBlock,

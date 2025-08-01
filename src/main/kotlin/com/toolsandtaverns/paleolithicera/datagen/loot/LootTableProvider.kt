@@ -30,7 +30,9 @@ class LootTableProvider(
 
     override fun generate() {
         addDrop(ModBlocks.KNAPPING_STATION)
+        addDrop(ModBlocks.HIDE_DRYER)
         addDrop(ModBlocks.ELDERBERRY_BUSH, addElderberryBushesDrop(ModItems.RAW_ELDERBERRIES))
+
 
         listOf(
             Blocks.OAK_LOG,

@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.client.renderer
 
-import com.toolsandtaverns.paleolithicera.block.entity.KnappingStationBlockEntity
+import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.WorldRenderer
 import net.minecraft.client.render.block.entity.BlockEntityRenderer

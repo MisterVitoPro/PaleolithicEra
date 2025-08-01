@@ -1,8 +1,9 @@
 package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
-import com.toolsandtaverns.paleolithicera.block.entity.CrudeCampfireBlockEntity
-import com.toolsandtaverns.paleolithicera.block.entity.KnappingStationBlockEntity
+import com.toolsandtaverns.paleolithicera.entity.CrudeCampfireBlockEntity
+import com.toolsandtaverns.paleolithicera.entity.HideDryerBlockEntity
+import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.projectile.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -26,6 +27,8 @@ object ModEntities {
         private set
     lateinit var SPEAR_ENTITY: EntityType<WoodenSpearEntity>
             private set
+    lateinit var HIDE_DRYER_BLOCK_ENTITY: BlockEntityType<HideDryerBlockEntity>
+        private set
 
 
     fun initialize() {
@@ -50,6 +53,13 @@ object ModEntities {
                 .trackingTickInterval(10)
                 .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("thrown_spear")))
         )
+
+        HIDE_DRYER_BLOCK_ENTITY = register(
+            "hide_dryer",
+            ::HideDryerBlockEntity,
+            ModBlocks.HIDE_DRYER
+            )
+
     }
 
     private fun <T : BlockEntity> register(
