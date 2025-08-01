@@ -58,7 +58,7 @@ object ModItems {
     val FLINT_BIFACE: Item = register("flint_biface", { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.FLINT_MATERIAL, settings.maxDamage(15), 0.0f) })
     val BONE_KNIFE: Item = register("bone_knife", { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.BONE_MATERIAL, settings) })
     val BONE_SPEAR: Item = register("bone_spear", { settings: Item.Settings -> TridentItem(settings) })
-    val BONE_SPEARHEAD: Item = register("bone_spearhead", { settings: Item.Settings -> Item(settings) })
+    val BONE_SHARD: Item = register("bone_shard", { settings: Item.Settings -> Item(settings) })
     val FLINT_KNIFE: Item = register(
         "flint_knife",
         { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.FLINT_MATERIAL, settings, 1.0f) })

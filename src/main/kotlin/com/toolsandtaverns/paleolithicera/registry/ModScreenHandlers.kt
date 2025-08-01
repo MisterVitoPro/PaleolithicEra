@@ -2,11 +2,12 @@ package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.screen.KnappingScreenHandler
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.resource.featuretoggle.FeatureSet
 import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.BlockPos
 
 object ModScreenHandlers {
 
@@ -17,7 +18,10 @@ object ModScreenHandlers {
         KNAPPING = Registry.register(
             Registries.SCREEN_HANDLER,
             Identifier.of(MOD_ID, "knapping"),
-            ScreenHandlerType(::KnappingScreenHandler, FeatureSet.empty())
+            ExtendedScreenHandlerType(
+                { syncId, inventory, pos -> KnappingScreenHandler(syncId, inventory, pos) },
+                BlockPos.PACKET_CODEC
+            )
         )
     }
 }

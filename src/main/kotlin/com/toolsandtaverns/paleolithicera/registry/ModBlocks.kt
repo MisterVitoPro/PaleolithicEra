@@ -24,7 +24,7 @@ import net.minecraft.state.property.Properties
 
 object ModBlocks {
 
-    val KNAPPING_STATION: Block = register("knapping_station", ::KnappingStationBlock, AbstractBlock.Settings.create())
+    val KNAPPING_STATION: Block = register("knapping_station", ::KnappingStationBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
     val CRUDE_CAMPFIRE: Block = register(
         "crude_campfire", ::CrudeCampFireBlock,
         AbstractBlock.Settings.create()

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "minecraft:block/dirt",
+    "east": "minecraft:block/grass_block_side",
+    "north": "minecraft:block/grass_block_side",
+    "particle": "minecraft:block/dirt",
+    "south": "minecraft:block/grass_block_side",
+    "up": "paleolithic-era:block/knapping_station_top",
+    "west": "minecraft:block/grass_block_side"
+  }
+}

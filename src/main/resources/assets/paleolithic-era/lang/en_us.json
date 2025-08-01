@@ -68,7 +68,10 @@
   "item.paleolithic-era.wooden_harpoon": "Wooden Harpoon",
   "item.paleolithic-era.wooden_harpoon.tooltip": "Use near water to fish. Time your strike!",
 
+  "tag.item.paleolithic-era.bone_tool_materials": "Bone Tools",
+  "tag.item.paleolithic-era.flint_tool_materials": "Flint Tools",
   "tag.item.paleolithic-era.repairs_rawhide_armor": "Rawhide Repair Material",
   "tag.item.paleolithic-era.knife": "Knife",
-  "tag.item.paleolithic-era.spears": "Spears"
+  "tag.item.paleolithic-era.spears": "Spears",
+  "tag.entity_type.paleolithic-era.huntable": "Huntable"
 }

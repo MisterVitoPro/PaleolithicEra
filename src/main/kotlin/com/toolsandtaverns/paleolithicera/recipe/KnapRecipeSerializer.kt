@@ -15,30 +15,19 @@ object KnapRecipeSerializer : RecipeSerializer<KnapRecipe> {
     val CODEC: MapCodec<KnapRecipe> =
         RecordCodecBuilder.mapCodec { inst: RecordCodecBuilder.Instance<KnapRecipe> ->
             inst.group(
-                Ingredient.CODEC.listOf().fieldOf("ingredient")
-                    .forGetter { it.getRawInputs() },
-                ItemStack.CODEC.fieldOf("result")
-                    .forGetter(KnapRecipe::output),
-                Codec.BOOL.optionalFieldOf("isShaped", false)
-                    .forGetter { it.isShaped }
-            ).apply(inst) { ingredients, result, isShaped ->
-                KnapRecipe(result, ingredients, isShaped)
-            }
+                Ingredient.CODEC.fieldOf("ingredient").forGetter(KnapRecipe::inputItem),
+                ItemStack.CODEC.fieldOf("result").forGetter(KnapRecipe::output),
+            ).apply(inst, ::KnapRecipe)
         }
 
     val PACKET_CODEC: PacketCodec<RegistryByteBuf, KnapRecipe> =
         PacketCodec.tuple(
-            PacketCodecs.collection({ ArrayList() }, Ingredient.PACKET_CODEC),
-            KnapRecipe::getRawInputs,
+            Ingredient.PACKET_CODEC,
+            KnapRecipe::inputItem,
 
             ItemStack.PACKET_CODEC,
             KnapRecipe::output,
-
-            PacketCodecs.BOOLEAN,
-            KnapRecipe::isShaped
-        ) { ingredients: List<Ingredient>, output: ItemStack, isShaped: Boolean ->
-            KnapRecipe(output, ingredients, isShaped)
-        }
+            ::KnapRecipe)
 
     override fun codec(): MapCodec<KnapRecipe> = CODEC
 

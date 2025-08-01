@@ -3,21 +3,20 @@ package com.toolsandtaverns.paleolithicera.recipe
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.input.RecipeInput
 
-class KnapRecipeInput(val inputItemStacks: List<ItemStack>) : RecipeInput {
+class KnapRecipeInput(val input: ItemStack) : RecipeInput {
+
+    fun getStack(): ItemStack = getStackInSlot(0)
 
     override fun getStackInSlot(slot: Int): ItemStack {
-        return inputItemStacks.getOrElse(slot) { ItemStack.EMPTY }
+        return input
     }
 
     override fun size(): Int {
-        return inputItemStacks.size
+        return 1
     }
 
     override fun isEmpty(): Boolean {
-        return inputItemStacks.all { it.isEmpty }
+        return input.isEmpty
     }
 
-    fun getStacks(): List<ItemStack> {
-        return inputItemStacks
-    }
 }

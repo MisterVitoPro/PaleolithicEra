@@ -1,8 +1,6 @@
 {
   "type": "paleolithic-era:knapping",
-  "ingredient": [
-    "minecraft:flint"
-  ],
+  "ingredient": "minecraft:flint",
   "result": {
     "count": 1,
     "id": "paleolithic-era:flint_biface"

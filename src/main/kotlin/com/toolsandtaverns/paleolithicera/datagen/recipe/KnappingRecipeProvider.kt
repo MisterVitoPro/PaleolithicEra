@@ -12,6 +12,7 @@ import net.minecraft.data.recipe.RecipeExporter
 import net.minecraft.data.recipe.RecipeGenerator
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.recipe.Ingredient
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
@@ -56,18 +57,18 @@ class KnappingRecipeProvider(
                 buildDefaultKnapRecipe(
                     exporter = exporter,
                     recipeId = "knap_flint_to_flint_biface",
-                    recipe = KnapRecipe(ItemStack(ModItems.FLINT_BIFACE, 1), Items.FLINT),
+                    recipe = KnapRecipe(Ingredient.ofItem(Items.FLINT), ItemStack(ModItems.FLINT_BIFACE, 1), ),
                     criterionName = "has_flint",
                     criterion = InventoryChangedCriterion.Conditions.items(Items.FLINT)
                 )
 
-                // Bone -> Bone Spearhead
+                // Bone -> Bone Shard
                 buildDefaultKnapRecipe(
                     exporter = exporter,
-                    recipeId = "knap_bone_spearhead",
-                    recipe = KnapRecipe(ItemStack(ModItems.BONE_SPEARHEAD), Items.BONE),
+                    recipeId = "knap_bone_shard",
+                    recipe = KnapRecipe(Ingredient.ofItem(ModItems.BONE_SHARD), ItemStack(ModItems.BONE_SHARD)),
                     criterionName = "has_bone",
-                    criterion = InventoryChangedCriterion.Conditions.items(ModItems.BONE_SPEARHEAD)
+                    criterion = InventoryChangedCriterion.Conditions.items(ModItems.BONE_SHARD)
                 )
             }
         }

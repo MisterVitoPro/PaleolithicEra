@@ -1,5 +1,6 @@
 package com.toolsandtaverns.paleolithicera
 
+import com.toolsandtaverns.paleolithicera.client.renderer.KnappingStationBlockEntityRenderer
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiClient
 import com.toolsandtaverns.paleolithicera.render.WoodenSpearRenderer
 import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
@@ -46,6 +47,9 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
             ModEntities.CRUDE_CAMPFIRE,
             ::CrudeCampfireBlockEntityRenderer
         )
+
+        BlockEntityRendererFactories.register(ModEntities.KNAPPING_STATION, ::KnappingStationBlockEntityRenderer)
+
 
         // Register the renderer for the wooden spear entity
         // This allows thrown spears to be properly displayed in the world

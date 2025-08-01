@@ -98,15 +98,13 @@ class KnifeItem(
                 world.syncWorldEvent(player, WorldEvents.BLOCK_SCRAPED, pos, 0)
                 return optional2
             } else {
-                val optional3 =
-                    Optional.ofNullable<Block>((HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get() as BiMap<*, *>)[state.block] as Block)
-                        .map(Function { block: Block -> block.getStateWithProperties(state) })
-                if (optional3.isPresent) {
+                val unwaxed = (HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get() as BiMap<*, *>)[state.block] as? Block
+                return if (unwaxed != null) {
                     world.playSound(player, pos, SoundEvents.ITEM_AXE_WAX_OFF, SoundCategory.BLOCKS, 1.0f, 1.0f)
                     world.syncWorldEvent(player, WorldEvents.WAX_REMOVED, pos, 0)
-                    return optional3
+                    Optional.of(unwaxed.getStateWithProperties(state))
                 } else {
-                    return Optional.empty<BlockState>()
+                    Optional.empty()
                 }
             }
         }

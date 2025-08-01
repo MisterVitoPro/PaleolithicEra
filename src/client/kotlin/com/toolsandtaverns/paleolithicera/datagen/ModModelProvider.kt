@@ -3,11 +3,15 @@ package com.toolsandtaverns.paleolithicera.datagen
 import com.toolsandtaverns.paleolithicera.block.ElderberryBushBlock
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
+import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.minecraft.client.data.BlockStateModelGenerator
 import net.minecraft.client.data.ItemModelGenerator
 import net.minecraft.client.data.Models
+import net.minecraft.client.data.TextureKey
+import net.minecraft.client.data.TextureMap
+import net.minecraft.util.Identifier
 
 class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
@@ -27,6 +31,17 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             BlockStateModelGenerator.CrossType.NOT_TINTED,
             ElderberryBushBlock.Companion.AGE, 0, 1, 2, 3
         )
+
+        blockStateModelGenerator.registerCubeWithCustomTextures(
+            ModBlocks.KNAPPING_STATION,
+            ModBlocks.KNAPPING_STATION // Same block used as texture source
+        ) { block, _ ->
+            TextureMap()
+                .put(TextureKey.UP, id("block/knapping_station_top"))
+                .put(TextureKey.SIDE, Identifier.ofVanilla("block/grass_block_side"))
+                .put(TextureKey.DOWN, Identifier.ofVanilla("block/dirt"))
+                .put(TextureKey.PARTICLE, Identifier.ofVanilla("block/dirt"))
+        }
     }
 
     /**
@@ -44,7 +59,7 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.PLANT_FIBER, Models.GENERATED)
         itemModelGenerator.register(ModItems.ROCK_CHUNK, Models.GENERATED)
         itemModelGenerator.register(ModItems.RAWHIDE, Models.GENERATED)
-        itemModelGenerator.register(ModItems.BONE_SPEARHEAD, Models.GENERATED)
+        itemModelGenerator.register(ModItems.BONE_SHARD, Models.GENERATED)
         itemModelGenerator.register(ModItems.FLINT_BIFACE, Models.GENERATED)
 
         // Register food items with GENERATED model type

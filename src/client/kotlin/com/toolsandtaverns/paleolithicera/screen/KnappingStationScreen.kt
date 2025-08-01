@@ -1,5 +1,6 @@
 package com.toolsandtaverns.paleolithicera.screen
 
+import com.toolsandtaverns.paleolithicera.util.id
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.entity.player.PlayerInventory
@@ -21,7 +22,7 @@ class KnappingStationScreen(
 
     companion object {
         /** Texture file for the GUI background */
-        private val TEXTURE = Identifier.of("paleolithic-era", "textures/gui/container/knapping_station.png")
+        private val TEXTURE = id("textures/gui/container/knapping_station.png")
     }
 
     init {

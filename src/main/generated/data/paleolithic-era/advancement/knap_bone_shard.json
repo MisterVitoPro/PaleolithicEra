@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "paleolithic-era:bone_spearhead"
+            "items": "paleolithic-era:bone_shard"
           }
         ]
       },
@@ -19,7 +19,7 @@
   ],
   "rewards": {
     "recipes": [
-      "paleolithic-era:knap_bone_spearhead"
+      "paleolithic-era:knap_bone_shard"
     ]
   }
 }
