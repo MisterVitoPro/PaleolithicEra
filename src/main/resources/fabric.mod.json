@@ -3,7 +3,7 @@
 	"id": "paleolithic-era",
 	"version": "${version}",
 	"name": "Paleolithic Era",
-	"description": "Explore early game technology of the Paleolithic Era",
+	"description": "Adds stone-age crafting, survival tools, and Paleolithic tech to early Minecraft gameplay. Expands the early game tiers a bit more.",
 	"authors": [
 		"MrVitoPro"
 	],
@@ -11,7 +11,7 @@
 		"homepage": "https://github.com/MisterVitoPro/PaleolithicEra",
 		"sources": "https://github.com/MisterVitoPro/PaleolithicEra"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/paleolithic-era/icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -47,5 +47,15 @@
 		"java": ">=21",
 		"fabric-api": "*",
 		"fabric-language-kotlin": "1.13.4+kotlin.2.2.0"
+	},
+	"custom": {
+		"modrinth": {
+			"tags": [
+				"stone-age", "early-game", "survival", "fabric", "hardcore", "primitive", "prehistoric", "campfire", "cooking"
+			]
+		},
+		"curseforge": {
+			"slug": "paleolithic-era"
+		}
 	}
 }
