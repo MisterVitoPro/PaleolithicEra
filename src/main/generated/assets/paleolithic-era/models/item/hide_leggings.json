@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "paleolithic-era:item/rawhide_tunic"
+    "layer0": "paleolithic-era:item/hide_leggings"
   }
 }

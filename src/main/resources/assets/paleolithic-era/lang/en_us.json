@@ -37,8 +37,8 @@
   "advancement.paleolithic-era.awakening.hunt_aggressive.title": "Hunter's First Blood",
   "advancement.paleolithic-era.awakening.hunt_aggressive.description": "Hunt down any hostile creature using your primitive weapons",
 
-  "advancement.paleolithic-era.awakening.wear_rawhide_armor.title": "Protection First",
-  "advancement.paleolithic-era.awakening.wear_rawhide_armor.description": "Limited coverage, but anything will help at this point.",
+  "advancement.paleolithic-era.awakening.wear_hide_armor.title": "Protection First",
+  "advancement.paleolithic-era.awakening.wear_hide_armor.description": "Limited coverage, but anything will help at this point.",
 
   "message.paleolithic-era.caught_item": "you caught a %s!",
 
@@ -57,8 +57,11 @@
   "item.paleolithic-era.plant_fiber": "Plant Fiber",
   "item.paleolithic-era.rawhide": "Rawhide",
   "item.paleolithic-era.dry_hide": "Dry Hide",
-  "item.paleolithic-era.rawhide_leggings": "Rawhide Leggings",
-  "item.paleolithic-era.rawhide_tunic": "Rawhide Tunic",
+  "item.paleolithic-era.patched_hide": "Patched Hide",
+  "item.paleolithic-era.hide_leggings": "Hide Leggings",
+  "item.paleolithic-era.hide_tunic": "Hide Tunic",
+  "item.paleolithic-era.hide_cap": "Hide Cap",
+  "item.paleolithic-era.hide_shoes": "Hide Shoes",
   "item.paleolithic-era.rock_chunk": "Rock Chunk",
   "block.paleolithic-era.elderberry_bush": "Elderberry Bush",
   "block.paleolithic-era.hide_dryer": "Hide Dryer",
@@ -73,7 +76,7 @@
 
   "tag.item.paleolithic-era.bone_tool_materials": "Bone Tools",
   "tag.item.paleolithic-era.flint_tool_materials": "Flint Tools",
-  "tag.item.paleolithic-era.repairs_rawhide_armor": "Rawhide Repair Material",
+  "tag.item.paleolithic-era.repairs_hide_armor": "Hide Repair Material",
   "tag.item.paleolithic-era.knife": "Knife",
   "tag.item.paleolithic-era.spears": "Spears",
   "tag.entity_type.paleolithic-era.huntable": "Huntable"

@@ -7,9 +7,9 @@ import net.minecraft.registry.RegistryKey
 
 object ModEquipmentAssets {
 
-    val RAWHIDE_EQUIPMENT_ASSET: RegistryKey<EquipmentAsset> = RegistryKey.of(
+    val HIDE_EQUIPMENT_ASSET: RegistryKey<EquipmentAsset> = RegistryKey.of(
         EquipmentAssetKeys.REGISTRY_KEY,
-        id("rawhide")
+        id("hide")
     )
 
 }

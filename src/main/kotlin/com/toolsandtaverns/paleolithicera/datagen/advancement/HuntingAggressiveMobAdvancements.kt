@@ -64,19 +64,21 @@ object HuntingAdvancements {
         val fullRawHideArmor: AdvancementEntry = Advancement.Builder.create()
             .parent(huntAggressiveMob)
             .display(
-               ModItems.RAWHIDE_TUNIC,
-                Text.translatable("advancement.$MOD_ID.awakening.wear_rawhide_armor.title"),
-                Text.translatable("advancement.$MOD_ID.awakening.wear_rawhide_armor.description"),
+               ModItems.HIDE_TUNIC,
+                Text.translatable("advancement.$MOD_ID.awakening.wear_hide_armor.title"),
+                Text.translatable("advancement.$MOD_ID.awakening.wear_hide_armor.description"),
                 null,
                 AdvancementFrame.TASK,
                 true,
                 true,
                 false
             )
-            .criterion("wear_rawhide_tunic", InventoryChangedCriterion.Conditions.items(ModItems.RAWHIDE_TUNIC))
-            .criterion("wear_rawhide_leggings", InventoryChangedCriterion.Conditions.items(ModItems.RAWHIDE_LEGGINGS))
-            .requirements(AdvancementRequirements.allOf(listOf("wear_rawhide_tunic", "wear_rawhide_leggings")))
+            .criterion("wear_hide_tunic", InventoryChangedCriterion.Conditions.items(ModItems.HIDE_TUNIC))
+            .criterion("wear_hide_leggings", InventoryChangedCriterion.Conditions.items(ModItems.HIDE_LEGGINGS))
+            .criterion("wear_hide_cap", InventoryChangedCriterion.Conditions.items(ModItems.HIDE_CAP))
+            .criterion("wear_hide_shoes", InventoryChangedCriterion.Conditions.items(ModItems.HIDE_SHOES))
+            .requirements(AdvancementRequirements.allOf(listOf("wear_hide_tunic", "wear_hide_leggings", "wear_hide_cap", "wear_hide_shoes")))
             .rewards(AdvancementRewards.Builder.experience(4))
-            .build(consumer, "$MOD_ID/wear_rawhide_armor")
+            .build(consumer, "$MOD_ID/wear_hide_armor")
     }
 }

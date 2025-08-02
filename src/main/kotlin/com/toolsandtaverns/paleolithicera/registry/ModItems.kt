@@ -3,7 +3,7 @@ package com.toolsandtaverns.paleolithicera.registry
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.item.FireDrillItem
 import com.toolsandtaverns.paleolithicera.item.KnifeItem
-import com.toolsandtaverns.paleolithicera.item.ModArmorMaterials.RAWHIDE_MATERIAL
+import com.toolsandtaverns.paleolithicera.item.ModArmorMaterials.HIDE_MATERIAL
 import com.toolsandtaverns.paleolithicera.item.ToolMaterialsMod
 import com.toolsandtaverns.paleolithicera.item.WoodenHarpoonItem
 import com.toolsandtaverns.paleolithicera.item.WoodenSpearItem
@@ -45,13 +45,22 @@ object ModItems {
     val ROCK_CHUNK: Item = register("rock_chunk", { settings: Item.Settings -> Item(settings) })
     val RAWHIDE: Item = register("rawhide", { settings: Item.Settings -> Item(settings) })
     val DRY_HIDE: Item = register("dry_hide", { settings: Item.Settings -> Item(settings) })
+    val PATCHED_HIDE: Item = register("patched_hide", { settings: Item.Settings -> Item(settings) })
 
-    val RAWHIDE_TUNIC: Item = register("rawhide_tunic", { settings: Item.Settings ->
-        Item(settings.armor(RAWHIDE_MATERIAL, EquipmentType.CHESTPLATE))
+    val HIDE_CAP : Item = register("hide_cap", { settings: Item.Settings ->
+        Item(settings.armor(HIDE_MATERIAL, EquipmentType.HELMET))
     })
 
-    val RAWHIDE_LEGGINGS: Item = register("rawhide_leggings", { settings: Item.Settings ->
-        Item(settings.armor(RAWHIDE_MATERIAL, EquipmentType.LEGGINGS))
+    val HIDE_TUNIC: Item = register("hide_tunic", { settings: Item.Settings ->
+        Item(settings.armor(HIDE_MATERIAL, EquipmentType.CHESTPLATE))
+    })
+
+    val HIDE_LEGGINGS: Item = register("hide_leggings", { settings: Item.Settings ->
+        Item(settings.armor(HIDE_MATERIAL, EquipmentType.LEGGINGS))
+    })
+
+    val HIDE_SHOES : Item = register("hide_shoes", { settings: Item.Settings ->
+        Item(settings.armor(HIDE_MATERIAL, EquipmentType.BOOTS))
     })
 
     val WOODEN_SPEAR: Item = register("wooden_spear", { settings: Item.Settings -> WoodenSpearItem(settings) })

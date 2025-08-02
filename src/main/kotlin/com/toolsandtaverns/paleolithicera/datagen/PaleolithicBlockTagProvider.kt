@@ -43,9 +43,5 @@ class PaleolithicBlockTagProvider(
 
     }
 
-    fun shouldReplace(tag: TagKey<Block>): Boolean {
-        return false
-    }
-
     override fun getName(): String = "Paleolithic Block Tags"
 }

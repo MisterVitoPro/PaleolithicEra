@@ -3,14 +3,14 @@
   "category": "equipment",
   "key": {
     "F": "paleolithic-era:plant_fiber",
-    "R": "paleolithic-era:rawhide"
+    "P": "paleolithic-era:patched_hide"
   },
   "pattern": [
-    "RF",
-    "RR"
+    "PP",
+    "F "
   ],
   "result": {
     "count": 1,
-    "id": "paleolithic-era:rawhide_tunic"
+    "id": "paleolithic-era:hide_cap"
   }
 }

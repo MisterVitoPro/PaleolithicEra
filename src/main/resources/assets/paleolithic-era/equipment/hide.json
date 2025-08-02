@@ -2,12 +2,12 @@
   "layers": {
     "humanoid": [
       {
-        "texture": "paleolithic-era:rawhide"
+        "texture": "paleolithic-era:hide"
       }
     ],
     "humanoid_leggings": [
       {
-        "texture": "paleolithic-era:rawhide"
+        "texture": "paleolithic-era:hide"
       }
     ]
   }

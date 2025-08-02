@@ -11,7 +11,7 @@ object ModItemTags {
     val BONE_TOOL_MATERIALS = of("bone_tool_materials")
     val FLINT_TOOL_MATERIALS = of("flint_tool_materials")
 
-    val REPAIRS_RAWHIDE_ARMOR = of("repairs_rawhide_armor")
+    val REPAIRS_HIDE_ARMOR = of("repairs_hide_armor")
 
     val KNIFE = of("knife")
     val SPEARS = of("spears")

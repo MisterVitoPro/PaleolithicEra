@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.item
 
-import com.toolsandtaverns.paleolithicera.entity.projectile.WoodenSpearEntity
+import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import net.minecraft.component.type.AttributeModifierSlot
 import net.minecraft.component.type.AttributeModifiersComponent
 import net.minecraft.entity.LivingEntity

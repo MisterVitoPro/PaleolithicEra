@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.render
 
-import com.toolsandtaverns.paleolithicera.entity.projectile.WoodenSpearEntity
+import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.OverlayTexture

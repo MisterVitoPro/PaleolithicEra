@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": "paleolithic-era:dry_hide",
+    "F": "paleolithic-era:plant_fiber"
+  },
+  "pattern": [
+    "DF",
+    "FD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:patched_hide"
+  }
+}

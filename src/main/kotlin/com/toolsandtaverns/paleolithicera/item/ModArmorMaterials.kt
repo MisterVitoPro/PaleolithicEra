@@ -3,25 +3,21 @@ package com.toolsandtaverns.paleolithicera.item
 import com.google.common.collect.Maps
 import com.toolsandtaverns.paleolithicera.item.equipment.ModEquipmentAssets
 import com.toolsandtaverns.paleolithicera.registry.ModItemTags
-import com.toolsandtaverns.paleolithicera.util.id
-import com.toolsandtaverns.paleolithicera.util.regKeyOfItem
 import net.minecraft.item.equipment.ArmorMaterial
 import net.minecraft.item.equipment.EquipmentType
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.tag.TagKey
 import net.minecraft.sound.SoundEvents
 
 object ModArmorMaterials {
 
-    val RAWHIDE_MATERIAL: ArmorMaterial = ArmorMaterial(
-        8, // Base durability (lower than leather)
-        createDefenseMap(0, 1, 1, 0, 1), // No helmet/boots
-        1, // Enchantability (extremely low)
+    val HIDE_MATERIAL: ArmorMaterial = ArmorMaterial(
+        5, // Base durability (lower than leather)
+        createDefenseMap(1, 1, 2, 1, 2), // No helmet/boots
+        3, // Enchantability (extremely low)
         SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
         0.0f, // Toughness
         0.0f, // Knockback resistance
-        ModItemTags.REPAIRS_RAWHIDE_ARMOR, // Repair tag
-        ModEquipmentAssets.RAWHIDE_EQUIPMENT_ASSET // Asset key
+        ModItemTags.REPAIRS_HIDE_ARMOR, // Repair tag
+        ModEquipmentAssets.HIDE_EQUIPMENT_ASSET // Asset key
     )
 
     private fun createDefenseMap(

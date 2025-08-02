@@ -1,0 +1,75 @@
+{
+  "parent": "minecraft:awakening/hunt_aggressive",
+  "criteria": {
+    "wear_hide_cap": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:hide_cap"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "wear_hide_leggings": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:hide_leggings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "wear_hide_shoes": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:hide_shoes"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "wear_hide_tunic": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:hide_tunic"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.wear_hide_armor.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:hide_tunic"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.wear_hide_armor.title"
+    }
+  },
+  "requirements": [
+    [
+      "wear_hide_tunic"
+    ],
+    [
+      "wear_hide_leggings"
+    ],
+    [
+      "wear_hide_cap"
+    ],
+    [
+      "wear_hide_shoes"
+    ]
+  ],
+  "rewards": {
+    "experience": 4
+  },
+  "sends_telemetry_event": true
+}

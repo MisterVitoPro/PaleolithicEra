@@ -4,7 +4,7 @@ import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.entity.CrudeCampfireBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.HideDryerBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
-import com.toolsandtaverns.paleolithicera.entity.projectile.WoodenSpearEntity
+import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.minecraft.block.Block

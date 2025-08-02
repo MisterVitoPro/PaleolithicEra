@@ -71,6 +71,7 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.ROCK_CHUNK, Models.GENERATED)
         itemModelGenerator.register(ModItems.RAWHIDE, Models.GENERATED)
         itemModelGenerator.register(ModItems.DRY_HIDE, Models.GENERATED)
+        itemModelGenerator.register(ModItems.PATCHED_HIDE, Models.GENERATED)
         itemModelGenerator.register(ModItems.BONE_SHARD, Models.GENERATED)
         itemModelGenerator.register(ModItems.FLINT_BIFACE, Models.GENERATED)
 
@@ -79,8 +80,10 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.COOKED_ELDERBERRIES, Models.GENERATED)
 
         // Register armor items with GENERATED model type
-        itemModelGenerator.register(ModItems.RAWHIDE_LEGGINGS, Models.GENERATED)
-        itemModelGenerator.register(ModItems.RAWHIDE_TUNIC, Models.GENERATED)
+        itemModelGenerator.register(ModItems.HIDE_LEGGINGS, Models.GENERATED)
+        itemModelGenerator.register(ModItems.HIDE_TUNIC, Models.GENERATED)
+        itemModelGenerator.register(ModItems.HIDE_SHOES, Models.GENERATED)
+        itemModelGenerator.register(ModItems.HIDE_CAP, Models.GENERATED)
 
         // Register tools and weapons with HANDHELD model type
         itemModelGenerator.register(ModItems.BONE_KNIFE, Models.HANDHELD)

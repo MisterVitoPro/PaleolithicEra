@@ -1,4 +1,4 @@
-package com.toolsandtaverns.paleolithicera.entity.projectile
+package com.toolsandtaverns.paleolithicera.entity
 
 import com.toolsandtaverns.paleolithicera.registry.ModEntities
 import com.toolsandtaverns.paleolithicera.registry.ModItems

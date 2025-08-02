@@ -9,7 +9,6 @@ import net.minecraft.item.Items
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
-import net.minecraft.registry.tag.BlockTags
 import java.util.concurrent.CompletableFuture
 
 class ModItemTagProvider(output: FabricDataOutput, val registries: CompletableFuture<RegistryWrapper.WrapperLookup>)
@@ -25,8 +24,9 @@ class ModItemTagProvider(output: FabricDataOutput, val registries: CompletableFu
             .add(Registries.ITEM.getId(ModItems.FLINT_KNIFE))
             .add(Registries.ITEM.getId(Items.FLINT))
 
-        getTagBuilder(ModItemTags.REPAIRS_RAWHIDE_ARMOR)
-            .add(Registries.ITEM.getId(ModItems.RAWHIDE))
+        getTagBuilder(ModItemTags.REPAIRS_HIDE_ARMOR)
+            .add(Registries.ITEM.getId(ModItems.DRY_HIDE))
+            .add(Registries.ITEM.getId(ModItems.PATCHED_HIDE))
 
         getTagBuilder(ModItemTags.SPEARS)
             .add(Registries.ITEM.getId(ModItems.WOODEN_SPEAR))

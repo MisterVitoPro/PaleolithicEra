@@ -2,15 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "F": "paleolithic-era:plant_fiber",
-    "R": "paleolithic-era:rawhide"
+    "P": "paleolithic-era:patched_hide"
   },
   "pattern": [
-    "RR",
-    "FF"
+    "PP",
+    "PP"
   ],
   "result": {
     "count": 1,
-    "id": "paleolithic-era:rawhide_leggings"
+    "id": "paleolithic-era:hide_tunic"
   }
 }
