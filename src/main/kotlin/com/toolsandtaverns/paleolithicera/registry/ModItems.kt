@@ -15,6 +15,7 @@ import net.minecraft.component.type.ConsumableComponent
 import net.minecraft.component.type.FoodComponent
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.item.AxeItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroups
 import net.minecraft.item.TridentItem
@@ -50,15 +51,12 @@ object ModItems {
     val HIDE_CAP : Item = register("hide_cap", { settings: Item.Settings ->
         Item(settings.armor(HIDE_MATERIAL, EquipmentType.HELMET))
     })
-
     val HIDE_TUNIC: Item = register("hide_tunic", { settings: Item.Settings ->
         Item(settings.armor(HIDE_MATERIAL, EquipmentType.CHESTPLATE))
     })
-
     val HIDE_LEGGINGS: Item = register("hide_leggings", { settings: Item.Settings ->
         Item(settings.armor(HIDE_MATERIAL, EquipmentType.LEGGINGS))
     })
-
     val HIDE_SHOES : Item = register("hide_shoes", { settings: Item.Settings ->
         Item(settings.armor(HIDE_MATERIAL, EquipmentType.BOOTS))
     })
@@ -72,6 +70,9 @@ object ModItems {
     val FLINT_KNIFE: Item = register(
         "flint_knife",
         { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.FLINT_MATERIAL, settings, 1.0f) })
+    val FLINT_AXE: Item = register(
+        "flint_axe",
+        { settings: Item.Settings -> AxeItem(ToolMaterialsMod.FLINT_MATERIAL, 3.0f, -3.2F, settings) })
     val FIRE_DRILL: Item =
         register("fire_drill", { settings: Item.Settings -> FireDrillItem(settings.maxCount(1).maxDamage(25)) })
 

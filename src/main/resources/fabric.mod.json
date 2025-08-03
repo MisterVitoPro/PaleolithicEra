@@ -3,16 +3,16 @@
 	"id": "paleolithic-era",
 	"version": "${version}",
 	"name": "Paleolithic Era",
-	"description": "Adds stone-age crafting, survival tools, and Paleolithic tech to early Minecraft gameplay. Expands the early game tiers a bit more.",
+	"description": "Adds paleolithic era crafting, survival tools, and tech to early Minecraft gameplay. Expands the early game tiers a bit more.",
 	"authors": [
-		"MrVitoPro"
+		"MisterVitoPro"
 	],
 	"contact": {
 		"homepage": "https://github.com/MisterVitoPro/PaleolithicEra",
 		"sources": "https://github.com/MisterVitoPro/PaleolithicEra"
 	},
 	"license": "MIT",
-	"icon": "assets/paleolithic-era/icon.png",
+	"icon": "assets/paleolithic-era/mod_icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [

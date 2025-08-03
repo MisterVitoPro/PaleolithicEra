@@ -173,6 +173,24 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(ModItems.DRY_HIDE), conditionsFromItem(ModItems.DRY_HIDE))
                     .offerTo(exporter)
 
+                createShaped(RecipeCategory.COMBAT, ModItems.FLINT_KNIFE, 1)
+                    .pattern("PF")
+                    .pattern("S ")
+                    .input('F', ModItems.FLINT_BIFACE)
+                    .input('P', ModItems.PLANT_FIBER)
+                    .input('S', Items.STICK)
+                    .criterion(hasItem(ModItems.FLINT_BIFACE), conditionsFromItem(ModItems.FLINT_BIFACE))
+                    .offerTo(exporter)
+
+                createShaped(RecipeCategory.COMBAT, ModItems.FLINT_AXE, 1)
+                    .pattern("PF")
+                    .pattern("SF")
+                    .input('F', ModItems.FLINT_BIFACE)
+                    .input('P', ModItems.PLANT_FIBER)
+                    .input('S', Items.STICK)
+                    .criterion(hasItem(ModItems.FLINT_BIFACE), conditionsFromItem(ModItems.FLINT_BIFACE))
+                    .offerTo(exporter)
+
             }
         }
     }

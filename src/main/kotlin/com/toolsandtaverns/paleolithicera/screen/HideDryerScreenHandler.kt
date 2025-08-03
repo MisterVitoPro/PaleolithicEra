@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos
 
 /**
  * Handles server-side inventory logic for the Hide Dryer UI.
- * Supports progress tracking and input/output access.
  */
 class HideDryerScreenHandler(
     syncId: Int,

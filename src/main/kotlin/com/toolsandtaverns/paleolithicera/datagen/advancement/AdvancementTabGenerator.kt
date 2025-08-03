@@ -51,9 +51,9 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
                 Text.translatable("advancement.$MOD_ID.awakening.get_rock_chunk.description"),
                 null,
                 AdvancementFrame.TASK,
-                true, // show toast
-                false, // announce to chat
-                false // not hidden
+                true,
+                false,
+                false
             )
             .criterion(
                 "has_rock_chunk",
@@ -70,9 +70,9 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
                 Text.translatable("advancement.$MOD_ID.awakening.craft_knapping_station.description"),
                 null,
                 AdvancementFrame.TASK,
-                true, // show toast
-                false, // announce to chat
-                false // not hidden
+                true,
+                false,
+                false
             )
             .criterion(
                 "craft_knap_station",
@@ -89,9 +89,9 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
                 Text.translatable("advancement.$MOD_ID.awakening.craft_flint_biface.description"),
                 null,
                 AdvancementFrame.TASK,
-                true, // show toast
-                true, // announce to chat
-                false // not hidden
+                true,
+                true,
+                false
             )
             .criterion(
                 "craft_flint_biface",

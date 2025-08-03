@@ -1,5 +1,6 @@
 package com.toolsandtaverns.paleolithicera.datagen.loot
 
+import com.toolsandtaverns.paleolithicera.datagen.ModEntityTypeTagProvider.Companion.huntableAnimals
 import com.toolsandtaverns.paleolithicera.registry.ModEntityTags.HUNTABLE_TAG
 import com.toolsandtaverns.paleolithicera.registry.ModItems.RAWHIDE
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents
@@ -19,11 +20,11 @@ object MobLootModifier {
             if (!source.isBuiltin) return@register
             if (!id.value.path.startsWith("entities/")) return@register
 
-            val entityId = Identifier.ofVanilla(id.value.path)
+            val entityName = id.value.path.removePrefix("entities/")
+            val entityId = Identifier.ofVanilla(entityName)
             val entityType = Registries.ENTITY_TYPE.get(entityId)
 
-            if (entityType.isIn(HUNTABLE_TAG)) {
-                // Add Raw Hide instead
+            if (huntableAnimals.contains(entityType)) {
                 builder.pool(
                     LootPool.builder()
                         .with(ItemEntry.builder(RAWHIDE))

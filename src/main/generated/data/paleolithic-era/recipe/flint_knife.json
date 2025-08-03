@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": "paleolithic-era:flint_biface",
+    "P": "paleolithic-era:plant_fiber",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "PF",
+    "S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:flint_knife"
+  }
+}

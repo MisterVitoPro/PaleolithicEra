@@ -5,8 +5,6 @@ import net.minecraft.recipe.input.RecipeInput
 
 class KnapRecipeInput(val input: ItemStack) : RecipeInput {
 
-    fun getStack(): ItemStack = getStackInSlot(0)
-
     override fun getStackInSlot(slot: Int): ItemStack {
         return input
     }

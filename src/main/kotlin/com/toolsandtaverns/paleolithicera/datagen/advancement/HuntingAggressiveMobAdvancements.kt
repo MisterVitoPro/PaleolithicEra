@@ -27,7 +27,7 @@ object HuntingAdvancements {
         val huntAggressiveMob: AdvancementEntry = Advancement.Builder.create()
             .parent(parent)
             .display(
-                ModItems.WOODEN_SPEAR, // You can change this to another relevant item
+                ModItems.WOODEN_SPEAR,
                 Text.translatable("advancement.$MOD_ID.awakening.hunt_aggressive.title"),
                 Text.translatable("advancement.$MOD_ID.awakening.hunt_aggressive.description"),
                 null,

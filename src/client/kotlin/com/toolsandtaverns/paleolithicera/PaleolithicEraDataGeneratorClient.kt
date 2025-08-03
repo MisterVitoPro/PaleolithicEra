@@ -36,8 +36,6 @@ import net.minecraft.registry.RegistryKeys
         val pack: FabricDataGenerator.Pack = fabricDataGenerator.createPack()
         // Add item tag generator for creating item tags
         pack.addProvider(::ModItemTagProvider)
-        // Add entity type tag generator for creating entity type tags
-        pack.addProvider(::ModEntityTypeTagProvider)
         // Add recipe generators for creating vanilla-style crafting recipes
         pack.addProvider(::VanillaRecipeProvider)
         pack.addProvider(::KnappingRecipeProvider)
@@ -49,6 +47,8 @@ import net.minecraft.registry.RegistryKeys
         pack.addProvider(::ModModelProvider)
         // Add block tag generator for creating block tags
         pack.addProvider(::PaleolithicBlockTagProvider)
+        // Add entity type tag generator for creating entity type tags
+        pack.addProvider(::ModEntityTypeTagProvider)
         // Add advancement generator for creating advancements
         pack.addProvider(::ModAdvancementProvider)
     }
