@@ -43,7 +43,6 @@ class KnappingStationBlock(settings: Settings) : BlockWithEntity(settings) {
         player: PlayerEntity,
         hit: BlockHitResult
     ): ActionResult {
-        println("onUse() Triggered")
         val blockEntity = world.getBlockEntity(pos) as? KnappingStationBlockEntity ?: return ActionResult.PASS
 
         return if (player.isSneaking) {

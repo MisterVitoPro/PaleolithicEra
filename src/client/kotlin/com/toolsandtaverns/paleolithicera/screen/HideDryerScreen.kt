@@ -66,7 +66,6 @@ class HideDryerScreen(
     }
 
     override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {
-        renderBackground(context, mouseX, mouseY, delta) // Draw the darkened background behind the GUI
         super.render(context, mouseX, mouseY, delta)      // Draw containers, slots, and items
         drawMouseoverTooltip(context, mouseX, mouseY)     // Draw tooltips when hovering over items
     }
