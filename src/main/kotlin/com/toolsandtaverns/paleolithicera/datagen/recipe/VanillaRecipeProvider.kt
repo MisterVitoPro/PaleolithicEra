@@ -5,6 +5,7 @@ import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
+import net.minecraft.advancement.AdvancementCriterion
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
 import net.minecraft.data.recipe.CookingRecipeJsonBuilder
 import net.minecraft.data.recipe.RecipeExporter
@@ -48,26 +49,26 @@ class VanillaRecipeProvider(
              * and campfire cooking recipes.
              */
             override fun generate() {
-                // Bone Knife - diagonal crafting pattern with bone and stick
+                // Bone Knife
                 createShaped(RecipeCategory.TOOLS, ModItems.BONE_KNIFE, 1)
                     .pattern(" B")
                     .pattern("S ")
-                    .input('B', Items.BONE)
+                    .input('B', ModItems.BONE_SHARD)
                     .input('S', Items.STICK)
                     .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
                     .offerTo(exporter)
 
-                // Bone Spear - diagonal design with bone spearhead at the tip
+                // Bone Spear
                 createShaped(RecipeCategory.COMBAT, ModItems.BONE_SPEAR, 1)
-                    .pattern("  B")
-                    .pattern(" S ")
-                    .pattern("S  ")
+                    .pattern(" B")
+                    .pattern("SP")
                     .input('B', ModItems.BONE_SHARD)
+                    .input('P', ModItems.PLANT_CORDAGE)
                     .input('S', Items.STICK)
-                    .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem(ModItems.BONE_SHARD))
+                    .criterion(hasItem(ModItems.BONE_SHARD), conditionsFromItem(ModItems.BONE_SHARD))
                     .offerTo(exporter)
 
-                // Wooden Spear - simple diagonal pattern with sticks
+                // Wooden Spear
                 createShaped(RecipeCategory.COMBAT, ModItems.WOODEN_SPEAR, 1)
                     .pattern(" S")
                     .pattern("S ")
@@ -75,7 +76,7 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
                     .offerTo(exporter)
 
-                // Fire Drill - crafted with sticks and plant fiber
+                // Fire Drill
                 createShaped(RecipeCategory.TOOLS, ModItems.FIRE_DRILL, 1)
                     .pattern("SF")
                     .pattern("SS")
@@ -84,16 +85,24 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(Items.CRAFTING_TABLE), conditionsFromItem(ModItems.PLANT_FIBER))
                     .offerTo(exporter)
 
-                // Crude Campfire - primitive version of the vanilla campfire
+                // Crude Campfire
                 createShaped(RecipeCategory.MISC, ModBlocks.CRUDE_CAMPFIRE, 1)
                     .pattern("SF")
                     .pattern("BB")
                     .input('S', Items.STICK)
                     .input('B', ModItems.BARK)
                     .input('F', ModItems.PLANT_FIBER)
-                    // Unlock recipe when player has both bark and plant fiber
                     .criterion(hasItem(ModItems.BARK), conditionsFromItem(ModItems.BARK))
                     .criterion(hasItem(ModItems.PLANT_FIBER), conditionsFromItem(ModItems.PLANT_FIBER))
+                    .offerTo(exporter)
+
+                createShaped(RecipeCategory.MISC, ModBlocks.HIDE_DRYER, 1)
+                    .pattern("SD")
+                    .pattern("BB")
+                    .input('S', Items.STICK)
+                    .input('D', ModItems.RAWHIDE)
+                    .input('B', ModItems.BARK)
+                    .criterion(hasItem(ModItems.RAWHIDE), conditionsFromItem { ModItems.RAWHIDE })
                     .offerTo(exporter)
 
                 // Knapping Station - crafting block for stone tools
@@ -142,9 +151,17 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(ModItems.DRY_HIDE), conditionsFromItem(ModItems.DRY_HIDE))
                     .offerTo(exporter)
 
+                createShaped(RecipeCategory.MISC, ModItems.PLANT_CORDAGE, 1)
+                    .pattern("FF")
+                    .pattern("FF")
+                    .input('F', ModItems.PLANT_FIBER)
+                    .criterion(hasItem(ModItems.PLANT_FIBER), conditionsFromItem(ModItems.PLANT_FIBER))
+                    .offerTo(exporter)
+
                 createShaped(RecipeCategory.COMBAT, ModItems.HIDE_TUNIC, 1)
+                    .pattern("PC")
                     .pattern("PP")
-                    .pattern("PP")
+                    .input('P', ModItems.PLANT_CORDAGE)
                     .input('P', ModItems.PATCHED_HIDE)
                     .criterion(hasItem(ModItems.DRY_HIDE), conditionsFromItem(ModItems.DRY_HIDE))
                     .offerTo(exporter)
@@ -177,18 +194,18 @@ class VanillaRecipeProvider(
                     .pattern("PF")
                     .pattern("S ")
                     .input('F', ModItems.FLINT_BIFACE)
-                    .input('P', ModItems.PLANT_FIBER)
+                    .input('P', ModItems.PLANT_CORDAGE)
                     .input('S', Items.STICK)
-                    .criterion(hasItem(ModItems.FLINT_BIFACE), conditionsFromItem(ModItems.FLINT_BIFACE))
+                    .criterion(hasItem(ModItems.BONE_KNIFE), conditionsFromItem(ModItems.BONE_KNIFE))
                     .offerTo(exporter)
 
                 createShaped(RecipeCategory.COMBAT, ModItems.FLINT_AXE, 1)
                     .pattern("PF")
                     .pattern("SF")
                     .input('F', ModItems.FLINT_BIFACE)
-                    .input('P', ModItems.PLANT_FIBER)
+                    .input('P', ModItems.PLANT_CORDAGE)
                     .input('S', Items.STICK)
-                    .criterion(hasItem(ModItems.FLINT_BIFACE), conditionsFromItem(ModItems.FLINT_BIFACE))
+                    .criterion(hasItem(ModItems.BONE_KNIFE), conditionsFromItem(ModItems.BONE_KNIFE))
                     .offerTo(exporter)
 
             }

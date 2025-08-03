@@ -68,6 +68,7 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         // Register resource/material items with GENERATED model type
         itemModelGenerator.register(ModItems.BARK, Models.GENERATED)
         itemModelGenerator.register(ModItems.PLANT_FIBER, Models.GENERATED)
+        itemModelGenerator.register(ModItems.PLANT_CORDAGE, Models.GENERATED)
         itemModelGenerator.register(ModItems.ROCK_CHUNK, Models.GENERATED)
         itemModelGenerator.register(ModItems.RAWHIDE, Models.GENERATED)
         itemModelGenerator.register(ModItems.DRY_HIDE, Models.GENERATED)

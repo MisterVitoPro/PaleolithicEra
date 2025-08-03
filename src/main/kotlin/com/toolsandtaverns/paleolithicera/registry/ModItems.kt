@@ -43,6 +43,7 @@ import net.minecraft.util.Identifier
 object ModItems {
     val BARK: Item = register("bark", { settings: Item.Settings -> Item(settings) })
     val PLANT_FIBER: Item = register("plant_fiber", { settings: Item.Settings -> Item(settings) })
+    val PLANT_CORDAGE: Item = register("plant_cordage", { settings: Item.Settings -> Item(settings) })
     val ROCK_CHUNK: Item = register("rock_chunk", { settings: Item.Settings -> Item(settings) })
     val RAWHIDE: Item = register("rawhide", { settings: Item.Settings -> Item(settings) })
     val DRY_HIDE: Item = register("dry_hide", { settings: Item.Settings -> Item(settings) })
@@ -74,7 +75,7 @@ object ModItems {
         "flint_axe",
         { settings: Item.Settings -> AxeItem(ToolMaterialsMod.FLINT_MATERIAL, 3.0f, -3.2F, settings) })
     val FIRE_DRILL: Item =
-        register("fire_drill", { settings: Item.Settings -> FireDrillItem(settings.maxCount(1).maxDamage(25)) })
+        register("fire_drill", { settings: Item.Settings -> FireDrillItem(settings.maxCount(1).maxDamage(10)) })
 
     val WOODEN_HARPOON = register("wooden_harpoon", { settings: Item.Settings -> WoodenHarpoonItem(settings.maxCount(1).maxDamage(20)) })
 
