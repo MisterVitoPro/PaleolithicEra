@@ -79,11 +79,11 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
     private var burnTicksRemaining: Int = 0
 
     /**
-     * The total number of ticks a crude campfire burns when lit (1200 ticks = 60 seconds).
+     * The total number of ticks a crude campfire burns when lit (20 ticks = 1 seconds).
      * This represents the primitive nature of the campfire - it doesn't burn as long as
      * advanced fire sources, reflecting Paleolithic technology limitations.
      */
-    private val totalBurnTicks: Int = 1200
+    private val totalBurnTicks: Int = 120 * 20
 
     /**
      * Reads the entity's data from NBT or component storage.

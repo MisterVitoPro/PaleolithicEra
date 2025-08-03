@@ -62,13 +62,19 @@ class HideDryerBlockEntity(
     fun tick(world: World) {
         if (world.isClient || !world.isDay) return
 
+        // Do not dry if it is raining and the block is exposed to the sky
+        if (world.isRaining && world.isSkyVisible(pos)) return
+
         val input = inventory.getStack(0)
         val output = inventory.getStack(1)
 
         if (input.isOf(ModItems.RAWHIDE) &&
             (output.isEmpty || (output.item == ModItems.DRY_HIDE && output.count < output.maxCount))
         ) {
-            progress++
+            // Determine drying speed: full speed during day, 25% speed at night
+            val dryingSpeed = if (world.isDay) 1.0f else 0.25f
+            progress += dryingSpeed.toInt()  // We use integer progress, so we cast here
+
             if (progress >= (DRYING_DURATION_SECS * 20)) {
                 input.decrement(1)
                 if (output.isEmpty) {

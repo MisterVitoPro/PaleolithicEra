@@ -112,9 +112,6 @@ class CrudeCampFireBlock(settings: Settings) : CampfireBlock(false, 1, settings)
             if (recipeSet.canUse(stack)) {
                 if (blockEntity.addItem(world, player, stack)) {
                     player.incrementStat(Stats.INTERACT_WITH_CAMPFIRE)
-                    if (!player.abilities.creativeMode) {
-                        stack.decrement(1)
-                    }
                     return ActionResult.SUCCESS
                 }
                 return ActionResult.CONSUME
