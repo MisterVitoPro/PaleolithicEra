@@ -66,7 +66,7 @@ class KnappingRecipeProvider(
                 buildDefaultKnapRecipe(
                     exporter = exporter,
                     recipeId = "knap_bone_shard",
-                    recipe = KnapRecipe(Ingredient.ofItem(ModItems.BONE_SHARD), ItemStack(ModItems.BONE_SHARD)),
+                    recipe = KnapRecipe(Ingredient.ofItem(Items.BONE), ItemStack(ModItems.BONE_SHARD, 1)),
                     criterionName = "has_bone",
                     criterion = InventoryChangedCriterion.Conditions.items(ModItems.BONE_SHARD)
                 )
