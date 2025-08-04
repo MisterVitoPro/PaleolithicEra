@@ -1,24 +1,26 @@
 package com.toolsandtaverns.paleolithicera
 
 import com.toolsandtaverns.paleolithicera.client.renderer.KnappingStationBlockEntityRenderer
+import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiClient
-import com.toolsandtaverns.paleolithicera.render.WoodenSpearRenderer
 import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
-import com.toolsandtaverns.paleolithicera.render.CrudeCampfireBlockEntityRenderer
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
-import com.toolsandtaverns.paleolithicera.screen.KnappingStationScreen
+import com.toolsandtaverns.paleolithicera.registry.ModEntities
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
+import com.toolsandtaverns.paleolithicera.render.CrudeCampfireBlockEntityRenderer
+import com.toolsandtaverns.paleolithicera.render.WoodenSpearRenderer
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreen
+import com.toolsandtaverns.paleolithicera.screen.KnappingStationScreen
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry
 import net.minecraft.client.gui.screen.ingame.HandledScreens
 import net.minecraft.client.render.BlockRenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 
-    /**
+/**
      * Client-side initialization for the Paleolithic Era mod.
      * 
      * This class handles all client-specific initialization such as registering
@@ -52,9 +54,13 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
         BlockEntityRendererFactories.register(ModEntities.KNAPPING_STATION, ::KnappingStationBlockEntityRenderer)
 
 
+        EntityModelLayerRegistry.registerModelLayer(
+            WoodenSpearProjectileModel.WOOD_SPEAR_MODEL_LAYER,
+            WoodenSpearProjectileModel::getTexturedModelData
+        )
         // Register the renderer for the wooden spear entity
         // This allows thrown spears to be properly displayed in the world
-        EntityRendererRegistry.register(ModEntities.SPEAR_ENTITY) { context ->
+        EntityRendererRegistry.register(ModEntities.WOODEN_SPEAR_ENTITY) { context ->
             WoodenSpearRenderer(context)
         }
 
@@ -70,5 +76,6 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 
         // Register client-side network handlers for the harpoon fishing system
         OpenHarpoonGuiClient.register()
+
     }
 }
