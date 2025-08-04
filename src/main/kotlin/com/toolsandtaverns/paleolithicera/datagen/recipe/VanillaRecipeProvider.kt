@@ -161,7 +161,7 @@ class VanillaRecipeProvider(
                 createShaped(RecipeCategory.COMBAT, ModItems.HIDE_TUNIC, 1)
                     .pattern("PC")
                     .pattern("PP")
-                    .input('P', ModItems.PLANT_CORDAGE)
+                    .input('C', ModItems.PLANT_CORDAGE)
                     .input('P', ModItems.PATCHED_HIDE)
                     .criterion(hasItem(ModItems.DRY_HIDE), conditionsFromItem(ModItems.DRY_HIDE))
                     .offerTo(exporter)

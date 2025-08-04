@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "F": "paleolithic-era:flint_biface",
-    "P": "paleolithic-era:plant_fiber",
+    "P": "paleolithic-era:plant_cordage",
     "S": "minecraft:stick"
   },
   "pattern": [

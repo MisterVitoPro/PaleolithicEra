@@ -1,6 +1,6 @@
 {
   "type": "paleolithic-era:knapping",
-  "ingredient": "paleolithic-era:bone_shard",
+  "ingredient": "minecraft:bone",
   "result": {
     "count": 1,
     "id": "paleolithic-era:bone_shard"
