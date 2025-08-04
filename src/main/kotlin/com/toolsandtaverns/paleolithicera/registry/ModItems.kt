@@ -67,13 +67,12 @@ object ModItems {
     })
 
     val WOODEN_SPEAR = register("wooden_spear",
-        { SpearItem( it, ::WoodenSpearEntity) },
-        Item.Settings()
-            .maxDamage(ToolMaterial.WOOD.durability)
+        { settings: Item.Settings -> SpearItem( settings.maxDamage(ToolMaterial.WOOD.durability)
             .attributeModifiers(SpearItem.createAttributeModifiers(ToolMaterial.WOOD))
             .component(DataComponentTypes.TOOL, SpearItem.createToolComponent(ToolMaterial.WOOD))
             .enchantable(ToolMaterial.WOOD.enchantmentValue())
-            .component(DataComponentTypes.WEAPON, WeaponComponent(1))
+            .component(DataComponentTypes.WEAPON, WeaponComponent(1)), ::WoodenSpearEntity) }
+
     )
 
     val FLINT_BIFACE: Item = register("flint_biface", { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.FLINT_MATERIAL, settings.maxDamage(15), 0.0f) })

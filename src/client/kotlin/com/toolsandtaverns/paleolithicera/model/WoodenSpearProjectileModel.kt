@@ -14,15 +14,12 @@ class WoodenSpearProjectileModel(root: ModelPart) : EntityModel<EntityRenderStat
         val WOOD_SPEAR_MODEL_LAYER: EntityModelLayer = EntityModelLayer(id("wooden_spear"), "main")
         fun getTexturedModelData(): TexturedModelData {
             val modelData = ModelData()
-            val modelPartData = modelData.root
-
-            modelPartData.addChild(
+            modelData.root.addChild(
                 "main",
                 ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -24.0F, 0.0F, 1.0F, 24.0F, 1.0F, Dilation(0.0f)),
                 ModelTransform.origin(0.0f, 20f, 0.0f)
             )
-
-            return TexturedModelData.of(modelData, 32, 32)
+            return TexturedModelData.of(modelData, 64, 64)
         }
     }
 

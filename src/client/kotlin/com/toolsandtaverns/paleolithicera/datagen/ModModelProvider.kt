@@ -88,11 +88,13 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
         // Register tools and weapons with HANDHELD model type
         itemModelGenerator.register(ModItems.BONE_KNIFE, Models.HANDHELD)
-        itemModelGenerator.register(ModItems.WOODEN_SPEAR, Models.HANDHELD)
+        itemModelGenerator.register(ModItems.FLINT_KNIFE, Models.HANDHELD)
+
         itemModelGenerator.register(ModItems.BONE_SPEAR, Models.HANDHELD)
+
         itemModelGenerator.register(ModItems.FIRE_DRILL, Models.HANDHELD)
         itemModelGenerator.register(ModItems.WOODEN_HARPOON, Models.HANDHELD)
-        itemModelGenerator.register(ModItems.FLINT_KNIFE, Models.HANDHELD)
+
         itemModelGenerator.register(ModItems.FLINT_AXE, Models.HANDHELD)
     }
 
