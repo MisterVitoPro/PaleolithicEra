@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": "paleolithic-era:plant_fiber"
+  },
+  "pattern": [
+    "FF",
+    "FF"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:plant_cordage"
+  }
+}
