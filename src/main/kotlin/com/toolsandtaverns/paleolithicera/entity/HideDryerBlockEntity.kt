@@ -45,48 +45,52 @@ class HideDryerBlockEntity(
 ) : BlockEntity(ModEntities.HIDE_DRYER_BLOCK_ENTITY, pos, state), ExtendedScreenHandlerFactory<BlockPos> {
 
     /**
-     * Handles the core drying process logic during world ticks.
-     * 
-     * This method simulates the natural sun-drying of animal hides by:
-     * 1. Checking if it's daytime (hides only dry during the day in sunlight)
-     * 2. Verifying input and output slots contain appropriate items
-     * 3. Incrementing progress until the required drying time is reached
-     * 4. Transforming rawhide into dry hide when complete
-     * 
-     * The daylight requirement creates a realistic time constraint that forces players
-     * to plan their hide processing around the day/night cycle, similar to how Paleolithic
-     * humans would have been constrained by natural cycles for their crafting activities.
+     * Handles the drying process logic for the Hide Dryer block entity.
      *
-     * @param world The world containing this block entity
+     * This function executes server-side every tick and simulates the realistic constraints
+     * of Paleolithic hide drying:
+     *
+     * - Drying halts entirely during rain if the block is exposed to the sky.
+     * - Daylight enables full drying speed (1.0f per tick).
+     * - Nighttime slows drying to 25% speed (0.25f per tick).
+     * - When the accumulated drying progress reaches the configured threshold,
+     *   the rawhide is consumed and replaced with dry hide.
+     *
+     * The progress is tracked as a float to support sub-tick increments for nighttime drying.
+     * This creates a more nuanced, time-sensitive crafting mechanic tied to natural conditions.
+     *
+     * @param world The server-side world instance containing this dryer.
      */
     fun tick(world: World) {
-        if (world.isClient || !world.isDay) return
-
-        // Do not dry if it is raining and the block is exposed to the sky
-        if (world.isRaining && world.isSkyVisible(pos)) return
+        if (world.isClient) return
 
         val input = inventory.getStack(0)
         val output = inventory.getStack(1)
 
+        // Stop and reset if raining and dryer is exposed
+        if (world.isRaining && world.isSkyVisible(pos)) {
+            progress = 0f
+            return
+        }
+
         if (input.isOf(ModItems.RAWHIDE) &&
             (output.isEmpty || (output.item == ModItems.DRY_HIDE && output.count < output.maxCount))
         ) {
-            // Determine drying speed: full speed during day, 25% speed at night
             val dryingSpeed = if (world.isDay) 1.0f else 0.25f
-            progress += dryingSpeed.toInt()  // We use integer progress, so we cast here
+            progress += dryingSpeed
 
-            if (progress >= (DRYING_DURATION_SECS * 20)) {
+            if (progress >= DRYING_DURATION_TICKS) {
                 input.decrement(1)
                 if (output.isEmpty) {
                     inventory.setStack(1, ItemStack(ModItems.DRY_HIDE))
                 } else {
                     output.increment(1)
                 }
-                progress = 0
+                progress = 0f
                 markDirty()
             }
         } else {
-            progress = 0
+            progress = 0f
         }
     }
 
@@ -95,7 +99,7 @@ class HideDryerBlockEntity(
      * When this reaches DRYING_DURATION_TICKS, the rawhide is transformed into dry hide.
      * This slower processing reflects the time-consuming nature of hide preparation in the Paleolithic era.
      */
-    private var progress = 0
+    private var progress = 0f
 
     /**
      * Simple two-slot inventory for the hide dryer:
@@ -123,16 +127,17 @@ class HideDryerBlockEntity(
      */
     val propertyDelegate = object : PropertyDelegate {
         override fun get(index: Int): Int = when (index) {
-            0 -> progress
+            0 -> progress.toInt()
             else -> 0
         }
 
         override fun set(index: Int, value: Int) {
-            if (index == 0) progress = value
+            if (index == 0) progress = value.toFloat()
         }
 
         override fun size(): Int = 1
     }
+
 
     /**
      * Handles behavior when the hide dryer block is replaced or destroyed.
