@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": "minecraft:stick",
+    "W": "paleolithic-era:wooden_spear"
+  },
+  "pattern": [
+    "SS",
+    "WS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:wooden_harpoon"
+  }
+}
