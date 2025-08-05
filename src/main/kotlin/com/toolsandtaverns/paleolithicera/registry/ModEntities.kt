@@ -25,7 +25,7 @@ object ModEntities {
         private set
     lateinit var CRUDE_CAMPFIRE: BlockEntityType<CrudeCampfireBlockEntity>
         private set
-    lateinit var SPEAR_ENTITY: EntityType<WoodenSpearEntity>
+    lateinit var WOODEN_SPEAR_ENTITY: EntityType<WoodenSpearEntity>
             private set
     lateinit var HIDE_DRYER_BLOCK_ENTITY: BlockEntityType<HideDryerBlockEntity>
         private set
@@ -44,14 +44,14 @@ object ModEntities {
             ModBlocks.CRUDE_CAMPFIRE
         )
 
-        SPEAR_ENTITY = Registry.register(
+        WOODEN_SPEAR_ENTITY = Registry.register(
             Registries.ENTITY_TYPE,
-            id("thrown_spear"),
+            id("wooden_spear"),
             EntityType.Builder.create(::WoodenSpearEntity, SpawnGroup.MISC)
                 .dimensions(0.5f, 0.5f)
                 .maxTrackingRange(4)
                 .trackingTickInterval(10)
-                .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("thrown_spear")))
+                .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("wooden_spear")))
         )
 
         HIDE_DRYER_BLOCK_ENTITY = register(

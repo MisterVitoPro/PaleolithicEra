@@ -4,6 +4,7 @@ import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.datagen.loot.MobLootModifier
 import com.toolsandtaverns.paleolithicera.datagen.loot.PlantFiberLootModifier
 import com.toolsandtaverns.paleolithicera.datagen.loot.RockChunkLootModifier
+import com.toolsandtaverns.paleolithicera.event.BlockDropHandler
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiPacket
 import com.toolsandtaverns.paleolithicera.network.payload.HarpoonResultPayload
 import com.toolsandtaverns.paleolithicera.registry.*
@@ -68,6 +69,8 @@ import org.slf4j.LoggerFactory
 
         // Register packet handlers for network communication
         OpenHarpoonGuiPacket.register()
+
+        BlockDropHandler.register()
     }
 
 }

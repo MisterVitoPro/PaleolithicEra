@@ -1,9 +1,11 @@
 package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
+import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.item.FireDrillItem
 import com.toolsandtaverns.paleolithicera.item.KnifeItem
 import com.toolsandtaverns.paleolithicera.item.ModArmorMaterials.HIDE_MATERIAL
+import com.toolsandtaverns.paleolithicera.item.SpearItem
 import com.toolsandtaverns.paleolithicera.item.ToolMaterialsMod
 import com.toolsandtaverns.paleolithicera.item.WoodenHarpoonItem
 import com.toolsandtaverns.paleolithicera.item.WoodenSpearItem
@@ -13,11 +15,13 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.ConsumableComponent
 import net.minecraft.component.type.FoodComponent
+import net.minecraft.component.type.WeaponComponent
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.AxeItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroups
+import net.minecraft.item.ToolMaterial
 import net.minecraft.item.TridentItem
 import net.minecraft.item.consume.ApplyEffectsConsumeEffect
 import net.minecraft.item.consume.UseAction
@@ -62,7 +66,14 @@ object ModItems {
         Item(settings.armor(HIDE_MATERIAL, EquipmentType.BOOTS))
     })
 
-    val WOODEN_SPEAR: Item = register("wooden_spear", { settings: Item.Settings -> WoodenSpearItem(settings) })
+    val WOODEN_SPEAR = register("wooden_spear",
+        { settings: Item.Settings -> SpearItem( settings.maxDamage(ToolMaterial.WOOD.durability)
+            .attributeModifiers(SpearItem.createAttributeModifiers(ToolMaterial.WOOD))
+            .component(DataComponentTypes.TOOL, SpearItem.createToolComponent(ToolMaterial.WOOD))
+            .enchantable(ToolMaterial.WOOD.enchantmentValue())
+            .component(DataComponentTypes.WEAPON, WeaponComponent(1)), ::WoodenSpearEntity) }
+
+    )
 
     val FLINT_BIFACE: Item = register("flint_biface", { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.FLINT_MATERIAL, settings.maxDamage(15), 0.0f) })
     val BONE_KNIFE: Item = register("bone_knife", { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.BONE_MATERIAL, settings) })
@@ -77,7 +88,7 @@ object ModItems {
     val FIRE_DRILL: Item =
         register("fire_drill", { settings: Item.Settings -> FireDrillItem(settings.maxCount(1).maxDamage(10)) })
 
-    val WOODEN_HARPOON = register("wooden_harpoon", { settings: Item.Settings -> WoodenHarpoonItem(settings.maxCount(1).maxDamage(20)) })
+    val WOODEN_HARPOON = register("wooden_harpoon", { settings: Item.Settings -> WoodenHarpoonItem(settings.maxCount(1).maxDamage(10)) })
 
     val RAW_ELDERBERRIES: Item = register("raw_elderberries", { settings ->
         Item(

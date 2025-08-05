@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bone_shard": {
+    "has_plant_fiber": {
       "conditions": {
         "items": [
           {
-            "items": "paleolithic-era:bone_shard"
+            "items": "paleolithic-era:plant_fiber"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paleolithic-era:bone_spear"
+        "recipe": "paleolithic-era:plant_cordage"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_bone_shard"
+      "has_plant_fiber"
     ]
   ],
   "rewards": {
     "recipes": [
-      "paleolithic-era:bone_spear"
+      "paleolithic-era:plant_cordage"
     ]
   }
 }

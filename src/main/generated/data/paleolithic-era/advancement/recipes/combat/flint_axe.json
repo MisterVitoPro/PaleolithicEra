@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_flint_biface": {
+    "has_bone_knife": {
       "conditions": {
         "items": [
           {
-            "items": "paleolithic-era:flint_biface"
+            "items": "paleolithic-era:bone_knife"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_flint_biface"
+      "has_bone_knife"
     ]
   ],
   "rewards": {

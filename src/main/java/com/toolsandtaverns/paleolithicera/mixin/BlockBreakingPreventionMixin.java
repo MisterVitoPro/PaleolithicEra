@@ -1,33 +1,32 @@
 package com.toolsandtaverns.paleolithicera.mixin;
 
-import com.toolsandtaverns.paleolithicera.PaleolithicEra;
-import net.minecraft.block.Block;
+import com.toolsandtaverns.paleolithicera.registry.ModTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShovelItem;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.block.Block;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.HashMap;
 import java.util.UUID;
-
-import static com.toolsandtaverns.paleolithicera.util.RegistryHelpersKt.tagKeyOfBlock;
+import java.util.function.Predicate;
 
 @Mixin(ServerPlayerInteractionManager.class)
 public abstract class BlockBreakingPreventionMixin {
@@ -35,9 +34,9 @@ public abstract class BlockBreakingPreventionMixin {
     @Final
     protected ServerPlayerEntity player;
 
-    private static final TagKey<Block> UNBREAKABLE_TAG = tagKeyOfBlock("unbreakable_without_tool");
-
     private static final HashMap<UUID, Long> lastWarnTime = new HashMap<>();
+    @Unique
+    private static final HashMap<UUID, Boolean> beenWarned = new HashMap<>();
     private static final long COOLDOWN_MS = 3000;
 
     @Inject(method = "processBlockBreakingAction", at = @At("HEAD"), cancellable = true)
@@ -52,27 +51,53 @@ public abstract class BlockBreakingPreventionMixin {
         if (action != PlayerActionC2SPacket.Action.START_DESTROY_BLOCK) return;
 
         BlockState state = player.getWorld().getBlockState(pos);
+        ServerWorld world = player.getWorld();
+
+        // Check UNBREAKABLE_TAG (axe required)
+        checkToolRequirement(
+                ModTags.Blocks.INSTANCE.getUNBREAKABLE_TAG(),
+                itemStack -> itemStack.getItem() instanceof AxeItem,
+                "You need an axe to harvest logs.",
+                state, pos, world, ci
+        );
+
+        // Check REQUIRES_SHOVEL (shovel required)
+        checkToolRequirement(
+                ModTags.Blocks.INSTANCE.getREQUIRES_SHOVEL(),
+                itemStack -> itemStack.getItem() instanceof ShovelItem,
+                "You need a shovel to dig in dirt.",
+                state, pos, world, ci
+        );
+    }
+
+    /**
+     * Prevents block breaking and sends a message if the block is tagged and the tool predicate fails.
+     */
+    @Unique
+    private void checkToolRequirement(
+            TagKey<Block> tag,
+            Predicate<ItemStack> validToolPredicate,
+            String message,
+            BlockState state,
+            BlockPos pos,
+            ServerWorld world,
+            CallbackInfo ci
+    ) {
+        if (!state.isIn(tag)) return;
+
         ItemStack held = player.getMainHandStack();
-        Item item = held.getItem();
+        if (validToolPredicate.test(held)) return;
 
-        if (state.isIn(UNBREAKABLE_TAG) && !(item instanceof AxeItem)) {
-            ServerWorld world = (ServerWorld) player.getWorld();
+        // Cancel animation and reset block visual
+        world.setBlockBreakingInfo(player.getId(), pos, -1);
+        player.networkHandler.sendPacket(new BlockUpdateS2CPacket(pos, state));
 
-            // Immediately clear damage animation
-            world.setBlockBreakingInfo(player.getId(), pos, -1);
-
-            // Reset visual state of the block
-            player.networkHandler.sendPacket(new BlockUpdateS2CPacket(pos, state));
-
-            // One-time feedback message
-            UUID id = player.getUuid();
-            long now = System.currentTimeMillis();
-            if (now - lastWarnTime.getOrDefault(id, 0L) > COOLDOWN_MS) {
-                player.sendMessage(Text.literal("You need an axe to harvest logs."), true);
-                lastWarnTime.put(id, now);
-            }
-
-            ci.cancel();
+        UUID id = player.getUuid();
+        if (!beenWarned.getOrDefault(id, false)) {
+            player.sendMessage(Text.literal(message), true);
+            beenWarned.put(id, true);
         }
+
+        ci.cancel();
     }
 }

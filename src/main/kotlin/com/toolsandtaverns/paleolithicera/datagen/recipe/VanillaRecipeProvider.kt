@@ -76,6 +76,15 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
                     .offerTo(exporter)
 
+                // Wooden Harpoon
+                createShaped(RecipeCategory.COMBAT, ModItems.WOODEN_HARPOON, 1)
+                    .pattern("SS")
+                    .pattern("WS")
+                    .input('S', Items.STICK)
+                    .input('W', ModItems.WOODEN_SPEAR)
+                    .criterion(hasItem(ModItems.WOODEN_SPEAR), conditionsFromItem(ModItems.WOODEN_SPEAR))
+                    .offerTo(exporter)
+
                 // Fire Drill
                 createShaped(RecipeCategory.TOOLS, ModItems.FIRE_DRILL, 1)
                     .pattern("SF")
@@ -161,7 +170,7 @@ class VanillaRecipeProvider(
                 createShaped(RecipeCategory.COMBAT, ModItems.HIDE_TUNIC, 1)
                     .pattern("PC")
                     .pattern("PP")
-                    .input('P', ModItems.PLANT_CORDAGE)
+                    .input('C', ModItems.PLANT_CORDAGE)
                     .input('P', ModItems.PATCHED_HIDE)
                     .criterion(hasItem(ModItems.DRY_HIDE), conditionsFromItem(ModItems.DRY_HIDE))
                     .offerTo(exporter)

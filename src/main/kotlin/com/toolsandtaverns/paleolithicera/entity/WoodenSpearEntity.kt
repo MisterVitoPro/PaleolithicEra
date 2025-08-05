@@ -6,6 +6,9 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.PersistentProjectileEntity
 import net.minecraft.item.ItemStack
+import net.minecraft.network.listener.ClientPlayPacketListener
+import net.minecraft.network.packet.Packet
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.EntityHitResult
@@ -19,7 +22,7 @@ import net.minecraft.world.World
 class WoodenSpearEntity : PersistentProjectileEntity {
 
     constructor(world: World, x: Double, y: Double, z: Double, stack: ItemStack) : super(
-        ModEntities.SPEAR_ENTITY,
+        ModEntities.WOODEN_SPEAR_ENTITY,
         x,
         y,
         z,
@@ -29,7 +32,7 @@ class WoodenSpearEntity : PersistentProjectileEntity {
     )
 
     constructor(world: World, owner: LivingEntity, stack: ItemStack)
-            : super(ModEntities.SPEAR_ENTITY, owner, world, stack, stack) {
+            : super(ModEntities.WOODEN_SPEAR_ENTITY, owner, world, stack, stack) {
         this.setNoGravity(false)
     }
 
@@ -43,14 +46,6 @@ class WoodenSpearEntity : PersistentProjectileEntity {
         }
     }
 
-    override fun onCollision(hitResult: HitResult) {
-        super.onCollision(hitResult)
-        if (!this.world.isClient) {
-            this.world.sendEntityStatus(this, 3.toByte())
-            this.discard()
-        }
-    }
-
     override fun getHitSound(): SoundEvent? {
         return SoundEvents.ITEM_TRIDENT_HIT_GROUND
     }
@@ -60,4 +55,5 @@ class WoodenSpearEntity : PersistentProjectileEntity {
     override fun shouldRender(cameraX: Double, cameraY: Double, cameraZ: Double): Boolean {
         return true
     }
+
 }

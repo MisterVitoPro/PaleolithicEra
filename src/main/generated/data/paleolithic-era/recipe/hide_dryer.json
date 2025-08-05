@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "paleolithic-era:bark",
+    "D": "paleolithic-era:rawhide",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "SD",
+    "BB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:hide_dryer"
+  }
+}

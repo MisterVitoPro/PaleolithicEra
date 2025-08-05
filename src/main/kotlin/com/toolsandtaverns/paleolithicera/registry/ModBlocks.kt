@@ -5,8 +5,8 @@ import com.toolsandtaverns.paleolithicera.block.CrudeCampFireBlock
 import com.toolsandtaverns.paleolithicera.block.ElderberryBushBlock
 import com.toolsandtaverns.paleolithicera.block.HideDryerBlock
 import com.toolsandtaverns.paleolithicera.block.KnappingStationBlock
+import com.toolsandtaverns.paleolithicera.util.RegistryHelpers
 import com.toolsandtaverns.paleolithicera.util.id
-import com.toolsandtaverns.paleolithicera.util.regKeyOfBlock
 import com.toolsandtaverns.paleolithicera.util.regKeyOfItem
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
@@ -66,7 +66,7 @@ object ModBlocks {
         shouldRegisterItem: Boolean = true
     ): Block {
         // Create a registry key for the block
-        val blockKey = regKeyOfBlock(name)
+        val blockKey = RegistryHelpers.regKeyOfBlock(name)
         // Create the block instance
         val block: Block? = blockFactory(settings.registryKey(blockKey))
 
@@ -89,7 +89,7 @@ object ModBlocks {
         additionalSettings: (AbstractBlock.Settings) -> Block
     ): Block {
         return Registry.register(Registries.BLOCK, id(name),
-            additionalSettings(AbstractBlock.Settings.create().registryKey(regKeyOfBlock(name)))
+            additionalSettings(AbstractBlock.Settings.create().registryKey(RegistryHelpers.regKeyOfBlock(name)))
         )
     }
 

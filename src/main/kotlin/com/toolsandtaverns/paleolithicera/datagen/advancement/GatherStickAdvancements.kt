@@ -29,7 +29,7 @@ object GatherStickAdvancements {
             .rewards(AdvancementRewards.Builder.experience(2))
             .build(consumer, "awakening/get_stick")
 
-        val craftWoodenSpear: AdvancementEntry = Advancement.Builder.create()
+        Advancement.Builder.create()
             .parent(getStick)
             .display(
                 ModItems.WOODEN_SPEAR,
@@ -42,6 +42,20 @@ object GatherStickAdvancements {
             .criterion("craft_wooden_spear", InventoryChangedCriterion.Conditions.items(ModItems.WOODEN_SPEAR))
             .rewards(AdvancementRewards.Builder.experience(2))
             .build(consumer, "awakening/craft_wooden_spear")
+
+        Advancement.Builder.create()
+            .parent(getStick)
+            .display(
+                ModItems.WOODEN_HARPOON,
+                Text.translatable("advancement.$MOD_ID.awakening.craft_wooden_harpoon.title"),
+                Text.translatable("advancement.$MOD_ID.awakening.craft_wooden_harpoon.desc"),
+                null,
+                AdvancementFrame.TASK,
+                true, true, false
+            )
+            .criterion("craft_wooden_harpoon", InventoryChangedCriterion.Conditions.items(ModItems.WOODEN_HARPOON))
+            .rewards(AdvancementRewards.Builder.experience(2))
+            .build(consumer, "craft_wooden_harpoon")
     }
 
 }

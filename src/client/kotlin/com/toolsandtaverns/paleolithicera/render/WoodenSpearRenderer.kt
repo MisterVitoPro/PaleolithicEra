@@ -1,24 +1,26 @@
 package com.toolsandtaverns.paleolithicera.render
 
 import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
-import com.toolsandtaverns.paleolithicera.registry.ModItems
-import net.minecraft.client.MinecraftClient
+import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
+import com.toolsandtaverns.paleolithicera.util.id
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider
+import net.minecraft.client.render.entity.EntityRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
+import net.minecraft.client.render.entity.state.EntityRenderState
+import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.item.ItemDisplayContext
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.RotationAxis
 
 /**
  * Renderer for Wooden Spear entity using item model.
  */
 class WoodenSpearRenderer(
-    context: EntityRendererFactory.Context
-) : net.minecraft.client.render.entity.EntityRenderer<WoodenSpearEntity, SpearRenderState>(context) {
+    context: EntityRendererFactory.Context,
+) : EntityRenderer<WoodenSpearEntity, SpearRenderState>(context) {
 
-    // Use the Minecraft item renderer to render the spear item model
-    private val itemRenderer = MinecraftClient.getInstance().itemRenderer
+    val model: WoodenSpearProjectileModel = WoodenSpearProjectileModel(context.getPart(WoodenSpearProjectileModel.WOOD_SPEAR_MODEL_LAYER))
 
     /**
      * Creates a new render state object for this renderer.
@@ -69,17 +71,13 @@ class WoodenSpearRenderer(
         // Add 90 degrees to pitch to make the spear point forward correctly
         matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(state.pitch + 90.0f))
 
-        // Render the spear using the item model
-        itemRenderer.renderItem(
-            ModItems.WOODEN_SPEAR.defaultStack, // The item to render
-            ItemDisplayContext.GROUND,          // Display context (ground item)
-            light,                              // Light level
-            OverlayTexture.DEFAULT_UV,          // Standard overlay texture (damage, etc.)
-            matrixStack,                        // Transformation matrix
-            vertexConsumerProvider,             // Vertex buffer provider
-            null,                               // No specific world (null is okay)
-            0                                   // Seed for random variations
+        val vertexConsumer = ItemRenderer.getItemGlintConsumer(
+            vertexConsumerProvider,
+            this.model.getLayer(id("textures/entity/wooden_spear.png")),
+            false,
+            false
         )
+        this.model.render(matrixStack, vertexConsumer, light, OverlayTexture.DEFAULT_UV)
 
         matrixStack.pop() // Restore the previous transformation state
         super.render(state, matrixStack, vertexConsumerProvider, light) // Call parent renderer
@@ -92,7 +90,7 @@ class WoodenSpearRenderer(
  * Stores rotation information for the spear entity that needs to be preserved
  * between update and render calls.
  */
-class SpearRenderState : net.minecraft.client.render.entity.state.EntityRenderState() {
+class SpearRenderState : EntityRenderState() {
     /** Horizontal rotation (yaw) of the spear in degrees */
     var yaw: Float = 0f
     /** Vertical rotation (pitch) of the spear in degrees */

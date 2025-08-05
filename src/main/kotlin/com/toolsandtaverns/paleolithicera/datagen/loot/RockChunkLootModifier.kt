@@ -1,24 +1,16 @@
 package com.toolsandtaverns.paleolithicera.datagen.loot
 
-import com.toolsandtaverns.paleolithicera.Constants
 import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
 import com.toolsandtaverns.paleolithicera.registry.ModItems.ROCK_CHUNK
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents
 import net.minecraft.block.Blocks
-import net.minecraft.item.Item
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
-import net.minecraft.loot.condition.MatchToolLootCondition
 import net.minecraft.loot.condition.RandomChanceLootCondition
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.function.SetCountLootFunction
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
-import net.minecraft.predicate.item.ItemPredicate
-import net.minecraft.registry.Registries
-import net.minecraft.registry.RegistryEntryLookup
 import net.minecraft.registry.RegistryKey
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.util.Identifier
 
 object RockChunkLootModifier {
 
