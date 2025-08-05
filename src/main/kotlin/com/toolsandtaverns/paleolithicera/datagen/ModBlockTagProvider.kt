@@ -1,13 +1,13 @@
 package com.toolsandtaverns.paleolithicera.datagen
 
-import com.toolsandtaverns.paleolithicera.util.tagKeyOfBlock
+import com.toolsandtaverns.paleolithicera.registry.ModTags
+import com.toolsandtaverns.paleolithicera.util.RegistryHelpers
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
-import net.minecraft.block.Block
+import net.minecraft.block.Blocks
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
-import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
 import java.util.concurrent.CompletableFuture
 
@@ -34,7 +34,7 @@ import java.util.concurrent.CompletableFuture
  * These block tags fundamentally alter the vanilla Minecraft experience to better simulate
  * the technological constraints and progression of Paleolithic-era survival.
  */
-class PaleolithicBlockTagProvider(
+class ModBlockTagProvider(
     output: FabricDataOutput,
     registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>
 ) : FabricTagProvider.BlockTagProvider(output, registriesFuture) {
@@ -54,12 +54,11 @@ class PaleolithicBlockTagProvider(
      * @param wrapperLookup Registry wrapper lookup for accessing block registries
      */
     override fun configure(wrapperLookup: RegistryWrapper.WrapperLookup) {
-        val unbreakableTag = tagKeyOfBlock("unbreakable_without_tool")
 
         // All log types are added to the unbreakable tag, as harvesting trees without tools
         // would have been impossible for Paleolithic humans. This creates an important
         // progression gate where players must craft primitive axes before accessing wood in quantity.
-        builder(unbreakableTag)
+        builder(ModTags.Blocks.UNBREAKABLE_TAG)
             // Natural logs require tools to harvest
             .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("oak_log")))
             .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("spruce_log")))
@@ -80,6 +79,14 @@ class PaleolithicBlockTagProvider(
             .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("stripped_mangrove_log")))
             .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("stripped_cherry_log")))
 
+        builder(ModTags.Blocks.REQUIRES_SHOVEL)
+            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.COARSE_DIRT))
+            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.DIRT))
+            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.GRASS_BLOCK))
+            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.MOSS_BLOCK))
+            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.MYCELIUM))
+            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.PODZOL))
+            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.ROOTED_DIRT))
     }
 
     /**

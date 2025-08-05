@@ -6,7 +6,7 @@ import com.toolsandtaverns.paleolithicera.datagen.ModEntityTypeTagProvider
 import com.toolsandtaverns.paleolithicera.datagen.ModItemTagProvider
 import com.toolsandtaverns.paleolithicera.datagen.ModModelProvider
 import com.toolsandtaverns.paleolithicera.datagen.ModRegistryDataGenerator
-import com.toolsandtaverns.paleolithicera.datagen.PaleolithicBlockTagProvider
+import com.toolsandtaverns.paleolithicera.datagen.ModBlockTagProvider
 import com.toolsandtaverns.paleolithicera.datagen.recipe.KnappingRecipeProvider
 import com.toolsandtaverns.paleolithicera.datagen.recipe.VanillaRecipeProvider
 import com.toolsandtaverns.paleolithicera.world.ModConfiguredFeatures
@@ -46,7 +46,7 @@ import net.minecraft.registry.RegistryKeys
         // Add model generator for creating block and item models
         pack.addProvider(::ModModelProvider)
         // Add block tag generator for creating block tags
-        pack.addProvider(::PaleolithicBlockTagProvider)
+        pack.addProvider(::ModBlockTagProvider)
         // Add entity type tag generator for creating entity type tags
         pack.addProvider(::ModEntityTypeTagProvider)
         // Add advancement generator for creating advancements
