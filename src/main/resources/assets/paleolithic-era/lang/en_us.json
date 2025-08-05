@@ -70,14 +70,15 @@
   "block.paleolithic-era.elderberry_bush": "Elderberry Bush",
   "block.paleolithic-era.hide_dryer": "Hide Dryer",
   "container.paleolithic-era.hide_dryer": "Hide Dryer",
+  "tooltip.paleolithic-era.hide_dryer": "Keep out of the rain. Slows at night.",
   "item.paleolithic-era.raw_elderberries": "Raw Elderberries",
   "item.paleolithic-era.cooked_elderberries": "Cooked Elderberries",
   "item.paleolithic-era.wooden_spear": "Wooden Spear",
   "tooltip.paleolithic-era.wooden_spear": "Melee or throw it. Your choice.",
 
   "item.paleolithic-era.wooden_harpoon": "Wooden Harpoon",
-  "item.paleolithic-era.wooden_harpoon.tooltip1": "Use near water to fish. Time your strike!",
-  "item.paleolithic-era.wooden_harpoon.tooltip2": "Must be a 3x3 water pool",
+  "tooltip.paleolithic-era.wooden_harpoon.1": "Use near water to fish. Time your strike!",
+  "tooltip.paleolithic-era.wooden_harpoon.2": "Must be a 3x3 water pool",
 
   "tag.item.paleolithic-era.bone_tool_materials": "Bone Tools",
   "tag.item.paleolithic-era.flint_tool_materials": "Flint Tools",
