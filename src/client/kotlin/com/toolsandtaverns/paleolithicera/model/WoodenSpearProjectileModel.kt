@@ -12,7 +12,8 @@ class WoodenSpearProjectileModel(root: ModelPart) : EntityModel<EntityRenderStat
 
     companion object {
         val WOOD_SPEAR_MODEL_LAYER: EntityModelLayer = EntityModelLayer(id("wooden_spear"), "main")
-        fun getTexturedModelData(): TexturedModelData {
+        val texturedModelData: TexturedModelData
+            get() {
             val modelData = ModelData()
             modelData.root.addChild(
                 "main",

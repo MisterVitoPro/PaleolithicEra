@@ -2,13 +2,8 @@ package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
-import com.toolsandtaverns.paleolithicera.item.FireDrillItem
-import com.toolsandtaverns.paleolithicera.item.KnifeItem
+import com.toolsandtaverns.paleolithicera.item.*
 import com.toolsandtaverns.paleolithicera.item.ModArmorMaterials.HIDE_MATERIAL
-import com.toolsandtaverns.paleolithicera.item.SpearItem
-import com.toolsandtaverns.paleolithicera.item.ToolMaterialsMod
-import com.toolsandtaverns.paleolithicera.item.WoodenHarpoonItem
-import com.toolsandtaverns.paleolithicera.item.WoodenSpearItem
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries
@@ -18,11 +13,7 @@ import net.minecraft.component.type.FoodComponent
 import net.minecraft.component.type.WeaponComponent
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.item.AxeItem
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroups
-import net.minecraft.item.ToolMaterial
-import net.minecraft.item.TridentItem
+import net.minecraft.item.*
 import net.minecraft.item.consume.ApplyEffectsConsumeEffect
 import net.minecraft.item.consume.UseAction
 import net.minecraft.item.equipment.EquipmentType
@@ -32,6 +23,7 @@ import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Identifier
+import java.util.function.Function
 
 /**
  * Registry for all custom items in the Paleolithic Era mod.
@@ -129,6 +121,10 @@ object ModItems {
     })
 
     val TAB_ICON_ITEM: Item = register("tab_icon", { settings: Item.Settings -> Item(settings.maxCount(1)) })
+
+    val MANTIS_SPAWN_EGG: Item = register(
+    "boar_spawn_egg",
+    { setting: Item.Settings? -> SpawnEggItem(ModEntities.BOAR_ENTITY, setting) })
 
     /**
      * Initializes item group registrations and any other post-registration setup.
