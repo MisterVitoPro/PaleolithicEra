@@ -36,9 +36,7 @@ object ModEntities {
             Registries.ENTITY_TYPE,
             id("boar"),
             EntityType.Builder.create(::BoarEntity, SpawnGroup.CREATURE)
-                .dimensions(0.5f, 0.5f)
-                .maxTrackingRange(4)
-                .trackingTickInterval(10)
+                .dimensions(0.9f, 0.9f)
                 .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("boar")))
         )
     }

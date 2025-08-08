@@ -4,6 +4,8 @@ import com.toolsandtaverns.paleolithicera.registry.ModEntities
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.minecraft.block.BlockState
 import net.minecraft.entity.AnimationState
+import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EntityPose
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.goal.*
@@ -15,7 +17,6 @@ import net.minecraft.entity.passive.PassiveEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.Ingredient
-import net.minecraft.registry.tag.BlockTags
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -40,7 +41,7 @@ class BoarEntity(entityType: EntityType<out AnimalEntity>, world: World) : Anima
 
     private fun updateAnimations() {
         if (this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = 40
+            this.idleAnimationTimeout = 50
             this.idleAnimationState.start(this.age)
         } else {
             --this.idleAnimationTimeout
@@ -89,7 +90,6 @@ class BoarEntity(entityType: EntityType<out AnimalEntity>, world: World) : Anima
                 .add(EntityAttributes.MAX_HEALTH, 10.0)
                 .add(EntityAttributes.MOVEMENT_SPEED, 0.25)
                 .add(EntityAttributes.ATTACK_DAMAGE, 1.0)
-                .add(EntityAttributes.FOLLOW_RANGE, 20.0)
                 .add(EntityAttributes.TEMPT_RANGE, 12.0)
         }
     }

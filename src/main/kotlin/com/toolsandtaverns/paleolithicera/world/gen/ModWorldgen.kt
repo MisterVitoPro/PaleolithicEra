@@ -38,6 +38,6 @@ object ModWorldgen {
                 BiomeKeys.PLAINS,
                 BiomeKeys.TAIGA,
                 ),
-            SpawnGroup.CREATURE, ModEntities.BOAR_ENTITY, 60, 1, 3)
+            SpawnGroup.CREATURE, ModEntities.BOAR_ENTITY, 40, 1, 2)
     }
 }

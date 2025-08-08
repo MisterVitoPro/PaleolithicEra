@@ -10,7 +10,7 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 
 class BoarRenderer(context: EntityRendererFactory.Context) :
-    MobEntityRenderer<BoarEntity, BoarRenderState, BoarModel>(context, BoarModel(context.getPart(BoarModel.BOAR_MODEL_LAYER)), 0.25f) {
+    MobEntityRenderer<BoarEntity, BoarRenderState, BoarModel>(context, BoarModel(context.getPart(BoarModel.BOAR_MODEL_LAYER)), 0.5f) {
 
     override fun getTexture(state: BoarRenderState): Identifier {
         return id("textures/entity/boar.png")
@@ -25,7 +25,7 @@ class BoarRenderer(context: EntityRendererFactory.Context) :
         vertexConsumerProvider: VertexConsumerProvider?, i: Int
     ) {
         if (state.baby) {
-            matrixStack.scale(0.45f, 0.45f, 0.45f)
+            matrixStack.scale(0.55f, 0.55f, 0.55f)
         } else {
             matrixStack.scale(1f, 1f, 1f)
         }

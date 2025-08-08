@@ -75,6 +75,7 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.PATCHED_HIDE, Models.GENERATED)
         itemModelGenerator.register(ModItems.BONE_SHARD, Models.GENERATED)
         itemModelGenerator.register(ModItems.FLINT_BIFACE, Models.GENERATED)
+        itemModelGenerator.register(ModItems.BOAR_SPAWN_EGG, Models.GENERATED)
 
         // Register food items with GENERATED model type
         itemModelGenerator.register(ModItems.RAW_ELDERBERRIES, Models.GENERATED)

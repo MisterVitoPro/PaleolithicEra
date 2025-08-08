@@ -122,9 +122,7 @@ object ModItems {
 
     val TAB_ICON_ITEM: Item = register("tab_icon", { settings: Item.Settings -> Item(settings.maxCount(1)) })
 
-    val MANTIS_SPAWN_EGG: Item = register(
-    "boar_spawn_egg",
-    { setting: Item.Settings? -> SpawnEggItem(ModEntities.BOAR_ENTITY, setting) })
+    val BOAR_SPAWN_EGG: Item = register("boar_spawn_egg", { setting: Item.Settings -> SpawnEggItem(ModEntities.BOAR_ENTITY, setting) })
 
     /**
      * Initializes item group registrations and any other post-registration setup.

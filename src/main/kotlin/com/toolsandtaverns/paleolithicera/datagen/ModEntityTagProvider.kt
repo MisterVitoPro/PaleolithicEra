@@ -1,5 +1,6 @@
 package com.toolsandtaverns.paleolithicera.datagen
 
+import com.toolsandtaverns.paleolithicera.registry.ModEntities
 import com.toolsandtaverns.paleolithicera.registry.ModEntityTags.HUNTABLE_TAG
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
@@ -87,11 +88,11 @@ class ModEntityTypeTagProvider(
             EntityType.MOOSHROOM,
             EntityType.MULE,
             EntityType.PANDA,
-            EntityType.PIG,
             EntityType.POLAR_BEAR,
             EntityType.RABBIT,
             EntityType.SHEEP,
             EntityType.WOLF,
+            ModEntities.BOAR_ENTITY
         )
     }
 
