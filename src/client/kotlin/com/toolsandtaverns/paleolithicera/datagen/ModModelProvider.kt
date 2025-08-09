@@ -11,6 +11,7 @@ import net.minecraft.client.data.ItemModelGenerator
 import net.minecraft.client.data.Models
 import net.minecraft.client.data.TextureKey
 import net.minecraft.client.data.TextureMap
+import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
 
 class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
@@ -92,10 +93,8 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.FLINT_KNIFE, Models.HANDHELD)
 
         itemModelGenerator.register(ModItems.BONE_SPEAR, Models.HANDHELD)
-
         itemModelGenerator.register(ModItems.FIRE_DRILL, Models.HANDHELD)
         itemModelGenerator.register(ModItems.WOODEN_HARPOON, Models.HANDHELD)
-
         itemModelGenerator.register(ModItems.FLINT_AXE, Models.HANDHELD)
     }
 

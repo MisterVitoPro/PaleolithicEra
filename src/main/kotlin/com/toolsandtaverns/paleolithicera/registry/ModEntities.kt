@@ -2,6 +2,7 @@ package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.entity.BoarEntity
+import com.toolsandtaverns.paleolithicera.entity.CrudeBedBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.CrudeCampfireBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.HideDryerBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
@@ -40,6 +41,14 @@ object ModEntities {
                 .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("boar")))
         )
     }
+
+    val CRUDE_BED: BlockEntityType<CrudeBedBlockEntity> = Registry.register(
+        Registries.BLOCK_ENTITY_TYPE,
+        id("crude_bed"),
+        FabricBlockEntityTypeBuilder
+            .create(::CrudeBedBlockEntity, ModBlocks.CRUDE_BED)
+            .build()  // ✅ Don't pass a type reference here!
+    )
 
     fun initialize() {
         KNAPPING_STATION = register(

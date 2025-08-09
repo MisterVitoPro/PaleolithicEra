@@ -43,7 +43,15 @@
   "advancement.paleolithic-era.awakening.craft_wooden_harpoon.title": "Here Fishy, Fishy",
   "advancement.paleolithic-era.awakening.craft_wooden_harpoon.description": "Craft a Wooden Harpoon for fishing.",
 
+  "advancement.paleolithic-era.awakening.crude_bed.title": "Rest for the Weary",
+  "advancement.paleolithic-era.awakening.crude_bed.desc": "Craft a crude bed to survive for the night",
+
   "message.paleolithic-era.caught_item": "you caught a %s!",
+
+  "block.paleolithic-era.knapping_station": "Knapping Station",
+  "block.paleolithic-era.crude_bed": "Crude Bed",
+  "block.paleolithic-era.crude_campfire": "Crude Campfire",
+  "block.paleolithic-era.crude_bed.tooltip": "Rest until dawn, but don’t expect comfort.",
 
   "item.paleolithic-era.bark": "Bark",
   "item.paleolithic-era.bone_knife": "Bone Knife",
@@ -55,8 +63,7 @@
   "item.paleolithic-era.flint_biface": "Flint Biface",
   "item.paleolithic-era.fire_drill": "Fire Drill",
   "item.paleolithic-era.knapping_station": "Knapping Station",
-  "block.paleolithic-era.knapping_station": "Knapping Station",
-  "block.paleolithic-era.crude_campfire": "Crude Campfire",
+
   "container.paleolithic-era.knapping_station": "Knapping Station",
   "item.paleolithic-era.plant_cordage": "Plant Cordage",
   "item.paleolithic-era.plant_fiber": "Plant Fiber",
