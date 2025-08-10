@@ -71,6 +71,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
         // CUTOUT is used for blocks with binary transparency (fully transparent or fully opaque pixels)
         BlockRenderLayerMap.putBlock(ModBlocks.CRUDE_CAMPFIRE, BlockRenderLayer.CUTOUT)
         BlockRenderLayerMap.putBlock(ModBlocks.ELDERBERRY_BUSH, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.YARROW_PLANT, BlockRenderLayer.CUTOUT)
 
         // Register client-side network handlers for the harpoon fishing system
         OpenHarpoonGuiClient.register()

@@ -24,7 +24,7 @@
   "advancement.paleolithic-era.awakening.craft_flint_biface.description": "Create a flint biface, a versatile prehistoric tool.",
 
   "advancement.paleolithic-era.awakening.harvest_berries.title": "Forage the Bush",
-  "advancement.paleolithic-era.awakening.harvest_berries.description": "Find and harvest elderberries from the bush.",
+  "advancement.paleolithic-era.awakening.harvest_berries.description": "Find and harvest all paleolithic berries and herbs.",
   "advancement.paleolithic-era.awakening.eat_berries.title": "Tart But Tasty",
   "advancement.paleolithic-era.awakening.eat_berries.description": "Cook them berries up!",
 
@@ -58,6 +58,7 @@
   "item.paleolithic-era.bone_spear": "Bone Spear",
   "item.paleolithic-era.bone_shard": "Bone Shard",
   "item.paleolithic-era.boar_spawn_egg": "Boar Spawn Egg",
+  "item.paleolithic-era.crude_bed": "Crude Bed",
   "item.paleolithic-era.flint_knife": "Flint Knife",
   "item.paleolithic-era.crude_campfire": "Crude Campfire",
   "item.paleolithic-era.flint_biface": "Flint Biface",

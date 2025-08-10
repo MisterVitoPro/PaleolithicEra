@@ -123,35 +123,6 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(ModItems.ROCK_CHUNK), conditionsFromItem { ModItems.ROCK_CHUNK })
                     .offerTo(exporter)
 
-                // Smelting recipe for elderberries in a furnace
-                CookingRecipeJsonBuilder.createSmelting(
-                    Ingredient.ofItems(ModItems.RAW_ELDERBERRIES), // Input item
-                    RecipeCategory.FOOD,                          // Recipe category for JEI/REI
-                    ModItems.COOKED_ELDERBERRIES,                // Output item
-                    0.35f,                                       // Experience given
-                    200                                          // Cook time in ticks (10 seconds)
-                ).criterion(
-                    "has_raw_elderberries",
-                    InventoryChangedCriterion.Conditions.items(ModItems.RAW_ELDERBERRIES)
-                )
-                    .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(MOD_ID, "smelt_elderberries")))
-
-                // Campfire cooking recipe for elderberries (slower than furnace but no fuel needed)
-                CookingRecipeJsonBuilder.createCampfireCooking(
-                    Ingredient.ofItems(ModItems.RAW_ELDERBERRIES), // Input item
-                    RecipeCategory.FOOD,                          // Recipe category for JEI/REI
-                    ModItems.COOKED_ELDERBERRIES,                // Output item
-                    0.35f,                                       // Experience given
-                    600                                          // Cook time in ticks (30 seconds)
-                ).criterion(
-                    "has_raw_elderberries",
-                    InventoryChangedCriterion.Conditions.items(ModItems.RAW_ELDERBERRIES)
-                )
-                    .offerTo(
-                        exporter,
-                        RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(MOD_ID, "campfire_cook_elderberries"))
-                    )
-
                 createShaped(RecipeCategory.MISC, ModItems.PATCHED_HIDE, 1)
                     .pattern("DF")
                     .pattern("FD")

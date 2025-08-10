@@ -8,7 +8,9 @@ import net.minecraft.block.enums.BedPart
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
+import net.minecraft.entity.passive.VillagerEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.PlayerEntity.SleepFailureReason
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.loot.context.LootWorldContext
@@ -20,12 +22,18 @@ import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Box
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.random.Random
+import net.minecraft.world.BlockView
 import net.minecraft.world.World
+import net.minecraft.world.World.ExplosionSourceType
 import net.minecraft.world.WorldEvents
 import net.minecraft.world.WorldView
+import net.minecraft.world.explosion.ExplosionBehavior
 import net.minecraft.world.tick.ScheduledTickView
+import java.util.function.Consumer
+import java.util.function.Predicate
 
 class CrudeBedBlock(settings: Settings) : HorizontalFacingBlock(settings), BlockEntityProvider {
 
@@ -33,6 +41,10 @@ class CrudeBedBlock(settings: Settings) : HorizontalFacingBlock(settings), Block
         val PART: EnumProperty<BedPart> = Properties.BED_PART
         val OCCUPIED: BooleanProperty = Properties.OCCUPIED
         val CODEC: MapCodec<CrudeBedBlock> = createCodec(::CrudeBedBlock)
+
+        fun isBedWorking(world: World): Boolean {
+            return world.dimension.bedWorks()
+        }
     }
 
     init {
@@ -40,6 +52,77 @@ class CrudeBedBlock(settings: Settings) : HorizontalFacingBlock(settings), Block
             PART,
             BedPart.FOOT
         ) as BlockState).with<Boolean, Boolean>(OCCUPIED, false)
+    }
+
+    fun getDirection(world: BlockView, pos: BlockPos): Direction? {
+        val blockState = world.getBlockState(pos)
+        return if (blockState.block is CrudeBedBlock) blockState.get(FACING) else null
+    }
+
+    override fun onUse(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        player: PlayerEntity,
+        hit: BlockHitResult
+    ): ActionResult {
+        if (world.isClient) {
+            return ActionResult.SUCCESS_SERVER
+        } else {
+            if (state.get(PART) != BedPart.HEAD) {
+                val pos = pos.offset(state.get(FACING))
+                val state = world.getBlockState(pos)
+                if (!state.isOf(this)) {
+                    return ActionResult.CONSUME
+                }
+            }
+
+            if (!isBedWorking(world)) {
+                world.removeBlock(pos, false)
+                val blockPos = pos.offset((state.get(FACING) as Direction).opposite)
+                if (world.getBlockState(blockPos).isOf(this)) {
+                    world.removeBlock(blockPos, false)
+                }
+
+                val vec3d = pos.toCenterPos()
+                world.createExplosion(
+                    null,
+                    world.damageSources.badRespawnPoint(vec3d),
+                    null,
+                    vec3d,
+                    5.0f,
+                    true,
+                    ExplosionSourceType.BLOCK
+                )
+                return ActionResult.SUCCESS_SERVER
+            } else if (state.get(OCCUPIED)) {
+                if (!this.wakeVillager(world, pos)) {
+                    player.sendMessage(Text.translatable("block.minecraft.bed.occupied"), true)
+                }
+
+                return ActionResult.SUCCESS_SERVER
+            } else {
+                player.trySleep(pos).ifLeft(Consumer { reason: SleepFailureReason? ->
+                    if (reason?.message != null) {
+                        player.sendMessage(reason.message, true)
+                    }
+                })
+                return ActionResult.SUCCESS_SERVER
+            }
+        }
+    }
+
+    private fun wakeVillager(world: World, pos: BlockPos): Boolean {
+        val list = world.getEntitiesByClass(
+            VillagerEntity::class.java,
+            Box(pos),
+            Predicate { obj: VillagerEntity -> obj.isSleeping })
+        if (list.isEmpty()) {
+            return false
+        } else {
+            (list[0] as VillagerEntity).wakeUp()
+            return true
+        }
     }
 
     override fun onLandedUpon(
@@ -113,31 +196,6 @@ class CrudeBedBlock(settings: Settings) : HorizontalFacingBlock(settings), Block
         }
 
         return super.onBreak(world, pos, state, player)
-    }
-
-    override fun onUse(
-        state: BlockState,
-        world: World,
-        pos: BlockPos,
-        player: PlayerEntity,
-        hit: BlockHitResult
-    ): ActionResult {
-        if (world.isClient) return ActionResult.SUCCESS
-
-        if (state.get(PART) == BedPart.HEAD) {
-            player.sendMessage(Text.literal("Use the foot of the bed to rest"), true)
-            return ActionResult.SUCCESS
-        }
-
-        if (player.hungerManager.foodLevel >= 4 && player.health < player.maxHealth) {
-            player.heal(4.0f)
-            player.hungerManager.add(-4, 0f)  // Remove 4 food points
-            player.sendMessage(Text.literal("You rest for a moment..."), true)
-            return ActionResult.CONSUME
-        }
-
-        player.sendMessage(Text.literal("You do not need rest at the moment."), true)
-        return ActionResult.SUCCESS
     }
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, placer: LivingEntity?, itemStack: ItemStack) {

@@ -3,6 +3,7 @@ package com.toolsandtaverns.paleolithicera.datagen.advancement
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
+import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import net.minecraft.advancement.Advancement
 import net.minecraft.advancement.AdvancementEntry
 import net.minecraft.advancement.AdvancementFrame
@@ -18,14 +19,15 @@ object ElderberryAdvancements {
         val harvestBerries: AdvancementEntry = Advancement.Builder.create()
             .parent(parent)
             .display(
-                ModItems.RAW_ELDERBERRIES,
+                ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY],
                 Text.translatable("advancement.$MOD_ID.awakening.harvest_berries.title"),
                 Text.translatable("advancement.$MOD_ID.awakening.harvest_berries.description"),
                 null,
-                AdvancementFrame.TASK,
+                AdvancementFrame.CHALLENGE,
                 true, true, false
             )
-            .criterion("has_berries", InventoryChangedCriterion.Conditions.items(ModItems.RAW_ELDERBERRIES))
+            .criterion("has_raw_elderberries",InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]))
+            .criterion("has_yarrow_herb", InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW]))
             .rewards(AdvancementRewards.Builder.experience(8))
             .build(consumer, "awakening/harvest_berries")
 

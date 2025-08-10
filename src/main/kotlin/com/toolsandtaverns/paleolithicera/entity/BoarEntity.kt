@@ -2,6 +2,7 @@ package com.toolsandtaverns.paleolithicera.entity
 
 import com.toolsandtaverns.paleolithicera.registry.ModEntities
 import com.toolsandtaverns.paleolithicera.registry.ModItems
+import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import net.minecraft.block.BlockState
 import net.minecraft.entity.AnimationState
 import net.minecraft.entity.EntityDimensions
@@ -29,7 +30,7 @@ class BoarEntity(entityType: EntityType<out AnimalEntity>, world: World) : Anima
     private var idleAnimationTimeout = 0
 
     override fun isBreedingItem(stack: ItemStack): Boolean {
-        return stack.isOf(ModItems.RAW_ELDERBERRIES)
+        return stack.isOf(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]!!.asItem())
     }
 
     override fun createChild(
@@ -77,7 +78,7 @@ class BoarEntity(entityType: EntityType<out AnimalEntity>, world: World) : Anima
         this.goalSelector.add(0, SwimGoal(this))
         this.goalSelector.add(1, EscapeDangerGoal(this, 1.25))
         this.goalSelector.add(2, AnimalMateGoal(this, 1.0))
-        this.goalSelector.add(3, TemptGoal(this, 1.2, Ingredient.ofItems(ModItems.RAW_ELDERBERRIES), true))
+        this.goalSelector.add(3, TemptGoal(this, 1.2, Ingredient.ofItems(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]!!.asItem()), true))
         this.goalSelector.add(4, FollowParentGoal(this, 1.1))
         this.goalSelector.add(5, WanderAroundFarGoal(this, 1.0))
         this.goalSelector.add(6, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))

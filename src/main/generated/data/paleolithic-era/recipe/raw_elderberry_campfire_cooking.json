@@ -1,9 +1,9 @@
 {
   "type": "minecraft:campfire_cooking",
   "category": "food",
-  "cookingtime": 600,
+  "cookingtime": 200,
   "experience": 0.35,
-  "ingredient": "paleolithic-era:raw_elderberries",
+  "ingredient": "paleolithic-era:raw_elderberry",
   "result": {
     "id": "paleolithic-era:cooked_elderberries"
   }

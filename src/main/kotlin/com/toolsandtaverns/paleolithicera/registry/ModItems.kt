@@ -4,6 +4,8 @@ import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.item.*
 import com.toolsandtaverns.paleolithicera.item.ModArmorMaterials.HIDE_MATERIAL
+import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
+import com.toolsandtaverns.paleolithicera.registry.custom.ModEdiblePlants
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries
@@ -11,10 +13,7 @@ import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.ConsumableComponent
 import net.minecraft.component.type.FoodComponent
 import net.minecraft.component.type.WeaponComponent
-import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.*
-import net.minecraft.item.consume.ApplyEffectsConsumeEffect
 import net.minecraft.item.consume.UseAction
 import net.minecraft.item.equipment.EquipmentType
 import net.minecraft.registry.Registries
@@ -23,7 +22,6 @@ import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Identifier
-import java.util.function.Function
 
 /**
  * Registry for all custom items in the Paleolithic Era mod.
@@ -82,27 +80,6 @@ object ModItems {
 
     val WOODEN_HARPOON = register("wooden_harpoon", { settings: Item.Settings -> WoodenHarpoonItem(settings.maxCount(1).maxDamage(10)) })
 
-    val RAW_ELDERBERRIES: Item = register("raw_elderberries", { settings ->
-        Item(
-            settings
-                .component(DataComponentTypes.FOOD, FoodComponent.Builder()
-                    .nutrition(2)
-                    .saturationModifier(0.1f)
-                    .build()
-                )
-                .component(DataComponentTypes.CONSUMABLE, ConsumableComponent.builder()
-                    .consumeSeconds(1.6f)
-                    .useAction(UseAction.EAT)
-                    .sound(SoundEvents.ENTITY_GENERIC_EAT)
-                    .consumeParticles(true)
-                    .consumeEffect(
-                        ApplyEffectsConsumeEffect(StatusEffectInstance(StatusEffects.POISON, 60))
-                    )
-                    .build()
-                )
-        )
-    })
-
     val COOKED_ELDERBERRIES: Item = register("cooked_elderberries", { settings ->
         Item(
             settings
@@ -124,6 +101,9 @@ object ModItems {
 
     val BOAR_SPAWN_EGG: Item = register("boar_spawn_egg", { setting: Item.Settings -> SpawnEggItem(ModEntities.BOAR_ENTITY, setting) })
 
+    val EDIBLE_PLANTS: MutableMap<EdiblePlants, Item> = mutableMapOf()
+
+
     /**
      * Initializes item group registrations and any other post-registration setup.
      * 
@@ -131,6 +111,8 @@ object ModItems {
      * initialization tasks like adding items to vanilla item groups.
      */
     fun initialize() {
+        EDIBLE_PLANTS.putAll(ModEdiblePlants.registerAll())
+
         // Add bone spear to the vanilla combat item group
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT)
             .register(ModifyEntries { itemGroup: FabricItemGroupEntries -> itemGroup.add(BONE_SPEAR) })

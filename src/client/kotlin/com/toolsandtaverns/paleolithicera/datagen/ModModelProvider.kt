@@ -1,37 +1,63 @@
 package com.toolsandtaverns.paleolithicera.datagen
 
 import com.toolsandtaverns.paleolithicera.block.ElderberryBushBlock
+import com.toolsandtaverns.paleolithicera.block.YarrowPlantBlock
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
+import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.minecraft.client.data.BlockStateModelGenerator
-import net.minecraft.client.data.ItemModelGenerator
-import net.minecraft.client.data.Models
-import net.minecraft.client.data.TextureKey
-import net.minecraft.client.data.TextureMap
-import net.minecraft.util.DyeColor
+import net.minecraft.block.Block
+import net.minecraft.block.Blocks
+import net.minecraft.client.data.*
+import net.minecraft.item.Item
+import net.minecraft.item.Items
+import net.minecraft.registry.Registries
+import net.minecraft.state.property.IntProperty
+import net.minecraft.state.property.Properties
 import net.minecraft.util.Identifier
+import java.util.function.Function
 
 class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
     /**
      * Generates block state models for mod blocks.
-     * 
+     *
      * This function is called during data generation to create the necessary block state
      * model files for blocks added by this mod.
-     * 
+     *
      * @param blockStateModelGenerator The generator to register block models with
      */
     override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
         // Register the elderberry bush with age stages (0-3) as a cross-type block
         // NOT_TINTED is used because we don't need biome coloring for this plant
-        blockStateModelGenerator.registerTintableCrossBlockStateWithStages(
+
+        val item: Item? = ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]
+
+        blockStateModelGenerator.registerPlantStagesWithItem(
+            item,
             ModBlocks.ELDERBERRY_BUSH,
-            BlockStateModelGenerator.CrossType.NOT_TINTED,
-            ElderberryBushBlock.Companion.AGE, 0, 1, 2, 3
+            ElderberryBushBlock.AGE
         )
+
+        blockStateModelGenerator.registerPlantStagesWithItem(
+            ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW],
+            ModBlocks.YARROW_PLANT,
+            YarrowPlantBlock.AGE
+        )
+
+//        blockStateModelGenerator.registerTintableCrossBlockStateWithStages(
+//            ModBlocks.ELDERBERRY_BUSH,
+//            BlockStateModelGenerator.CrossType.NOT_TINTED,
+//            ElderberryBushBlock.Companion.AGE, 0, 1, 2, 3
+//        )
+
+//        blockStateModelGenerator.registerTintableCrossBlockStateWithStages(
+//            ModBlocks.YARROW_PLANT,
+//            BlockStateModelGenerator.CrossType.NOT_TINTED,
+//            YarrowPlantBlock.Companion.AGE, 0, 1, 2, 3
+//        )
 
         blockStateModelGenerator.registerCubeWithCustomTextures(
             ModBlocks.KNAPPING_STATION,
@@ -58,11 +84,11 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
     /**
      * Generates item models for mod items.
-     * 
+     *
      * This function registers all custom items with appropriate model types:
      * - GENERATED: For items displayed flat in hand (resources, materials, etc.)
      * - HANDHELD: For items displayed as tools/weapons held in hand
-     * 
+     *
      * @param itemModelGenerator The generator to register item models with
      */
     override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {
@@ -79,7 +105,6 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.BOAR_SPAWN_EGG, Models.GENERATED)
 
         // Register food items with GENERATED model type
-        itemModelGenerator.register(ModItems.RAW_ELDERBERRIES, Models.GENERATED)
         itemModelGenerator.register(ModItems.COOKED_ELDERBERRIES, Models.GENERATED)
 
         // Register armor items with GENERATED model type
@@ -96,6 +121,52 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.FIRE_DRILL, Models.HANDHELD)
         itemModelGenerator.register(ModItems.WOODEN_HARPOON, Models.HANDHELD)
         itemModelGenerator.register(ModItems.FLINT_AXE, Models.HANDHELD)
+
+        EdiblePlants.entries.forEach { ediblePlants ->
+            val def = ediblePlants.definitions
+            val id = id(def.idPath)
+            val item = Registries.ITEM.get(id)
+            itemModelGenerator.register(item, Models.GENERATED)
+        }
     }
+
+    private fun BlockStateModelGenerator.registerPlantStagesWithItem(
+        item: Item?,
+        block: Block,
+        age: IntProperty = Properties.AGE_3
+    ) {
+//        this.registerItemModel(item)
+        this.blockStateCollector.accept(
+            VariantsBlockModelDefinitionCreator.of(block).with(
+                BlockStateVariantMap.models(age).generate { stage: Int? ->
+                    BlockStateModelGenerator.createWeightedVariant(
+                        this.createSubModel(
+                            block,
+                            "_stage$stage",
+                            Models.CROSS,
+                            { id: Identifier? -> TextureMap.cross(id) })
+                    )
+                })
+        )
+    }
+
+//    private fun registerPlantStagesNoItem(
+//        gen: BlockStateModelGenerator,
+//        block: Block,
+//        tint: BlockStateModelGenerator.CrossType,
+//        age: IntProperty,
+//        vararg stages: Int,
+//        textureBaseId: Identifier // e.g. id("block/elderberry_stage_")
+//    ) {
+//        require(age.values.size == stages.size)
+//
+//        // Build model variants for each stage without touching any item models
+//        val stageMap = BlockStateVariantMap.models(age).register { stage ->
+//            val tex = TextureMap().put(TextureKey.CROSS, Identifier.of("${textureBaseId}_$stage"))
+//            val modelId = tint.crossModel.upload(block, "_$stage", tex, gen.modelCollector)
+//            BlockStateVariant.create().put(VariantSettings.MODEL, modelId)
+//        }
+//        gen.blockStateCollector.accept(VariantsBlockStateSupplier.create(block, stageMap))
+//    }
 
 }

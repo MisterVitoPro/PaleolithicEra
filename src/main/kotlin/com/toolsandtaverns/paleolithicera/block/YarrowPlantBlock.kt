@@ -17,15 +17,12 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldView
 import kotlin.random.Random
 
-/**
- * A berry bush that grows elderberries, poisonous unless cooked.
- * Behaves similarly to SweetBerryBushBlock but applies poison when eaten raw.
- */
-class ElderberryBushBlock(settings: Settings) : SweetBerryBushBlock(settings) {
+class YarrowPlantBlock(settings: Settings) : SweetBerryBushBlock(settings) {
 
     private fun getBerryItem(): Item? {
-        return ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]
+        return ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW]
     }
+
 
     public override fun getPickStack(world: WorldView, pos: BlockPos, state: BlockState, b: Boolean): ItemStack {
         return ItemStack(getBerryItem())

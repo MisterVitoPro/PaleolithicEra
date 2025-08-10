@@ -6,6 +6,7 @@ import com.toolsandtaverns.paleolithicera.block.CrudeCampFireBlock
 import com.toolsandtaverns.paleolithicera.block.ElderberryBushBlock
 import com.toolsandtaverns.paleolithicera.block.HideDryerBlock
 import com.toolsandtaverns.paleolithicera.block.KnappingStationBlock
+import com.toolsandtaverns.paleolithicera.block.YarrowPlantBlock
 import com.toolsandtaverns.paleolithicera.util.RegistryHelpers
 import com.toolsandtaverns.paleolithicera.util.id
 import com.toolsandtaverns.paleolithicera.util.regKeyOfItem
@@ -36,8 +37,20 @@ object ModBlocks {
             .pistonBehavior(PistonBehavior.DESTROY)
             .sounds(BlockSoundGroup.WOOD)
             .luminance { state -> if (state.get(Properties.LIT)) 15 else 0 })
+
     val ELDERBERRY_BUSH: Block = registerBlockWithoutBlockItem("elderberry_bush") { settings: AbstractBlock.Settings ->
         ElderberryBushBlock(
+            settings
+                .mapColor(MapColor.DARK_GREEN)
+                .ticksRandomly()
+                .noCollision()
+                .sounds(BlockSoundGroup.SWEET_BERRY_BUSH)
+                .pistonBehavior(PistonBehavior.DESTROY)
+        )
+    }
+
+    val YARROW_PLANT: Block = registerBlockWithoutBlockItem("yarrow_plant") { settings: AbstractBlock.Settings ->
+        YarrowPlantBlock(
             settings
                 .mapColor(MapColor.DARK_GREEN)
                 .ticksRandomly()
@@ -60,7 +73,9 @@ object ModBlocks {
             }
 
         val maybeItem = Registries.ITEM.getId(Registries.ITEM.get(id("elderberry_bush")))
+        val maybeItem2 = Registries.ITEM.getId(Registries.ITEM.get(id("yarrow_plant")))
         LOGGER.info("Elderberry bush item ID: $maybeItem")
+        LOGGER.info("Yarrow Plant item ID: $maybeItem2")
     }
 
     private fun register(

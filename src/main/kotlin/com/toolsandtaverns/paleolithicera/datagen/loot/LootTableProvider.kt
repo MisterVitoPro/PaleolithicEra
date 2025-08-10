@@ -3,6 +3,7 @@ package com.toolsandtaverns.paleolithicera.datagen.loot
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
+import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.block.Block
@@ -38,7 +39,8 @@ class LootTableProvider(
     override fun generate() {
         addDrop(ModBlocks.KNAPPING_STATION)
         addDrop(ModBlocks.HIDE_DRYER)
-        addDrop(ModBlocks.ELDERBERRY_BUSH, addElderberryBushesDrop(ModItems.RAW_ELDERBERRIES))
+        addDrop(ModBlocks.ELDERBERRY_BUSH, addElderberryBushesDrop(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]!!.asItem()))
+        addDrop(ModBlocks.YARROW_PLANT, addElderberryBushesDrop(ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW]!!.asItem()))
 
         listOf(
             Blocks.OAK_LOG,

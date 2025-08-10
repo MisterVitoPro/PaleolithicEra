@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_elderberries": {
+    "has_raw_elderberry": {
       "conditions": {
         "items": [
           {
-            "items": "paleolithic-era:raw_elderberries"
+            "items": "paleolithic-era:raw_elderberry"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paleolithic-era:smelt_elderberries"
+        "recipe": "paleolithic-era:raw_elderberry_smelt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_raw_elderberries"
+      "has_raw_elderberry"
     ]
   ],
   "rewards": {
     "recipes": [
-      "paleolithic-era:smelt_elderberries"
+      "paleolithic-era:raw_elderberry_smelt"
     ]
   }
 }

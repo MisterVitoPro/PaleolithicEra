@@ -1,11 +1,21 @@
 {
   "parent": "minecraft:awakening/tab_root",
   "criteria": {
-    "has_berries": {
+    "has_raw_elderberries": {
       "conditions": {
         "items": [
           {
-            "items": "paleolithic-era:raw_elderberries"
+            "items": "paleolithic-era:raw_elderberry"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_yarrow_herb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:yarrow_herb"
           }
         ]
       },
@@ -16,9 +26,10 @@
     "description": {
       "translate": "advancement.paleolithic-era.awakening.harvest_berries.description"
     },
+    "frame": "challenge",
     "icon": {
       "count": 1,
-      "id": "paleolithic-era:raw_elderberries"
+      "id": "paleolithic-era:raw_elderberry"
     },
     "title": {
       "translate": "advancement.paleolithic-era.awakening.harvest_berries.title"
@@ -26,7 +37,10 @@
   },
   "requirements": [
     [
-      "has_berries"
+      "has_raw_elderberries"
+    ],
+    [
+      "has_yarrow_herb"
     ]
   ],
   "rewards": {

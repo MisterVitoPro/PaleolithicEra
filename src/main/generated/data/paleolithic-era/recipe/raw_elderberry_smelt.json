@@ -3,7 +3,7 @@
   "category": "food",
   "cookingtime": 200,
   "experience": 0.35,
-  "ingredient": "paleolithic-era:raw_elderberries",
+  "ingredient": "paleolithic-era:raw_elderberry",
   "result": {
     "id": "paleolithic-era:cooked_elderberries"
   }
