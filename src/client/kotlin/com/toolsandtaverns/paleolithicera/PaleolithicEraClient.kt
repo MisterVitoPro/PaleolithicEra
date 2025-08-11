@@ -1,5 +1,6 @@
 package com.toolsandtaverns.paleolithicera
 
+import com.toolsandtaverns.paleolithicera.events.TooltipEvents
 import com.toolsandtaverns.paleolithicera.render.KnappingStationBlockEntityRenderer
 import com.toolsandtaverns.paleolithicera.model.BoarModel
 import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
@@ -75,6 +76,6 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 
         // Register client-side network handlers for the harpoon fishing system
         OpenHarpoonGuiClient.register()
-
+        TooltipEvents.register()
     }
 }

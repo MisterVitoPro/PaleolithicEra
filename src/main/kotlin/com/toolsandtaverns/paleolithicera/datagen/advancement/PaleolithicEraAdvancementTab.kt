@@ -48,7 +48,7 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
             .display(
                 ModBlocks.CRUDE_BED,
                 Text.translatable("advancement.$MOD_ID.awakening.crude_bed.title"),
-                Text.translatable("advancement.$MOD_ID.awakening.crude_bed.desc"),
+                Text.translatable("advancement.$MOD_ID.awakening.crude_bed.description"),
                 null,
                 AdvancementFrame.TASK,
                 true, true, false

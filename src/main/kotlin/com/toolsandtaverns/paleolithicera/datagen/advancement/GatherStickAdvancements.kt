@@ -48,7 +48,7 @@ object GatherStickAdvancements {
             .display(
                 ModItems.WOODEN_HARPOON,
                 Text.translatable("advancement.$MOD_ID.awakening.craft_wooden_harpoon.title"),
-                Text.translatable("advancement.$MOD_ID.awakening.craft_wooden_harpoon.desc"),
+                Text.translatable("advancement.$MOD_ID.awakening.craft_wooden_harpoon.description"),
                 null,
                 AdvancementFrame.TASK,
                 true, true, false
