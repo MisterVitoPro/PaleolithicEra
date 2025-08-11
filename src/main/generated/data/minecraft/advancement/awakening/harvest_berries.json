@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "paleolithic-era:raw_elderberry"
+            "items": "paleolithic-era:raw_elderberries"
           }
         ]
       },
@@ -29,7 +29,7 @@
     "frame": "challenge",
     "icon": {
       "count": 1,
-      "id": "paleolithic-era:raw_elderberry"
+      "id": "paleolithic-era:raw_elderberries"
     },
     "title": {
       "translate": "advancement.paleolithic-era.awakening.harvest_berries.title"

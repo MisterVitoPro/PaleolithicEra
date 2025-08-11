@@ -20,17 +20,17 @@ import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
 import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
+import net.minecraft.util.Util
 import net.minecraft.util.hit.BlockHitResult
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Box
-import net.minecraft.util.math.Direction
+import net.minecraft.util.math.*
 import net.minecraft.util.math.random.Random
+import net.minecraft.util.shape.VoxelShape
+import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.minecraft.world.World.ExplosionSourceType
 import net.minecraft.world.WorldEvents
 import net.minecraft.world.WorldView
-import net.minecraft.world.explosion.ExplosionBehavior
 import net.minecraft.world.tick.ScheduledTickView
 import java.util.function.Consumer
 import java.util.function.Predicate
@@ -41,6 +41,14 @@ class CrudeBedBlock(settings: Settings) : HorizontalFacingBlock(settings), Block
         val PART: EnumProperty<BedPart> = Properties.BED_PART
         val OCCUPIED: BooleanProperty = Properties.OCCUPIED
         val CODEC: MapCodec<CrudeBedBlock> = createCodec(::CrudeBedBlock)
+        val SHAPES_BY_DIRECTION: MutableMap<Direction, VoxelShape> = Util.make<MutableMap<Direction, VoxelShape>> {
+            VoxelShapes.createHorizontalFacingShapeMap(createColumnShape(16.0, 0.0, 3.0))
+        }
+
+        fun getOppositePartDirection(state: BlockState): Direction {
+            val direction = state.get(FACING) as Direction
+            return if (state.get(PART) == BedPart.HEAD) direction.opposite else direction
+        }
 
         fun isBedWorking(world: World): Boolean {
             return world.dimension.bedWorks()
@@ -48,10 +56,10 @@ class CrudeBedBlock(settings: Settings) : HorizontalFacingBlock(settings), Block
     }
 
     init {
-        this.defaultState = ((this.stateManager.getDefaultState() as BlockState).with<BedPart, BedPart>(
+        this.defaultState = ((this.stateManager.getDefaultState()).with<BedPart, BedPart>(
             PART,
             BedPart.FOOT
-        ) as BlockState).with<Boolean, Boolean>(OCCUPIED, false)
+        )).with<Boolean, Boolean>(OCCUPIED, false)
     }
 
     fun getDirection(world: BlockView, pos: BlockPos): Direction? {
@@ -180,6 +188,15 @@ class CrudeBedBlock(settings: Settings) : HorizontalFacingBlock(settings), Block
         return if (world.getBlockState(blockPos2).canReplace(ctx) && world.worldBorder
                 .contains(blockPos2)
         ) this.defaultState.with(FACING, direction) else null
+    }
+
+    override fun getOutlineShape(
+        state: BlockState,
+        world: BlockView,
+        pos: BlockPos,
+        context: ShapeContext
+    ): VoxelShape? {
+        return SHAPES_BY_DIRECTION[getOppositePartDirection(state).opposite]
     }
 
     override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity): BlockState? {

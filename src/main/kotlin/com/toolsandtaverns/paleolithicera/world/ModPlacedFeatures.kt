@@ -28,7 +28,7 @@ object ModPlacedFeatures {
             PlacedFeature(
                 elderberryBushConfigured,
                 listOf(
-                    RarityFilterPlacementModifier.of(32), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()
+                    RarityFilterPlacementModifier.of(30), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()
                 )
             )
         )
@@ -38,7 +38,7 @@ object ModPlacedFeatures {
             PlacedFeature(
                 yarrowPlantConfigured,
                 listOf(
-                    RarityFilterPlacementModifier.of(32), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()
+                    RarityFilterPlacementModifier.of(36), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()
                 )
             )
         )

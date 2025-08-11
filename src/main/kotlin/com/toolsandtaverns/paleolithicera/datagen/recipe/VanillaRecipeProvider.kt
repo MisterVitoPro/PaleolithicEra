@@ -188,14 +188,14 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(ModItems.BONE_KNIFE), conditionsFromItem(ModItems.BONE_KNIFE))
                     .offerTo(exporter)
 
-                createShaped(RecipeCategory.COMBAT, ModBlocks.CRUDE_BED, 1)
-                    .pattern("RP")
-                    .pattern("FF")
-                    .input('P', ModItems.PATCHED_HIDE)
-                    .input('F', ModItems.PLANT_FIBER)
-                    .input('R', ModItems.ROCK_CHUNK)
-                    .criterion(hasItem(ModItems.BONE_KNIFE), conditionsFromItem(ModItems.BONE_KNIFE))
-                    .offerTo(exporter)
+//                createShaped(RecipeCategory.COMBAT, ModBlocks.CRUDE_BED, 1)
+//                    .pattern("RP")
+//                    .pattern("FF")
+//                    .input('P', ModItems.PATCHED_HIDE)
+//                    .input('F', ModItems.PLANT_FIBER)
+//                    .input('R', ModItems.ROCK_CHUNK)
+//                    .criterion(hasItem(ModItems.BONE_KNIFE), conditionsFromItem(ModItems.BONE_KNIFE))
+//                    .offerTo(exporter)
 
             }
         }

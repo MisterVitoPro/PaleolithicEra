@@ -40,7 +40,7 @@ data class EdiblePlantDef(
 
 enum class EdiblePlants(val ediblePlantDef: EdiblePlantDef) {
     ELDERBERRY(EdiblePlantDef(
-        idPath = "raw_elderberry",
+        idPath = "raw_elderberries",
         hunger = 4,
         saturationModifier = 0.3f,
         alwaysEdible = false,
@@ -65,9 +65,6 @@ enum class EdiblePlants(val ediblePlantDef: EdiblePlantDef) {
     );
 
     val definitions: EdiblePlantDef = ediblePlantDef
-
-    val regKey: RegistryKey<Item> = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(MOD_ID, ediblePlantDef.idPath))
-
 }
 
 /**
@@ -89,8 +86,6 @@ object ModEdiblePlants {
             .useAction(UseAction.EAT)
             .sound(SoundEvents.ENTITY_GENERIC_EAT)
             .consumeParticles(true)
-
-
 
         if (def.effect != null && def.effectDurationTicks > 0) {
             consumableComponent

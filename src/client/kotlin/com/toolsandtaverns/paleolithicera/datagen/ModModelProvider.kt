@@ -30,13 +30,8 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
      * @param blockStateModelGenerator The generator to register block models with
      */
     override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
-        // Register the elderberry bush with age stages (0-3) as a cross-type block
-        // NOT_TINTED is used because we don't need biome coloring for this plant
-
-        val item: Item? = ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]
-
         blockStateModelGenerator.registerPlantStagesWithItem(
-            item,
+            ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY],
             ModBlocks.ELDERBERRY_BUSH,
             ElderberryBushBlock.AGE
         )

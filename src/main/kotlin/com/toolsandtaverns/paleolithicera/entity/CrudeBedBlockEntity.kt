@@ -8,7 +8,6 @@ import net.minecraft.util.math.BlockPos
 
 /**
  * Crude bed block entity used by the CrudeBedBlock.
- * This implementation currently holds no extra data but is required to support a multi-block bed structure.
  */
 class CrudeBedBlockEntity(
     pos: BlockPos,
