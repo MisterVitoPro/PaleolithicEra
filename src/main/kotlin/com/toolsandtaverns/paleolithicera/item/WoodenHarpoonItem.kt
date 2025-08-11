@@ -120,10 +120,6 @@ import java.util.function.Consumer
         textConsumer: Consumer<Text>,
         type: TooltipType
     ) {
-        // Add the main tooltip explaining item usage
-        textConsumer.accept(Text.translatable("tooltip.paleolithic-era.wooden_harpoon.1").formatted(Formatting.GRAY))
-        textConsumer.accept(Text.translatable("tooltip.paleolithic-era.wooden_harpoon.2").formatted(Formatting.GRAY))
-
         // If advanced tooltips are enabled and the item is damaged,
         // show remaining durability information
         if (type.isAdvanced && stack.isDamaged) {

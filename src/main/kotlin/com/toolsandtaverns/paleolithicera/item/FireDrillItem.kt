@@ -5,19 +5,24 @@ import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModCriteria
 import net.minecraft.block.BlockState
 import net.minecraft.block.CampfireBlock
+import net.minecraft.component.type.TooltipDisplayComponent
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.consume.UseAction
+import net.minecraft.item.tooltip.TooltipType
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.state.property.Properties
-import net.minecraft.util.*
+import net.minecraft.text.Text
+import net.minecraft.util.ActionResult
+import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import java.util.function.Consumer
 
 /**
  * A primitive tool that lights unlit campfires when crouching and holding use for n seconds.
@@ -107,4 +112,5 @@ class FireDrillItem(settings: Settings) : Item(settings) {
 
         return stack
     }
+
 }
