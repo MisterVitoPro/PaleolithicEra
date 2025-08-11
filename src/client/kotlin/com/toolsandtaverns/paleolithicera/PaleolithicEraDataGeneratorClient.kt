@@ -7,6 +7,8 @@ import com.toolsandtaverns.paleolithicera.datagen.ModItemTagProvider
 import com.toolsandtaverns.paleolithicera.datagen.ModModelProvider
 import com.toolsandtaverns.paleolithicera.datagen.ModRegistryDataGenerator
 import com.toolsandtaverns.paleolithicera.datagen.ModBlockTagProvider
+import com.toolsandtaverns.paleolithicera.datagen.loot.EntityLootTableProvider
+import com.toolsandtaverns.paleolithicera.datagen.recipe.EdiblePlantRecipeProvider
 import com.toolsandtaverns.paleolithicera.datagen.recipe.KnappingRecipeProvider
 import com.toolsandtaverns.paleolithicera.datagen.recipe.VanillaRecipeProvider
 import com.toolsandtaverns.paleolithicera.world.ModConfiguredFeatures
@@ -39,11 +41,13 @@ import net.minecraft.registry.RegistryKeys
         // Add recipe generators for creating vanilla-style crafting recipes
         pack.addProvider(::VanillaRecipeProvider)
         pack.addProvider(::KnappingRecipeProvider)
+        pack.addProvider(::EdiblePlantRecipeProvider)
         // Add loot table generator for creating loot tables
         pack.addProvider(::LootTableProvider)
+        pack.addProvider(::EntityLootTableProvider)
         // Add registry data generator for other registry data
         pack.addProvider(::ModRegistryDataGenerator)
-        // Add model generator for creating block and item models
+        // Add model generator for creating block and item models (only one allowed)
         pack.addProvider(::ModModelProvider)
         // Add block tag generator for creating block tags
         pack.addProvider(::ModBlockTagProvider)

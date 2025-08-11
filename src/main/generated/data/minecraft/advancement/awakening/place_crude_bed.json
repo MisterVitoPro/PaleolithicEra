@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:awakening/tab_root",
+  "criteria": {
+    "place_crude_bed": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:crude_bed"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.crude_bed.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:crude_bed"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.crude_bed.title"
+    }
+  },
+  "requirements": [
+    [
+      "place_crude_bed"
+    ]
+  ],
+  "rewards": {
+    "experience": 2
+  },
+  "sends_telemetry_event": true
+}

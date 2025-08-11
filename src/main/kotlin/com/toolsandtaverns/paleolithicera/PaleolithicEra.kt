@@ -4,6 +4,7 @@ import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.datagen.loot.MobLootModifier
 import com.toolsandtaverns.paleolithicera.datagen.loot.PlantFiberLootModifier
 import com.toolsandtaverns.paleolithicera.datagen.loot.RockChunkLootModifier
+import com.toolsandtaverns.paleolithicera.entity.BoarEntity
 import com.toolsandtaverns.paleolithicera.event.BlockDropHandler
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiPacket
 import com.toolsandtaverns.paleolithicera.network.payload.HarpoonResultPayload
@@ -11,10 +12,11 @@ import com.toolsandtaverns.paleolithicera.registry.*
 import com.toolsandtaverns.paleolithicera.world.gen.ModWorldgen
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry
+import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-    /**
+/**
      * Main mod class for the Paleolithic Era mod.
      * 
      * This class serves as the entry point for the mod and handles initialization
@@ -58,6 +60,8 @@ import org.slf4j.LoggerFactory
         ModRecipes.initialize()
         // Initialize advancement criteria
         ModCriteria.initialize()
+
+        FabricDefaultAttributeRegistry.register(ModEntities.BOAR_ENTITY, BoarEntity.createAttributes())
 
         // Initialize loot table modifiers for custom drops
         PlantFiberLootModifier.initialize() // Adds plant fiber drops to grass

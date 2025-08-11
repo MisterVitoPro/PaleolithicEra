@@ -1,10 +1,12 @@
 package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
+import com.toolsandtaverns.paleolithicera.block.CrudeBedBlock
 import com.toolsandtaverns.paleolithicera.block.CrudeCampFireBlock
 import com.toolsandtaverns.paleolithicera.block.ElderberryBushBlock
 import com.toolsandtaverns.paleolithicera.block.HideDryerBlock
 import com.toolsandtaverns.paleolithicera.block.KnappingStationBlock
+import com.toolsandtaverns.paleolithicera.block.YarrowPlantBlock
 import com.toolsandtaverns.paleolithicera.util.RegistryHelpers
 import com.toolsandtaverns.paleolithicera.util.id
 import com.toolsandtaverns.paleolithicera.util.regKeyOfItem
@@ -25,8 +27,7 @@ import net.minecraft.state.property.Properties
 
 object ModBlocks {
 
-    val HIDE_DRYER: Block = register("hide_dryer", ::HideDryerBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
-    val KNAPPING_STATION: Block = register("knapping_station", ::KnappingStationBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
+    val CRUDE_BED: Block = register("crude_bed", ::CrudeBedBlock, AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOD).strength(0.2F).nonOpaque().burnable().pistonBehavior(PistonBehavior.DESTROY))
     val CRUDE_CAMPFIRE: Block = register(
         "crude_campfire", ::CrudeCampFireBlock,
         AbstractBlock.Settings.create()
@@ -48,15 +49,33 @@ object ModBlocks {
         )
     }
 
+    val YARROW_PLANT: Block = registerBlockWithoutBlockItem("yarrow_plant") { settings: AbstractBlock.Settings ->
+        YarrowPlantBlock(
+            settings
+                .mapColor(MapColor.DARK_GREEN)
+                .ticksRandomly()
+                .noCollision()
+                .sounds(BlockSoundGroup.SWEET_BERRY_BUSH)
+                .pistonBehavior(PistonBehavior.DESTROY)
+        )
+    }
+    val HIDE_DRYER: Block = register("hide_dryer", ::HideDryerBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
+    val KNAPPING_STATION: Block = register("knapping_station", ::KnappingStationBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
+
+
+
     fun initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL)
             .register { entries: FabricItemGroupEntries ->
                 entries.add(KNAPPING_STATION)
+                entries.add(CRUDE_BED)
                 entries.add(CRUDE_CAMPFIRE)
             }
 
         val maybeItem = Registries.ITEM.getId(Registries.ITEM.get(id("elderberry_bush")))
+        val maybeItem2 = Registries.ITEM.getId(Registries.ITEM.get(id("yarrow_plant")))
         LOGGER.info("Elderberry bush item ID: $maybeItem")
+        LOGGER.info("Yarrow Plant item ID: $maybeItem2")
     }
 
     private fun register(

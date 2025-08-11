@@ -24,7 +24,7 @@
   "advancement.paleolithic-era.awakening.craft_flint_biface.description": "Create a flint biface, a versatile prehistoric tool.",
 
   "advancement.paleolithic-era.awakening.harvest_berries.title": "Forage the Bush",
-  "advancement.paleolithic-era.awakening.harvest_berries.description": "Find and harvest elderberries from the bush.",
+  "advancement.paleolithic-era.awakening.harvest_berries.description": "Find and harvest all paleolithic berries and herbs.",
   "advancement.paleolithic-era.awakening.eat_berries.title": "Tart But Tasty",
   "advancement.paleolithic-era.awakening.eat_berries.description": "Cook them berries up!",
 
@@ -43,19 +43,28 @@
   "advancement.paleolithic-era.awakening.craft_wooden_harpoon.title": "Here Fishy, Fishy",
   "advancement.paleolithic-era.awakening.craft_wooden_harpoon.description": "Craft a Wooden Harpoon for fishing.",
 
+  "advancement.paleolithic-era.awakening.crude_bed.title": "Rest for the Weary",
+  "advancement.paleolithic-era.awakening.crude_bed.desc": "Craft a crude bed to survive for the night",
+
   "message.paleolithic-era.caught_item": "you caught a %s!",
+
+  "block.paleolithic-era.knapping_station": "Knapping Station",
+  "block.paleolithic-era.crude_bed": "Crude Bed",
+  "block.paleolithic-era.crude_campfire": "Crude Campfire",
+  "block.paleolithic-era.crude_bed.tooltip": "Rest until dawn, but don’t expect comfort.",
 
   "item.paleolithic-era.bark": "Bark",
   "item.paleolithic-era.bone_knife": "Bone Knife",
   "item.paleolithic-era.bone_spear": "Bone Spear",
   "item.paleolithic-era.bone_shard": "Bone Shard",
+  "item.paleolithic-era.boar_spawn_egg": "Boar Spawn Egg",
+  "item.paleolithic-era.crude_bed": "Crude Bed",
   "item.paleolithic-era.flint_knife": "Flint Knife",
   "item.paleolithic-era.crude_campfire": "Crude Campfire",
   "item.paleolithic-era.flint_biface": "Flint Biface",
   "item.paleolithic-era.fire_drill": "Fire Drill",
   "item.paleolithic-era.knapping_station": "Knapping Station",
-  "block.paleolithic-era.knapping_station": "Knapping Station",
-  "block.paleolithic-era.crude_campfire": "Crude Campfire",
+
   "container.paleolithic-era.knapping_station": "Knapping Station",
   "item.paleolithic-era.plant_cordage": "Plant Cordage",
   "item.paleolithic-era.plant_fiber": "Plant Fiber",

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_elderberries": {
+    "has_bone_knife": {
       "conditions": {
         "items": [
           {
-            "items": "paleolithic-era:raw_elderberries"
+            "items": "paleolithic-era:bone_knife"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paleolithic-era:campfire_cook_elderberries"
+        "recipe": "paleolithic-era:crude_bed"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_raw_elderberries"
+      "has_bone_knife"
     ]
   ],
   "rewards": {
     "recipes": [
-      "paleolithic-era:campfire_cook_elderberries"
+      "paleolithic-era:crude_bed"
     ]
   }
 }

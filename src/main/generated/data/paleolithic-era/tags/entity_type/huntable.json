@@ -11,10 +11,10 @@
     "minecraft:mooshroom",
     "minecraft:mule",
     "minecraft:panda",
-    "minecraft:pig",
     "minecraft:polar_bear",
     "minecraft:rabbit",
     "minecraft:sheep",
-    "minecraft:wolf"
+    "minecraft:wolf",
+    "paleolithic-era:boar"
   ]
 }

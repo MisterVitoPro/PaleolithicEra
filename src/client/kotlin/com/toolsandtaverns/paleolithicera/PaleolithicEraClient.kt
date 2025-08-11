@@ -1,12 +1,14 @@
 package com.toolsandtaverns.paleolithicera
 
-import com.toolsandtaverns.paleolithicera.client.renderer.KnappingStationBlockEntityRenderer
+import com.toolsandtaverns.paleolithicera.render.KnappingStationBlockEntityRenderer
+import com.toolsandtaverns.paleolithicera.model.BoarModel
 import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiClient
 import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModEntities
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
+import com.toolsandtaverns.paleolithicera.render.BoarRenderer
 import com.toolsandtaverns.paleolithicera.render.CrudeCampfireBlockEntityRenderer
 import com.toolsandtaverns.paleolithicera.render.WoodenSpearRenderer
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreen
@@ -46,26 +48,22 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 
         // Register the custom renderer for the crude campfire block entity
         // This renderer displays cooking items above the campfire
-        BlockEntityRendererFactories.register(
-            ModEntities.CRUDE_CAMPFIRE,
-            ::CrudeCampfireBlockEntityRenderer
-        )
-
+        BlockEntityRendererFactories.register(ModEntities.CRUDE_CAMPFIRE, ::CrudeCampfireBlockEntityRenderer)
         BlockEntityRendererFactories.register(ModEntities.KNAPPING_STATION, ::KnappingStationBlockEntityRenderer)
 
-
-        EntityModelLayerRegistry.registerModelLayer(
-            WoodenSpearProjectileModel.WOOD_SPEAR_MODEL_LAYER,
-            WoodenSpearProjectileModel::getTexturedModelData
-        )
         // Register the renderer for the wooden spear entity
         // This allows thrown spears to be properly displayed in the world
+        EntityModelLayerRegistry.registerModelLayer(BoarModel.BOAR_MODEL_LAYER, BoarModel::texturedModelData)
+        EntityModelLayerRegistry.registerModelLayer(WoodenSpearProjectileModel.WOOD_SPEAR_MODEL_LAYER, WoodenSpearProjectileModel::texturedModelData)
+
+        EntityRendererRegistry.register(ModEntities.BOAR_ENTITY) { context -> BoarRenderer(context) }
         EntityRendererRegistry.register(ModEntities.WOODEN_SPEAR_ENTITY) { context ->
             WoodenSpearRenderer(context)
         }
 
         // Register the screen for the knapping station
         // This connects the container handler to its GUI implementation
+
         HandledScreens.register(ModScreenHandlers.KNAPPING, ::KnappingStationScreen)
         HandledScreens.register(ModScreenHandlers.HIDE_DRYER, ::HideDryerScreen)
 
@@ -73,6 +71,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
         // CUTOUT is used for blocks with binary transparency (fully transparent or fully opaque pixels)
         BlockRenderLayerMap.putBlock(ModBlocks.CRUDE_CAMPFIRE, BlockRenderLayer.CUTOUT)
         BlockRenderLayerMap.putBlock(ModBlocks.ELDERBERRY_BUSH, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.YARROW_PLANT, BlockRenderLayer.CUTOUT)
 
         // Register client-side network handlers for the harpoon fishing system
         OpenHarpoonGuiClient.register()

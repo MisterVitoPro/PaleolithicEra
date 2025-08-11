@@ -1,6 +1,8 @@
 package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
+import com.toolsandtaverns.paleolithicera.entity.BoarEntity
+import com.toolsandtaverns.paleolithicera.entity.CrudeBedBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.CrudeCampfireBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.HideDryerBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
@@ -30,6 +32,23 @@ object ModEntities {
     lateinit var HIDE_DRYER_BLOCK_ENTITY: BlockEntityType<HideDryerBlockEntity>
         private set
 
+    val BOAR_ENTITY: EntityType<BoarEntity> by lazy {
+        Registry.register(
+            Registries.ENTITY_TYPE,
+            id("boar"),
+            EntityType.Builder.create(::BoarEntity, SpawnGroup.CREATURE)
+                .dimensions(0.9f, 0.9f)
+                .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("boar")))
+        )
+    }
+
+    val CRUDE_BED: BlockEntityType<CrudeBedBlockEntity> = Registry.register(
+        Registries.BLOCK_ENTITY_TYPE,
+        id("crude_bed"),
+        FabricBlockEntityTypeBuilder
+            .create(::CrudeBedBlockEntity, ModBlocks.CRUDE_BED)
+            .build()  // ✅ Don't pass a type reference here!
+    )
 
     fun initialize() {
         KNAPPING_STATION = register(
@@ -49,8 +68,6 @@ object ModEntities {
             id("wooden_spear"),
             EntityType.Builder.create(::WoodenSpearEntity, SpawnGroup.MISC)
                 .dimensions(0.5f, 0.5f)
-                .maxTrackingRange(4)
-                .trackingTickInterval(10)
                 .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("wooden_spear")))
         )
 

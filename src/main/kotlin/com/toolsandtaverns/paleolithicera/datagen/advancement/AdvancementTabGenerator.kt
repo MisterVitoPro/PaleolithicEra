@@ -43,6 +43,23 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
         GatherStickAdvancements.generate(tabRoot, consumer)
         HuntingAdvancements.generate(tabRoot, consumer, registries)
 
+        Advancement.Builder.create()
+            .parent(tabRoot)
+            .display(
+                ModBlocks.CRUDE_BED,
+                Text.translatable("advancement.$MOD_ID.awakening.crude_bed.title"),
+                Text.translatable("advancement.$MOD_ID.awakening.crude_bed.desc"),
+                null,
+                AdvancementFrame.TASK,
+                true, true, false
+            )
+            .criterion(
+                "place_crude_bed",
+                InventoryChangedCriterion.Conditions.items(ModBlocks.CRUDE_BED)
+            )
+            .rewards(AdvancementRewards.Builder.experience(2))
+            .build(consumer, "awakening/place_crude_bed")
+
         val getRockChunk = Advancement.Builder.create()
             .parent(tabRoot)
             .display(

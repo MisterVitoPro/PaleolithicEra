@@ -1,4 +1,4 @@
-package com.toolsandtaverns.paleolithicera.client.renderer
+package com.toolsandtaverns.paleolithicera.render
 
 import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
 import net.minecraft.client.render.VertexConsumerProvider

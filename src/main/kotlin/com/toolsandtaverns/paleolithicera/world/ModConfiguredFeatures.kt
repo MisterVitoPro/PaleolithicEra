@@ -13,17 +13,24 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider
 object ModConfiguredFeatures {
 
     val ELDERBERRY_BUSH_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("elderberry_bush")
+    val YARROW_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("yarrow_plant")
 
     fun bootstrap(context: Registerable<ConfiguredFeature<*, *>>) {
-        val bushBlockState = ModBlocks.ELDERBERRY_BUSH.defaultState.with(SweetBerryBushBlock.AGE, 3)
-
-        register<RandomPatchFeatureConfig, Feature<RandomPatchFeatureConfig>>(
+        Feature.RANDOM_PATCH.register<RandomPatchFeatureConfig, Feature<RandomPatchFeatureConfig>>(
             context,
             ELDERBERRY_BUSH_CONFIGURED_KEY,
-            Feature.RANDOM_PATCH,
             ConfiguredFeatures.createRandomPatchFeatureConfig(
                 Feature.SIMPLE_BLOCK,
-                SimpleBlockFeatureConfig(BlockStateProvider.of(bushBlockState)),
+                SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.ELDERBERRY_BUSH.defaultState.with(SweetBerryBushBlock.AGE, 3))),
+                listOf(Blocks.GRASS_BLOCK)
+            )
+        )
+        Feature.RANDOM_PATCH.register<RandomPatchFeatureConfig, Feature<RandomPatchFeatureConfig>>(
+            context,
+            YARROW_PLANT_CONFIGURED_KEY,
+            ConfiguredFeatures.createRandomPatchFeatureConfig(
+                Feature.SIMPLE_BLOCK,
+                SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.YARROW_PLANT.defaultState.with(SweetBerryBushBlock.AGE, 3))),
                 listOf(Blocks.GRASS_BLOCK)
             )
         )
@@ -33,12 +40,11 @@ object ModConfiguredFeatures {
         return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, id(name))
     }
 
-    private fun <FC : FeatureConfig, F : Feature<FC>> register(
+    private fun <FC : FeatureConfig, F : Feature<FC>> F.register(
         context: Registerable<ConfiguredFeature<*, *>>,
         key: RegistryKey<ConfiguredFeature<*, *>>,
-        feature: F,
         configuration: FC
     ) {
-        context.register(key, ConfiguredFeature<FC, F>(feature, configuration))
+        context.register(key, ConfiguredFeature<FC, F>(this, configuration))
     }
 }

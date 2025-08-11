@@ -3,6 +3,7 @@ package com.toolsandtaverns.paleolithicera.datagen.loot
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
+import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.block.Block
@@ -10,13 +11,20 @@ import net.minecraft.block.Blocks
 import net.minecraft.block.SweetBerryBushBlock
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
+import net.minecraft.item.Items
 import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition
+import net.minecraft.loot.condition.EntityPropertiesLootCondition
+import net.minecraft.loot.condition.LootConditionTypes
 import net.minecraft.loot.condition.RandomChanceLootCondition
+import net.minecraft.loot.context.LootContextParameters
+import net.minecraft.loot.context.LootContextTypes
 import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.loot.entry.LeafEntry
+import net.minecraft.loot.function.FurnaceSmeltLootFunction
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider
+import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.predicate.StatePredicate
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryWrapper
@@ -31,8 +39,8 @@ class LootTableProvider(
     override fun generate() {
         addDrop(ModBlocks.KNAPPING_STATION)
         addDrop(ModBlocks.HIDE_DRYER)
-        addDrop(ModBlocks.ELDERBERRY_BUSH, addElderberryBushesDrop(ModItems.RAW_ELDERBERRIES))
-
+        addDrop(ModBlocks.ELDERBERRY_BUSH, addElderberryBushesDrop(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]!!.asItem()))
+        addDrop(ModBlocks.YARROW_PLANT, addElderberryBushesDrop(ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW]!!.asItem()))
 
         listOf(
             Blocks.OAK_LOG,

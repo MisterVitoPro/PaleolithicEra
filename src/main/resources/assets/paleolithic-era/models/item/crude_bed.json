@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "paleolithic-era:item/crude_bed"
+  }
+}

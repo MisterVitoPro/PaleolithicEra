@@ -16,7 +16,9 @@ import net.minecraft.util.math.Vec3d
 /**
  * Custom renderer for the Crude Campfire. Displays cooking items above the fire.
  */
-class CrudeCampfireBlockEntityRenderer(context: BlockEntityRendererFactory.Context) : BlockEntityRenderer<CrudeCampfireBlockEntity> {
+class CrudeCampfireBlockEntityRenderer(
+    context: BlockEntityRendererFactory.Context
+) : BlockEntityRenderer<CrudeCampfireBlockEntity> {
 
     private val itemRenderer: ItemRenderer = context.itemRenderer
 
