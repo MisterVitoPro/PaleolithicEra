@@ -1,170 +1,129 @@
 # Paleolithic Era Mod
-Welcome to the **Paleolithic Era Mod**, a Minecraft modification that transports you back to the ancient Stone Age! This mod integrates primitive tools, blocks, items, crafting mechanics, and survival elements designed for an immersive early civilization gameplay experience.
+
+Welcome to **Paleolithic Era** — a Fabric mod that drops Minecraft’s opening hours into the Stone Age. You’ll craft by knapping, cook on crude fires, forage wild plants, and hunt with primitive weapons while working your way toward early settlement.
+
+> **Mod ID:** `paleolithic-era`
 
 ---
 
-## Table of Contents
-1. [Overview](#overview)
-2. [Blocks](#blocks)
-3. [Tools and Weapons](#tools-and-weapons)
-4. [Special Items and Features](#special-items-and-features)
-5. [Knapping Mechanics](#knapping-mechanics)
-6. [Fishing Minigame (Harpoon)](#fishing-minigame-harpoon)
-7. [Recipes](#recipes)
-8. [Client-Side Features](#client-side-features)
-9. [Advanced Configuration](#advanced-configuration)
-10. [Additional Notes](#additional-notes)
+## Contents
+- [Overview](#overview)
+- [World & Survival Content](#world--survival-content)
+  - [Blocks & Stations](#blocks--stations)
+  - [Wild Plants & Food](#wild-plants--food)
+  - [Animals](#animals)
+- [Tools & Weapons](#tools--weapons)
+- [Core Systems](#core-systems)
+  - [Knapping](#knapping)
+  - [Harpoon Fishing Minigame](#harpoon-fishing-minigame)
+- [Recipes & Data](#recipes--data)
+- [World Generation](#world-generation)
+- [Client/Visuals](#clientvisuals)
+- [Developer Notes](#developer-notes)
 
 ---
 
 ## Overview
-The Paleolithic Era Mod introduces early survival elements that let you explore crafting techniques, primitive tools, and hunting using primitive weaponry. The key goals of this mod are:
-- Add realism and depth to early-game mechanics.
-- Provide tools and blocks that emphasize *prehistoric survival*.
-- Offer challenging and creative ways to collect resources, craft items, and manage their environmental impact.
+**Paleolithic Era** expands the early game with believable, low-tech progression:
+- Gather sticks, fiber, berries, flint, bone and rock chunks.
+- Shape parts at a **Knapping Station**.
+- Light a **Crude Campfire** and cook basic food.
+- Hunt with **wooden spears/harpoons** and upgrade into bone/flint toolsets.
+- Forage **elderberries** and **yarrow** to survive and craft.
+- Encounter early fauna like **Boar** roaming the wilds.
+
+The design aim is to create meaningful choices and a grounded start that still plays smoothly in modpacks.
 
 ---
 
-## Blocks
-This mod introduces new blocks to enrich your gameplay experience:
+## World & Survival Content
 
-### 1. **Knapping Station**
-- **Description**: The Knapping Station is a crafting block that allows players to create primitive tools and refine raw materials into usable forms.
-- **Usage**: Right-click to open the crafting GUI, or sneak + right-click to manually knap.
-- **Strength**: 2.0f (slightly less durable than stone blocks).
-- **Features**: Uses recipes to convert input items (e.g., Flint, Bone) into useful outputs (e.g., spearheads, bifaces).
-- **Crafting Example**:
-  - Input: 1 Flint → Output: 1 Flint Biface.
+### Blocks & Stations
+- **Knapping Station** – Compact work surface for shaping flint/bone into tool parts (bifaces, spearheads). Has a short action delay and basic input/output slots. Designed for early-game recipes.
+- **Crude Campfire** – Primitive heat/cooking source with light emission; supports multiple items and early survival cooking.
+- **Crude Bed** – Rough, early bedding with custom texturing and recipe variants (intended as a first shelter milestone before proper beds).
 
----
+### Wild Plants & Food
+- **Elderberry Bush** – Naturally generates and yields **Raw Elderberries** (edible, used in recipes). Elderberry harvesting uses proper loot tables.
+- **Yarrow (Herb)** – A wild plant with growth stages, drops/seeds, and early-game food/herbal use. Integrated into recipes and data generation.
 
-### 2. **Crude Campfire**
-- **Description**: A primitive cooking station essential for surviving the harsh early days.
-- **Features**:
-  - Cooks multiple items simultaneously.
-  - Emits light with an intensity of `15` when lit.
-  - Made of wooden materials for compatibility with the early game.
-  - **Maximum Cooking Items**: Supports multiple items held in its internal inventory.
+### Animals
+- **Boar** – A sturdy early-game animal that roams the overworld. Interacts with elderberries (can be fed/bred) and fits into a foraging/hunting loop.
 
 ---
 
-### 3. **Elderberry Bush**
-- **Description**: A wild-growing bush that provides a new food source: **Elderberries**.
-- **Behavior**:
-  - Grows naturally in forests or plains.
-  - Can be harvested to collect **Raw Elderberries**, which restore hunger and have other recipe uses.
+## Tools & Weapons
+- **Primitive Toolsets**
+  - **Bone Tools (Tier 0)** – Extremely low durability, slower mining; useful stepping stone.
+  - **Flint Tools (Tier 1)** – Better durability/speed than bone; establishes a proper early tier.
+- **Wooden Spear** – Throwable javelin/melee hybrid with tuned handling for early combat.
+- **Wooden Harpoon** – Enables fishing via a timing-based minigame on valid 3×3 still water.
+- **Parts & Components** – **Flint Biface**, **Bone Spearhead**, etc., crafted via knapping and used across recipes.
 
 ---
 
-## Tools and Weapons
-### Primitive Toolsets
-The mod features two new tool tiers designed for early survival:
+## Core Systems
 
-#### 1. **Bone Tools** (Tier 0)
-- **Durability**: 25
-- **Mining Speed**: 0.5x (slower than wooden tools).
-- **Attack Damage Bonus**: 0.2
-- **Enchantability**: 3 (low enchantment potential).
-- **Ideal For**: Cutting weak materials or soft blocks.
+### Knapping
+Perform quick shaping actions on the **Knapping Station**:
+1. Insert a base material (flint, bone, etc.).
+2. Activate to knap (short delay per action).
+3. Receive parts like **Flint Bifaces** or **Bone Spearheads**.
 
-#### 2. **Flint Tools** (Tier 1)
-- **Durability**: 40
-- **Mining Speed**: 1.0x (same as wooden tools).
-- **Attack Damage Bonus**: 0.5
-- **Enchantability**: 5 (slightly better than Bone).
-- **Best Use**: Ideal for upgrading basic damage and mining capabilities.
+Notes:
+- Consumes one input per operation.
+- Halts if the output is full.
 
-Both material types form the basis of Paleolithic weaponry and can be crafted from their respective recipes.
+### Harpoon Fishing Minigame
+- Requires a valid **3×3 still-water** patch (no flowing/singles).
+- Right-click to start; succeed with timing/precision to catch fish and aquatic loot.
+- Harpoons show advanced durability info with F3+H.
 
 ---
 
-### Wooden Spear
-- **Description**: A primitive javelin-style weapon usable for ranged combat.
-- **Durability**: 45 (weaker than iron but sufficient for early-game usage).
-- **Features**:
-  - Throwable, much like a **Trident**, with customized velocity and attack mechanics.
-  - Usable as either a ranged weapon or a melee item.
-  - **Crafted From**: Flint + Stick + String.
+## Recipes & Data
+- **Knapping** – Source → shaped parts (e.g., flint → **Flint Biface**).
+- **Primitive Crafting** – Sticks/strings/bones/flint combine into early tools and weapons.
+- **Food** – Early cooking paths on the **Crude Campfire**; berries and herbs support basic survival.
+- **Data Generation** – Providers cover recipes/loot for new plants (e.g., yarrow), and elderberry harvesting is driven by loot tables.
 
 ---
 
-### Wooden Harpoon
-- **Description**: A tool for fishing through a fun minigame mechanic that simulates ancient hunting techniques.
-- **Use**: Target a body of water (3x3 area of still water), and engage in a timing-focused fishing minigame.
-- **Durability**: Limited; breaks after repeated use.
-- **Advanced Features**:
-  - Displays advanced durability information when F3+H is enabled.
-  - Compatible only with proper water patches (flowing water or single blocks are invalid).
+## World Generation
+- **Wild Crops** – **Elderberry Bushes** and **Yarrow** appear in suitable biomes as foraging targets.
+- **Fauna** – **Boar** added to biome spawn lists with sensible weights for early exploration.
+
+> Worldgen targets and spawn weights are tuned for a survival-forward early game without cluttering vanilla terrain.
 
 ---
 
-## Special Items and Features
-- **Flint Biface**: Crafted from Flint, this tool functions as a primitive knife or cutting edge.
-- **Bone Spearhead**: Crafted from Bones, essential for building throwable spears or adding sharp edges to primitive constructs.
-- **Raw Elderberries**: A new food item that acts as an early-game nourishment source.
+## Client/Visuals
+- Custom GUI for **Knapping Station**.
+- Render layers for foliage (bush transparency) and **Crude Campfire** visuals.
+- New textures for **Crude Bed** and plant growth stages (e.g., yarrow).
 
 ---
 
-## Knapping Mechanics
-Knapping is a **unique crafting process** where players use a **Knapping Station** to transform base materials into tools or useful items.
-
-### How It Works:
-1. Place a material (e.g., Flint or Bone) into the **Knapping Station** input slot.
-2. **Right-click** or **Sneak + Right-click** to begin the crafting process.
-3. Observe the crafting delay (20 ticks or 1 second).
-4. Output items, such as **Flint Bifaces** or **Bone Spearheads**, will appear in the result slot.
-
-#### Fine Details:
-- Input stacks will **decrement by 1** per crafting cycle.
-- The station will **halt** crafting if the output slot is full.
+## Developer Notes
+- **Mod ID:** `paleolithic-era`
+- **Language/Stack:** Fabric + Kotlin
+- **Entrypoints:** main, client, and datagen are registered.
+- **Data:** Loot tables and recipe providers are in place for plants (elderberries/yarrow) and early items.
+- **Worldgen hooks:** Biome modifications register plant features and entity spawns.
 
 ---
 
-## Fishing Minigame (Harpoon)
-The **Wooden Harpoon** introduces a fishing mechanic requiring timing and precision. When aiming at valid still water areas:
-1. Right-click to trigger the fishing mechanism.
-2. Engage in a reaction-based minigame to "catch" fish through precise inputs.
-3. **Rewards**: Fish or other aquatic loot items.
-
-#### Valid Water:
-- A proper **3x3 patch of still, non-flowing water** is required.
-- Flowing water, or water that lacks adjacent blocks, will fail validation.
-
----
-
-## Recipes
-### New Recipe Types
-1. **Knapping Recipes**:
-   - Recipes that refine materials into more sophisticated tools.
-   - Example:
-     - **Input**: Flint → **Output**: Flint Biface.
-2. **Primitive Crafting**:
-   - Craft Bone Tools, Flint Tools, and Wooden Weapons using sticks, string, and bones.
+## Roadmap Hints
+This project aims to:
+- flesh out "Stage 0: The Awakening"
+- introduce more Paleolithic structures (tanning racks, World POI huts)
+- more Herbs with status effects that spawn in the world 
+- effigies/totems that give radial effects to players
+- Another animal to hunt
+- Improve Boars to attack when scared
 
 ---
 
-## Client-Side Features
-### GUI Enhancements
-- The Knapping Station features a **custom GUI** for enhanced crafting functionality.
-- Fishing effects include visual and audio feedback when using the **Wooden Harpoon**.
-
-### Block Render Layers
-- **Crude Campfire**:
-  - Emits light and features realistic transparency for embers and smoke.
-- **Elderberry Bush**:
-  - Designed with semi-transparent rendering for better visual integration with the environment.
-
----
-
-## Advanced Configuration
-For developers:
-- Use the **KnappingRecipeProvider** for generating new crafting recipes procedurally.
-- Expand primitive material tiers via the **ToolMaterialsMod** system, allowing for new metals or stones.
-
----
-
-## Additional Notes
-- The mod integrates seamlessly with **Fabric API**, ensuring compatibility with most modpack configurations.
-- Extensible design encourages modders to add new blocks, tools, and mechanics within the same "prehistoric" theme.
-
-Feel free to share suggestions or report bugs to improve the **Paleolithic Era Mod**!
+### Credits & Links
+- MIT Licensed.
+- BlockBench used for models
