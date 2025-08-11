@@ -36,15 +36,12 @@
 
   "advancement.paleolithic-era.awakening.hunt_aggressive.title": "Hunter's First Blood",
   "advancement.paleolithic-era.awakening.hunt_aggressive.description": "Hunt down any hostile creature using your primitive weapons",
-
   "advancement.paleolithic-era.awakening.wear_hide_armor.title": "Protection First",
   "advancement.paleolithic-era.awakening.wear_hide_armor.description": "Limited coverage, but anything will help at this point.",
-
   "advancement.paleolithic-era.awakening.craft_wooden_harpoon.title": "Here Fishy, Fishy",
   "advancement.paleolithic-era.awakening.craft_wooden_harpoon.description": "Craft a Wooden Harpoon for fishing.",
-
   "advancement.paleolithic-era.awakening.crude_bed.title": "Rest for the Weary",
-  "advancement.paleolithic-era.awakening.crude_bed.desc": "Craft a crude bed to survive for the night",
+  "advancement.paleolithic-era.awakening.crude_bed.description": "Craft a crude bed to survive for the night",
 
   "message.paleolithic-era.caught_item": "you caught a %s!",
 
@@ -68,17 +65,16 @@
   "item.paleolithic-era.flint_knife": "Flint Knife",
   "item.paleolithic-era.flint_biface": "Flint Biface",
   "item.paleolithic-era.fire_drill": "Fire Drill",
+  "item.paleolithic-era.hide_cap": "Hide Cap",
+  "item.paleolithic-era.hide_dryer": "Hide Dryer",
+  "item.paleolithic-era.hide_leggings": "Hide Leggings",
+  "item.paleolithic-era.hide_shoes": "Hide Shoes",
+  "item.paleolithic-era.hide_tunic": "Hide Tunic",
   "item.paleolithic-era.knapping_station": "Knapping Station",
   "item.paleolithic-era.patched_hide": "Patched Hide",
   "item.paleolithic-era.plant_cordage": "Plant Cordage",
   "item.paleolithic-era.plant_fiber": "Plant Fiber",
   "item.paleolithic-era.rawhide": "Rawhide",
-
-
-  "item.paleolithic-era.hide_leggings": "Hide Leggings",
-  "item.paleolithic-era.hide_tunic": "Hide Tunic",
-  "item.paleolithic-era.hide_cap": "Hide Cap",
-  "item.paleolithic-era.hide_shoes": "Hide Shoes",
   "item.paleolithic-era.rock_chunk": "Rock Chunk",
   "item.paleolithic-era.raw_elderberries": "Raw Elderberries",
   "item.paleolithic-era.cooked_elderberries": "Cooked Elderberries",
