@@ -28,7 +28,8 @@ object ElderberryAdvancements {
             )
             .criterion("has_raw_elderberries",InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]))
             .criterion("has_yarrow_herb", InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW]))
-            .rewards(AdvancementRewards.Builder.experience(8))
+            .criterion("has_chamomile_herb", InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.CHAMOMILE]))
+            .rewards(AdvancementRewards.Builder.experience(9))
             .build(consumer, "awakening/harvest_berries")
 
         Advancement.Builder.create()
