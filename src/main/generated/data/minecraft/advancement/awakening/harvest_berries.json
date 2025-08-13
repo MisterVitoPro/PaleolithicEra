@@ -1,6 +1,16 @@
 {
   "parent": "minecraft:awakening/tab_root",
   "criteria": {
+    "has_chamomile_herb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:chamomile_herb"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_raw_elderberries": {
       "conditions": {
         "items": [
@@ -41,10 +51,13 @@
     ],
     [
       "has_yarrow_herb"
+    ],
+    [
+      "has_chamomile_herb"
     ]
   ],
   "rewards": {
-    "experience": 8
+    "experience": 9
   },
   "sends_telemetry_event": true
 }
