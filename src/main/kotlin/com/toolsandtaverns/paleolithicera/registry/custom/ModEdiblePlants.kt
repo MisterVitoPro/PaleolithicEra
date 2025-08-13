@@ -58,11 +58,21 @@ enum class EdiblePlants(val ediblePlantDef: EdiblePlantDef) {
             alwaysEdible = false,
             effect = StatusEffects.REGENERATION,
             effectAmplifier = 0,
-            effectDurationTicks = 20 * 4,           // 3 seconds
+            effectDurationTicks = 20 * 3,
             effectChance = 1.0f,
             maxStackSize = 64
-        )
-    );
+        )),
+    CHAMOMILE(EdiblePlantDef(
+        idPath = "chamomile_herb",
+        hunger = 1,
+        saturationModifier = 0.2f,
+        alwaysEdible = false,
+        effect = StatusEffects.RESISTANCE,
+        effectAmplifier = 0,
+        effectDurationTicks = 20 * 5,
+        effectChance = 1.0f,
+        maxStackSize = 64
+    ));
 
     val definitions: EdiblePlantDef = ediblePlantDef
 }

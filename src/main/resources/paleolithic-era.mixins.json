@@ -4,7 +4,8 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"LeafAndLogBehaviorMixin",
-		"BlockBreakingPreventionMixin"
+		"BlockBreakingPreventionMixin",
+		"AxeItemMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

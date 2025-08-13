@@ -48,6 +48,8 @@
   "block.paleolithic-era.crude_bed": "Crude Bed",
   "block.paleolithic-era.crude_campfire": "Crude Campfire",
   "block.paleolithic-era.elderberry_bush": "Elderberry Bush",
+  "block.paleolithic-era.chamomile_plant": "Wild Chamomile",
+  "block.paleolithic-era.yarrow_plant": "Wild Yarrow",
   "block.paleolithic-era.hide_dryer": "Hide Dryer",
   "block.paleolithic-era.knapping_station": "Knapping Station",
 
@@ -59,6 +61,7 @@
   "item.paleolithic-era.bone_spear": "Bone Spear",
   "item.paleolithic-era.bone_shard": "Bone Shard",
   "item.paleolithic-era.boar_spawn_egg": "Boar Spawn Egg",
+  "item.paleolithic-era.chamomile_herb": "Chamomile",
   "item.paleolithic-era.crude_bed": "Crude Bed",
   "item.paleolithic-era.crude_campfire": "Crude Campfire",
   "item.paleolithic-era.dry_hide": "Dry Hide",
@@ -82,6 +85,8 @@
   "item.paleolithic-era.wooden_harpoon": "Wooden Harpoon",
   "item.paleolithic-era.yarrow_herb": "Yarrow Herb",
 
+  "itemGroup.paleolithic-era.paleolithic_era": "Paleolithic Era",
+
   "tooltip.paleolithic-era.crude_campfire": "Primitive source of warmth, light, and cooking.",
   "tooltip.paleolithic-era.crude_campfire.usage": "[Use] raw food to cook when lit. Requires Fire Drill.",
   "tooltip.paleolithic-era.crude_bed": "Rest until dawn, but don’t expect comfort.",
@@ -93,7 +98,7 @@
   "tooltip.paleolithic-era.knapping_station": "Used for shaping flint and bone into tools.",
   "tooltip.paleolithic-era.knapping_station.usage": "[Sneak + Use](Hold) to knap item",
   "tooltip.paleolithic-era.wooden_harpoon": "Use near water to fish. Time your strike!",
-  "tooltip.paleolithic-era.wooden_harpoon.usage": "Must be a 3x3 water pool",
+  "tooltip.paleolithic-era.wooden_harpoon.usage": "[Use] on water block surrounded by water blocks. [Spacebar] to catch",
   "tooltip.paleolithic-era.wooden_spear": "Melee or throw it. Your choice.",
   "tooltip.paleolithic-era.yarrow_herb": "Achillea millefolium",
 

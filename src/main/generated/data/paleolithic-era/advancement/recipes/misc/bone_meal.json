@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bone_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:bone_shard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "paleolithic-era:bone_meal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bone_shard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "paleolithic-era:bone_meal"
+    ]
+  }
+}

@@ -3,6 +3,7 @@ package com.toolsandtaverns.paleolithicera
 import com.toolsandtaverns.paleolithicera.events.TooltipEvents
 import com.toolsandtaverns.paleolithicera.render.KnappingStationBlockEntityRenderer
 import com.toolsandtaverns.paleolithicera.model.BoarModel
+import com.toolsandtaverns.paleolithicera.model.BoneSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiClient
 import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
@@ -10,6 +11,7 @@ import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModEntities
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
 import com.toolsandtaverns.paleolithicera.render.BoarRenderer
+import com.toolsandtaverns.paleolithicera.render.BoneSpearRenderer
 import com.toolsandtaverns.paleolithicera.render.CrudeCampfireBlockEntityRenderer
 import com.toolsandtaverns.paleolithicera.render.WoodenSpearRenderer
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreen
@@ -56,11 +58,11 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
         // This allows thrown spears to be properly displayed in the world
         EntityModelLayerRegistry.registerModelLayer(BoarModel.BOAR_MODEL_LAYER, BoarModel::texturedModelData)
         EntityModelLayerRegistry.registerModelLayer(WoodenSpearProjectileModel.WOOD_SPEAR_MODEL_LAYER, WoodenSpearProjectileModel::texturedModelData)
+        EntityModelLayerRegistry.registerModelLayer(BoneSpearProjectileModel.BONE_SPEAR_MODEL_LAYER, BoneSpearProjectileModel::texturedModelData)
 
-        EntityRendererRegistry.register(ModEntities.BOAR_ENTITY) { context -> BoarRenderer(context) }
-        EntityRendererRegistry.register(ModEntities.WOODEN_SPEAR_ENTITY) { context ->
-            WoodenSpearRenderer(context)
-        }
+        EntityRendererRegistry.register(ModEntities.BOAR_ENTITY) { cxt -> BoarRenderer(cxt) }
+        EntityRendererRegistry.register(ModEntities.WOODEN_SPEAR_ENTITY) { cxt -> WoodenSpearRenderer(cxt) }
+        EntityRendererRegistry.register(ModEntities.BONE_SPEAR_ENTITY) { cxt -> BoneSpearRenderer(cxt) }
 
         // Register the screen for the knapping station
         // This connects the container handler to its GUI implementation
@@ -72,6 +74,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
         // CUTOUT is used for blocks with binary transparency (fully transparent or fully opaque pixels)
         BlockRenderLayerMap.putBlock(ModBlocks.CRUDE_CAMPFIRE, BlockRenderLayer.CUTOUT)
         BlockRenderLayerMap.putBlock(ModBlocks.ELDERBERRY_BUSH, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.CHAMOMILE_PLANT, BlockRenderLayer.CUTOUT)
         BlockRenderLayerMap.putBlock(ModBlocks.YARROW_PLANT, BlockRenderLayer.CUTOUT)
 
         // Register client-side network handlers for the harpoon fishing system

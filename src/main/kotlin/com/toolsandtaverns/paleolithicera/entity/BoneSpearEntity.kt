@@ -16,16 +16,16 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
 /**
- * Primitive throwable spear entity with no magical effects.
+ * Primitive throwable bone spear entity with no magical effects.
  */
-class WoodenSpearEntity : PersistentProjectileEntity {
+class BoneSpearEntity : PersistentProjectileEntity {
 
     constructor(world: World, owner: LivingEntity, stack: ItemStack)
-            : super(ModEntities.WOODEN_SPEAR_ENTITY, owner, world, stack, stack) {
+            : super(ModEntities.BONE_SPEAR_ENTITY, owner, world, stack, stack) {
         this.setNoGravity(false)
     }
 
-    constructor(type: EntityType<out WoodenSpearEntity>, world: World)
+    constructor(type: EntityType<out BoneSpearEntity>, world: World)
             : super(type, world)
 
     override fun onEntityHit(hitResult: EntityHitResult) {
@@ -39,7 +39,7 @@ class WoodenSpearEntity : PersistentProjectileEntity {
         return SoundEvents.ITEM_TRIDENT_HIT_GROUND
     }
 
-    override fun getDefaultItemStack(): ItemStack = ItemStack(ModItems.WOODEN_SPEAR)
+    override fun getDefaultItemStack(): ItemStack = ItemStack(ModItems.BONE_SPEAR)
 
     override fun shouldRender(cameraX: Double, cameraY: Double, cameraZ: Double): Boolean {
         return true

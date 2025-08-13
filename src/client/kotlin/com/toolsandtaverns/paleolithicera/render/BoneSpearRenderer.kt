@@ -1,7 +1,9 @@
 package com.toolsandtaverns.paleolithicera.render
 
 import SpearRenderState
+import com.toolsandtaverns.paleolithicera.entity.BoneSpearEntity
 import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
+import com.toolsandtaverns.paleolithicera.model.BoneSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.util.id
 import net.minecraft.client.render.OverlayTexture
@@ -15,13 +17,13 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.RotationAxis
 
 /**
- * Renderer for Wooden Spear entity using item model.
+ * Renderer for Bone Spear entity using item model.
  */
-class WoodenSpearRenderer(
+class BoneSpearRenderer(
     context: EntityRendererFactory.Context,
-) : EntityRenderer<WoodenSpearEntity, SpearRenderState>(context) {
+) : EntityRenderer<BoneSpearEntity, SpearRenderState>(context) {
 
-    val model: WoodenSpearProjectileModel = WoodenSpearProjectileModel(context.getPart(WoodenSpearProjectileModel.WOOD_SPEAR_MODEL_LAYER))
+    val model: BoneSpearProjectileModel = BoneSpearProjectileModel(context.getPart(BoneSpearProjectileModel.BONE_SPEAR_MODEL_LAYER))
 
     /**
      * Creates a new render state object for this renderer.
@@ -40,7 +42,7 @@ class WoodenSpearRenderer(
      * @param state The render state to update
      * @param tickDelta Partial tick time for smooth animations
      */
-    override fun updateRenderState(entity: WoodenSpearEntity, state: SpearRenderState, tickDelta: Float) {
+    override fun updateRenderState(entity: BoneSpearEntity, state: SpearRenderState, tickDelta: Float) {
         super.updateRenderState(entity, state, tickDelta)
         // Get interpolated yaw and pitch for smooth rotation
         state.yaw = entity.getLerpedYaw(tickDelta)
@@ -74,7 +76,7 @@ class WoodenSpearRenderer(
 
         val vertexConsumer = ItemRenderer.getItemGlintConsumer(
             vertexConsumerProvider,
-            this.model.getLayer(id("textures/entity/wooden_spear.png")),
+            this.model.getLayer(id("textures/entity/wooden_spear.png")), //TODO need to change when getting bone spear model
             false,
             false
         )

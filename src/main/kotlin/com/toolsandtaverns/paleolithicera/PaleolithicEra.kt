@@ -61,6 +61,8 @@ import org.slf4j.LoggerFactory
         // Initialize advancement criteria
         ModCriteria.initialize()
 
+        ModItemGroups.register()
+
         FabricDefaultAttributeRegistry.register(ModEntities.BOAR_ENTITY, BoarEntity.createAttributes())
 
         // Initialize loot table modifiers for custom drops
@@ -68,13 +70,15 @@ import org.slf4j.LoggerFactory
         MobLootModifier.initialize()        // Adds custom mob drops
         RockChunkLootModifier.initialize()  // Adds rock chunk drops to stone
 
-        // Initialize custom world generation features
-        ModWorldgen.initialize()
-
         // Register packet handlers for network communication
         OpenHarpoonGuiPacket.register()
 
         BlockDropHandler.register()
+
+        // Initialize custom world generation features
+        ModWorldgen.initialize()
+
+        ModFuelRegistry.registerFuels()
     }
 
 }

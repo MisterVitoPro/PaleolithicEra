@@ -1,5 +1,6 @@
 package com.toolsandtaverns.paleolithicera.datagen
 
+import com.toolsandtaverns.paleolithicera.block.ChamomilePlantBlock
 import com.toolsandtaverns.paleolithicera.block.ElderberryBushBlock
 import com.toolsandtaverns.paleolithicera.block.YarrowPlantBlock
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
@@ -31,28 +32,19 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
      */
     override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
         blockStateModelGenerator.registerPlantStagesWithItem(
-            ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY],
             ModBlocks.ELDERBERRY_BUSH,
             ElderberryBushBlock.AGE
         )
 
         blockStateModelGenerator.registerPlantStagesWithItem(
-            ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW],
             ModBlocks.YARROW_PLANT,
             YarrowPlantBlock.AGE
         )
 
-//        blockStateModelGenerator.registerTintableCrossBlockStateWithStages(
-//            ModBlocks.ELDERBERRY_BUSH,
-//            BlockStateModelGenerator.CrossType.NOT_TINTED,
-//            ElderberryBushBlock.Companion.AGE, 0, 1, 2, 3
-//        )
-
-//        blockStateModelGenerator.registerTintableCrossBlockStateWithStages(
-//            ModBlocks.YARROW_PLANT,
-//            BlockStateModelGenerator.CrossType.NOT_TINTED,
-//            YarrowPlantBlock.Companion.AGE, 0, 1, 2, 3
-//        )
+        blockStateModelGenerator.registerPlantStagesWithItem(
+            ModBlocks.CHAMOMILE_PLANT,
+            ChamomilePlantBlock.AGE
+        )
 
         blockStateModelGenerator.registerCubeWithCustomTextures(
             ModBlocks.KNAPPING_STATION,
@@ -112,7 +104,6 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.BONE_KNIFE, Models.HANDHELD)
         itemModelGenerator.register(ModItems.FLINT_KNIFE, Models.HANDHELD)
 
-        itemModelGenerator.register(ModItems.BONE_SPEAR, Models.HANDHELD)
         itemModelGenerator.register(ModItems.FIRE_DRILL, Models.HANDHELD)
         itemModelGenerator.register(ModItems.WOODEN_HARPOON, Models.HANDHELD)
         itemModelGenerator.register(ModItems.FLINT_AXE, Models.HANDHELD)
@@ -126,11 +117,9 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     }
 
     private fun BlockStateModelGenerator.registerPlantStagesWithItem(
-        item: Item?,
         block: Block,
         age: IntProperty = Properties.AGE_3
     ) {
-//        this.registerItemModel(item)
         this.blockStateCollector.accept(
             VariantsBlockModelDefinitionCreator.of(block).with(
                 BlockStateVariantMap.models(age).generate { stage: Int? ->
@@ -144,24 +133,5 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 })
         )
     }
-
-//    private fun registerPlantStagesNoItem(
-//        gen: BlockStateModelGenerator,
-//        block: Block,
-//        tint: BlockStateModelGenerator.CrossType,
-//        age: IntProperty,
-//        vararg stages: Int,
-//        textureBaseId: Identifier // e.g. id("block/elderberry_stage_")
-//    ) {
-//        require(age.values.size == stages.size)
-//
-//        // Build model variants for each stage without touching any item models
-//        val stageMap = BlockStateVariantMap.models(age).register { stage ->
-//            val tex = TextureMap().put(TextureKey.CROSS, Identifier.of("${textureBaseId}_$stage"))
-//            val modelId = tint.crossModel.upload(block, "_$stage", tex, gen.modelCollector)
-//            BlockStateVariant.create().put(VariantSettings.MODEL, modelId)
-//        }
-//        gen.blockStateCollector.accept(VariantsBlockStateSupplier.create(block, stageMap))
-//    }
 
 }
