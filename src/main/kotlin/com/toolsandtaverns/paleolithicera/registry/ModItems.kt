@@ -1,9 +1,11 @@
 package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
+import com.toolsandtaverns.paleolithicera.entity.BoneSpearEntity
 import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.item.*
-import com.toolsandtaverns.paleolithicera.item.ModArmorMaterials.HIDE_MATERIAL
+import com.toolsandtaverns.paleolithicera.item.material.ModArmorMaterials.HIDE_MATERIAL
+import com.toolsandtaverns.paleolithicera.item.material.ModToolMaterials
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import com.toolsandtaverns.paleolithicera.registry.custom.ModEdiblePlants
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
@@ -57,24 +59,33 @@ object ModItems {
     })
 
     val WOODEN_SPEAR = register("wooden_spear",
-        { settings: Item.Settings -> SpearItem( settings.maxDamage(ToolMaterial.WOOD.durability)
-            .attributeModifiers(SpearItem.createAttributeModifiers(ToolMaterial.WOOD))
-            .component(DataComponentTypes.TOOL, SpearItem.createToolComponent(ToolMaterial.WOOD))
-            .enchantable(ToolMaterial.WOOD.enchantmentValue())
-            .component(DataComponentTypes.WEAPON, WeaponComponent(1)), ::WoodenSpearEntity) }
+        { settings: Item.Settings ->
+            SpearItem( settings.maxDamage(25)
+                .attributeModifiers(SpearItem.createAttributeModifiers(ToolMaterial.WOOD))
+                .component(DataComponentTypes.TOOL, SpearItem.createToolComponent(ToolMaterial.WOOD))
+                .enchantable(ToolMaterial.WOOD.enchantmentValue())
+                .component(DataComponentTypes.WEAPON, WeaponComponent(1)),
+                ::WoodenSpearEntity)
+        }
 
     )
 
-    val FLINT_BIFACE: Item = register("flint_biface", { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.FLINT_MATERIAL, settings.maxDamage(15), 0.0f) })
-    val BONE_KNIFE: Item = register("bone_knife", { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.BONE_MATERIAL, settings) })
-    val BONE_SPEAR: Item = register("bone_spear", { settings: Item.Settings -> TridentItem(settings) })
+    val FLINT_BIFACE: Item = register("flint_biface", { settings: Item.Settings -> KnifeItem(ModToolMaterials.FLINT_MATERIAL, settings.maxDamage(15), 0.0f) })
+    val BONE_KNIFE: Item = register("bone_knife", { settings: Item.Settings -> KnifeItem(ModToolMaterials.BONE_MATERIAL, settings) })
+    val BONE_SPEAR: Item = register(
+        "bone_spear",
+        { settings: Item.Settings ->
+            SpearItem(settings.attributeModifiers(SpearItem.createAttributeModifiers(ModToolMaterials.BONE_MATERIAL))
+                    .component(DataComponentTypes.TOOL, SpearItem.createToolComponent(ToolMaterial.WOOD))
+                    .enchantable(ToolMaterial.WOOD.enchantmentValue()), ::BoneSpearEntity)
+        })
     val BONE_SHARD: Item = register("bone_shard", { settings: Item.Settings -> Item(settings) })
     val FLINT_KNIFE: Item = register(
         "flint_knife",
-        { settings: Item.Settings -> KnifeItem(ToolMaterialsMod.FLINT_MATERIAL, settings, 1.0f) })
+        { settings: Item.Settings -> KnifeItem(ModToolMaterials.FLINT_MATERIAL, settings, 1.0f) })
     val FLINT_AXE: Item = register(
         "flint_axe",
-        { settings: Item.Settings -> AxeItem(ToolMaterialsMod.FLINT_MATERIAL, 3.0f, -3.2F, settings) })
+        { settings: Item.Settings -> AxeItem(ModToolMaterials.FLINT_MATERIAL, 3.0f, -3.2F, settings) })
     val FIRE_DRILL: Item =
         register("fire_drill", { settings: Item.Settings -> FireDrillItem(settings.maxCount(1).maxDamage(10)) })
 

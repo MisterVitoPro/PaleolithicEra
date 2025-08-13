@@ -64,7 +64,7 @@ class VanillaRecipeProvider(
                     .pattern("SP")
                     .input('B', ModItems.BONE_SHARD)
                     .input('P', ModItems.PLANT_CORDAGE)
-                    .input('S', Items.STICK)
+                    .input('S', ModItems.WOODEN_SPEAR)
                     .criterion(hasItem(ModItems.BONE_SHARD), conditionsFromItem(ModItems.BONE_SHARD))
                     .offerTo(exporter)
 
@@ -187,6 +187,12 @@ class VanillaRecipeProvider(
                     .input('S', Items.STICK)
                     .criterion(hasItem(ModItems.BONE_KNIFE), conditionsFromItem(ModItems.BONE_KNIFE))
                     .offerTo(exporter)
+
+                createShapeless(RecipeCategory.MISC, Items.BONE_MEAL, 1)
+                    .input(ModItems.BONE_SHARD)
+                    .criterion(hasItem(ModItems.BONE_SHARD), conditionsFromItem(ModItems.BONE_SHARD))
+                    .offerTo(exporter)
+
 
 //                createShaped(RecipeCategory.COMBAT, ModBlocks.CRUDE_BED, 1)
 //                    .pattern("RP")

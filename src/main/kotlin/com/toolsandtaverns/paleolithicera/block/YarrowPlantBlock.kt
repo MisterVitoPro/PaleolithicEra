@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.state.property.IntProperty
+import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
@@ -59,6 +60,7 @@ class YarrowPlantBlock(settings: Settings) : SweetBerryBushBlock(settings) {
     }
 
     companion object {
-        val AGE: IntProperty = SweetBerryBushBlock.AGE
+        val AGE: IntProperty = Properties.AGE_3
+        const val MAX_AGE: Int = 3
     }
 }

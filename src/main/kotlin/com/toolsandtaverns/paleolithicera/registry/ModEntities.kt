@@ -2,6 +2,7 @@ package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.entity.BoarEntity
+import com.toolsandtaverns.paleolithicera.entity.BoneSpearEntity
 import com.toolsandtaverns.paleolithicera.entity.CrudeBedBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.CrudeCampfireBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.HideDryerBlockEntity
@@ -29,6 +30,8 @@ object ModEntities {
         private set
     lateinit var WOODEN_SPEAR_ENTITY: EntityType<WoodenSpearEntity>
             private set
+    lateinit var BONE_SPEAR_ENTITY: EntityType<BoneSpearEntity>
+        private set
     lateinit var HIDE_DRYER_BLOCK_ENTITY: BlockEntityType<HideDryerBlockEntity>
         private set
 
@@ -69,6 +72,14 @@ object ModEntities {
             EntityType.Builder.create(::WoodenSpearEntity, SpawnGroup.MISC)
                 .dimensions(0.5f, 0.5f)
                 .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("wooden_spear")))
+        )
+
+        BONE_SPEAR_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE,
+            id("bone_spear"),
+            EntityType.Builder.create(::BoneSpearEntity, SpawnGroup.MISC)
+                .dimensions(0.5f, 0.5f)
+                .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("bone_spear")))
         )
 
         HIDE_DRYER_BLOCK_ENTITY = register(

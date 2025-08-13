@@ -14,7 +14,7 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.paleolithic-era.awakening.crude_bed.desc"
+      "translate": "advancement.paleolithic-era.awakening.crude_bed.description"
     },
     "icon": {
       "count": 1,

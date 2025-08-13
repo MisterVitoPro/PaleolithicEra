@@ -14,7 +14,7 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.paleolithic-era.awakening.craft_wooden_harpoon.desc"
+      "translate": "advancement.paleolithic-era.awakening.craft_wooden_harpoon.description"
     },
     "icon": {
       "count": 1,

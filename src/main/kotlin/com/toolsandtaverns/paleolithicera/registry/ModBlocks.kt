@@ -1,6 +1,7 @@
 package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
+import com.toolsandtaverns.paleolithicera.block.ChamomilePlantBlock
 import com.toolsandtaverns.paleolithicera.block.CrudeBedBlock
 import com.toolsandtaverns.paleolithicera.block.CrudeCampFireBlock
 import com.toolsandtaverns.paleolithicera.block.ElderberryBushBlock
@@ -48,7 +49,16 @@ object ModBlocks {
                 .pistonBehavior(PistonBehavior.DESTROY)
         )
     }
-
+    val CHAMOMILE_PLANT: Block = registerBlockWithoutBlockItem("chamomile_plant") { settings: AbstractBlock.Settings ->
+        ChamomilePlantBlock(
+            settings
+                .mapColor(MapColor.DARK_GREEN)
+                .ticksRandomly()
+                .noCollision()
+                .sounds(BlockSoundGroup.SWEET_BERRY_BUSH)
+                .pistonBehavior(PistonBehavior.DESTROY)
+        )
+    }
     val YARROW_PLANT: Block = registerBlockWithoutBlockItem("yarrow_plant") { settings: AbstractBlock.Settings ->
         YarrowPlantBlock(
             settings
@@ -71,11 +81,6 @@ object ModBlocks {
                 entries.add(CRUDE_BED)
                 entries.add(CRUDE_CAMPFIRE)
             }
-
-        val maybeItem = Registries.ITEM.getId(Registries.ITEM.get(id("elderberry_bush")))
-        val maybeItem2 = Registries.ITEM.getId(Registries.ITEM.get(id("yarrow_plant")))
-        LOGGER.info("Elderberry bush item ID: $maybeItem")
-        LOGGER.info("Yarrow Plant item ID: $maybeItem2")
     }
 
     private fun register(

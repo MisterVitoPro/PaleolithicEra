@@ -39,6 +39,20 @@ object ModWorldgen {
                 BiomeKeys.WINDSWEPT_HILLS,
             ),
             GenerationStep.Feature.VEGETAL_DECORATION,
+            ModPlacedFeatures.CHAMOMILE_BUSH_PLACED
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.includeByKey(
+                BiomeKeys.PLAINS,
+                BiomeKeys.SUNFLOWER_PLAINS,
+                BiomeKeys.MEADOW,
+                BiomeKeys.CHERRY_GROVE,
+                BiomeKeys.TAIGA,
+                BiomeKeys.GROVE,
+                BiomeKeys.WINDSWEPT_HILLS,
+            ),
+            GenerationStep.Feature.VEGETAL_DECORATION,
             ModPlacedFeatures.YARROW_PLANT_PLACED
         )
 

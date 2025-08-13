@@ -1,4 +1,4 @@
-package com.toolsandtaverns.paleolithicera.item
+package com.toolsandtaverns.paleolithicera.item.material
 
 import com.google.common.collect.Maps
 import com.toolsandtaverns.paleolithicera.item.equipment.ModEquipmentAssets

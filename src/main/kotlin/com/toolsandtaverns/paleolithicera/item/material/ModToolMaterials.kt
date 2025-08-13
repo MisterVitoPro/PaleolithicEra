@@ -1,4 +1,4 @@
-package com.toolsandtaverns.paleolithicera.item
+package com.toolsandtaverns.paleolithicera.item.material
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import net.minecraft.item.ToolMaterial
@@ -7,15 +7,15 @@ import net.minecraft.registry.tag.BlockTags
 import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
 
-object ToolMaterialsMod {
+object ModToolMaterials {
 
     // Tier 0
     val BONE_MATERIAL = ToolMaterial(
         BlockTags.INCORRECT_FOR_WOODEN_TOOL,       // Blocks it cannot mine properly
-        25,                                             // Durability
+        30,                                             // Durability
         0.5f,                                           // Mining speed
-        0.2f,                                           // Attack damage bonus
-        3,                                              // Enchantability
+        1.0f,                                           // Attack damage bonus
+        5,                                              // Enchantability
         TagKey.of(
             RegistryKeys.ITEM,
             Identifier.of(MOD_ID, "bone_tool_material")

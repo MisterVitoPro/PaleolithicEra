@@ -1,6 +1,9 @@
 package com.toolsandtaverns.paleolithicera.datagen.loot
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
+import com.toolsandtaverns.paleolithicera.block.ChamomilePlantBlock
+import com.toolsandtaverns.paleolithicera.block.ElderberryBushBlock
+import com.toolsandtaverns.paleolithicera.block.YarrowPlantBlock
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
@@ -28,6 +31,7 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider
 import net.minecraft.predicate.StatePredicate
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryWrapper
+import net.minecraft.state.property.IntProperty
 import net.minecraft.util.Identifier
 import java.util.concurrent.CompletableFuture
 
@@ -39,8 +43,10 @@ class LootTableProvider(
     override fun generate() {
         addDrop(ModBlocks.KNAPPING_STATION)
         addDrop(ModBlocks.HIDE_DRYER)
-        addDrop(ModBlocks.ELDERBERRY_BUSH, addElderberryBushesDrop(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]!!.asItem()))
-        addDrop(ModBlocks.YARROW_PLANT, addElderberryBushesDrop(ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW]!!.asItem()))
+        addPlantDrops(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]!!.asItem(), ModBlocks.ELDERBERRY_BUSH, ElderberryBushBlock.AGE, ElderberryBushBlock.MAX_AGE)
+        addPlantDrops(ModItems.EDIBLE_PLANTS[EdiblePlants.CHAMOMILE]!!.asItem(), ModBlocks.CHAMOMILE_PLANT,
+            ChamomilePlantBlock.AGE, ChamomilePlantBlock.MAX_AGE)
+        addPlantDrops(ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW]!!.asItem(), ModBlocks.YARROW_PLANT, YarrowPlantBlock.AGE, YarrowPlantBlock.MAX_AGE)
 
         listOf(
             Blocks.OAK_LOG,
@@ -72,16 +78,19 @@ class LootTableProvider(
         addDrop(log, lootTable)
     }
 
-    private fun addElderberryBushesDrop(dropItem: Item): LootTable.Builder {
-        return LootTable.builder()
-            .pool(
-                LootPool.builder()
-                    .conditionally(
-                        BlockStatePropertyLootCondition.builder(Blocks.SWEET_BERRY_BUSH)
-                        .properties(StatePredicate.Builder.create().exactMatch(SweetBerryBushBlock.AGE, 3)))
-                    .rolls(ConstantLootNumberProvider.create(1f))
-                    .with(ItemEntry.builder(dropItem))
-            )
+    private fun addPlantDrops(dropItem: Item, block: Block, property: IntProperty, maxAge: Int) {
+        addDrop(
+            block, LootTable.builder()
+                .pool(
+                    LootPool.builder()
+                        .conditionally(
+                            BlockStatePropertyLootCondition.builder(block)
+                                .properties(StatePredicate.Builder.create().exactMatch(property, maxAge))
+                        )
+                        .rolls(ConstantLootNumberProvider.create(1f))
+                        .with(ItemEntry.builder(dropItem))
+                )
+        )
     }
 
 }

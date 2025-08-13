@@ -14,13 +14,15 @@ object ModPlacedFeatures {
 
     val ELDERBERRY_BUSH_PLACED: RegistryKey<PlacedFeature>
             = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("elderberry_bush_placed"))
-
+    val CHAMOMILE_BUSH_PLACED: RegistryKey<PlacedFeature>
+            = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("chamomile_bush_placed"))
     val YARROW_PLANT_PLACED: RegistryKey<PlacedFeature>
             = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("yarrow_plant_placed"))
 
     fun bootstrap(context: Registerable<PlacedFeature>) {
         val configuredLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE)
         val elderberryBushConfigured = configuredLookup.getOrThrow(ModConfiguredFeatures.ELDERBERRY_BUSH_CONFIGURED_KEY)
+        val chamomilePlantConfigured = configuredLookup.getOrThrow(ModConfiguredFeatures.CHAMOMILE_PLANT_CONFIGURED_KEY)
         val yarrowPlantConfigured = configuredLookup.getOrThrow(ModConfiguredFeatures.YARROW_PLANT_CONFIGURED_KEY)
 
         context.register(
@@ -29,6 +31,16 @@ object ModPlacedFeatures {
                 elderberryBushConfigured,
                 listOf(
                     RarityFilterPlacementModifier.of(30), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()
+                )
+            )
+        )
+
+        context.register(
+            CHAMOMILE_BUSH_PLACED,
+            PlacedFeature(
+                chamomilePlantConfigured,
+                listOf(
+                    RarityFilterPlacementModifier.of(36), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()
                 )
             )
         )

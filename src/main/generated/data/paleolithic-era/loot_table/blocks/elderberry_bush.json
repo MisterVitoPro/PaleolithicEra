@@ -5,7 +5,7 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "minecraft:sweet_berry_bush",
+          "block": "paleolithic-era:elderberry_bush",
           "condition": "minecraft:block_state_property",
           "properties": {
             "age": "3"

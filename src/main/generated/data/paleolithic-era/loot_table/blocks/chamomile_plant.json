@@ -5,17 +5,17 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "paleolithic-era:yarrow_plant",
+          "block": "paleolithic-era:chamomile_plant",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "age": "3"
+            "age": "2"
           }
         }
       ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paleolithic-era:yarrow_herb"
+          "name": "paleolithic-era:chamomile_herb"
         }
       ],
       "rolls": 1.0

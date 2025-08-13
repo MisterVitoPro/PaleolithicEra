@@ -4,7 +4,7 @@
   "key": {
     "B": "paleolithic-era:bone_shard",
     "P": "paleolithic-era:plant_cordage",
-    "S": "minecraft:stick"
+    "S": "paleolithic-era:wooden_spear"
   },
   "pattern": [
     " B",
