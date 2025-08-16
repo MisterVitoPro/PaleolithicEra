@@ -47,49 +47,49 @@ object ModPlacedFeatures {
             ELDERBERRY_BUSH_PLACED,
             PlacedFeature(
                 elderberryBushConfigured,
-                getHerbPlantPlacementModifiers(30)
+                getHerbPlantPlacementModifiers(32)
             )
         )
         context.register(
             CHAMOMILE_BUSH_PLACED,
             PlacedFeature(
                 chamomilePlantConfigured,
-                getHerbPlantPlacementModifiers(36)
+                getHerbPlantPlacementModifiers(42)
             )
         )
         context.register(
             YARROW_PLANT_PLACED,
             PlacedFeature(
                 yarrowPlantConfigured,
-                getHerbPlantPlacementModifiers(36)
+                getHerbPlantPlacementModifiers(42)
             )
         )
         context.register(
             WILD_GARLIC_PLANT_PLACED,
             PlacedFeature(
                 wildGarlicPlantConfigured,
-                getHerbPlantPlacementModifiers(36)
+                getHerbPlantPlacementModifiers(42)
             )
         )
         context.register(
             EPHEDRA_PLANT_PLACED,
             PlacedFeature(
                 ephedraPlantConfigured,
-                getHerbPlantPlacementModifiers(36)
+                getHerbPlantPlacementModifiers(42)
             )
         )
         context.register(
             SAGEBRUSH_PLANT_PLACED,
             PlacedFeature(
                 sagebrushPlantConfigured,
-                getHerbPlantPlacementModifiers(36)
+                getHerbPlantPlacementModifiers(42)
             )
         )
         context.register(
             WILD_MINT_PLANT_PLACED,
             PlacedFeature(
                 wildMintPlantConfigured,
-                getHerbPlantPlacementModifiers(36)
+                getHerbPlantPlacementModifiers(42)
             )
         )
         context.register(

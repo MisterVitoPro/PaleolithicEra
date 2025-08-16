@@ -58,13 +58,11 @@ object ModWorldgen {
 
         BiomeModifications.addFeature(
             BiomeSelectors.includeByKey(
-                BiomeKeys.PLAINS,
-                BiomeKeys.SUNFLOWER_PLAINS,
-                BiomeKeys.MEADOW,
-                BiomeKeys.CHERRY_GROVE,
-                BiomeKeys.TAIGA,
-                BiomeKeys.GROVE,
-                BiomeKeys.WINDSWEPT_HILLS,
+                BiomeKeys.FOREST,
+                BiomeKeys.DARK_FOREST,
+                BiomeKeys.OLD_GROWTH_BIRCH_FOREST,
+                BiomeKeys.BIRCH_FOREST,
+                BiomeKeys.FLOWER_FOREST,
             ),
             GenerationStep.Feature.VEGETAL_DECORATION,
             ModPlacedFeatures.WILD_GARLIC_PLANT_PLACED
@@ -72,13 +70,11 @@ object ModWorldgen {
 
         BiomeModifications.addFeature(
             BiomeSelectors.includeByKey(
-                BiomeKeys.PLAINS,
-                BiomeKeys.SUNFLOWER_PLAINS,
-                BiomeKeys.MEADOW,
-                BiomeKeys.CHERRY_GROVE,
-                BiomeKeys.TAIGA,
-                BiomeKeys.GROVE,
-                BiomeKeys.WINDSWEPT_HILLS,
+                BiomeKeys.SNOWY_SLOPES,
+                BiomeKeys.JAGGED_PEAKS,
+                BiomeKeys.FROZEN_PEAKS,
+                BiomeKeys.STONY_PEAKS,
+                BiomeKeys.WINDSWEPT_HILLS
             ),
             GenerationStep.Feature.VEGETAL_DECORATION,
             ModPlacedFeatures.EPHEDRA_PLANT_PLACED
@@ -86,13 +82,11 @@ object ModWorldgen {
 
         BiomeModifications.addFeature(
             BiomeSelectors.includeByKey(
-                BiomeKeys.PLAINS,
-                BiomeKeys.SUNFLOWER_PLAINS,
-                BiomeKeys.MEADOW,
-                BiomeKeys.CHERRY_GROVE,
-                BiomeKeys.TAIGA,
-                BiomeKeys.GROVE,
-                BiomeKeys.WINDSWEPT_HILLS,
+                BiomeKeys.BADLANDS,
+                BiomeKeys.ERODED_BADLANDS,
+                BiomeKeys.WOODED_BADLANDS,
+                BiomeKeys.SAVANNA,
+                BiomeKeys.WINDSWEPT_SAVANNA
             ),
             GenerationStep.Feature.VEGETAL_DECORATION,
             ModPlacedFeatures.SAGEBRUSH_PLANT_PLACED
@@ -100,13 +94,8 @@ object ModWorldgen {
 
         BiomeModifications.addFeature(
             BiomeSelectors.includeByKey(
-                BiomeKeys.PLAINS,
-                BiomeKeys.SUNFLOWER_PLAINS,
-                BiomeKeys.MEADOW,
-                BiomeKeys.CHERRY_GROVE,
-                BiomeKeys.TAIGA,
-                BiomeKeys.GROVE,
-                BiomeKeys.WINDSWEPT_HILLS,
+                BiomeKeys.RIVER,
+                BiomeKeys.MEADOW
             ),
             GenerationStep.Feature.VEGETAL_DECORATION,
             ModPlacedFeatures.WILD_MINT_PLANT_PLACED
@@ -114,13 +103,11 @@ object ModWorldgen {
 
         BiomeModifications.addFeature(
             BiomeSelectors.includeByKey(
+                BiomeKeys.JUNGLE,
+                BiomeKeys.SPARSE_JUNGLE,
+                BiomeKeys.BAMBOO_JUNGLE,
                 BiomeKeys.PLAINS,
-                BiomeKeys.SUNFLOWER_PLAINS,
-                BiomeKeys.MEADOW,
-                BiomeKeys.CHERRY_GROVE,
-                BiomeKeys.TAIGA,
-                BiomeKeys.GROVE,
-                BiomeKeys.WINDSWEPT_HILLS,
+                BiomeKeys.SAVANNA
             ),
             GenerationStep.Feature.VEGETAL_DECORATION,
             ModPlacedFeatures.WILD_GINGER_PLANT_PLACED
