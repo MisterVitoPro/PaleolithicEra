@@ -5,24 +5,20 @@ import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModCriteria
 import net.minecraft.block.BlockState
 import net.minecraft.block.CampfireBlock
-import net.minecraft.component.type.TooltipDisplayComponent
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.consume.UseAction
-import net.minecraft.item.tooltip.TooltipType
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.state.property.Properties
-import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import java.util.function.Consumer
 
 /**
  * A primitive tool that lights unlit campfires when crouching and holding use for n seconds.
@@ -31,7 +27,7 @@ class FireDrillItem(settings: Settings) : Item(settings) {
 
     /**
      * Determines how long the item needs to be used to complete the action.
-     * 
+     *
      * @param stack The item stack being used
      * @param user The entity using the item
      * @return The number of ticks (3 seconds at 20 TPS)
@@ -42,9 +38,9 @@ class FireDrillItem(settings: Settings) : Item(settings) {
 
     /**
      * Handles right-click usage of the fire drill.
-     * 
+     *
      * Starts the use animation when right-clicked.
-     * 
+     *
      * @param world The world in which the item is being used
      * @param user The player using the item
      * @param hand The hand in which the item is being held
@@ -57,7 +53,7 @@ class FireDrillItem(settings: Settings) : Item(settings) {
 
     /**
      * Determines the animation to play when using this item.
-     * 
+     *
      * @param stack The item stack being used
      * @return BOW use action to show a charging animation
      */
@@ -67,10 +63,10 @@ class FireDrillItem(settings: Settings) : Item(settings) {
 
     /**
      * Called when the player finishes using the fire drill (after holding right-click).
-     * 
+     *
      * If the player is sneaking and looking at an unlit campfire, this will light the campfire,
      * play a sound effect, and damage the fire drill item.
-     * 
+     *
      * @param stack The item stack being used
      * @param world The world in which the item is being used
      * @param user The entity using the item

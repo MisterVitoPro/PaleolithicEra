@@ -1,18 +1,14 @@
 package com.toolsandtaverns.paleolithicera.entity
 
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.projectile.PersistentProjectileEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.network.listener.ClientPlayPacketListener
-import net.minecraft.network.packet.Packet
-import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.hit.EntityHitResult
-import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 
 /**
@@ -21,7 +17,7 @@ import net.minecraft.world.World
 class WoodenSpearEntity : PersistentProjectileEntity {
 
     constructor(world: World, owner: LivingEntity, stack: ItemStack)
-            : super(ModEntities.WOODEN_SPEAR_ENTITY, owner, world, stack, stack) {
+            : super(ModEntityType.WOODEN_SPEAR_ENTITY, owner, world, stack, stack) {
         this.setNoGravity(false)
     }
 

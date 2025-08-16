@@ -1,19 +1,10 @@
 package com.toolsandtaverns.paleolithicera.event
 
-import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.ModTags.Blocks.REQUIRES_SHOVEL
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
-import net.fabricmc.fabric.api.event.player.UseBlockCallback
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
 import net.minecraft.block.Blocks
-import net.minecraft.item.AxeItem
-import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.registry.Registries
-import net.minecraft.server.world.ServerWorld
-import net.minecraft.util.ActionResult
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Direction
 
 
 object BlockDropHandler {
@@ -36,7 +27,7 @@ object BlockDropHandler {
                 if (!isShovel && !world.isClient) {
                     // Remove all drops after the block breaks
                     // We remove them manually by setting the drops to air
-                     world.setBlockState(pos, Blocks.AIR.defaultState, 3)
+                    world.setBlockState(pos, Blocks.AIR.defaultState, 3)
                     // Don't drop any items
                     // Prevent normal drop behavior by removing the loot manually
                 }

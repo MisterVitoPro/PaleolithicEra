@@ -1,12 +1,10 @@
 package com.toolsandtaverns.paleolithicera.recipe
 
-import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.item.ItemStack
 import net.minecraft.network.RegistryByteBuf
 import net.minecraft.network.codec.PacketCodec
-import net.minecraft.network.codec.PacketCodecs
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.RecipeSerializer
 
@@ -27,7 +25,8 @@ object KnapRecipeSerializer : RecipeSerializer<KnapRecipe> {
 
             ItemStack.PACKET_CODEC,
             KnapRecipe::output,
-            ::KnapRecipe)
+            ::KnapRecipe
+        )
 
     override fun codec(): MapCodec<KnapRecipe> = CODEC
 

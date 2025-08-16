@@ -1,7 +1,7 @@
 package com.toolsandtaverns.paleolithicera.block
 
 import com.toolsandtaverns.paleolithicera.entity.CrudeCampfireBlockEntity
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import net.minecraft.block.BlockState
 import net.minecraft.block.CampfireBlock
 import net.minecraft.block.entity.BlockEntity
@@ -50,7 +50,7 @@ class CrudeCampFireBlock(settings: Settings) : CampfireBlock(false, 1, settings)
             world.isClient -> {
                 validateTicker(
                     type,
-                    ModEntities.CRUDE_CAMPFIRE,
+                    ModEntityType.CRUDE_CAMPFIRE,
                     BlockEntityTicker { w, pos, s, be ->
                         CrudeCampfireBlockEntity.clientTick(w, pos, s, be)
                     }
@@ -61,7 +61,7 @@ class CrudeCampFireBlock(settings: Settings) : CampfireBlock(false, 1, settings)
                 val matchGetter = ServerRecipeManager.createCachedMatchGetter(RecipeType.CAMPFIRE_COOKING)
                 validateTicker(
                     type,
-                    ModEntities.CRUDE_CAMPFIRE,
+                    ModEntityType.CRUDE_CAMPFIRE,
                     BlockEntityTicker { w, pos, s, be ->
                         CrudeCampfireBlockEntity.litServerTick(w as ServerWorld, pos, s, be, matchGetter)
                     }
@@ -71,7 +71,7 @@ class CrudeCampFireBlock(settings: Settings) : CampfireBlock(false, 1, settings)
             else -> {
                 validateTicker(
                     type,
-                    ModEntities.CRUDE_CAMPFIRE,
+                    ModEntityType.CRUDE_CAMPFIRE,
                     BlockEntityTicker { w, pos, s, be ->
                         CrudeCampfireBlockEntity.unlitServerTick(w, pos, s, be)
                     }

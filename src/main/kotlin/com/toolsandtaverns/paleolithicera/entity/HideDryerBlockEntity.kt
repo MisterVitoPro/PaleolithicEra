@@ -1,18 +1,15 @@
 package com.toolsandtaverns.paleolithicera.entity
 
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreenHandler
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.component.type.TooltipDisplayComponent
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.SimpleInventory
-import net.minecraft.item.Item.TooltipContext
 import net.minecraft.item.ItemStack
-import net.minecraft.item.tooltip.TooltipType
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.Packet
@@ -25,28 +22,27 @@ import net.minecraft.text.Text
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import java.util.function.Consumer
 
 /**
  * HideDryerBlockEntity implements the hide drying process - a crucial step in early leather production.
- * 
+ *
  * The Hide Dryer represents an essential Paleolithic technology for transforming raw animal hides
  * into usable leather materials. This process simulates how early humans would stretch and dry hides
  * in the sun to prepare them for clothing, containers, and shelter materials.
- * 
+ *
  * Key gameplay features:
  * - Operates only during daylight hours (simulating sun-drying)
  * - Automatically processes rawhide into dry hide over time
  * - Provides a dedicated interface for monitoring and managing the drying process
  * - Creates a time-gate for progression in leather-based crafting technologies
- * 
+ *
  * This block entity serves as an important early-game crafting station that bridges
  * hunting activities with clothing and equipment crafting.
  */
 class HideDryerBlockEntity(
     pos: BlockPos,
     state: BlockState
-) : BlockEntity(ModEntities.HIDE_DRYER_BLOCK_ENTITY, pos, state), ExtendedScreenHandlerFactory<BlockPos> {
+) : BlockEntity(ModEntityType.HIDE_DRYER_BLOCK_ENTITY, pos, state), ExtendedScreenHandlerFactory<BlockPos> {
 
     /**
      * Handles the drying process logic for the Hide Dryer block entity.
@@ -109,7 +105,7 @@ class HideDryerBlockEntity(
      * Simple two-slot inventory for the hide dryer:
      * - Slot 0: Input slot for rawhide items
      * - Slot 1: Output slot where dried hide appears
-     * 
+     *
      * This minimal inventory reflects the straightforward nature of the drying process,
      * which transforms a single input resource into a processed version without additional ingredients.
      */
@@ -117,14 +113,14 @@ class HideDryerBlockEntity(
 
     /**
      * Property delegate that exposes the drying progress to the screen handler system.
-     * 
+     *
      * This delegate allows the GUI to display a visual progress indicator that shows
      * the current status of the drying process. This visual feedback is important for
      * players to understand how long they need to wait for their hides to process.
-     * 
+     *
      * Currently exposes:
      * - Index 0: Current drying progress (in ticks)
-     * 
+     *
      * The visual representation of time-based crafting reinforces the patient, methodical
      * nature of Paleolithic technologies, where processes couldn't be rushed and required
      * waiting for natural processes to complete.
@@ -145,7 +141,7 @@ class HideDryerBlockEntity(
 
     /**
      * Handles behavior when the hide dryer block is replaced or destroyed.
-     * 
+     *
      * Drops any items contained in the dryer's inventory into the world when the block
      * is broken, ensuring players don't lose valuable rawhide or dried hides. This is
      * particularly important since rawhide represents hunting effort and time investment.
@@ -160,7 +156,7 @@ class HideDryerBlockEntity(
 
     /**
      * Provides data needed when opening the hide dryer screen.
-     * 
+     *
      * This method is part of the ExtendedScreenHandlerFactory interface and returns
      * the position of this block entity, which is used to locate and interact with
      * the correct dryer in the world when the GUI is open.
@@ -174,7 +170,7 @@ class HideDryerBlockEntity(
 
     /**
      * Returns the display name of the hide dryer for the UI.
-     * 
+     *
      * This localized text appears in the GUI when players interact with the dryer,
      * clearly identifying the specialized function of this crafting station in the
      * leather production chain.
@@ -187,7 +183,7 @@ class HideDryerBlockEntity(
 
     /**
      * Creates a screen handler for player interaction with the hide dryer.
-     * 
+     *
      * This method connects the block entity to the screen system, allowing players to
      * visually interact with the drying process through a dedicated GUI. The interface
      * shows input and output slots along with a progress indicator for the drying process.
@@ -207,7 +203,7 @@ class HideDryerBlockEntity(
 
     /**
      * Constants that define the hide drying process parameters.
-     * 
+     *
      * These values determine how long the drying process takes, balancing gameplay
      * pacing with realistic simulation of the time-consuming nature of primitive
      * hide processing techniques.
@@ -229,7 +225,7 @@ class HideDryerBlockEntity(
 
     /**
      * Creates a packet to send this block entity's data to clients.
-     * 
+     *
      * This network synchronization ensures that all players see the same state of the
      * hide dryer, including its inventory contents and drying progress. This is particularly
      * important in multiplayer settings where multiple players might interact with the same dryer.
@@ -240,7 +236,7 @@ class HideDryerBlockEntity(
 
     /**
      * Creates NBT data to send when a chunk is first loaded by a client.
-     * 
+     *
      * This provides the initial state of the hide dryer when a player first encounters it,
      * including any materials already in the drying process. This ensures visual consistency
      * when players approach an existing dryer in the world.

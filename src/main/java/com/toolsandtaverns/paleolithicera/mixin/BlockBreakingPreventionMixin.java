@@ -1,9 +1,9 @@
 package com.toolsandtaverns.paleolithicera.mixin;
 
 import com.toolsandtaverns.paleolithicera.registry.ModTags;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.AxeItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
@@ -15,7 +15,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.block.Block;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -57,7 +56,7 @@ public abstract class BlockBreakingPreventionMixin {
         checkToolRequirement(
                 ModTags.Blocks.INSTANCE.getUNBREAKABLE_TAG(),
                 itemStack -> itemStack.getItem() instanceof AxeItem,
-                "You need an axe to harvest logs.",
+                "message.paleolithic-era.need_axe",
                 state, pos, world, ci
         );
 
@@ -65,7 +64,7 @@ public abstract class BlockBreakingPreventionMixin {
         checkToolRequirement(
                 ModTags.Blocks.INSTANCE.getREQUIRES_SHOVEL(),
                 itemStack -> itemStack.getItem() instanceof ShovelItem,
-                "You need a shovel to dig in dirt.",
+                "message.paleolithic-era.need_shovel",
                 state, pos, world, ci
         );
     }
@@ -94,7 +93,7 @@ public abstract class BlockBreakingPreventionMixin {
 
         UUID id = player.getUuid();
         if (!beenWarned.getOrDefault(id, false)) {
-            player.sendMessage(Text.literal(message), true);
+            player.sendMessage(Text.translatable(message), true);
             beenWarned.put(id, true);
         }
 

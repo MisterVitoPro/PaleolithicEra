@@ -2,20 +2,76 @@
   "parent": "block/block",
   "textures": {
     "particle": "paleolithic-era:block/crude_bed_head",
-    "0":  "paleolithic-era:block/crude_bed_head",
-    "1":  "minecraft:block/dirt"
+    "0": "paleolithic-era:block/crude_bed_head",
+    "1": "minecraft:block/dirt"
   },
   "elements": [
     {
-      "from": [0, 0, 0],
-      "to":   [16, 3, 16],
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        3,
+        16
+      ],
       "faces": {
-        "up":    { "uv": [0, 0, 16, 16], "texture": "#0" },
-        "down":  { "uv": [0, 0, 16, 16], "texture": "#0" },
-        "north": { "uv": [0, 0, 16, 3],  "texture": "#1" },
-        "south": { "uv": [0, 0, 16, 3],  "texture": "#1" },
-        "east":  { "uv": [0, 0, 16, 3],  "texture": "#1" },
-        "west":  { "uv": [0, 0, 16, 3],  "texture": "#1" }
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#0"
+        },
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ],
+          "texture": "#1"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ],
+          "texture": "#1"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ],
+          "texture": "#1"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ],
+          "texture": "#1"
+        }
       }
     }
   ]

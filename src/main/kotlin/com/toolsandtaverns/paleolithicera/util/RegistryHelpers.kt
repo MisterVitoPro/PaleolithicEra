@@ -2,7 +2,6 @@ package com.toolsandtaverns.paleolithicera.util
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import net.minecraft.block.Block
-import net.minecraft.block.Blocks
 import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
 import net.minecraft.registry.Registries

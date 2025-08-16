@@ -2,17 +2,16 @@ package com.toolsandtaverns.paleolithicera.block
 
 import com.mojang.serialization.MapCodec
 import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
-import net.minecraft.block.*
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.BlockWithEntity
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
@@ -63,7 +62,7 @@ class KnappingStationBlock(settings: Settings) : BlockWithEntity(settings) {
         state: BlockState,
         type: BlockEntityType<T>
     ): BlockEntityTicker<T>? {
-        return if (!world.isClient && type === ModEntities.KNAPPING_STATION) {
+        return if (!world.isClient && type === ModEntityType.KNAPPING_STATION) {
             BlockEntityTicker { w, pos, s, be ->
                 (be as? KnappingStationBlockEntity)?.tick(w as ServerWorld)
             }

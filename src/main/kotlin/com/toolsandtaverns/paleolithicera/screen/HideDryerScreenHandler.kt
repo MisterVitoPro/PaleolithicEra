@@ -84,6 +84,7 @@ class HideDryerScreenHandler(
                 slot.markDirty()
                 newStack
             }
+
             else -> ItemStack.EMPTY
         }.also {
             if (originalStack.isEmpty) {

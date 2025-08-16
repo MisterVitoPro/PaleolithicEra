@@ -1,7 +1,6 @@
 package com.toolsandtaverns.paleolithicera.datagen.recipe
 
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
-import com.toolsandtaverns.paleolithicera.registry.custom.ModEdiblePlants
 import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
@@ -23,7 +22,8 @@ import java.util.concurrent.CompletableFuture
  */
 class EdiblePlantRecipeProvider(
     output: FabricDataOutput,
-    registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricRecipeProvider(output, registriesFuture) {
+    registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>
+) : FabricRecipeProvider(output, registriesFuture) {
 
     override fun getRecipeGenerator(
         registryLookup: RegistryWrapper.WrapperLookup,
@@ -49,7 +49,7 @@ class EdiblePlantRecipeProvider(
                         ).criterion(
                             "has_${def.idPath}",
                             InventoryChangedCriterion.Conditions.items(item)
-                        ).offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, id( "${def.idPath}_smelt")))
+                        ).offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, id("${def.idPath}_smelt")))
 
                         CookingRecipeJsonBuilder.createCampfireCooking(
                             Ingredient.ofItems(item),   // Input item
@@ -60,7 +60,7 @@ class EdiblePlantRecipeProvider(
                         ).criterion(
                             "has_${def.idPath}",
                             InventoryChangedCriterion.Conditions.items(item)
-                        ).offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, id( "${def.idPath}_campfire_cooking")))
+                        ).offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, id("${def.idPath}_campfire_cooking")))
                     }
                 }
             }

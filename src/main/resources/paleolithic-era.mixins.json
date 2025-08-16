@@ -1,16 +1,16 @@
 {
-	"required": true,
-	"package": "com.toolsandtaverns.paleolithicera.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"LeafAndLogBehaviorMixin",
-		"BlockBreakingPreventionMixin",
-		"AxeItemMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
-	}
+  "required": true,
+  "package": "com.toolsandtaverns.paleolithicera.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AxeItemMixin",
+    "BlockBreakingPreventionMixin",
+    "LeafAndLogBehaviorMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
 }

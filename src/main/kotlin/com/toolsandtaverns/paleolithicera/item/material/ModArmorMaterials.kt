@@ -2,7 +2,7 @@ package com.toolsandtaverns.paleolithicera.item.material
 
 import com.google.common.collect.Maps
 import com.toolsandtaverns.paleolithicera.item.equipment.ModEquipmentAssets
-import com.toolsandtaverns.paleolithicera.registry.ModItemTags
+import com.toolsandtaverns.paleolithicera.registry.ModTags
 import net.minecraft.item.equipment.ArmorMaterial
 import net.minecraft.item.equipment.EquipmentType
 import net.minecraft.sound.SoundEvents
@@ -16,7 +16,7 @@ object ModArmorMaterials {
         SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
         0.0f, // Toughness
         0.0f, // Knockback resistance
-        ModItemTags.REPAIRS_HIDE_ARMOR, // Repair tag
+        ModTags.Items.REPAIRS_HIDE_ARMOR, // Repair tag
         ModEquipmentAssets.HIDE_EQUIPMENT_ASSET // Asset key
     )
 

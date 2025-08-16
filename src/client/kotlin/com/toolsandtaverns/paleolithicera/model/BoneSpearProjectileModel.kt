@@ -14,14 +14,14 @@ class BoneSpearProjectileModel(root: ModelPart) : EntityModel<EntityRenderState>
         val BONE_SPEAR_MODEL_LAYER: EntityModelLayer = EntityModelLayer(id("bone_spear"), "main")
         val texturedModelData: TexturedModelData
             get() {
-            val modelData = ModelData()
-            modelData.root.addChild(
-                "main",
-                ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -24.0F, 0.0F, 1.0F, 24.0F, 1.0F, Dilation(0.0f)),
-                ModelTransform.origin(0.0f, 20f, 0.0f)
-            )
-            return TexturedModelData.of(modelData, 64, 64)
-        }
+                val modelData = ModelData()
+                modelData.root.addChild(
+                    "main",
+                    ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -24.0F, 0.0F, 1.0F, 24.0F, 1.0F, Dilation(0.0f)),
+                    ModelTransform.origin(0.0f, 20f, 0.0f)
+                )
+                return TexturedModelData.of(modelData, 64, 64)
+            }
     }
 
 }

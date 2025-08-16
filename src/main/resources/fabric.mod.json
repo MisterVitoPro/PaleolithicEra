@@ -1,61 +1,69 @@
 {
-	"schemaVersion": 1,
-	"id": "paleolithic-era",
-	"version": "${version}",
-	"name": "Paleolithic Era",
-	"description": "Adds paleolithic era crafting, survival tools, and tech to early Minecraft gameplay. Expands the early game tiers a bit more.",
-	"authors": [
-		"MisterVitoPro"
-	],
-	"contact": {
-		"homepage": "https://github.com/MisterVitoPro/PaleolithicEra",
-		"sources": "https://github.com/MisterVitoPro/PaleolithicEra"
-	},
-	"license": "MIT",
-	"icon": "assets/paleolithic-era/mod_icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			{
-				"value": "com.toolsandtaverns.paleolithicera.PaleolithicEra",
-				"adapter": "kotlin"
-			}
-		],
-		"client": [
-			{
-				"value": "com.toolsandtaverns.paleolithicera.PaleolithicEraClient",
-				"adapter": "kotlin"
-			}
-		],
-		"fabric-datagen": [
-			{
-				"value": "com.toolsandtaverns.paleolithicera.PaleolithicEraDataGeneratorClient",
-				"adapter": "kotlin"
-			}
-		]
-	},
-	"mixins": [
-		"paleolithic-era.mixins.json",
-		{
-			"config": "paleolithic-era.client.mixins.json",
-			"environment": "client"
-		}
-	],
-	"depends": {
-		"fabricloader": ">=0.16.14",
-		"minecraft": "~1.21.7",
-		"java": ">=21",
-		"fabric-api": "*",
-		"fabric-language-kotlin": "1.13.4+kotlin.2.2.0"
-	},
-	"custom": {
-		"modrinth": {
-			"tags": [
-				"stone-age", "early-game", "survival", "fabric", "hardcore", "primitive", "prehistoric", "campfire", "cooking"
-			]
-		},
-		"curseforge": {
-			"slug": "paleolithic-era"
-		}
-	}
+  "schemaVersion": 1,
+  "id": "paleolithic-era",
+  "version": "${version}",
+  "name": "Paleolithic Era",
+  "description": "Adds paleolithic era crafting, survival tools, and tech to early Minecraft gameplay. Expands the early game tiers a bit more.",
+  "authors": [
+    "MisterVitoPro"
+  ],
+  "contact": {
+    "homepage": "https://github.com/MisterVitoPro/PaleolithicEra",
+    "sources": "https://github.com/MisterVitoPro/PaleolithicEra"
+  },
+  "license": "MIT",
+  "icon": "assets/paleolithic-era/mod_icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "value": "com.toolsandtaverns.paleolithicera.PaleolithicEra",
+        "adapter": "kotlin"
+      }
+    ],
+    "client": [
+      {
+        "value": "com.toolsandtaverns.paleolithicera.PaleolithicEraClient",
+        "adapter": "kotlin"
+      }
+    ],
+    "fabric-datagen": [
+      {
+        "value": "com.toolsandtaverns.paleolithicera.PaleolithicEraDataGeneratorClient",
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "mixins": [
+    "paleolithic-era.mixins.json",
+    {
+      "config": "paleolithic-era.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "minecraft": "~1.21.7",
+    "java": ">=21",
+    "fabric-api": "*",
+    "fabric-language-kotlin": "1.13.4+kotlin.2.2.0"
+  },
+  "custom": {
+    "modrinth": {
+      "tags": [
+        "stone-age",
+        "early-game",
+        "survival",
+        "fabric",
+        "hardcore",
+        "primitive",
+        "prehistoric",
+        "campfire",
+        "cooking"
+      ]
+    },
+    "curseforge": {
+      "slug": "paleolithic-era"
+    }
+  }
 }

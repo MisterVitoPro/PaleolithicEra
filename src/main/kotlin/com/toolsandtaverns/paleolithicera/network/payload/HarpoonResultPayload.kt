@@ -15,7 +15,7 @@ data class HarpoonResultPayload(val success: Boolean) : CustomPayload {
 
         val CODEC: PacketCodec<PacketByteBuf, HarpoonResultPayload> =
             PacketCodec.of(
-                { payload, buf ->  buf.writeBoolean(payload.success) },
+                { payload, buf -> buf.writeBoolean(payload.success) },
                 { buf -> HarpoonResultPayload(buf.readBoolean()) }
             )
 

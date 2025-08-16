@@ -2,13 +2,9 @@ package com.toolsandtaverns.paleolithicera.datagen.advancement
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
-import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.ModCriteria
-import net.minecraft.advancement.Advancement
-import net.minecraft.advancement.AdvancementEntry
-import net.minecraft.advancement.AdvancementFrame
-import net.minecraft.advancement.AdvancementRequirements
-import net.minecraft.advancement.AdvancementRewards
+import com.toolsandtaverns.paleolithicera.registry.ModItems
+import net.minecraft.advancement.*
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
 import net.minecraft.advancement.criterion.TickCriterion
 import net.minecraft.data.advancement.AdvancementTabGenerator
@@ -39,7 +35,7 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
             .criterion("tick", TickCriterion.Conditions.createTick())
             .build(consumer, "awakening/tab_root")
 
-        ElderberryAdvancements.generate(tabRoot, consumer)
+        HerbsAdvancements.generate(tabRoot, consumer)
         GatherStickAdvancements.generate(tabRoot, consumer)
         HuntingAdvancements.generate(tabRoot, consumer, registries)
 
@@ -185,16 +181,19 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
             .criterion("cooked_porkchop", InventoryChangedCriterion.Conditions.items(Items.COOKED_PORKCHOP))
             .criterion("cooked_cod", InventoryChangedCriterion.Conditions.items(Items.COOKED_COD))
             .criterion("cooked_salmon", InventoryChangedCriterion.Conditions.items(Items.COOKED_SALMON))
-            .requirements(AdvancementRequirements.anyOf(
-                listOf(
-                    "cooked_beef",
-                    "cooked_chicken",
-                    "cooked_mutton",
-                    "cooked_rabbit",
-                    "cooked_porkchop",
-                    "cooked_cod",
-                    "cooked_salmon"
-                )))
+            .requirements(
+                AdvancementRequirements.anyOf(
+                    listOf(
+                        "cooked_beef",
+                        "cooked_chicken",
+                        "cooked_mutton",
+                        "cooked_rabbit",
+                        "cooked_porkchop",
+                        "cooked_cod",
+                        "cooked_salmon"
+                    )
+                )
+            )
             .rewards(AdvancementRewards.Builder.experience(3))
             .build(consumer, "awakening/cook_meat")
 

@@ -2,32 +2,26 @@ package com.toolsandtaverns.paleolithicera.block
 
 import com.mojang.serialization.MapCodec
 import com.toolsandtaverns.paleolithicera.entity.HideDryerBlockEntity
-import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
-import com.toolsandtaverns.paleolithicera.screen.HideDryerScreenHandler
-import net.minecraft.block.*
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
+import net.minecraft.block.BlockRenderType
+import net.minecraft.block.BlockState
+import net.minecraft.block.BlockWithEntity
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
-import net.minecraft.component.type.TooltipDisplayComponent
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item.TooltipContext
-import net.minecraft.item.ItemStack
-import net.minecraft.item.tooltip.TooltipType
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import java.util.function.Consumer
 
 /**
  * HideDryerBlock is a custom block that lets players dry Rawhide into Dry Rawhide during the day.
  * It uses a BlockEntity to handle inventory and tick-based drying logic.
  */
-class HideDryerBlock(settings: Settings) : BlockWithEntity(settings)  {
+class HideDryerBlock(settings: Settings) : BlockWithEntity(settings) {
 
     override fun getCodec(): MapCodec<out BlockWithEntity?> = CODEC
 
@@ -53,7 +47,7 @@ class HideDryerBlock(settings: Settings) : BlockWithEntity(settings)  {
         state: BlockState,
         type: BlockEntityType<T>
     ): BlockEntityTicker<T>? {
-        return if (!world.isClient && type === ModEntities.HIDE_DRYER_BLOCK_ENTITY) {
+        return if (!world.isClient && type === ModEntityType.HIDE_DRYER_BLOCK_ENTITY) {
             BlockEntityTicker { w, pos, s, be ->
                 (be as? HideDryerBlockEntity)?.tick(w as ServerWorld)
             }

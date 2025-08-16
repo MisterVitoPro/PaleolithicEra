@@ -2,7 +2,6 @@ package com.toolsandtaverns.paleolithicera.network
 
 import com.toolsandtaverns.paleolithicera.network.payload.HarpoonResultPayload
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
-import net.minecraft.entity.EquipmentSlot
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
@@ -11,16 +10,16 @@ import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import kotlin.random.Random
 
-    /**
-     * Server-side packet handler for harpoon fishing functionality.
-     * 
-     * Handles incoming client packets related to the harpoon fishing minigame,
-     * processes results, and provides appropriate rewards.
-     */
-    object OpenHarpoonGuiPacket {
+/**
+ * Server-side packet handler for harpoon fishing functionality.
+ *
+ * Handles incoming client packets related to the harpoon fishing minigame,
+ * processes results, and provides appropriate rewards.
+ */
+object OpenHarpoonGuiPacket {
     /**
      * Registers network packet receivers for harpoon fishing.
-     * 
+     *
      * Sets up handlers for client-to-server packets that are sent when
      * the player completes the fishing minigame.
      */
@@ -34,13 +33,13 @@ import kotlin.random.Random
 
     /**
      * Processes the result of a harpoon fishing attempt.
-     * 
+     *
      * This method:
      * 1. Damages the harpoon item by 1 point
      * 2. Shows a break animation if the item breaks
      * 3. If successful, gives the player a fish reward and displays a message
      * 4. If unsuccessful or if the fish escaped, displays an appropriate message
-     * 
+     *
      * @param player The player who attempted fishing
      * @param success Whether the player successfully caught a fish
      */
@@ -67,21 +66,23 @@ import kotlin.random.Random
                 player.sendMessage(message, true)
             } else {
                 // The player succeeded but the fish still escaped (bad luck)
-                player.sendMessage(Text.literal("The fish escaped..."), true)
+                player.sendMessage(Text.translatable("message.paleolithic-era.fish_escaped"), true)
             }
+        } else {
+            player.sendMessage(Text.translatable("message.paleolithic-era.fish_miss"), true)
         }
     }
 
     /**
      * Determines the fish reward for a successful harpoon fishing attempt.
-     * 
+     *
      * Uses a random number generator to select from different types of fish with
      * different probabilities:
      * - 30% chance for Cod
      * - 15% chance for Salmon
      * - 3% chance for Tropical Fish
      * - 52% chance of no fish (escape)
-     * 
+     *
      * @return The fish item to reward, or null if the fish escaped
      */
     private fun getFishReward(): Item? {

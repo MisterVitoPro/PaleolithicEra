@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "paleolithic-era:block/wild_ginger_plant_stage3"
+  }
+}

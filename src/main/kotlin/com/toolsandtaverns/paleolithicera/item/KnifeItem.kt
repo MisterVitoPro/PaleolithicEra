@@ -20,11 +20,10 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldEvents
 import net.minecraft.world.event.GameEvent
 import java.util.*
-import java.util.function.Function
 
 /**
  * Knife item that represents a primitive cutting tool used for stripping logs to obtain bark.
- * 
+ *
  * The knife is a fundamental Paleolithic tool that serves multiple purposes in early survival:
  * - Stripping logs to obtain bark (a critical early-game resource)
  * - Harvesting leaves more efficiently than by hand
@@ -48,11 +47,11 @@ class KnifeItem(
 
     /**
      * Handles the behavior when the knife is used on a block, primarily for stripping logs.
-     * 
+     *
      * This method represents the bark-gathering technique used by Paleolithic humans,
      * where primitive tools were used to extract useful materials from trees without
      * necessarily felling them. When a player uses the knife on a log:
-     * 
+     *
      * 1. It checks if the attempt should be canceled (e.g., blocked by shield)
      * 2. Attempts to strip the log block, converting it to its stripped variant
      * 3. Triggers advancement criteria for using items on blocks
@@ -102,12 +101,12 @@ class KnifeItem(
 
     /**
      * Determines the mining speed of the knife against different block types.
-     * 
+     *
      * The knife has a special interaction with leaves, allowing faster collection
      * than by hand but not as fast as dedicated tools like shears. This represents
      * how Paleolithic humans would have used cutting tools to gather leafy materials
      * for various purposes like bedding, kindling, or primitive roofing materials.
-     * 
+     *
      * The intentionally modest speed (5.0f vs. shears' 15.0f) reflects the technological
      * limitations of primitive stone tools while still providing gameplay incentive
      * to craft and use knives for specific gathering tasks.
@@ -126,7 +125,7 @@ class KnifeItem(
 
     /**
      * Determines if a stripping attempt should be canceled due to shield interactions.
-     * 
+     *
      * This method prevents accidental bark harvesting when the player is using a shield
      * in their off-hand and might be attempting to block rather than strip. This gameplay
      * consideration helps improve the user experience by preventing unintended tool use.
@@ -142,17 +141,17 @@ class KnifeItem(
 
     /**
      * Attempts to strip, scrape, or unwax a block using the knife.
-     * 
+     *
      * While primarily used for stripping logs to gather bark, this method also supports
      * other vanilla interactions like scraping oxidized copper or removing wax. These
      * additional functions represent how primitive cutting tools would have been
      * multipurpose implements, used for various precise material manipulation tasks.
-     * 
+     *
      * The method follows a priority order:
      * 1. Try to strip logs (primary Paleolithic use case)
      * 2. Try to scrape oxidation (advanced use case)
      * 3. Try to remove wax (advanced use case)
-     * 
+     *
      * Appropriate sounds and visual effects are played based on the action performed.
      *
      * @param world The world containing the block
@@ -192,7 +191,7 @@ class KnifeItem(
 
     /**
      * Gets the stripped variant of a log block state.
-     * 
+     *
      * This helper method determines what a log block will become when stripped
      * by the knife, preserving properties like axis orientation. The stripping
      * mechanism is central to the bark gathering system in the Paleolithic era mod,
@@ -209,15 +208,32 @@ class KnifeItem(
     companion object {
         /**
          * A mapping of normal log/wood blocks to their stripped variants.
-         * 
+         *
          * This comprehensive mapping enables the knife to strip any vanilla log or wood type,
          * producing its stripped variant. The extensive support for different wood types reflects
          * how Paleolithic humans would have utilized whatever timber was available in their
          * environment, adapting their tool usage to local resources.
-         * 
+         *
          * Each entry represents a strippable block and what it becomes when stripped by the knife,
          * which is a critical part of the bark gathering gameplay loop in early progression.
          */
-        val STRIPPED_BLOCKS: ImmutableMap<Block, Block> = (ImmutableMap.Builder<Block, Block>()).put(Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD).put(Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG).put(Blocks.DARK_OAK_WOOD, Blocks.STRIPPED_DARK_OAK_WOOD).put(Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG).put(Blocks.PALE_OAK_WOOD, Blocks.STRIPPED_PALE_OAK_WOOD).put(Blocks.PALE_OAK_LOG, Blocks.STRIPPED_PALE_OAK_LOG).put(Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD).put(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG).put(Blocks.CHERRY_WOOD, Blocks.STRIPPED_CHERRY_WOOD).put(Blocks.CHERRY_LOG, Blocks.STRIPPED_CHERRY_LOG).put(Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD).put(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG).put(Blocks.JUNGLE_WOOD, Blocks.STRIPPED_JUNGLE_WOOD).put(Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG).put(Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD).put(Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG).put(Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM).put(Blocks.WARPED_HYPHAE, Blocks.STRIPPED_WARPED_HYPHAE).put(Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM).put(Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_HYPHAE).put(Blocks.MANGROVE_WOOD, Blocks.STRIPPED_MANGROVE_WOOD).put(Blocks.MANGROVE_LOG, Blocks.STRIPPED_MANGROVE_LOG).put(Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK).build()
+        val STRIPPED_BLOCKS: ImmutableMap<Block, Block> =
+            (ImmutableMap.Builder<Block, Block>()).put(Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD)
+                .put(Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG).put(Blocks.DARK_OAK_WOOD, Blocks.STRIPPED_DARK_OAK_WOOD)
+                .put(Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG)
+                .put(Blocks.PALE_OAK_WOOD, Blocks.STRIPPED_PALE_OAK_WOOD)
+                .put(Blocks.PALE_OAK_LOG, Blocks.STRIPPED_PALE_OAK_LOG)
+                .put(Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD).put(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG)
+                .put(Blocks.CHERRY_WOOD, Blocks.STRIPPED_CHERRY_WOOD).put(Blocks.CHERRY_LOG, Blocks.STRIPPED_CHERRY_LOG)
+                .put(Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD).put(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG)
+                .put(Blocks.JUNGLE_WOOD, Blocks.STRIPPED_JUNGLE_WOOD).put(Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG)
+                .put(Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD).put(Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG)
+                .put(Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM)
+                .put(Blocks.WARPED_HYPHAE, Blocks.STRIPPED_WARPED_HYPHAE)
+                .put(Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM)
+                .put(Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_HYPHAE)
+                .put(Blocks.MANGROVE_WOOD, Blocks.STRIPPED_MANGROVE_WOOD)
+                .put(Blocks.MANGROVE_LOG, Blocks.STRIPPED_MANGROVE_LOG)
+                .put(Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK).build()
     }
 }
