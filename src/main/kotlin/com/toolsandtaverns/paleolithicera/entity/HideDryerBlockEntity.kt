@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.entity
 
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreenHandler
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
@@ -42,7 +42,7 @@ import net.minecraft.world.World
 class HideDryerBlockEntity(
     pos: BlockPos,
     state: BlockState
-) : BlockEntity(ModEntities.HIDE_DRYER_BLOCK_ENTITY, pos, state), ExtendedScreenHandlerFactory<BlockPos> {
+) : BlockEntity(ModEntityType.HIDE_DRYER_BLOCK_ENTITY, pos, state), ExtendedScreenHandlerFactory<BlockPos> {
 
     /**
      * Handles the drying process logic for the Hide Dryer block entity.

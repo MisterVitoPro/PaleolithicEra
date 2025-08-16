@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.datagen.loot
 
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricEntityLootTableProvider
 import net.minecraft.item.Items
@@ -20,7 +20,7 @@ class EntityLootTableProvider(
 
     override fun generate() {
         register(
-            ModEntities.BOAR_ENTITY, LootTable.builder()
+            ModEntityType.BOAR_ENTITY, LootTable.builder()
                 .pool(
                     LootPool.builder()
                         .rolls(UniformLootNumberProvider.create(1f, 2f))

@@ -1,4 +1,4 @@
-package com.toolsandtaverns.paleolithicera.datagen.loot
+package com.toolsandtaverns.paleolithicera.event
 
 import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
 import com.toolsandtaverns.paleolithicera.registry.ModItems.ROCK_CHUNK

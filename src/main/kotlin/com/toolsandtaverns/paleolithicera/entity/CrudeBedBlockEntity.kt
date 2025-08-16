@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.entity
 
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos
 class CrudeBedBlockEntity(
     pos: BlockPos,
     state: BlockState?
-) : BlockEntity(ModEntities.CRUDE_BED, pos, state) {
+) : BlockEntity(ModEntityType.CRUDE_BED, pos, state) {
 
     override fun toUpdatePacket(): BlockEntityUpdateS2CPacket? {
         return BlockEntityUpdateS2CPacket.create(this)

@@ -11,6 +11,7 @@ import com.toolsandtaverns.paleolithicera.item.material.ModArmorMaterials.HIDE_M
 import com.toolsandtaverns.paleolithicera.item.material.ModToolMaterials
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import com.toolsandtaverns.paleolithicera.registry.custom.ModEdiblePlants
+import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries
@@ -128,7 +129,7 @@ object ModItems {
     val TAB_ICON_ITEM: Item = register("tab_icon", { settings: Item.Settings -> Item(settings.maxCount(1)) })
 
     val BOAR_SPAWN_EGG: Item =
-        register("boar_spawn_egg", { setting: Item.Settings -> SpawnEggItem(ModEntities.BOAR_ENTITY, setting) })
+        register("boar_spawn_egg", { setting: Item.Settings -> SpawnEggItem(ModEntityType.BOAR_ENTITY, setting) })
 
 
     /**
@@ -164,7 +165,7 @@ object ModItems {
         itemFactory: (Item.Settings) -> Item,
         settings: Item.Settings = Item.Settings()
     ): Item {
-        val itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(MOD_ID, name))
+        val itemKey = RegistryKey.of(RegistryKeys.ITEM, id(name))
         val item: Item = itemFactory(settings.registryKey(itemKey))
         Registry.register(Registries.ITEM, itemKey, item)
         return item

@@ -1,7 +1,7 @@
 package com.toolsandtaverns.paleolithicera.entity
 
 import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import net.minecraft.block.BlockState
 import net.minecraft.block.CampfireBlock
 import net.minecraft.block.entity.BlockEntity
@@ -52,7 +52,7 @@ import kotlin.math.min
  * limited burn duration and simpler visual effects.
  */
 class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
-    BlockEntity(ModEntities.CRUDE_CAMPFIRE, pos, state),
+    BlockEntity(ModEntityType.CRUDE_CAMPFIRE, pos, state),
     Clearable {
     /**
      * Stores the items currently being cooked on the campfire (up to 4).

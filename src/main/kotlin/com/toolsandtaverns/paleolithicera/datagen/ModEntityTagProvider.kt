@@ -1,6 +1,7 @@
 package com.toolsandtaverns.paleolithicera.datagen
 
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
+import com.toolsandtaverns.paleolithicera.registry.ModTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.entity.EntityType
@@ -47,7 +48,7 @@ class ModEntityTypeTagProvider(
      * @param lookup Registry wrapper lookup for accessing entity type registries
      */
     override fun configure(lookup: RegistryWrapper.WrapperLookup) {
-        val builder = builder(HUNTABLE_TAG)
+        val builder = builder(ModTags.Entity.HUNTABLE_TAG)
 
         huntableAnimals.forEach { entityType ->
             val id: Identifier = EntityType.getId(entityType)
@@ -89,7 +90,7 @@ class ModEntityTypeTagProvider(
             EntityType.RABBIT,
             EntityType.SHEEP,
             EntityType.WOLF,
-            ModEntities.BOAR_ENTITY
+            ModEntityType.BOAR_ENTITY
         )
     }
 

@@ -11,7 +11,7 @@ import net.minecraft.text.Text
  * The player must press space when the slider is in the green target zone to catch a fish.
  * After a successful or failed attempt, the screen automatically closes after a short delay.
  */
-class HarpoonFishingScreen : Screen(Text.literal("Fishing")) {
+class HarpoonFishingScreen : Screen(Text.translatable("screen.paleolithic-era.wooden_harpoon.title")) {
     // Position of the slider (0.0 to 1.0)
     private var sliderPos = 0f
 
@@ -100,7 +100,7 @@ class HarpoonFishingScreen : Screen(Text.literal("Fishing")) {
             // Send the result to the server for processing rewards
             OpenHarpoonGuiClient.sendResult(success)
             // Update the UI with result text
-            resultText = if (success) Text.literal("Caught a fish!") else Text.literal("The fish got away...")
+            resultText = if (success) Text.translatable("message.paleolithic-era.fish_caught") else Text.translatable("message.paleolithic-era.fish_escaped")
             // Mark that we've sent a result to prevent multiple attempts
             resultSent = true
         }

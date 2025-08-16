@@ -16,7 +16,7 @@ import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier
 
 
-object ModEntities {
+object ModEntityType {
 
     lateinit var KNAPPING_STATION: BlockEntityType<KnappingStationBlockEntity>
         private set
@@ -89,7 +89,7 @@ object ModEntities {
         entityFactory: FabricBlockEntityTypeBuilder.Factory<out T>,
         vararg blocks: Block
     ): BlockEntityType<T> {
-        val id = Identifier.of(MOD_ID, name)
+        val id = id(name)
         return Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
             id,

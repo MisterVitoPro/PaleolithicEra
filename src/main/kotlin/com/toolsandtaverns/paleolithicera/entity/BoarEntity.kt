@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.entity
 
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import net.minecraft.block.BlockState
@@ -35,7 +35,7 @@ class BoarEntity(entityType: EntityType<out AnimalEntity>, world: World) : Anima
         world: ServerWorld,
         entity: PassiveEntity
     ): PassiveEntity? {
-        return ModEntities.BOAR_ENTITY.create(world, SpawnReason.BREEDING)
+        return ModEntityType.BOAR_ENTITY.create(world, SpawnReason.BREEDING)
     }
 
     private fun updateAnimations() {

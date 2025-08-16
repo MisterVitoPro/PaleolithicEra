@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.entity
 
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -17,7 +17,7 @@ import net.minecraft.world.World
 class BoneSpearEntity : PersistentProjectileEntity {
 
     constructor(world: World, owner: LivingEntity, stack: ItemStack)
-            : super(ModEntities.BONE_SPEAR_ENTITY, owner, world, stack, stack) {
+            : super(ModEntityType.BONE_SPEAR_ENTITY, owner, world, stack, stack) {
         this.setNoGravity(false)
     }
 

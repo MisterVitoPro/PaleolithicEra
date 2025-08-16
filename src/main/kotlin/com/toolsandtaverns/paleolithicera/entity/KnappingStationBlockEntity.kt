@@ -2,7 +2,7 @@ package com.toolsandtaverns.paleolithicera.entity
 
 import com.toolsandtaverns.paleolithicera.recipe.KnapRecipe
 import com.toolsandtaverns.paleolithicera.recipe.KnapRecipeInput
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import com.toolsandtaverns.paleolithicera.registry.ModRecipes
 import com.toolsandtaverns.paleolithicera.screen.KnappingScreenHandler
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
@@ -48,7 +48,7 @@ import java.util.*
  * required for early tool-making technologies.
  */
 class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
-    BlockEntity(ModEntities.KNAPPING_STATION, pos, state),
+    BlockEntity(ModEntityType.KNAPPING_STATION, pos, state),
     ExtendedScreenHandlerFactory<BlockPos> {
 
     /**

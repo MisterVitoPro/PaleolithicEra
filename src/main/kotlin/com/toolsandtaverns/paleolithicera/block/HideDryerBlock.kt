@@ -2,7 +2,7 @@ package com.toolsandtaverns.paleolithicera.block
 
 import com.mojang.serialization.MapCodec
 import com.toolsandtaverns.paleolithicera.entity.HideDryerBlockEntity
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import net.minecraft.block.BlockRenderType
 import net.minecraft.block.BlockState
 import net.minecraft.block.BlockWithEntity
@@ -47,7 +47,7 @@ class HideDryerBlock(settings: Settings) : BlockWithEntity(settings) {
         state: BlockState,
         type: BlockEntityType<T>
     ): BlockEntityTicker<T>? {
-        return if (!world.isClient && type === ModEntities.HIDE_DRYER_BLOCK_ENTITY) {
+        return if (!world.isClient && type === ModEntityType.HIDE_DRYER_BLOCK_ENTITY) {
             BlockEntityTicker { w, pos, s, be ->
                 (be as? HideDryerBlockEntity)?.tick(w as ServerWorld)
             }

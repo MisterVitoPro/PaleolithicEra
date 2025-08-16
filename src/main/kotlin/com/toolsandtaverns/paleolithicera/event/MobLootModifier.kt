@@ -1,4 +1,4 @@
-package com.toolsandtaverns.paleolithicera.datagen.loot
+package com.toolsandtaverns.paleolithicera.event
 
 import com.toolsandtaverns.paleolithicera.datagen.ModEntityTypeTagProvider.Companion.huntableAnimals
 import com.toolsandtaverns.paleolithicera.registry.ModItems.RAWHIDE
@@ -23,6 +23,7 @@ object MobLootModifier {
             val entityId = Identifier.ofVanilla(entityName)
             val entityType = Registries.ENTITY_TYPE.get(entityId)
 
+            println("Huntable=${huntableAnimals.contains(entityType)}")
             if (huntableAnimals.contains(entityType)) {
                 builder.pool(
                     LootPool.builder()

@@ -6,6 +6,7 @@ import com.toolsandtaverns.paleolithicera.block.EdiblePlantBlock.Companion.MAX_A
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
+import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
 import net.minecraft.block.Block
@@ -54,7 +55,7 @@ class LootTableProvider(
             Blocks.BAMBOO_BLOCK,
             Blocks.CRIMSON_STEM,
             Blocks.WARPED_STEM
-        ).forEach { addBarkToLogDrop(it, Registries.ITEM.get(Identifier.of(MOD_ID, "bark"))) }
+        ).forEach { addBarkToLogDrop(it, Registries.ITEM.get(id( "bark"))) }
 
     }
 

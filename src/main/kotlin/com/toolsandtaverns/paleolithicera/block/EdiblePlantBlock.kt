@@ -33,7 +33,7 @@ class EdiblePlantBlock(settings: Settings, private val edibleItem: Item) : Sweet
         val age = state.get(AGE)
         val isMature = age == MAX_AGE
         if (isMature) {
-            val dropStack = ItemStack(edibleItem, Random.nextInt(1, 3))
+            val dropStack = ItemStack(edibleItem, 1)
             dropStack.onCraftByPlayer(player, 1)
             player.giveItemStack(dropStack)
             world.setBlockState(pos, state.with(AGE, 1))

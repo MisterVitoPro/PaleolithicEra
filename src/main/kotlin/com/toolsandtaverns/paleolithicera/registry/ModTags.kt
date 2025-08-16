@@ -18,8 +18,7 @@ object ModTags {
     }
 
     object Entity {
-        val HUNTABLE_TAG: TagKey<EntityType<*>> =
-            TagKey.of(RegistryKeys.ENTITY_TYPE, id("huntable"))
+        val HUNTABLE_TAG: TagKey<EntityType<*>> = TagKey.of(RegistryKeys.ENTITY_TYPE, id("huntable"))
     }
 
     object Items {

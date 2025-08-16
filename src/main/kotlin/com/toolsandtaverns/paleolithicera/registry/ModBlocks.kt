@@ -56,17 +56,18 @@ object ModBlocks {
         registerHerbPlantBlockWithoutItem("wild_ginger_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_GINGER]!!)
 
     val HIDE_DRYER: Block =
-        register("hide_dryer", ::HideDryerBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
+        register("hide_dryer", ::HideDryerBlock, AbstractBlock.Settings.create().strength(1.8f, 2.0f))
     val KNAPPING_STATION: Block =
-        register("knapping_station", ::KnappingStationBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
+        register("knapping_station", ::KnappingStationBlock, AbstractBlock.Settings.create().strength(1.8f, 2.0f))
 
 
     fun initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL)
             .register { entries: FabricItemGroupEntries ->
-                entries.add(KNAPPING_STATION)
                 entries.add(CRUDE_BED)
                 entries.add(CRUDE_CAMPFIRE)
+                entries.add(HIDE_DRYER)
+                entries.add(KNAPPING_STATION)
             }
     }
 

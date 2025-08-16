@@ -1,9 +1,9 @@
 package com.toolsandtaverns.paleolithicera
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
-import com.toolsandtaverns.paleolithicera.datagen.loot.MobLootModifier
-import com.toolsandtaverns.paleolithicera.datagen.loot.PlantFiberLootModifier
-import com.toolsandtaverns.paleolithicera.datagen.loot.RockChunkLootModifier
+import com.toolsandtaverns.paleolithicera.event.MobLootModifier
+import com.toolsandtaverns.paleolithicera.event.PlantFiberLootModifier
+import com.toolsandtaverns.paleolithicera.event.RockChunkLootModifier
 import com.toolsandtaverns.paleolithicera.entity.BoarEntity
 import com.toolsandtaverns.paleolithicera.event.BlockDropHandler
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiPacket
@@ -53,7 +53,7 @@ object PaleolithicEra : ModInitializer {
         // Initialize block registry with custom blocks
         ModBlocks.initialize()
         // Initialize entity types (including block entities)
-        ModEntities.initialize()
+        ModEntityType.initialize()
         // Initialize container/GUI screen handlers
         ModScreenHandlers.initialize()
         // Initialize custom crafting recipes
@@ -63,7 +63,7 @@ object PaleolithicEra : ModInitializer {
 
         ModItemGroups.register()
 
-        FabricDefaultAttributeRegistry.register(ModEntities.BOAR_ENTITY, BoarEntity.createAttributes())
+        FabricDefaultAttributeRegistry.register(ModEntityType.BOAR_ENTITY, BoarEntity.createAttributes())
 
         // Initialize loot table modifiers for custom drops
         PlantFiberLootModifier.initialize() // Adds plant fiber drops to grass

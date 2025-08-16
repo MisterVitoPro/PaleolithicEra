@@ -35,7 +35,9 @@
   "advancement.paleolithic-era.awakening.craft_wooden_harpoon.description": "Craft a Wooden Harpoon for fishing.",
   "advancement.paleolithic-era.awakening.crude_bed.title": "Rest for the Weary",
   "advancement.paleolithic-era.awakening.crude_bed.description": "Craft a crude bed to survive for the night",
-  "message.paleolithic-era.caught_item": "you caught a %s!",
+  "advancement.paleolithic-era.awakening.craft_bone_spear.title": "Take 'em Out",
+  "advancement.paleolithic-era.awakening.craft_bone_spear.description": "Craft a Bone Spear to protect you.",
+
   "block.paleolithic-era.crude_bed": "Crude Bed",
   "block.paleolithic-era.crude_campfire": "Crude Campfire",
   "block.paleolithic-era.elderberry_bush": "Elderberry Bush",
@@ -43,8 +45,10 @@
   "block.paleolithic-era.yarrow_plant": "Wild Yarrow",
   "block.paleolithic-era.hide_dryer": "Hide Dryer",
   "block.paleolithic-era.knapping_station": "Knapping Station",
+
   "container.paleolithic-era.hide_dryer": "Hide Dryer",
   "container.paleolithic-era.knapping_station": "Knapping Station",
+
   "item.paleolithic-era.bark": "Bark",
   "item.paleolithic-era.bone_knife": "Bone Knife",
   "item.paleolithic-era.bone_spear": "Bone Spear",
@@ -79,7 +83,17 @@
   "item.paleolithic-era.wooden_spear": "Wooden Spear",
   "item.paleolithic-era.wooden_harpoon": "Wooden Harpoon",
   "item.paleolithic-era.yarrow_herb": "Yarrow Herb",
+
   "itemGroup.paleolithic-era.paleolithic_era": "Paleolithic Era",
+
+  "message.paleolithic-era.caught_item": "you caught a %s!",
+  "message.paleolithic-era.fish_caught": "Caught a fish!",
+  "message.paleolithic-era.fish_escaped": "The fish escaped...",
+  "message.paleolithic-era.need_axe": "You need an axe to harvest logs.",
+  "message.paleolithic-era.need_shovel": "You need a shovel to dig in dirt.",
+
+  "screen.paleolithic-era.wooden_harpoon.title": "Fishing",
+
   "tooltip.paleolithic-era.chamomile_herb": "Matricaria chamomilla",
   "tooltip.paleolithic-era.crude_campfire": "Primitive source of warmth, light, and cooking.",
   "tooltip.paleolithic-era.crude_campfire.usage": "[Use] raw food to cook when lit. Requires Fire Drill.",
@@ -101,6 +115,7 @@
   "tooltip.paleolithic-era.wooden_harpoon.usage": "[Use] on water block surrounded by water blocks. [Spacebar] to catch",
   "tooltip.paleolithic-era.wooden_spear": "Melee or throw it. Your choice.",
   "tooltip.paleolithic-era.yarrow_herb": "Achillea millefolium",
+
   "tag.item.paleolithic-era.bone_tool_materials": "Bone Tools",
   "tag.item.paleolithic-era.flint_tool_materials": "Flint Tools",
   "tag.item.paleolithic-era.repairs_hide_armor": "Hide Repair Material",

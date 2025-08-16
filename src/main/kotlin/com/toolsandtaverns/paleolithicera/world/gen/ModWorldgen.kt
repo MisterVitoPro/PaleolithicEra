@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.world.gen
 
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import com.toolsandtaverns.paleolithicera.world.ModPlacedFeatures
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
@@ -123,7 +123,7 @@ object ModWorldgen {
                 BiomeKeys.PLAINS,
                 BiomeKeys.TAIGA,
             ),
-            SpawnGroup.CREATURE, ModEntities.BOAR_ENTITY, 40, 1, 2
+            SpawnGroup.CREATURE, ModEntityType.BOAR_ENTITY, 40, 1, 2
         )
     }
 }

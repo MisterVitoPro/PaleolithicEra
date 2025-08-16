@@ -7,7 +7,7 @@ import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiClient
 import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
-import com.toolsandtaverns.paleolithicera.registry.ModEntities
+import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
 import com.toolsandtaverns.paleolithicera.render.*
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreen
@@ -47,8 +47,8 @@ object PaleolithicEraClient : ClientModInitializer {
 
         // Register the custom renderer for the crude campfire block entity
         // This renderer displays cooking items above the campfire
-        BlockEntityRendererFactories.register(ModEntities.CRUDE_CAMPFIRE, ::CrudeCampfireBlockEntityRenderer)
-        BlockEntityRendererFactories.register(ModEntities.KNAPPING_STATION, ::KnappingStationBlockEntityRenderer)
+        BlockEntityRendererFactories.register(ModEntityType.CRUDE_CAMPFIRE, ::CrudeCampfireBlockEntityRenderer)
+        BlockEntityRendererFactories.register(ModEntityType.KNAPPING_STATION, ::KnappingStationBlockEntityRenderer)
 
         // Register the renderer for the wooden spear entity
         // This allows thrown spears to be properly displayed in the world
@@ -62,9 +62,9 @@ object PaleolithicEraClient : ClientModInitializer {
             BoneSpearProjectileModel::texturedModelData
         )
 
-        EntityRendererRegistry.register(ModEntities.BOAR_ENTITY) { cxt -> BoarRenderer(cxt) }
-        EntityRendererRegistry.register(ModEntities.WOODEN_SPEAR_ENTITY) { cxt -> WoodenSpearRenderer(cxt) }
-        EntityRendererRegistry.register(ModEntities.BONE_SPEAR_ENTITY) { cxt -> BoneSpearRenderer(cxt) }
+        EntityRendererRegistry.register(ModEntityType.BOAR_ENTITY) { cxt -> BoarRenderer(cxt) }
+        EntityRendererRegistry.register(ModEntityType.WOODEN_SPEAR_ENTITY) { cxt -> WoodenSpearRenderer(cxt) }
+        EntityRendererRegistry.register(ModEntityType.BONE_SPEAR_ENTITY) { cxt -> BoneSpearRenderer(cxt) }
 
         // Register the screen for the knapping station
         // This connects the container handler to its GUI implementation

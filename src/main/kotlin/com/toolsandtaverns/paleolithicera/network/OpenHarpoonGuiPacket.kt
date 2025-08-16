@@ -66,7 +66,7 @@ object OpenHarpoonGuiPacket {
                 player.sendMessage(message, true)
             } else {
                 // The player succeeded but the fish still escaped (bad luck)
-                player.sendMessage(Text.literal("The fish escaped..."), true)
+                player.sendMessage(Text.translatable("message.paleolithic-era.fish_escaped"), true)
             }
         }
     }
