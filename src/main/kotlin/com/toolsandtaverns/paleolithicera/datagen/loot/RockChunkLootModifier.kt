@@ -19,13 +19,15 @@ object RockChunkLootModifier {
         LootTableEvents.MODIFY.register { id: RegistryKey<LootTable>, builder, source, _ ->
             // Check if we are modifying sand or gravel
             if (source.isBuiltin &&
-                (id.value == Blocks.SAND.lootTableKey.get().value || id.value == Blocks.GRAVEL.lootTableKey.get().value)) {
+                (id.value == Blocks.SAND.lootTableKey.get().value || id.value == Blocks.GRAVEL.lootTableKey.get().value)
+            ) {
                 LOGGER.info("Adding Rock Chunk drop to: $id")
                 // Inject a new loot pool with a random drop chance
                 val rockChunkPool = LootPool.builder()
-                    .with(ItemEntry.builder(ROCK_CHUNK)
-                        .conditionally(RandomChanceLootCondition.builder(0.20f))
-                        .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1f)))
+                    .with(
+                        ItemEntry.builder(ROCK_CHUNK)
+                            .conditionally(RandomChanceLootCondition.builder(0.20f))
+                            .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1f)))
                     )
                     .rolls(ConstantLootNumberProvider.create(1f))
                 builder.pool(rockChunkPool)

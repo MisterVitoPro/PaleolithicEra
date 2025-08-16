@@ -1,7 +1,6 @@
 package com.toolsandtaverns.paleolithicera.recipe
 
 import com.toolsandtaverns.paleolithicera.registry.ModRecipes
-import net.minecraft.item.ItemConvertible
 import net.minecraft.item.ItemStack
 import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.IngredientPlacement
@@ -11,7 +10,6 @@ import net.minecraft.recipe.book.RecipeBookCategories
 import net.minecraft.recipe.book.RecipeBookCategory
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.world.World
-import java.util.*
 
 class KnapRecipe(
     val inputItem: Ingredient,

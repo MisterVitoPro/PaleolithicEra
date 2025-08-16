@@ -1,7 +1,5 @@
 package com.toolsandtaverns.paleolithicera.block
 
-import com.toolsandtaverns.paleolithicera.registry.ModItems
-import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import net.minecraft.block.BlockState
 import net.minecraft.block.SweetBerryBushBlock
 import net.minecraft.entity.Entity
@@ -11,6 +9,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.state.property.IntProperty
 import net.minecraft.state.property.Properties
+import net.minecraft.state.property.Properties.AGE_3_MAX
 import net.minecraft.util.ActionResult
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
@@ -18,15 +17,10 @@ import net.minecraft.world.World
 import net.minecraft.world.WorldView
 import kotlin.random.Random
 
-class ChamomilePlantBlock(settings: Settings) : SweetBerryBushBlock(settings) {
-
-    private fun getBerryItem(): Item? {
-        return ModItems.EDIBLE_PLANTS[EdiblePlants.CHAMOMILE]
-    }
-
+class EdiblePlantBlock(settings: Settings, private val edibleItem: Item) : SweetBerryBushBlock(settings) {
 
     public override fun getPickStack(world: WorldView, pos: BlockPos, state: BlockState, b: Boolean): ItemStack {
-        return ItemStack(getBerryItem())
+        return ItemStack(edibleItem)
     }
 
     override fun onUse(
@@ -39,7 +33,7 @@ class ChamomilePlantBlock(settings: Settings) : SweetBerryBushBlock(settings) {
         val age = state.get(AGE)
         val isMature = age == MAX_AGE
         if (isMature) {
-            val dropStack = ItemStack(getBerryItem(), Random.nextInt(1, 3))
+            val dropStack = ItemStack(edibleItem, Random.nextInt(1, 3))
             dropStack.onCraftByPlayer(player, 1)
             player.giveItemStack(dropStack)
             world.setBlockState(pos, state.with(AGE, 1))
@@ -61,6 +55,7 @@ class ChamomilePlantBlock(settings: Settings) : SweetBerryBushBlock(settings) {
 
     companion object {
         val AGE: IntProperty = Properties.AGE_3
-        const val MAX_AGE: Int = 2
+        const val MAX_AGE: Int = AGE_3_MAX
     }
+
 }

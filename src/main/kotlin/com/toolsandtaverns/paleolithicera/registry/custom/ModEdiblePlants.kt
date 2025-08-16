@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.registry.custom
 
-import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
+import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
 import com.toolsandtaverns.paleolithicera.util.id
 import com.toolsandtaverns.paleolithicera.util.regKeyOfItem
 import net.minecraft.component.DataComponentTypes
@@ -14,11 +14,8 @@ import net.minecraft.item.consume.ApplyEffectsConsumeEffect
 import net.minecraft.item.consume.UseAction
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.registry.RegistryKey
-import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.sound.SoundEvents
-import net.minecraft.util.Identifier
 
 /**
  * Data definition for an edible plant item (berries/herbs).
@@ -38,20 +35,23 @@ data class EdiblePlantDef(
     val maxStackSize: Int = 64             // typical for small foods
 )
 
-enum class EdiblePlants(val ediblePlantDef: EdiblePlantDef) {
-    ELDERBERRY(EdiblePlantDef(
-        idPath = "raw_elderberries",
-        hunger = 4,
-        saturationModifier = 0.3f,
-        alwaysEdible = false,
-        effect = StatusEffects.POISON,
-        effectDurationTicks = 20 * 3,           // 3 seconds
-        effectChance = 1.0f,
-        cookable = true,
-        cookedIdPath = "cooked_elderberries",    // set this to your cooked item id if you have one
-        maxStackSize = 64
-    )),
-    YARROW(EdiblePlantDef(
+enum class EdiblePlants(ediblePlantDef: EdiblePlantDef) {
+    ELDERBERRY(
+        EdiblePlantDef(
+            idPath = "raw_elderberries",
+            hunger = 4,
+            saturationModifier = 0.3f,
+            alwaysEdible = false,
+            effect = StatusEffects.POISON,
+            effectDurationTicks = 20 * 3,           // 3 seconds
+            effectChance = 1.0f,
+            cookable = true,
+            cookedIdPath = "cooked_elderberries",    // set this to your cooked item id if you have one
+            maxStackSize = 64
+        )
+    ),
+    YARROW(
+        EdiblePlantDef(
             idPath = "yarrow_herb",
             hunger = 1,
             saturationModifier = 0.2f,
@@ -61,18 +61,99 @@ enum class EdiblePlants(val ediblePlantDef: EdiblePlantDef) {
             effectDurationTicks = 20 * 3,
             effectChance = 1.0f,
             maxStackSize = 64
-        )),
-    CHAMOMILE(EdiblePlantDef(
-        idPath = "chamomile_herb",
-        hunger = 1,
-        saturationModifier = 0.2f,
-        alwaysEdible = false,
-        effect = StatusEffects.RESISTANCE,
-        effectAmplifier = 0,
-        effectDurationTicks = 20 * 5,
-        effectChance = 1.0f,
-        maxStackSize = 64
-    ));
+        )
+    ),
+    CHAMOMILE(
+        EdiblePlantDef(
+            idPath = "chamomile_herb",
+            hunger = 1,
+            saturationModifier = 0.2f,
+            alwaysEdible = false,
+            effect = StatusEffects.RESISTANCE,
+            effectAmplifier = 0,
+            effectDurationTicks = 20 * 5,
+            effectChance = 1.0f,
+            maxStackSize = 64
+        )
+    ),
+    WILLOW_BARK(
+        EdiblePlantDef(
+            idPath = "willow_bark",
+            hunger = 1,
+            saturationModifier = 0.1f,
+            alwaysEdible = false,
+            effect = StatusEffects.ABSORPTION,
+            effectAmplifier = 0,
+            effectDurationTicks = 20 * 10,          // 10 seconds
+            effectChance = 1.0f,
+            maxStackSize = 64
+        )
+    ),
+    WILD_GARLIC(
+        EdiblePlantDef(
+            idPath = "wild_garlic_herb",
+            hunger = 1,
+            saturationModifier = 0.2f,
+            alwaysEdible = false,
+            effect = StatusEffects.HASTE,
+            effectAmplifier = 0,
+            effectDurationTicks = 20 * 5,          // 5 seconds
+            effectChance = 1.0f,
+            maxStackSize = 64
+        )
+    ),
+    WILD_MINT(
+        EdiblePlantDef(
+            idPath = "wild_mint_herb",
+            hunger = 1,
+            saturationModifier = 0.2f,
+            alwaysEdible = false,
+            effect = StatusEffects.SPEED,
+            effectAmplifier = 0,
+            effectDurationTicks = 20 * 5,           // 5 seconds
+            effectChance = 1.0f,
+            maxStackSize = 64
+        )
+    ),
+    EPHEDRA(
+        EdiblePlantDef(
+            idPath = "ephedra_herb",
+            hunger = 1,
+            saturationModifier = 0.2f,
+            alwaysEdible = false,
+            effect = StatusEffects.NIGHT_VISION,
+            effectAmplifier = 0,
+            effectDurationTicks = 20 * 5,          // 5 seconds
+            effectChance = 1.0f,
+            maxStackSize = 64
+        )
+    ),
+    SAGEBRUSH(
+        EdiblePlantDef(
+            idPath = "sagebrush_herb",
+            hunger = 1,
+            saturationModifier = 0.2f,
+            alwaysEdible = false,
+            effect = StatusEffects.RESISTANCE,
+            effectAmplifier = 0,
+            effectDurationTicks = 20 * 5,           // 5 seconds
+            effectChance = 1.0f,
+            maxStackSize = 64
+        )
+    ),
+    WILD_GINGER(
+        EdiblePlantDef(
+            idPath = "wild_ginger_herb",
+            hunger = 1,
+            saturationModifier = 0.4f,
+            alwaysEdible = false,
+            effect = StatusEffects.SATURATION,      // instant, minor
+            effectAmplifier = 0,
+            effectDurationTicks = 1,                // 1 tick
+            effectChance = 1.0f,
+            maxStackSize = 64
+        )
+    );
 
     val definitions: EdiblePlantDef = ediblePlantDef
 }
@@ -100,13 +181,19 @@ object ModEdiblePlants {
         if (def.effect != null && def.effectDurationTicks > 0) {
             consumableComponent
                 .consumeEffect(
-                    ApplyEffectsConsumeEffect(StatusEffectInstance(def.effect, def.effectDurationTicks, def.effectAmplifier), def.effectChance)
+                    ApplyEffectsConsumeEffect(
+                        StatusEffectInstance(
+                            def.effect,
+                            def.effectDurationTicks,
+                            def.effectAmplifier
+                        ), def.effectChance
+                    )
                 )
         }
 
         return Item.Settings()
             .registryKey(regKeyOfItem(def.idPath))
-            .component(DataComponentTypes.FOOD,foodBuilder.build())
+            .component(DataComponentTypes.FOOD, foodBuilder.build())
             .component(DataComponentTypes.CONSUMABLE, consumableComponent.build())
     }
 
@@ -123,6 +210,7 @@ object ModEdiblePlants {
             val registered = Registry.register(Registries.ITEM, id, item)
             out[plant] = registered
         }
+        LOGGER.info("Initialized EdiblePlant Items.")
         return out
     }
 }

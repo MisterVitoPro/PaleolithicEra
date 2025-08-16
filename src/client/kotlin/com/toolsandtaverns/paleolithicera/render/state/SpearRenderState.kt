@@ -9,6 +9,7 @@ import net.minecraft.client.render.entity.state.EntityRenderState
 class SpearRenderState : EntityRenderState() {
     /** Horizontal rotation (yaw) of the spear in degrees */
     var yaw: Float = 0f
+
     /** Vertical rotation (pitch) of the spear in degrees */
     var pitch: Float = 0f
 }

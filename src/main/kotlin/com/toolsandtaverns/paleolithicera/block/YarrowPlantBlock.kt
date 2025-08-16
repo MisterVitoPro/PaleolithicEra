@@ -20,7 +20,7 @@ import kotlin.random.Random
 
 class YarrowPlantBlock(settings: Settings) : SweetBerryBushBlock(settings) {
 
-    private fun getBerryItem(): Item? {
+    protected fun getBerryItem(): Item? {
         return ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW]
     }
 

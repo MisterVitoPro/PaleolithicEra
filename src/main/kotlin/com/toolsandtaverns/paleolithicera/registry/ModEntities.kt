@@ -1,13 +1,7 @@
 package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
-import com.toolsandtaverns.paleolithicera.entity.BoarEntity
-import com.toolsandtaverns.paleolithicera.entity.BoneSpearEntity
-import com.toolsandtaverns.paleolithicera.entity.CrudeBedBlockEntity
-import com.toolsandtaverns.paleolithicera.entity.CrudeCampfireBlockEntity
-import com.toolsandtaverns.paleolithicera.entity.HideDryerBlockEntity
-import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
-import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
+import com.toolsandtaverns.paleolithicera.entity.*
 import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.minecraft.block.Block
@@ -29,7 +23,7 @@ object ModEntities {
     lateinit var CRUDE_CAMPFIRE: BlockEntityType<CrudeCampfireBlockEntity>
         private set
     lateinit var WOODEN_SPEAR_ENTITY: EntityType<WoodenSpearEntity>
-            private set
+        private set
     lateinit var BONE_SPEAR_ENTITY: EntityType<BoneSpearEntity>
         private set
     lateinit var HIDE_DRYER_BLOCK_ENTITY: BlockEntityType<HideDryerBlockEntity>
@@ -86,7 +80,7 @@ object ModEntities {
             "hide_dryer",
             ::HideDryerBlockEntity,
             ModBlocks.HIDE_DRYER
-            )
+        )
 
     }
 

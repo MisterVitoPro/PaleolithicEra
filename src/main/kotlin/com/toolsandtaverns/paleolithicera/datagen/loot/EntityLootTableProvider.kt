@@ -21,15 +21,14 @@ class EntityLootTableProvider(
     override fun generate() {
         register(
             ModEntities.BOAR_ENTITY, LootTable.builder()
-            .pool(
-                LootPool.builder()
-                    .rolls(UniformLootNumberProvider.create(1f, 2f))
-                    .with(ItemEntry.builder(Items.PORKCHOP))
-                    .conditionally(EntityPropertiesLootCondition.create(LootContext.EntityTarget.THIS))
-            )
+                .pool(
+                    LootPool.builder()
+                        .rolls(UniformLootNumberProvider.create(1f, 2f))
+                        .with(ItemEntry.builder(Items.PORKCHOP))
+                        .conditionally(EntityPropertiesLootCondition.create(LootContext.EntityTarget.THIS))
+                )
         )
     }
-
 
 
 }

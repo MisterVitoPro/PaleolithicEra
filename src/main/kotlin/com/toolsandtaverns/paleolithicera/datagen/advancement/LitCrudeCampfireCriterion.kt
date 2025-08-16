@@ -6,7 +6,7 @@ import net.minecraft.advancement.AdvancementCriterion
 import net.minecraft.advancement.criterion.AbstractCriterion
 import net.minecraft.predicate.entity.LootContextPredicate
 import net.minecraft.server.network.ServerPlayerEntity
-import java.util.Optional
+import java.util.*
 
 /**
  * Custom criterion that triggers when a player lights a Crude Campfire.

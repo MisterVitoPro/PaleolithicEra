@@ -3,9 +3,7 @@ package com.toolsandtaverns.paleolithicera.screen
 import com.toolsandtaverns.paleolithicera.util.id
 import net.minecraft.client.gl.RenderPipelines
 import net.minecraft.client.gui.DrawContext
-import net.minecraft.client.gui.screen.ingame.HandledScreens
 import net.minecraft.client.gui.screen.ingame.HandledScreen
-import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
 import net.minecraft.util.Colors
@@ -42,7 +40,8 @@ class HideDryerScreen(
             x, y,
             0f, 0f,
             backgroundWidth, backgroundHeight,
-            256, 256)
+            256, 256
+        )
 
         // Draw progress bar
         val progressWidth = handler.getScaledProgress(PROGRESS_BAR_WIDTH)

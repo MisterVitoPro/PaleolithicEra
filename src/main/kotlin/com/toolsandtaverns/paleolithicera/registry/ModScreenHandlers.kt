@@ -1,6 +1,5 @@
 package com.toolsandtaverns.paleolithicera.registry
 
-import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreenHandler
 import com.toolsandtaverns.paleolithicera.screen.KnappingScreenHandler
 import com.toolsandtaverns.paleolithicera.util.id
@@ -8,7 +7,6 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.screen.ScreenHandlerType
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 
 object ModScreenHandlers {

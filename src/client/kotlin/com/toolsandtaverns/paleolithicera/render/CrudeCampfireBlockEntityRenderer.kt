@@ -24,10 +24,10 @@ class CrudeCampfireBlockEntityRenderer(
 
     /**
      * Renders the items cooking on the crude campfire.
-     * 
+     *
      * This method positions and renders each item being cooked in the campfire,
      * properly oriented based on the campfire's facing direction.
-     * 
+     *
      * @param entity The crude campfire block entity
      * @param tickDelta Partial tick time for smooth animations
      * @param matrices Transformation matrix stack

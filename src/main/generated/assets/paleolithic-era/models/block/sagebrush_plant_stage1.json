@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "paleolithic-era:block/sagebrush_plant_stage1"
+  }
+}

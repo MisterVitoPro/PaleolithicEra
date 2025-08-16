@@ -36,6 +36,4 @@ object ModToolMaterials {
     )
 
 
-
-
 }

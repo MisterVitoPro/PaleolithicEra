@@ -10,7 +10,11 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 
 class BoarRenderer(context: EntityRendererFactory.Context) :
-    MobEntityRenderer<BoarEntity, BoarRenderState, BoarModel>(context, BoarModel(context.getPart(BoarModel.BOAR_MODEL_LAYER)), 0.5f) {
+    MobEntityRenderer<BoarEntity, BoarRenderState, BoarModel>(
+        context,
+        BoarModel(context.getPart(BoarModel.BOAR_MODEL_LAYER)),
+        0.5f
+    ) {
 
     override fun getTexture(state: BoarRenderState): Identifier {
         return id("textures/entity/boar.png")

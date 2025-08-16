@@ -1,7 +1,6 @@
 package com.toolsandtaverns.paleolithicera
 
-import com.toolsandtaverns.paleolithicera.events.TooltipEvents
-import com.toolsandtaverns.paleolithicera.render.KnappingStationBlockEntityRenderer
+import com.toolsandtaverns.paleolithicera.events.ToolTipEvents
 import com.toolsandtaverns.paleolithicera.model.BoarModel
 import com.toolsandtaverns.paleolithicera.model.BoneSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
@@ -10,10 +9,7 @@ import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModEntities
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
-import com.toolsandtaverns.paleolithicera.render.BoarRenderer
-import com.toolsandtaverns.paleolithicera.render.BoneSpearRenderer
-import com.toolsandtaverns.paleolithicera.render.CrudeCampfireBlockEntityRenderer
-import com.toolsandtaverns.paleolithicera.render.WoodenSpearRenderer
+import com.toolsandtaverns.paleolithicera.render.*
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreen
 import com.toolsandtaverns.paleolithicera.screen.KnappingStationScreen
 import net.fabricmc.api.ClientModInitializer
@@ -26,15 +22,15 @@ import net.minecraft.client.render.BlockRenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 
 /**
-     * Client-side initialization for the Paleolithic Era mod.
-     * 
-     * This class handles all client-specific initialization such as registering
-     * renderers, screens, and client-side network handlers.
-     */
-    object PaleolithicEraClient : ClientModInitializer {
+ * Client-side initialization for the Paleolithic Era mod.
+ *
+ * This class handles all client-specific initialization such as registering
+ * renderers, screens, and client-side network handlers.
+ */
+object PaleolithicEraClient : ClientModInitializer {
     /**
      * Initializes the client-side components of the mod.
-     * 
+     *
      * This method registers:
      * - Network packet handlers for client-server communication
      * - Block entity renderers for custom blocks
@@ -57,8 +53,14 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
         // Register the renderer for the wooden spear entity
         // This allows thrown spears to be properly displayed in the world
         EntityModelLayerRegistry.registerModelLayer(BoarModel.BOAR_MODEL_LAYER, BoarModel::texturedModelData)
-        EntityModelLayerRegistry.registerModelLayer(WoodenSpearProjectileModel.WOOD_SPEAR_MODEL_LAYER, WoodenSpearProjectileModel::texturedModelData)
-        EntityModelLayerRegistry.registerModelLayer(BoneSpearProjectileModel.BONE_SPEAR_MODEL_LAYER, BoneSpearProjectileModel::texturedModelData)
+        EntityModelLayerRegistry.registerModelLayer(
+            WoodenSpearProjectileModel.WOOD_SPEAR_MODEL_LAYER,
+            WoodenSpearProjectileModel::texturedModelData
+        )
+        EntityModelLayerRegistry.registerModelLayer(
+            BoneSpearProjectileModel.BONE_SPEAR_MODEL_LAYER,
+            BoneSpearProjectileModel::texturedModelData
+        )
 
         EntityRendererRegistry.register(ModEntities.BOAR_ENTITY) { cxt -> BoarRenderer(cxt) }
         EntityRendererRegistry.register(ModEntities.WOODEN_SPEAR_ENTITY) { cxt -> WoodenSpearRenderer(cxt) }
@@ -76,9 +78,14 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
         BlockRenderLayerMap.putBlock(ModBlocks.ELDERBERRY_BUSH, BlockRenderLayer.CUTOUT)
         BlockRenderLayerMap.putBlock(ModBlocks.CHAMOMILE_PLANT, BlockRenderLayer.CUTOUT)
         BlockRenderLayerMap.putBlock(ModBlocks.YARROW_PLANT, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.WILD_GARLIC_PLANT, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.EPHEDRA_PLANT, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.SAGEBRUSH_PLANT, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.WILD_MINT_PLANT, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.WILD_GARLIC_PLANT, BlockRenderLayer.CUTOUT)
 
         // Register client-side network handlers for the harpoon fishing system
         OpenHarpoonGuiClient.register()
-        TooltipEvents.register()
+        ToolTipEvents.register()
     }
 }

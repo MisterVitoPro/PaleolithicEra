@@ -26,7 +26,8 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Position
 import net.minecraft.world.World
 
-class SpearItem(settings: Settings, private val projectileCreator: ProjectileEntity.ProjectileCreator<*>) : Item(settings),
+class SpearItem(settings: Settings, private val projectileCreator: ProjectileEntity.ProjectileCreator<*>) :
+    Item(settings),
     ProjectileItem {
 
     companion object {
@@ -36,11 +37,19 @@ class SpearItem(settings: Settings, private val projectileCreator: ProjectileEnt
         fun createAttributeModifiers(material: ToolMaterial): AttributeModifiersComponent {
             return AttributeModifiersComponent.builder().add(
                 EntityAttributes.ATTACK_DAMAGE,
-                EntityAttributeModifier(BASE_ATTACK_DAMAGE_MODIFIER_ID, material.attackDamageBonus + 1.5, EntityAttributeModifier.Operation.ADD_VALUE),
+                EntityAttributeModifier(
+                    BASE_ATTACK_DAMAGE_MODIFIER_ID,
+                    material.attackDamageBonus + 1.5,
+                    EntityAttributeModifier.Operation.ADD_VALUE
+                ),
                 AttributeModifierSlot.MAINHAND
             ).add(
                 EntityAttributes.ATTACK_SPEED,
-                EntityAttributeModifier(BASE_ATTACK_SPEED_MODIFIER_ID, BASE_ATTACK_SPEED, EntityAttributeModifier.Operation.ADD_VALUE),
+                EntityAttributeModifier(
+                    BASE_ATTACK_SPEED_MODIFIER_ID,
+                    BASE_ATTACK_SPEED,
+                    EntityAttributeModifier.Operation.ADD_VALUE
+                ),
                 AttributeModifierSlot.MAINHAND
             ).build()
         }

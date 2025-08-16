@@ -57,7 +57,7 @@ class KnappingRecipeProvider(
                 buildDefaultKnapRecipe(
                     exporter = exporter,
                     recipeId = "knap_flint_to_flint_biface",
-                    recipe = KnapRecipe(Ingredient.ofItem(Items.FLINT), ItemStack(ModItems.FLINT_BIFACE, 1), ),
+                    recipe = KnapRecipe(Ingredient.ofItem(Items.FLINT), ItemStack(ModItems.FLINT_BIFACE, 1)),
                     criterionName = "has_flint",
                     criterion = InventoryChangedCriterion.Conditions.items(Items.FLINT)
                 )

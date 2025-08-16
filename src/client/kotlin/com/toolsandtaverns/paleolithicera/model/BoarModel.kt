@@ -54,7 +54,7 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
 
                 val tail = body.addChild("tail", ModelPartBuilder.create(), ModelTransform.origin(0.5f, -3.0f, 9.5f))
 
-                val tail_r1 = tail.addChild(
+                tail.addChild(
                     "tail_r1",
                     ModelPartBuilder.create().uv(30, 46).cuboid(-0.5f, -1.0f, -0.5f, 1.0f, 3.0f, 1.0f, Dilation(0.0f)),
                     ModelTransform.of(0.0f, 1.0f, 1.0f, 1.0036f, 0.0f, 0.0f)
@@ -70,7 +70,7 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
                 val mouth =
                     head.addChild("mouth", ModelPartBuilder.create(), ModelTransform.origin(-0.25f, 3.0f, -3.75f))
 
-                val mouth_r1 = mouth.addChild(
+                mouth.addChild(
                     "mouth_r1",
                     ModelPartBuilder.create().uv(44, 12)
                         .cuboid(-3.15f, -0.9838f, 0.4451f, 2.0f, 1.0f, 2.0f, Dilation(0.0f)),
@@ -84,38 +84,38 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
                     ModelTransform.origin(-2.4f, 2.0f, -3.6f)
                 )
 
-                val cube_r1 = tusk.addChild(
+                tusk.addChild(
                     "cube_r1",
                     ModelPartBuilder.create().uv(44, 15).cuboid(0.0f, -1.0f, -1.0f, 1.0f, 1.0f, 2.0f, Dilation(0.0f)),
                     ModelTransform.of(4.9f, -1.0f, -1.0f, -0.9424f, -0.3272f, 0.4164f)
                 )
 
-                val cube_r2 = tusk.addChild(
+                tusk.addChild(
                     "cube_r2",
                     ModelPartBuilder.create().uv(44, 18).cuboid(-1.0f, -1.0f, -1.0f, 1.0f, 1.0f, 2.0f, Dilation(0.0f)),
                     ModelTransform.of(0.0f, -1.0f, -1.0f, -0.9424f, 0.3272f, -0.4164f)
                 )
 
-                val font_leg_l = modelPartData.addChild(
+                modelPartData.addChild(
                     "font_leg_l",
                     ModelPartBuilder.create().uv(9, 50).cuboid(0.25f, 0.0f, -1.25f, 2.0f, 5.0f, 2.0f, Dilation(0.0f)),
                     ModelTransform.origin(2.5f, 19.0f, -4.5f)
                 )
 
-                val front_leg_r = modelPartData.addChild(
+                modelPartData.addChild(
                     "front_leg_r",
                     ModelPartBuilder.create().uv(9, 50).cuboid(-1.25f, 0.0f, -1.5f, 2.0f, 5.0f, 2.0f, Dilation(0.0f)),
                     ModelTransform.origin(-2.5f, 19.0f, -4.25f)
                 )
 
-                val rear_leg_l = modelPartData.addChild(
+                modelPartData.addChild(
                     "rear_leg_l",
                     ModelPartBuilder.create().uv(43, 6).cuboid(-2.0f, -1.0f, -1.0f, 3.0f, 3.0f, 3.0f, Dilation(0.0f))
                         .uv(0, 50).cuboid(-1.5f, 1.0f, -0.5f, 2.0f, 4.0f, 2.0f, Dilation(0.0f)),
                     ModelTransform.origin(3.0f, 19.0f, 5.5f)
                 )
 
-                val rear_leg_r = modelPartData.addChild(
+                modelPartData.addChild(
                     "rear_leg_r",
                     ModelPartBuilder.create().uv(50, 12).cuboid(-1.0f, -1.0f, -1.0f, 3.0f, 3.0f, 3.0f, Dilation(0.0f))
                         .uv(0, 50).cuboid(-0.5f, 1.0f, -0.5f, 2.0f, 4.0f, 2.0f, Dilation(0.0f)),

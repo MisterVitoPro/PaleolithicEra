@@ -23,7 +23,7 @@ object ModWorldgen {
                 BiomeKeys.JUNGLE,
                 BiomeKeys.GROVE,
                 BiomeKeys.OLD_GROWTH_BIRCH_FOREST,
-                ),
+            ),
             GenerationStep.Feature.VEGETAL_DECORATION,
             ModPlacedFeatures.ELDERBERRY_BUSH_PLACED
         )
@@ -56,6 +56,76 @@ object ModWorldgen {
             ModPlacedFeatures.YARROW_PLANT_PLACED
         )
 
+        BiomeModifications.addFeature(
+            BiomeSelectors.includeByKey(
+                BiomeKeys.PLAINS,
+                BiomeKeys.SUNFLOWER_PLAINS,
+                BiomeKeys.MEADOW,
+                BiomeKeys.CHERRY_GROVE,
+                BiomeKeys.TAIGA,
+                BiomeKeys.GROVE,
+                BiomeKeys.WINDSWEPT_HILLS,
+            ),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            ModPlacedFeatures.WILD_GARLIC_PLANT_PLACED
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.includeByKey(
+                BiomeKeys.PLAINS,
+                BiomeKeys.SUNFLOWER_PLAINS,
+                BiomeKeys.MEADOW,
+                BiomeKeys.CHERRY_GROVE,
+                BiomeKeys.TAIGA,
+                BiomeKeys.GROVE,
+                BiomeKeys.WINDSWEPT_HILLS,
+            ),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            ModPlacedFeatures.EPHEDRA_PLANT_PLACED
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.includeByKey(
+                BiomeKeys.PLAINS,
+                BiomeKeys.SUNFLOWER_PLAINS,
+                BiomeKeys.MEADOW,
+                BiomeKeys.CHERRY_GROVE,
+                BiomeKeys.TAIGA,
+                BiomeKeys.GROVE,
+                BiomeKeys.WINDSWEPT_HILLS,
+            ),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            ModPlacedFeatures.SAGEBRUSH_PLANT_PLACED
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.includeByKey(
+                BiomeKeys.PLAINS,
+                BiomeKeys.SUNFLOWER_PLAINS,
+                BiomeKeys.MEADOW,
+                BiomeKeys.CHERRY_GROVE,
+                BiomeKeys.TAIGA,
+                BiomeKeys.GROVE,
+                BiomeKeys.WINDSWEPT_HILLS,
+            ),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            ModPlacedFeatures.WILD_MINT_PLANT_PLACED
+        )
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.includeByKey(
+                BiomeKeys.PLAINS,
+                BiomeKeys.SUNFLOWER_PLAINS,
+                BiomeKeys.MEADOW,
+                BiomeKeys.CHERRY_GROVE,
+                BiomeKeys.TAIGA,
+                BiomeKeys.GROVE,
+                BiomeKeys.WINDSWEPT_HILLS,
+            ),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            ModPlacedFeatures.WILD_GINGER_PLANT_PLACED
+        )
+
         BiomeModifications.addSpawn(
             BiomeSelectors.includeByKey(
                 BiomeKeys.BIRCH_FOREST,
@@ -65,7 +135,8 @@ object ModWorldgen {
                 BiomeKeys.FOREST,
                 BiomeKeys.PLAINS,
                 BiomeKeys.TAIGA,
-                ),
-            SpawnGroup.CREATURE, ModEntities.BOAR_ENTITY, 40, 1, 2)
+            ),
+            SpawnGroup.CREATURE, ModEntities.BOAR_ENTITY, 40, 1, 2
+        )
     }
 }

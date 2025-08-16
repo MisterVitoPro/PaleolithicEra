@@ -5,8 +5,6 @@ import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import net.minecraft.block.BlockState
 import net.minecraft.entity.AnimationState
-import net.minecraft.entity.EntityDimensions
-import net.minecraft.entity.EntityPose
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.ai.goal.*
@@ -78,7 +76,10 @@ class BoarEntity(entityType: EntityType<out AnimalEntity>, world: World) : Anima
         this.goalSelector.add(0, SwimGoal(this))
         this.goalSelector.add(1, EscapeDangerGoal(this, 1.25))
         this.goalSelector.add(2, AnimalMateGoal(this, 1.0))
-        this.goalSelector.add(3, TemptGoal(this, 1.2, Ingredient.ofItems(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]!!.asItem()), true))
+        this.goalSelector.add(
+            3,
+            TemptGoal(this, 1.2, Ingredient.ofItems(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]!!.asItem()), true)
+        )
         this.goalSelector.add(4, FollowParentGoal(this, 1.1))
         this.goalSelector.add(5, WanderAroundFarGoal(this, 1.0))
         this.goalSelector.add(6, LookAtEntityGoal(this, PlayerEntity::class.java, 6.0f))

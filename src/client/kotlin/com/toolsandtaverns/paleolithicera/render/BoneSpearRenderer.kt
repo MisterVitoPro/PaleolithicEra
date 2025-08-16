@@ -2,18 +2,14 @@ package com.toolsandtaverns.paleolithicera.render
 
 import SpearRenderState
 import com.toolsandtaverns.paleolithicera.entity.BoneSpearEntity
-import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.model.BoneSpearProjectileModel
-import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.util.id
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
-import net.minecraft.client.render.entity.state.EntityRenderState
 import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.util.Identifier
 import net.minecraft.util.math.RotationAxis
 
 /**
@@ -23,21 +19,22 @@ class BoneSpearRenderer(
     context: EntityRendererFactory.Context,
 ) : EntityRenderer<BoneSpearEntity, SpearRenderState>(context) {
 
-    val model: BoneSpearProjectileModel = BoneSpearProjectileModel(context.getPart(BoneSpearProjectileModel.BONE_SPEAR_MODEL_LAYER))
+    val model: BoneSpearProjectileModel =
+        BoneSpearProjectileModel(context.getPart(BoneSpearProjectileModel.BONE_SPEAR_MODEL_LAYER))
 
     /**
      * Creates a new render state object for this renderer.
-     * 
+     *
      * @return A new SpearRenderState instance to store rendering state
      */
     override fun createRenderState(): SpearRenderState = SpearRenderState()
 
     /**
      * Updates the render state with entity positioning information.
-     * 
+     *
      * This method interpolates between the entity's previous and current rotation values
      * to ensure smooth animations when rendering at different frame rates.
-     * 
+     *
      * @param entity The wooden spear entity being rendered
      * @param state The render state to update
      * @param tickDelta Partial tick time for smooth animations
@@ -51,10 +48,10 @@ class BoneSpearRenderer(
 
     /**
      * Renders the wooden spear entity using the item model.
-     * 
+     *
      * This method transforms the rendering matrix to position and orient the spear correctly,
      * then uses the item renderer to draw the actual spear model.
-     * 
+     *
      * @param state The render state containing positioning data
      * @param matrixStack The transformation matrix stack
      * @param vertexConsumerProvider Provider for vertex consumers

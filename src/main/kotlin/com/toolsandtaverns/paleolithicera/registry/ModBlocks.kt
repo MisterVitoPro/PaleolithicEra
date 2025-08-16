@@ -1,13 +1,7 @@
 package com.toolsandtaverns.paleolithicera.registry
 
-import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
-import com.toolsandtaverns.paleolithicera.block.ChamomilePlantBlock
-import com.toolsandtaverns.paleolithicera.block.CrudeBedBlock
-import com.toolsandtaverns.paleolithicera.block.CrudeCampFireBlock
-import com.toolsandtaverns.paleolithicera.block.ElderberryBushBlock
-import com.toolsandtaverns.paleolithicera.block.HideDryerBlock
-import com.toolsandtaverns.paleolithicera.block.KnappingStationBlock
-import com.toolsandtaverns.paleolithicera.block.YarrowPlantBlock
+import com.toolsandtaverns.paleolithicera.block.*
+import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import com.toolsandtaverns.paleolithicera.util.RegistryHelpers
 import com.toolsandtaverns.paleolithicera.util.id
 import com.toolsandtaverns.paleolithicera.util.regKeyOfItem
@@ -28,7 +22,12 @@ import net.minecraft.state.property.Properties
 
 object ModBlocks {
 
-    val CRUDE_BED: Block = register("crude_bed", ::CrudeBedBlock, AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOD).strength(0.2F).nonOpaque().burnable().pistonBehavior(PistonBehavior.DESTROY))
+    val CRUDE_BED: Block = register(
+        "crude_bed",
+        ::CrudeBedBlock,
+        AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOD).strength(0.2F).nonOpaque().burnable()
+            .pistonBehavior(PistonBehavior.DESTROY)
+    )
     val CRUDE_CAMPFIRE: Block = register(
         "crude_campfire", ::CrudeCampFireBlock,
         AbstractBlock.Settings.create()
@@ -39,39 +38,27 @@ object ModBlocks {
             .sounds(BlockSoundGroup.WOOD)
             .luminance { state -> if (state.get(Properties.LIT)) 15 else 0 })
 
-    val ELDERBERRY_BUSH: Block = registerBlockWithoutBlockItem("elderberry_bush") { settings: AbstractBlock.Settings ->
-        ElderberryBushBlock(
-            settings
-                .mapColor(MapColor.DARK_GREEN)
-                .ticksRandomly()
-                .noCollision()
-                .sounds(BlockSoundGroup.SWEET_BERRY_BUSH)
-                .pistonBehavior(PistonBehavior.DESTROY)
-        )
-    }
-    val CHAMOMILE_PLANT: Block = registerBlockWithoutBlockItem("chamomile_plant") { settings: AbstractBlock.Settings ->
-        ChamomilePlantBlock(
-            settings
-                .mapColor(MapColor.DARK_GREEN)
-                .ticksRandomly()
-                .noCollision()
-                .sounds(BlockSoundGroup.SWEET_BERRY_BUSH)
-                .pistonBehavior(PistonBehavior.DESTROY)
-        )
-    }
-    val YARROW_PLANT: Block = registerBlockWithoutBlockItem("yarrow_plant") { settings: AbstractBlock.Settings ->
-        YarrowPlantBlock(
-            settings
-                .mapColor(MapColor.DARK_GREEN)
-                .ticksRandomly()
-                .noCollision()
-                .sounds(BlockSoundGroup.SWEET_BERRY_BUSH)
-                .pistonBehavior(PistonBehavior.DESTROY)
-        )
-    }
-    val HIDE_DRYER: Block = register("hide_dryer", ::HideDryerBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
-    val KNAPPING_STATION: Block = register("knapping_station", ::KnappingStationBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
+    val ELDERBERRY_BUSH: Block =
+        registerHerbPlantBlockWithoutItem("elderberry_bush", ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]!!)
+    val CHAMOMILE_PLANT: Block =
+        registerHerbPlantBlockWithoutItem("chamomile_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.CHAMOMILE]!!)
+    val YARROW_PLANT: Block =
+        registerHerbPlantBlockWithoutItem("yarrow_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW]!!)
+    val WILD_GARLIC_PLANT: Block =
+        registerHerbPlantBlockWithoutItem("wild_garlic_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_GARLIC]!!)
+    val EPHEDRA_PLANT: Block =
+        registerHerbPlantBlockWithoutItem("ephedra_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.EPHEDRA]!!)
+    val SAGEBRUSH_PLANT: Block =
+        registerHerbPlantBlockWithoutItem("sagebrush_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.SAGEBRUSH]!!)
+    val WILD_MINT_PLANT: Block =
+        registerHerbPlantBlockWithoutItem("wild_mint_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_MINT]!!)
+    val WILD_GINGER_PLANT: Block =
+        registerHerbPlantBlockWithoutItem("wild_ginger_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_GINGER]!!)
 
+    val HIDE_DRYER: Block =
+        register("hide_dryer", ::HideDryerBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
+    val KNAPPING_STATION: Block =
+        register("knapping_station", ::KnappingStationBlock, AbstractBlock.Settings.create().strength(2.0f, 2.0f))
 
 
     fun initialize() {
@@ -112,11 +99,25 @@ object ModBlocks {
         name: String,
         additionalSettings: (AbstractBlock.Settings) -> Block
     ): Block {
-        return Registry.register(Registries.BLOCK, id(name),
+        return Registry.register(
+            Registries.BLOCK, id(name),
             additionalSettings(AbstractBlock.Settings.create().registryKey(RegistryHelpers.regKeyOfBlock(name)))
         )
     }
 
+    private fun registerHerbPlantBlockWithoutItem(id: String, edibleItem: Item): Block {
+        return registerBlockWithoutBlockItem(id) { settings: AbstractBlock.Settings ->
+            EdiblePlantBlock(
+                settings
+                    .mapColor(MapColor.DARK_GREEN)
+                    .ticksRandomly()
+                    .noCollision()
+                    .sounds(BlockSoundGroup.SWEET_BERRY_BUSH)
+                    .pistonBehavior(PistonBehavior.DESTROY),
+                edibleItem
+            )
+        }
+    }
 
 
 }

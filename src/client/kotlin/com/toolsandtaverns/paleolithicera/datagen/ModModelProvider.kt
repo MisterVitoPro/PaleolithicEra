@@ -1,8 +1,6 @@
 package com.toolsandtaverns.paleolithicera.datagen
 
-import com.toolsandtaverns.paleolithicera.block.ChamomilePlantBlock
-import com.toolsandtaverns.paleolithicera.block.ElderberryBushBlock
-import com.toolsandtaverns.paleolithicera.block.YarrowPlantBlock
+import com.toolsandtaverns.paleolithicera.block.EdiblePlantBlock
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
@@ -10,15 +8,10 @@ import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.minecraft.block.Block
-import net.minecraft.block.Blocks
 import net.minecraft.client.data.*
-import net.minecraft.item.Item
-import net.minecraft.item.Items
 import net.minecraft.registry.Registries
 import net.minecraft.state.property.IntProperty
-import net.minecraft.state.property.Properties
 import net.minecraft.util.Identifier
-import java.util.function.Function
 
 class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
@@ -31,20 +24,14 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
      * @param blockStateModelGenerator The generator to register block models with
      */
     override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
-        blockStateModelGenerator.registerPlantStagesWithItem(
-            ModBlocks.ELDERBERRY_BUSH,
-            ElderberryBushBlock.AGE
-        )
-
-        blockStateModelGenerator.registerPlantStagesWithItem(
-            ModBlocks.YARROW_PLANT,
-            YarrowPlantBlock.AGE
-        )
-
-        blockStateModelGenerator.registerPlantStagesWithItem(
-            ModBlocks.CHAMOMILE_PLANT,
-            ChamomilePlantBlock.AGE
-        )
+        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.ELDERBERRY_BUSH)
+        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.YARROW_PLANT)
+        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.CHAMOMILE_PLANT)
+        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.WILD_GARLIC_PLANT)
+        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.EPHEDRA_PLANT)
+        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.SAGEBRUSH_PLANT)
+        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.WILD_MINT_PLANT)
+        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.WILD_GINGER_PLANT)
 
         blockStateModelGenerator.registerCubeWithCustomTextures(
             ModBlocks.KNAPPING_STATION,
@@ -118,7 +105,7 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
     private fun BlockStateModelGenerator.registerPlantStagesWithItem(
         block: Block,
-        age: IntProperty = Properties.AGE_3
+        age: IntProperty = EdiblePlantBlock.AGE
     ) {
         this.blockStateCollector.accept(
             VariantsBlockModelDefinitionCreator.of(block).with(

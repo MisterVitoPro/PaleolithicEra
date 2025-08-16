@@ -1,7 +1,6 @@
 package com.toolsandtaverns.paleolithicera.datagen.advancement
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
-import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import net.minecraft.advancement.Advancement
@@ -12,7 +11,7 @@ import net.minecraft.advancement.criterion.InventoryChangedCriterion
 import net.minecraft.text.Text
 import java.util.function.Consumer
 
-object ElderberryAdvancements {
+object HerbsAdvancements {
 
     fun generate(parent: AdvancementEntry, consumer: Consumer<AdvancementEntry>) {
 
@@ -26,10 +25,43 @@ object ElderberryAdvancements {
                 AdvancementFrame.CHALLENGE,
                 true, true, false
             )
-            .criterion("has_raw_elderberries",InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]))
-            .criterion("has_yarrow_herb", InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW]))
-            .criterion("has_chamomile_herb", InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.CHAMOMILE]))
-            .rewards(AdvancementRewards.Builder.experience(9))
+            .criterion(
+                "has_raw_elderberries",
+                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY])
+            )
+            .criterion(
+                "has_yarrow_herb",
+                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW])
+            )
+            .criterion(
+                "has_chamomile_herb",
+                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.CHAMOMILE])
+            )
+            .criterion(
+                "has_willow_bark_herb",
+                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.WILLOW_BARK])
+            )
+            .criterion(
+                "has_wild_garlic_herb",
+                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_GARLIC])
+            )
+            .criterion(
+                "has_wild_mint_herb",
+                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_MINT])
+            )
+            .criterion(
+                "has_ephedra_herb",
+                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.EPHEDRA])
+            )
+            .criterion(
+                "has_sagebrush_herb",
+                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.SAGEBRUSH])
+            )
+            .criterion(
+                "has_wild_ginger_herb",
+                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_GINGER])
+            )
+            .rewards(AdvancementRewards.Builder.experience(15))
             .build(consumer, "awakening/harvest_berries")
 
         Advancement.Builder.create()

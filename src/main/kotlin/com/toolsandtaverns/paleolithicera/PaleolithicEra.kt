@@ -17,19 +17,19 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 /**
-     * Main mod class for the Paleolithic Era mod.
-     * 
-     * This class serves as the entry point for the mod and handles initialization
-     * of all mod components, registries, and network handlers.
-     */
-    object PaleolithicEra : ModInitializer {
+ * Main mod class for the Paleolithic Era mod.
+ *
+ * This class serves as the entry point for the mod and handles initialization
+ * of all mod components, registries, and network handlers.
+ */
+object PaleolithicEra : ModInitializer {
 
     /** Logger instance for mod-related logging */
     val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
 
     /**
      * Initializes the mod when Minecraft starts up.
-     * 
+     *
      * This method registers all mod components including:
      * - Custom blocks and items
      * - Entity types
@@ -48,10 +48,10 @@ import org.slf4j.LoggerFactory
         // Register the packet codec for client-to-server harpoon result communication
         PayloadTypeRegistry.playC2S().register(HarpoonResultPayload.ID, HarpoonResultPayload.CODEC)
 
-        // Initialize block registry with custom blocks
-        ModBlocks.initialize()
         // Initialize item registry with custom items
         ModItems.initialize()
+        // Initialize block registry with custom blocks
+        ModBlocks.initialize()
         // Initialize entity types (including block entities)
         ModEntities.initialize()
         // Initialize container/GUI screen handlers

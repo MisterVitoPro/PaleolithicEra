@@ -1,16 +1,15 @@
 package com.toolsandtaverns.paleolithicera.screen
 
 import com.toolsandtaverns.paleolithicera.util.id
+import net.minecraft.client.gl.RenderPipelines
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
-import net.minecraft.util.Identifier
-import net.minecraft.client.gl.RenderPipelines
 
 /**
  * Screen (GUI) for the Knapping Station block.
- * 
+ *
  * This screen displays a crafting interface that allows players to create
  * tools and materials by knapping (shaping) rocks and other materials.
  */
@@ -33,7 +32,7 @@ class KnappingStationScreen(
 
     /**
      * Initializes the screen when it's created or resized.
-     * 
+     *
      * Centers the title text in the screen's title bar area.
      */
     override fun init() {
@@ -44,7 +43,7 @@ class KnappingStationScreen(
 
     /**
      * Draws the background texture of the GUI.
-     * 
+     *
      * @param context Drawing context
      * @param delta Partial tick time for smooth animations
      * @param mouseX Current mouse X position
@@ -73,7 +72,7 @@ class KnappingStationScreen(
 
     /**
      * Renders the complete screen, including background, slots, and tooltips.
-     * 
+     *
      * @param context Drawing context
      * @param mouseX Current mouse X position
      * @param mouseY Current mouse Y position
@@ -86,7 +85,7 @@ class KnappingStationScreen(
 
     /**
      * Draws the foreground elements of the GUI, including title and inventory label.
-     * 
+     *
      * @param context Drawing context
      * @param mouseX Current mouse X position
      * @param mouseY Current mouse Y position

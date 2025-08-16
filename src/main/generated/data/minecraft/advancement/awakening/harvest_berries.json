@@ -11,11 +11,71 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "has_ephedra_herb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:ephedra_herb"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_raw_elderberries": {
       "conditions": {
         "items": [
           {
             "items": "paleolithic-era:raw_elderberries"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_sagebrush_herb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:sagebrush_herb"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_wild_garlic_herb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:wild_garlic_herb"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_wild_ginger_herb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:wild_ginger_herb"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_wild_mint_herb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:wild_mint_herb"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_willow_bark_herb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:willow_bark"
           }
         ]
       },
@@ -54,10 +114,28 @@
     ],
     [
       "has_chamomile_herb"
+    ],
+    [
+      "has_willow_bark_herb"
+    ],
+    [
+      "has_wild_garlic_herb"
+    ],
+    [
+      "has_wild_mint_herb"
+    ],
+    [
+      "has_ephedra_herb"
+    ],
+    [
+      "has_sagebrush_herb"
+    ],
+    [
+      "has_wild_ginger_herb"
     ]
   ],
   "rewards": {
-    "experience": 9
+    "experience": 15
   },
   "sends_telemetry_event": true
 }

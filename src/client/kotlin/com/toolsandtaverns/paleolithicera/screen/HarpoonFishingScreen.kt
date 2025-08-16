@@ -5,21 +5,25 @@ import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.text.Text
 
-    /**
-     * A minigame screen for harpoon fishing that displays a moving slider.
-     * 
-     * The player must press space when the slider is in the green target zone to catch a fish.
-     * After a successful or failed attempt, the screen automatically closes after a short delay.
-     */
-    class HarpoonFishingScreen : Screen(Text.literal("Fishing")) {
+/**
+ * A minigame screen for harpoon fishing that displays a moving slider.
+ *
+ * The player must press space when the slider is in the green target zone to catch a fish.
+ * After a successful or failed attempt, the screen automatically closes after a short delay.
+ */
+class HarpoonFishingScreen : Screen(Text.literal("Fishing")) {
     // Position of the slider (0.0 to 1.0)
     private var sliderPos = 0f
+
     // Direction the slider is moving
     private var increasing = true
+
     // Range that represents a successful catch (45%-55% of the bar width)
     private val catchThreshold: ClosedFloatingPointRange<Float> = 0.45f..0.55f
+
     // Text shown after an attempt
     private var resultText: Text? = null
+
     // Whether the player has made an attempt
     private var resultSent = false
 
@@ -29,10 +33,10 @@ import net.minecraft.text.Text
 
     /**
      * Renders the fishing minigame screen.
-     * 
+     *
      * Handles the automatic screen closure after a result, updates the slider position,
      * and draws the UI elements including the bar, target zone, and slider.
-     * 
+     *
      * @param context Drawing context used to render elements
      * @param mouseX Current mouse X position
      * @param mouseY Current mouse Y position
@@ -80,10 +84,10 @@ import net.minecraft.text.Text
 
     /**
      * Handles key press events for the fishing minigame.
-     * 
+     *
      * When the player presses the space bar, checks if the slider is in the target zone,
      * sends the result to the server, and updates the UI accordingly.
-     * 
+     *
      * @param keyCode The key code of the pressed key
      * @param scanCode System-specific scan code
      * @param modifiers Bit field describing which modifier keys were held down

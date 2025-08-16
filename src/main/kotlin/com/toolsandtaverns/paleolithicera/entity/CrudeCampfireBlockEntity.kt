@@ -41,7 +41,7 @@ import kotlin.math.min
 
 /**
  * BlockEntity for the Crude Campfire block, a primitive fire source in the Paleolithic Era mod.
- * 
+ *
  * The Crude Campfire represents one of the earliest fire technologies available to players,
  * featuring a simpler construction than vanilla campfires but with similar cooking functionality.
  * It has a limited burn time and handles cooking up to 4 items simultaneously, tracking their
@@ -87,7 +87,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
     /**
      * Reads the entity's data from NBT or component storage.
-     * 
+     *
      * Loads all cooking-related information including:
      * - Items currently being cooked
      * - Current cooking progress for each item
@@ -126,13 +126,13 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
     /**
      * Writes the entity's data to NBT or component storage.
-     * 
+     *
      * Saves all cooking-related information including:
      * - Items currently being cooked
      * - Current cooking progress for each item
      * - Total cooking time required for each item
      * - Remaining burn time for the campfire
-     * 
+     *
      * This persistence is essential for maintaining the campfire's state between game sessions,
      * allowing players to return to their cooking progress - an important gameplay element in
      * the survival-focused Paleolithic era.
@@ -149,7 +149,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
     /**
      * Creates a packet to send this block entity's data to clients.
-     * 
+     *
      * This network synchronization is essential for the multiplayer experience,
      * ensuring all players see the same state of the campfire, including what items
      * are being cooked and visual effects like smoke particles.
@@ -162,7 +162,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
     /**
      * Creates NBT data to send when a chunk is first loaded by a client.
-     * 
+     *
      * This provides the initial state of the campfire when a player first sees it,
      * including which items are being cooked. For Paleolithic players, seeing what's
      * cooking from a distance is an important visual cue for finding their way back to camp.
@@ -180,7 +180,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
     /**
      * Attempts to add an item to the campfire for cooking.
-     * 
+     *
      * This core gameplay mechanic allows players to cook food without requiring a full furnace,
      * representing how Paleolithic humans would have prepared meals. The method:
      * 1. Finds the first empty cooking slot
@@ -227,7 +227,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
     /**
      * Updates the blockstate listeners to notify of changes to this block entity.
-     * 
+     *
      * This method ensures that when the campfire's state changes (like adding an item
      * or completing cooking), the client is properly notified and visual updates occur.
      * For Paleolithic players, these visual cues are critical feedback mechanisms to
@@ -240,7 +240,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
     /**
      * Clears all items from the campfire's cooking slots.
-     * 
+     *
      * This implementation of the Clearable interface allows the campfire to be emptied
      * programmatically, such as when the block is broken or another game mechanic requires
      * removing all cooking items at once.
@@ -251,7 +251,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
     /**
      * Handles behavior when the campfire block is replaced or destroyed.
-     * 
+     *
      * Drops any items that were being cooked when the campfire is broken,
      * preventing resource loss and maintaining the survival-oriented game design
      * of the Paleolithic Era mod.
@@ -267,7 +267,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
     /**
      * Reads component data from the component system.
-     * 
+     *
      * This allows the campfire to integrate with Minecraft's component system,
      * loading container data for the cooking items. The component system provides
      * a more flexible approach to data storage than traditional NBT.
@@ -286,7 +286,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
     /**
      * Adds components to the component builder for data serialization.
-     * 
+     *
      * Registers the campfire's inventory as a container component, allowing
      * it to be properly saved and loaded as part of Minecraft's component system.
      * This is critical for data persistence across game sessions.
@@ -302,7 +302,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
     /**
      * Removes redundant data from copied stack data.
-     * 
+     *
      * This deprecated method is maintained for backward compatibility with
      * Minecraft's data systems. It prevents duplicate item data when the
      * block entity is copied.
@@ -316,11 +316,11 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
     /**
      * Starts the burn timer for the crude campfire.
-     * 
+     *
      * When called, this method sets the campfire to burn for its full duration
      * (totalBurnTicks). This represents lighting the campfire with a primitive
      * fire-starting method, a critical survival skill in the Paleolithic era.
-     * 
+     *
      * The limited burn time (compared to modern furnaces) reflects the primitive
      * technology available during this era, requiring players to regularly maintain
      * their fire sources.
@@ -333,13 +333,13 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
     companion object {
         /**
          * Handles server-side tick logic for a lit crude campfire.
-         * 
+         *
          * This method is responsible for several critical gameplay mechanics:
          * 1. Burn time management - decreases remaining burn time and extinguishes when depleted
          * 2. Cooking progress - advances cooking time for each item being cooked
          * 3. Item completion - finishes cooking items that have reached their cooking time
          * 4. Result spawning - drops the cooked item into the world when complete
-         * 
+         *
          * These mechanics simulate primitive cooking techniques of the Paleolithic era,
          * where food preparation was a time-consuming but essential survival activity.
          * The limited burn time creates gameplay tension, requiring players to manage
@@ -374,7 +374,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
                 val itemStack = blockEntity.itemsBeingCooked[i]
                 if (!itemStack.isEmpty) {
                     bl = true
-                    val var10002: Int = blockEntity.cookingTimes[i]++
+                    blockEntity.cookingTimes[i]++
                     if (blockEntity.cookingTimes[i] >= blockEntity.cookingTotalTimes[i]) {
                         val singleStackRecipeInput = SingleStackRecipeInput(itemStack)
                         val itemStack2 =
@@ -408,12 +408,12 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
         /**
          * Handles server-side tick logic for an unlit crude campfire.
-         * 
+         *
          * Even when not burning, the campfire maintains state for partially cooked items.
          * However, cooking progress degrades over time when the fire is out, simulating
          * how food cools down when not actively heated - a realistic mechanic that adds
          * challenge to Paleolithic cooking.
-         * 
+         *
          * The cooking regression occurs at twice the rate of progression (decreasing by 2 ticks
          * per game tick), creating urgency to relight fires that have gone out during cooking.
          * This represents the struggle of maintaining consistent heat sources in primitive technology.
@@ -441,15 +441,15 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
 
         /**
          * Handles client-side visual effects for the crude campfire.
-         * 
+         *
          * This method is responsible for creating the visual representation of the campfire,
          * generating smoke particles both from the fire itself and from items being cooked.
          * These visual cues serve multiple gameplay purposes:
-         * 
+         *
          * 1. Feedback for cooking - Players can see when items are cooking from the additional smoke
          * 2. Navigation aid - Smoke from campfires can help players locate their base from a distance
          * 3. Atmosphere - Creates the primitive, rustic feel appropriate for Paleolithic technology
-         * 
+         *
          * The smoke particles from cooking items are positioned precisely around the campfire
          * based on which slot the item occupies, creating a realistic cooking simulation.
          *

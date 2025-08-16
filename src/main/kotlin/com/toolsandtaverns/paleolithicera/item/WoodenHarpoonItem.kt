@@ -3,7 +3,6 @@ package com.toolsandtaverns.paleolithicera.item
 import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.component.type.TooltipDisplayComponent
 import net.minecraft.entity.player.PlayerEntity
@@ -23,21 +22,21 @@ import net.minecraft.world.RaycastContext
 import net.minecraft.world.World
 import java.util.function.Consumer
 
-    /**
-     * A fishing tool that allows players to catch fish by playing a minigame.
-     * 
-     * The harpoon can only be used when targeting a valid water patch.
-     * When used, it opens a timing-based minigame where the player must press space
-     * at the right moment to catch a fish.
-     */
-    class WoodenHarpoonItem(settings: Settings) : Item(settings) {
+/**
+ * A fishing tool that allows players to catch fish by playing a minigame.
+ *
+ * The harpoon can only be used when targeting a valid water patch.
+ * When used, it opens a timing-based minigame where the player must press space
+ * at the right moment to catch a fish.
+ */
+class WoodenHarpoonItem(settings: Settings) : Item(settings) {
 
     /**
      * Handles the right-click usage of the wooden harpoon.
-     * 
+     *
      * When a player right-clicks with this item while pointing at a valid water patch,
      * sends a packet to the client to open the harpoon fishing minigame screen.
-     * 
+     *
      * @param world The world in which the item is being used
      * @param user The player using the item
      * @param hand The hand in which the item is being held
@@ -75,11 +74,11 @@ import java.util.function.Consumer
 
     /**
      * Checks if a given block position is surrounded by a valid 3x3 patch of still water.
-     * 
+     *
      * This method verifies that the targeted block and all 8 adjacent blocks in the same
      * Y-level contain still water (not flowing). This ensures the player is fishing in
      * a proper body of water rather than a single water block or flowing water.
-     * 
+     *
      * @param world The world to check in
      * @param center The central block position to check around
      * @return true if a 3x3 area of still water exists, false otherwise
@@ -101,10 +100,10 @@ import java.util.function.Consumer
 
     /**
      * Adds tooltip information to the wooden harpoon item.
-     * 
+     *
      * Displays a description of how to use the harpoon and, if advanced tooltips
      * are enabled (F3+H), shows the remaining durability of the item.
-     * 
+     *
      * @param stack The ItemStack being inspected
      * @param context The tooltip context
      * @param displayComponent The tooltip display component

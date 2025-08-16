@@ -1,17 +1,16 @@
 package com.toolsandtaverns.paleolithicera.datagen.loot
 
 import com.toolsandtaverns.paleolithicera.datagen.ModEntityTypeTagProvider.Companion.huntableAnimals
-import com.toolsandtaverns.paleolithicera.registry.ModEntityTags.HUNTABLE_TAG
 import com.toolsandtaverns.paleolithicera.registry.ModItems.RAWHIDE
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents
 import net.fabricmc.fabric.api.loot.v3.LootTableSource
-import net.minecraft.loot.entry.ItemEntry
-import net.minecraft.loot.LootPool
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider
-import net.minecraft.util.Identifier
 import net.minecraft.item.Items
+import net.minecraft.loot.LootPool
 import net.minecraft.loot.LootTable
+import net.minecraft.loot.entry.ItemEntry
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.registry.Registries
+import net.minecraft.util.Identifier
 
 object MobLootModifier {
 

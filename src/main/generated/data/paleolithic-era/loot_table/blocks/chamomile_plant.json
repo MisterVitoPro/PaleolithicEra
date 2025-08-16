@@ -8,7 +8,7 @@
           "block": "paleolithic-era:chamomile_plant",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "age": "2"
+            "age": "3"
           }
         }
       ],
