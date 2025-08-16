@@ -2,7 +2,9 @@ package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.util.RegistryHelpers
+import com.toolsandtaverns.paleolithicera.util.id
 import net.minecraft.block.Block
+import net.minecraft.entity.EntityType
 import net.minecraft.item.Item
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.TagKey
@@ -13,6 +15,11 @@ object ModTags {
     object Blocks {
         val REQUIRES_SHOVEL: TagKey<Block> = RegistryHelpers.tagKeyOfBlock("requires_shovel")
         val UNBREAKABLE_TAG: TagKey<Block> = RegistryHelpers.tagKeyOfBlock("unbreakable_without_tool")
+    }
+
+    object Entity {
+        val HUNTABLE_TAG: TagKey<EntityType<*>> =
+            TagKey.of(RegistryKeys.ENTITY_TYPE, id("huntable"))
     }
 
     object Items {

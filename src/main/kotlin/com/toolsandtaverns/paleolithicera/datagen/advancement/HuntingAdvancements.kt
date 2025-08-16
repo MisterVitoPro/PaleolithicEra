@@ -1,7 +1,6 @@
 package com.toolsandtaverns.paleolithicera.datagen.advancement
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
-import com.toolsandtaverns.paleolithicera.registry.ModEntityTags.HUNTABLE_TAG
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.minecraft.advancement.*
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
