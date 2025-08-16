@@ -197,16 +197,12 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
             if (world !is ServerWorld) return
 
             if (knappingTicks >= 20) {
-                println("Before - Tick() - Inventory Input (0): ${inventory.heldStacks[INPUT_SLOT]}")
-                println("Before - Tick() - Inventory Output (1): ${inventory.heldStacks[OUTPUT_SLOT]}")
                 if (!inventory.getStack(INPUT_SLOT).isEmpty) {
                     craft()
                 }
                 knappingTicks = 0
                 markDirty()
                 world.chunkManager.markForUpdate(pos)
-                println("Tick() - Inventory Input (0): ${inventory.heldStacks[INPUT_SLOT]}")
-                println("Tick() - Inventory Output (1): ${inventory.heldStacks[OUTPUT_SLOT]}")
             }
         }
     }

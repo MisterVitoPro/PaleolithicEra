@@ -44,7 +44,7 @@ object ModEntityType {
         id("crude_bed"),
         FabricBlockEntityTypeBuilder
             .create(::CrudeBedBlockEntity, ModBlocks.CRUDE_BED)
-            .build()  // ✅ Don't pass a type reference here!
+            .build()
     )
 
     fun initialize() {

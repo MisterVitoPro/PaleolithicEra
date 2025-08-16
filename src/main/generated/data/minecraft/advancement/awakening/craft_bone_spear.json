@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:awakening/craft_bone_knife",
+  "criteria": {
+    "craft_bone_spear": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:bone_spear"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.craft_bone_spear.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:bone_spear"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.craft_bone_spear.title"
+    }
+  },
+  "requirements": [
+    [
+      "craft_bone_spear"
+    ]
+  ],
+  "rewards": {
+    "experience": 2
+  },
+  "sends_telemetry_event": true
+}

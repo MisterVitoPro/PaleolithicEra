@@ -88,6 +88,7 @@
 
   "message.paleolithic-era.caught_item": "you caught a %s!",
   "message.paleolithic-era.fish_caught": "Caught a fish!",
+  "message.paleolithic-era.fish_miss": "Fish was too quick for you!",
   "message.paleolithic-era.fish_escaped": "The fish escaped...",
   "message.paleolithic-era.need_axe": "You need an axe to harvest logs.",
   "message.paleolithic-era.need_shovel": "You need a shovel to dig in dirt.",

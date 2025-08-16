@@ -21,7 +21,6 @@ object RockChunkLootModifier {
             if (source.isBuiltin &&
                 (id.value == Blocks.SAND.lootTableKey.get().value || id.value == Blocks.GRAVEL.lootTableKey.get().value)
             ) {
-                LOGGER.info("Adding Rock Chunk drop to: $id")
                 // Inject a new loot pool with a random drop chance
                 val rockChunkPool = LootPool.builder()
                     .with(
