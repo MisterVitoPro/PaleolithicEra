@@ -47,7 +47,7 @@ object ModPlacedFeatures {
             ELDERBERRY_BUSH_PLACED,
             PlacedFeature(
                 elderberryBushConfigured,
-                getHerbPlantPlacementModifiers(32)
+                getHerbPlantPlacementModifiers(38)
             )
         )
         context.register(
@@ -61,7 +61,7 @@ object ModPlacedFeatures {
             YARROW_PLANT_PLACED,
             PlacedFeature(
                 yarrowPlantConfigured,
-                getHerbPlantPlacementModifiers(42)
+                getHerbPlantPlacementModifiers(50)
             )
         )
         context.register(

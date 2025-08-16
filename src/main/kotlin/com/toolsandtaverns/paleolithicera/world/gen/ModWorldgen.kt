@@ -13,16 +13,14 @@ object ModWorldgen {
     fun initialize() {
         BiomeModifications.addFeature(
             BiomeSelectors.includeByKey(
-                BiomeKeys.PLAINS,
                 BiomeKeys.FOREST,
-                BiomeKeys.FLOWER_FOREST,
                 BiomeKeys.BIRCH_FOREST,
                 BiomeKeys.DARK_FOREST,
                 BiomeKeys.PALE_GARDEN,
                 BiomeKeys.TAIGA,
                 BiomeKeys.JUNGLE,
-                BiomeKeys.GROVE,
-                BiomeKeys.OLD_GROWTH_BIRCH_FOREST,
+                BiomeKeys.RIVER,
+                BiomeKeys.SPARSE_JUNGLE
             ),
             GenerationStep.Feature.VEGETAL_DECORATION,
             ModPlacedFeatures.ELDERBERRY_BUSH_PLACED
@@ -48,7 +46,6 @@ object ModWorldgen {
                 BiomeKeys.SUNFLOWER_PLAINS,
                 BiomeKeys.MEADOW,
                 BiomeKeys.CHERRY_GROVE,
-                BiomeKeys.TAIGA,
                 BiomeKeys.GROVE,
                 BiomeKeys.WINDSWEPT_HILLS,
             ),

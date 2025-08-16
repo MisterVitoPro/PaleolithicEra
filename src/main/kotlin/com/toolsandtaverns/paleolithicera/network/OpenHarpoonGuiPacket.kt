@@ -69,7 +69,7 @@ object OpenHarpoonGuiPacket {
                 player.sendMessage(Text.translatable("message.paleolithic-era.fish_escaped"), true)
             }
         } else {
-            player.sendMessage(Text.translatable("message.paleolithic-era.fish_escaped"), true)
+            player.sendMessage(Text.translatable("message.paleolithic-era.fish_miss"), true)
         }
     }
 
