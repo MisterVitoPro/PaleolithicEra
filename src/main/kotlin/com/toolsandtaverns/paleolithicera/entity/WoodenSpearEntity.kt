@@ -25,12 +25,11 @@ class WoodenSpearEntity : SpearEntity {
     /**
      * Engine constructor.
      */
-    constructor(type: EntityType<out WoodenSpearEntity>, world: World)
-            : super(type as EntityType<out SpearEntity>, world)
+    constructor(type: EntityType<out SpearEntity>, world: World)
+            : super(type, world)
 
     // Wooden tier: a shorter slow feels right at the start of the game.
-    override val slownessTickDuration: Int = 40 // 2s
-    override val slownessAmplifier: Int = 0     // Slowness I
+    override val slownessTickDuration: Int = 20 // 2s
 
     override fun getDefaultItemStack(): ItemStack = ItemStack(ModItems.WOODEN_SPEAR)
 

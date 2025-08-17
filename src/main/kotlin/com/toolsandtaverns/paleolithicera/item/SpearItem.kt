@@ -32,7 +32,7 @@ class SpearItem(settings: Settings, private val projectileCreator: ProjectileEnt
 
     companion object {
         private const val BASE_ATTACK_SPEED = -2.9
-        private const val THROW_SPEED = 2.5f
+        private const val THROW_SPEED = 1.0f
 
         fun createAttributeModifiers(material: ToolMaterial): AttributeModifiersComponent {
             return AttributeModifiersComponent.builder().add(

@@ -97,7 +97,7 @@ abstract class SpearEntity : PersistentProjectileEntity {
     /**
      * Optionally override to customize impact sounds per material.
      */
-    override fun getHitSound(): SoundEvent? = SoundEvents.ITEM_TRIDENT_HIT_GROUND
+    override fun getHitSound(): SoundEvent? = SoundEvents.BLOCK_WOOD_HIT
 
     /**
      * Always render; early-game spears are meant to be visible in-flight.
