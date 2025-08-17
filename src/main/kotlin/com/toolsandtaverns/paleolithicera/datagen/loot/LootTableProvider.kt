@@ -1,6 +1,5 @@
 package com.toolsandtaverns.paleolithicera.datagen.loot
 
-import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.block.EdiblePlantBlock.Companion.AGE
 import com.toolsandtaverns.paleolithicera.block.EdiblePlantBlock.Companion.MAX_AGE
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
@@ -22,7 +21,6 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider
 import net.minecraft.predicate.StatePredicate
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryWrapper
-import net.minecraft.util.Identifier
 import java.util.concurrent.CompletableFuture
 
 class LootTableProvider(
@@ -34,14 +32,14 @@ class LootTableProvider(
         addDrop(ModBlocks.KNAPPING_STATION)
         addDrop(ModBlocks.HIDE_DRYER)
         // Herbs
-        addPlantDrops(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]!!.asItem(), ModBlocks.ELDERBERRY_BUSH)
-        addPlantDrops(ModItems.EDIBLE_PLANTS[EdiblePlants.CHAMOMILE]!!.asItem(), ModBlocks.CHAMOMILE_PLANT)
-        addPlantDrops(ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW]!!.asItem(), ModBlocks.YARROW_PLANT)
-        addPlantDrops(ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_GARLIC]!!.asItem(), ModBlocks.WILD_GARLIC_PLANT)
-        addPlantDrops(ModItems.EDIBLE_PLANTS[EdiblePlants.EPHEDRA]!!.asItem(), ModBlocks.EPHEDRA_PLANT)
-        addPlantDrops(ModItems.EDIBLE_PLANTS[EdiblePlants.SAGEBRUSH]!!.asItem(), ModBlocks.SAGEBRUSH_PLANT)
-        addPlantDrops(ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_MINT]!!.asItem(), ModBlocks.WILD_MINT_PLANT)
-        addPlantDrops(ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_GINGER]!!.asItem(), ModBlocks.WILD_GINGER_PLANT)
+        addPlantDrops(ModItems.getPlantItem(EdiblePlants.ELDERBERRY), ModBlocks.ELDERBERRY_BUSH)
+        addPlantDrops(ModItems.getPlantItem(EdiblePlants.CHAMOMILE), ModBlocks.CHAMOMILE_PLANT)
+        addPlantDrops(ModItems.getPlantItem(EdiblePlants.YARROW), ModBlocks.YARROW_PLANT)
+        addPlantDrops(ModItems.getPlantItem(EdiblePlants.WILD_GARLIC), ModBlocks.WILD_GARLIC_PLANT)
+        addPlantDrops(ModItems.getPlantItem(EdiblePlants.EPHEDRA), ModBlocks.EPHEDRA_PLANT)
+        addPlantDrops(ModItems.getPlantItem(EdiblePlants.SAGEBRUSH), ModBlocks.SAGEBRUSH_PLANT)
+        addPlantDrops(ModItems.getPlantItem(EdiblePlants.WILD_MINT), ModBlocks.WILD_MINT_PLANT)
+        addPlantDrops(ModItems.getPlantItem(EdiblePlants.WILD_GINGER), ModBlocks.WILD_GINGER_PLANT)
 
         listOf(
             Blocks.OAK_LOG,

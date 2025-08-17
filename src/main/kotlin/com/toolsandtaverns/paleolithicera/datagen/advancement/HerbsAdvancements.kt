@@ -18,7 +18,7 @@ object HerbsAdvancements {
         val harvestBerries: AdvancementEntry = Advancement.Builder.create()
             .parent(parent)
             .display(
-                ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY],
+                ModItems.getPlantItem(EdiblePlants.ELDERBERRY),
                 Text.translatable("advancement.$MOD_ID.awakening.harvest_berries.title"),
                 Text.translatable("advancement.$MOD_ID.awakening.harvest_berries.description"),
                 null,
@@ -27,39 +27,39 @@ object HerbsAdvancements {
             )
             .criterion(
                 "has_raw_elderberries",
-                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY])
+                InventoryChangedCriterion.Conditions.items(ModItems.getPlantItem(EdiblePlants.ELDERBERRY))
             )
             .criterion(
                 "has_yarrow_herb",
-                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW])
+                InventoryChangedCriterion.Conditions.items(ModItems.getPlantItem(EdiblePlants.YARROW))
             )
             .criterion(
                 "has_chamomile_herb",
-                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.CHAMOMILE])
+                InventoryChangedCriterion.Conditions.items(ModItems.getPlantItem(EdiblePlants.CHAMOMILE))
             )
             .criterion(
                 "has_willow_bark_herb",
-                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.WILLOW_BARK])
+                InventoryChangedCriterion.Conditions.items(ModItems.getPlantItem(EdiblePlants.WILLOW_BARK))
             )
             .criterion(
                 "has_wild_garlic_herb",
-                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_GARLIC])
+                InventoryChangedCriterion.Conditions.items(ModItems.getPlantItem(EdiblePlants.WILD_GARLIC))
             )
             .criterion(
                 "has_wild_mint_herb",
-                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_MINT])
+                InventoryChangedCriterion.Conditions.items(ModItems.getPlantItem(EdiblePlants.WILD_MINT))
             )
             .criterion(
                 "has_ephedra_herb",
-                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.EPHEDRA])
+                InventoryChangedCriterion.Conditions.items(ModItems.getPlantItem(EdiblePlants.EPHEDRA))
             )
             .criterion(
                 "has_sagebrush_herb",
-                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.SAGEBRUSH])
+                InventoryChangedCriterion.Conditions.items(ModItems.getPlantItem(EdiblePlants.SAGEBRUSH))
             )
             .criterion(
                 "has_wild_ginger_herb",
-                InventoryChangedCriterion.Conditions.items(ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_GINGER])
+                InventoryChangedCriterion.Conditions.items(ModItems.getPlantItem(EdiblePlants.WILD_GINGER))
             )
             .rewards(AdvancementRewards.Builder.experience(15))
             .build(consumer, "awakening/harvest_berries")

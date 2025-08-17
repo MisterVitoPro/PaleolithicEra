@@ -14,31 +14,24 @@ import net.minecraft.world.World
 /**
  * Primitive throwable spear entity with no magical effects.
  */
-class WoodenSpearEntity : PersistentProjectileEntity {
+class WoodenSpearEntity : SpearEntity {
 
+    /**
+     * Thrown by a living owner with a specific item stack.
+     */
     constructor(world: World, owner: LivingEntity, stack: ItemStack)
-            : super(ModEntityType.WOODEN_SPEAR_ENTITY, owner, world, stack, stack) {
-        this.setNoGravity(false)
-    }
+            : super(ModEntityType.WOODEN_SPEAR_ENTITY as EntityType<out SpearEntity>, owner, world, stack)
 
+    /**
+     * Engine constructor.
+     */
     constructor(type: EntityType<out WoodenSpearEntity>, world: World)
-            : super(type, world)
+            : super(type as EntityType<out SpearEntity>, world)
 
-    override fun onEntityHit(hitResult: EntityHitResult) {
-        super.onEntityHit(hitResult)
-        if (!this.world.isClient) {
-            this.discard()
-        }
-    }
-
-    override fun getHitSound(): SoundEvent? {
-        return SoundEvents.ITEM_TRIDENT_HIT_GROUND
-    }
+    // Wooden tier: a shorter slow feels right at the start of the game.
+    override val slownessTickDuration: Int = 40 // 2s
+    override val slownessAmplifier: Int = 0     // Slowness I
 
     override fun getDefaultItemStack(): ItemStack = ItemStack(ModItems.WOODEN_SPEAR)
-
-    override fun shouldRender(cameraX: Double, cameraY: Double, cameraZ: Double): Boolean {
-        return true
-    }
 
 }

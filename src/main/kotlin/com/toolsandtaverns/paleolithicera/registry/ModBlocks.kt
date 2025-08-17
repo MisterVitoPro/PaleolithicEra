@@ -39,21 +39,21 @@ object ModBlocks {
             .luminance { state -> if (state.get(Properties.LIT)) 15 else 0 })
 
     val ELDERBERRY_BUSH: Block =
-        registerHerbPlantBlockWithoutItem("elderberry_bush", ModItems.EDIBLE_PLANTS[EdiblePlants.ELDERBERRY]!!)
+        registerHerbPlantBlockWithoutItem("elderberry_bush", ModItems.getPlantItem(EdiblePlants.ELDERBERRY))
     val CHAMOMILE_PLANT: Block =
-        registerHerbPlantBlockWithoutItem("chamomile_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.CHAMOMILE]!!)
+        registerHerbPlantBlockWithoutItem("chamomile_plant", ModItems.getPlantItem(EdiblePlants.CHAMOMILE))
     val YARROW_PLANT: Block =
-        registerHerbPlantBlockWithoutItem("yarrow_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.YARROW]!!)
+        registerHerbPlantBlockWithoutItem("yarrow_plant", ModItems.getPlantItem(EdiblePlants.YARROW))
     val WILD_GARLIC_PLANT: Block =
-        registerHerbPlantBlockWithoutItem("wild_garlic_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_GARLIC]!!)
+        registerHerbPlantBlockWithoutItem("wild_garlic_plant", ModItems.getPlantItem(EdiblePlants.WILD_GARLIC))
     val EPHEDRA_PLANT: Block =
-        registerHerbPlantBlockWithoutItem("ephedra_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.EPHEDRA]!!)
+        registerHerbPlantBlockWithoutItem("ephedra_plant", ModItems.getPlantItem(EdiblePlants.EPHEDRA))
     val SAGEBRUSH_PLANT: Block =
-        registerHerbPlantBlockWithoutItem("sagebrush_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.SAGEBRUSH]!!)
+        registerHerbPlantBlockWithoutItem("sagebrush_plant", ModItems.getPlantItem(EdiblePlants.SAGEBRUSH))
     val WILD_MINT_PLANT: Block =
-        registerHerbPlantBlockWithoutItem("wild_mint_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_MINT]!!)
+        registerHerbPlantBlockWithoutItem("wild_mint_plant", ModItems.getPlantItem(EdiblePlants.WILD_MINT))
     val WILD_GINGER_PLANT: Block =
-        registerHerbPlantBlockWithoutItem("wild_ginger_plant", ModItems.EDIBLE_PLANTS[EdiblePlants.WILD_GINGER]!!)
+        registerHerbPlantBlockWithoutItem("wild_ginger_plant", ModItems.getPlantItem(EdiblePlants.WILD_GINGER))
 
     val HIDE_DRYER: Block =
         register("hide_dryer", ::HideDryerBlock, AbstractBlock.Settings.create().strength(1.8f, 2.0f))
