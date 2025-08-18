@@ -69,19 +69,19 @@ object ModBlocks {
         ::PillarBlock,
         AbstractBlock.Settings.create()
             .instrument(NoteBlockInstrument.BASS)
-            .strength(2.0f).sounds(BlockSoundGroup.WOOD).burnable()
+            .strength(3.0f).sounds(BlockSoundGroup.WOOD).burnable()
     )
     val STRIPPED_WILLOW_LOG: Block = register(
         "stripped_willow_log",
         ::PillarBlock,
         AbstractBlock.Settings.create()
             .instrument(NoteBlockInstrument.BASS)
-            .strength(2.0f).sounds(BlockSoundGroup.WOOD).burnable()
+            .strength(3.0f).sounds(BlockSoundGroup.WOOD).burnable()
     )
     val WILLOW_PLANKS: Block = register(
         "willow_planks",
         ::Block,
-        AbstractBlock.Settings.create().strength(2.0f)
+        AbstractBlock.Settings.create().strength(3.0f)
     )
     val WILLOW_LEAVES: Block = register(
         "willow_leaves",

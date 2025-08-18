@@ -2,9 +2,18 @@ package com.toolsandtaverns.paleolithicera.event
 
 import com.toolsandtaverns.paleolithicera.registry.ModTags.Blocks.REQUIRES_SHOVEL
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents
+import net.fabricmc.fabric.api.loot.v3.LootTableSource
 import net.minecraft.block.Blocks
 import net.minecraft.item.Items
+import net.minecraft.loot.LootPool
+import net.minecraft.loot.LootTable
+import net.minecraft.loot.condition.RandomChanceLootCondition
+import net.minecraft.loot.condition.SurvivesExplosionLootCondition
+import net.minecraft.loot.entry.ItemEntry
 import net.minecraft.registry.Registries
+import net.minecraft.registry.RegistryKey
+import net.minecraft.registry.RegistryWrapper
 
 
 object BlockDropHandler {
@@ -34,22 +43,20 @@ object BlockDropHandler {
             }
         })
 
-//        UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->
-//            val stack = player.getStackInHand(hand)
-//            val pos: BlockPos = hitResult.blockPos
-//            val state = world.getBlockState(pos)
-//
-//            // Only trigger if holding an axe and block is strippable
-//            if (stack.item is AxeItem && StrippableBlockRegistry.get(state.block) != null) {
-//                if (!world.isClient && world is ServerWorld) {
-//                    val dropCount = world.random.nextBetween(1, 3)
-//                    val bark = ItemStack(ModItems.BARK, dropCount)
-//                    val dropPos = pos.offset(Direction.UP)
-//                    BlockPos.dropStack(world, dropPos, bark)
-//                }
-//            }
-//
-//            ActionResult.PASS // Let vanilla stripping happen
-//        })
+        LootTableEvents.MODIFY.register { key, tableBuilder, _, _ ->
+            val id = key.value
+            // Target any block loot table whose path ends with "_leaves" (e.g., blocks/oak_leaves).
+            if (id.path.startsWith("blocks/") && id.path.endsWith("_leaves")) {
+                // Build a pool that drops 1 stick with a 30% chance and respects explosion decay.
+                val pool = LootPool.builder()
+                    .with(ItemEntry.builder(Items.STICK)) // add stick as an entry
+                    .conditionally(RandomChanceLootCondition.builder(0.20f)) // 30% drop chance
+                    .conditionally(SurvivesExplosionLootCondition.builder()) // standard block explosion behavior
+
+                // Append our pool to the targeted leaves loot table.
+                tableBuilder.pool(pool)
+            }
+        }
+
     }
 }

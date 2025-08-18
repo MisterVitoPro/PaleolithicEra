@@ -1,5 +1,6 @@
 package com.toolsandtaverns.paleolithicera.mixin;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.ItemEntity;
@@ -9,6 +10,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,17 +36,12 @@ public abstract class LeafAndLogBehaviorMixin {
     private void addStickDrop(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         ServerWorld world = player.getWorld();
         BlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof LeavesBlock) {
+        if (state.getBlock() instanceof LeavesBlock) { // TODO this is air because its after the block broke
             Random random = world.getRandom();
             if (random.nextFloat() < 0.3f) {
-                ItemEntity itemEntity = new ItemEntity(
-                        world,
-                        pos.getX() + 0.5,
-                        pos.getY() + 0.5,
-                        pos.getZ() + 0.5,
-                        new ItemStack(Items.STICK)
-                );
-                world.spawnEntity(itemEntity);
+                BlockPos dropPos = pos.offset(Direction.UP, 0);
+                ItemStack dropStack = new ItemStack(Items.STICK,1);
+                Block.dropStack(world, dropPos, dropStack);
             }
         }
     }

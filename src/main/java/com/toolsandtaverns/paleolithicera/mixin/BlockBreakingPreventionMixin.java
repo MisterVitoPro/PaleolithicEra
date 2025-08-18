@@ -48,9 +48,11 @@ public abstract class BlockBreakingPreventionMixin {
             CallbackInfo ci
     ) {
         if (action != PlayerActionC2SPacket.Action.START_DESTROY_BLOCK) return;
+        if(player.isCreative()) return;
 
-        BlockState state = player.getWorld().getBlockState(pos);
         ServerWorld world = player.getWorld();
+        BlockState state = player.getWorld().getBlockState(pos);
+
 
         // Check UNBREAKABLE_TAG (axe required)
         checkToolRequirement(
