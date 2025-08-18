@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.event
 
-import com.toolsandtaverns.paleolithicera.datagen.ModEntityTypeTagProvider.Companion.huntableAnimals
+import com.toolsandtaverns.paleolithicera.datagen.tag.ModEntityTypeTagProvider.Companion.huntableAnimals
 import com.toolsandtaverns.paleolithicera.registry.ModItems.RAWHIDE
 import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents

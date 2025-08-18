@@ -83,6 +83,8 @@ object PaleolithicEraClient : ClientModInitializer {
         BlockRenderLayerMap.putBlock(ModBlocks.SAGEBRUSH_PLANT, BlockRenderLayer.CUTOUT)
         BlockRenderLayerMap.putBlock(ModBlocks.WILD_MINT_PLANT, BlockRenderLayer.CUTOUT)
         BlockRenderLayerMap.putBlock(ModBlocks.WILD_GARLIC_PLANT, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.WILLOW_SAPLING, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.WILLOW_LEAF_VINES, BlockRenderLayer.CUTOUT)
 
         // Register client-side network handlers for the harpoon fishing system
         OpenHarpoonGuiClient.register()

@@ -23,7 +23,7 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryWrapper
 import java.util.concurrent.CompletableFuture
 
-class LootTableProvider(
+class ModBlockLootTableProvider(
     output: FabricDataOutput,
     registryLookup: CompletableFuture<RegistryWrapper.WrapperLookup>
 ) : FabricBlockLootTableProvider(output, registryLookup) {
@@ -54,6 +54,16 @@ class LootTableProvider(
             Blocks.CRIMSON_STEM,
             Blocks.WARPED_STEM
         ).forEach { addBarkToLogDrop(it, Registries.ITEM.get(id( "bark"))) }
+
+        // Willow Tree
+        addDrop(ModBlocks.WILLOW_LOG)
+        addDrop(ModBlocks.STRIPPED_WILLOW_LOG)
+        addDrop(ModBlocks.WILLOW_PLANKS)
+        addDrop(ModBlocks.WILLOW_SAPLING)
+        addDrop(
+            ModBlocks.WILLOW_LEAVES,
+            leavesDrops(ModBlocks.WILLOW_LEAVES, ModBlocks.WILLOW_SAPLING, 0.0625f)
+        )
 
     }
 

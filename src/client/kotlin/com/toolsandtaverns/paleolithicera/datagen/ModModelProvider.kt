@@ -54,6 +54,13 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 .put(TextureKey.DOWN, id("block/hide_dryer_side"))
                 .put(TextureKey.PARTICLE, id("block/hide_dryer_side"))
         }
+
+        blockStateModelGenerator.createLogTexturePool(ModBlocks.WILLOW_LOG).log(ModBlocks.WILLOW_LOG)
+        blockStateModelGenerator.createLogTexturePool(ModBlocks.STRIPPED_WILLOW_LOG).log(ModBlocks.STRIPPED_WILLOW_LOG)
+
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.WILLOW_PLANKS)
+        blockStateModelGenerator.registerSingleton(ModBlocks.WILLOW_LEAVES, TexturedModel.LEAVES)
+        blockStateModelGenerator.registerTintableCrossBlockState(ModBlocks.WILLOW_SAPLING, BlockStateModelGenerator.CrossType.NOT_TINTED)
     }
 
     /**

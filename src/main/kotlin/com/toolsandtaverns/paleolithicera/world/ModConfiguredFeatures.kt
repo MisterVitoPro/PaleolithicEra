@@ -1,15 +1,25 @@
 package com.toolsandtaverns.paleolithicera.world
 
+import com.google.common.collect.ImmutableList
 import com.toolsandtaverns.paleolithicera.block.EdiblePlantBlock
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.util.id
+import com.toolsandtaverns.paleolithicera.world.gen.treedecorator.WillowLeavesTreeDecorator
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.registry.Registerable
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
+import net.minecraft.util.math.intprovider.ConstantIntProvider
 import net.minecraft.world.gen.feature.*
+import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer
 import net.minecraft.world.gen.stateprovider.BlockStateProvider
+import net.minecraft.world.gen.treedecorator.CocoaTreeDecorator
+import net.minecraft.world.gen.treedecorator.LeavesVineTreeDecorator
+import net.minecraft.world.gen.treedecorator.TreeDecorator
+import net.minecraft.world.gen.treedecorator.TrunkVineTreeDecorator
+import net.minecraft.world.gen.trunk.StraightTrunkPlacer
 
 object ModConfiguredFeatures {
 
@@ -19,6 +29,7 @@ object ModConfiguredFeatures {
     val WILD_GARLIC_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("wild_garlic_plant")
     val EPHEDRA_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("ephedra_plant")
     val SAGEBRUSH_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("sagebrush_plant")
+    val WILLOW_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("willow")
     val WILD_MINT_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("wild_mint_plant")
     val WILD_GINGER_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("wild_ginger_plant")
 
@@ -62,6 +73,22 @@ object ModConfiguredFeatures {
             context,
             WILD_GINGER_PLANT_CONFIGURED_KEY,
             getHerbPatchConfig(ModBlocks.WILD_GINGER_PLANT)
+        )
+
+        Feature.TREE.register<TreeFeatureConfig, Feature<TreeFeatureConfig>>(
+            context = context,
+            key = WILLOW_CONFIGURED_KEY,
+            configuration = TreeFeatureConfig.Builder(
+                BlockStateProvider.of(ModBlocks.WILLOW_LOG),
+                StraightTrunkPlacer(3, 5, 2),
+                BlockStateProvider.of(ModBlocks.WILLOW_LEAVES),
+                BlobFoliagePlacer(ConstantIntProvider.create(2),
+                    ConstantIntProvider.create(0),
+                    2),
+                TwoLayersFeatureSize(1, 0, 0))
+                    .decorators(listOf(TrunkVineTreeDecorator.INSTANCE, WillowLeavesTreeDecorator(0.55F)))
+                    .ignoreVines()
+            .build()
         )
     }
 

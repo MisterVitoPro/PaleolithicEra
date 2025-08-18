@@ -1,11 +1,13 @@
 package com.toolsandtaverns.paleolithicera.world
 
+import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.util.id
 import net.minecraft.registry.Registerable
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.world.gen.feature.PlacedFeature
 import net.minecraft.world.gen.feature.PlacedFeatures
+import net.minecraft.world.gen.feature.VegetationPlacedFeatures
 import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier
 import net.minecraft.world.gen.placementmodifier.PlacementModifier
 import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier
@@ -30,18 +32,19 @@ object ModPlacedFeatures {
     val WILD_GINGER_PLANT_PLACED: RegistryKey<PlacedFeature> =
         RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("wild_ginger_plant_placed"))
 
+    val WILLOW_PLACED: RegistryKey<PlacedFeature> =
+        RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("willow_placed"))
+
     fun bootstrap(context: Registerable<PlacedFeature>) {
         val configuredLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE)
         val elderberryBushConfigured = configuredLookup.getOrThrow(ModConfiguredFeatures.ELDERBERRY_BUSH_CONFIGURED_KEY)
         val chamomilePlantConfigured = configuredLookup.getOrThrow(ModConfiguredFeatures.CHAMOMILE_PLANT_CONFIGURED_KEY)
         val yarrowPlantConfigured = configuredLookup.getOrThrow(ModConfiguredFeatures.YARROW_PLANT_CONFIGURED_KEY)
-        val wildGarlicPlantConfigured =
-            configuredLookup.getOrThrow(ModConfiguredFeatures.WILD_GARLIC_PLANT_CONFIGURED_KEY)
+        val wildGarlicPlantConfigured = configuredLookup.getOrThrow(ModConfiguredFeatures.WILD_GARLIC_PLANT_CONFIGURED_KEY)
         val ephedraPlantConfigured = configuredLookup.getOrThrow(ModConfiguredFeatures.EPHEDRA_PLANT_CONFIGURED_KEY)
         val sagebrushPlantConfigured = configuredLookup.getOrThrow(ModConfiguredFeatures.SAGEBRUSH_PLANT_CONFIGURED_KEY)
         val wildMintPlantConfigured = configuredLookup.getOrThrow(ModConfiguredFeatures.WILD_MINT_PLANT_CONFIGURED_KEY)
-        val wildGingerPlantConfigured =
-            configuredLookup.getOrThrow(ModConfiguredFeatures.WILD_GARLIC_PLANT_CONFIGURED_KEY)
+        val wildGingerPlantConfigured = configuredLookup.getOrThrow(ModConfiguredFeatures.WILD_GARLIC_PLANT_CONFIGURED_KEY)
 
         context.register(
             ELDERBERRY_BUSH_PLACED,
@@ -99,6 +102,16 @@ object ModPlacedFeatures {
                 getHerbPlantPlacementModifiers(40)
             )
         )
+
+        context.register(
+            WILLOW_PLACED,
+            PlacedFeature(
+                configuredLookup.getOrThrow(ModConfiguredFeatures.WILLOW_CONFIGURED_KEY),
+                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(2, 0.1f, 2), ModBlocks.WILLOW_SAPLING)
+            )
+        )
+
+
 
     }
 

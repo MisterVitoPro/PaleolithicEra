@@ -1,13 +1,15 @@
-package com.toolsandtaverns.paleolithicera.datagen
+package com.toolsandtaverns.paleolithicera.datagen.tag
 
+import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModTags
-import com.toolsandtaverns.paleolithicera.util.RegistryHelpers
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.block.Blocks
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
+import net.minecraft.registry.tag.BlockTags
+import net.minecraft.registry.tag.ItemTags
 import net.minecraft.util.Identifier
 import java.util.concurrent.CompletableFuture
 
@@ -54,39 +56,50 @@ class ModBlockTagProvider(
      * @param wrapperLookup Registry wrapper lookup for accessing block registries
      */
     override fun configure(wrapperLookup: RegistryWrapper.WrapperLookup) {
+        valueLookupBuilder(BlockTags.LOGS_THAT_BURN)
+            .add(ModBlocks.WILLOW_LOG)
+            .add(ModBlocks.STRIPPED_WILLOW_LOG)
+
+        valueLookupBuilder(BlockTags.LOGS)
+            .add(ModBlocks.WILLOW_LOG)
+            .add(ModBlocks.STRIPPED_WILLOW_LOG)
 
         // All log types are added to the unbreakable tag, as harvesting trees without tools
         // would have been impossible for Paleolithic humans. This creates an important
         // progression gate where players must craft primitive axes before accessing wood in quantity.
-        builder(ModTags.Blocks.UNBREAKABLE_TAG)
-            // Natural logs require tools to harvest
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("oak_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("spruce_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("birch_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("jungle_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("acacia_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("dark_oak_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("mangrove_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("cherry_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("bamboo_block")))
-            // Stripped logs are also unbreakable without tools, as they still represent substantial wood
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("stripped_oak_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("stripped_spruce_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("stripped_birch_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("stripped_jungle_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("stripped_acacia_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("stripped_dark_oak_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("stripped_mangrove_log")))
-            .add(RegistryKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("stripped_cherry_log")))
+        valueLookupBuilder(ModTags.Blocks.UNBREAKABLE_TAG)
+//            .add(Blocks.SPRUCE_LOG)
+//            .add(Blocks.BIRCH_LOG)
+//            .add(Blocks.JUNGLE_LOG)
+//            .add(Blocks.ACACIA_LOG)
+//            .add(Blocks.DARK_OAK_LOG)
+//            .add(Blocks.MANGROVE_LOG)
+//            .add(Blocks.CHERRY_LOG)
+//            .add(Blocks.BAMBOO_BLOCK)
+//            .add(Blocks.STRIPPED_OAK_LOG)
+//            .add(Blocks.STRIPPED_SPRUCE_LOG)
+//            .add(Blocks.STRIPPED_BIRCH_LOG)
+//            .add(Blocks.STRIPPED_JUNGLE_LOG)
+//            .add(Blocks.STRIPPED_ACACIA_LOG)
+//            .add(Blocks.STRIPPED_DARK_OAK_LOG)
+//            .add(Blocks.STRIPPED_MANGROVE_LOG)
+//            .add(Blocks.STRIPPED_CHERRY_LOG)
+            .addOptionalTag(BlockTags.LOGS)
 
-        builder(ModTags.Blocks.REQUIRES_SHOVEL)
-            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.COARSE_DIRT))
-            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.DIRT))
-            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.GRASS_BLOCK))
-            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.MOSS_BLOCK))
-            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.MYCELIUM))
-            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.PODZOL))
-            .add(RegistryHelpers.regKeyOfBlockVanilla(Blocks.ROOTED_DIRT))
+        valueLookupBuilder(ModTags.Blocks.REQUIRES_SHOVEL)
+//            .add(Blocks.COARSE_DIRT)
+//            .add(Blocks.DIRT)
+//            .add(Blocks.GRASS_BLOCK)
+//            .add(Blocks.MOSS_BLOCK)
+//            .add(Blocks.MYCELIUM)
+//            .add(Blocks.PODZOL)
+//            .add(Blocks.ROOTED_DIRT)
+            .addOptionalTag(BlockTags.DIRT)
+
+
+        valueLookupBuilder(BlockTags.SWORD_EFFICIENT)
+            .add(ModBlocks.WILLOW_LEAF_VINES)
+
     }
 
     /**

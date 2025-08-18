@@ -7,17 +7,20 @@ import com.toolsandtaverns.paleolithicera.util.id
 import com.toolsandtaverns.paleolithicera.util.regKeyOfItem
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
-import net.minecraft.block.AbstractBlock
-import net.minecraft.block.Block
-import net.minecraft.block.MapColor
+import net.minecraft.block.*
+import net.minecraft.block.enums.NoteBlockInstrument
 import net.minecraft.block.piston.PistonBehavior
+import net.minecraft.entity.EntityType
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroups
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.state.property.Properties
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.BlockView
 
 
 object ModBlocks {
@@ -29,7 +32,8 @@ object ModBlocks {
             .pistonBehavior(PistonBehavior.DESTROY)
     )
     val CRUDE_CAMPFIRE: Block = register(
-        "crude_campfire", ::CrudeCampFireBlock,
+        "crude_campfire",
+        ::CrudeCampFireBlock,
         AbstractBlock.Settings.create()
             .mapColor(MapColor.TERRACOTTA_BROWN)
             .strength(1.0f)
@@ -60,6 +64,72 @@ object ModBlocks {
     val KNAPPING_STATION: Block =
         register("knapping_station", ::KnappingStationBlock, AbstractBlock.Settings.create().strength(1.8f, 2.0f))
 
+    val WILLOW_LOG: Block = register(
+        "willow_log",
+        ::PillarBlock,
+        AbstractBlock.Settings.create()
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(2.0f).sounds(BlockSoundGroup.WOOD).burnable()
+    )
+    val STRIPPED_WILLOW_LOG: Block = register(
+        "stripped_willow_log",
+        ::PillarBlock,
+        AbstractBlock.Settings.create()
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(2.0f).sounds(BlockSoundGroup.WOOD).burnable()
+    )
+    val WILLOW_PLANKS: Block = register(
+        "willow_planks",
+        ::Block,
+        AbstractBlock.Settings.create().strength(2.0f)
+    )
+    val WILLOW_LEAVES: Block = register(
+        "willow_leaves",
+        { settings -> UntintedParticleLeavesBlock(0.02f, ParticleTypes.CHERRY_LEAVES, settings) },
+        AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).strength(0.2f).ticksRandomly()
+            .sounds(BlockSoundGroup.AZALEA_LEAVES).nonOpaque()
+            .allowsSpawning { state: BlockState, world: BlockView, pos: BlockPos?, type: EntityType<*> ->
+                Blocks.canSpawnOnLeaves(
+                    state,
+                    world,
+                    pos,
+                    type
+                )
+            }.suffocates { state: BlockState, world: BlockView, pos: BlockPos ->
+                Blocks.never(
+                    state,
+                    world,
+                    pos
+                )
+            }
+            .blockVision { state: BlockState, world: BlockView, pos: BlockPos ->
+                Blocks.never(
+                    state,
+                    world,
+                    pos
+                )
+            }.burnable().pistonBehavior(PistonBehavior.DESTROY)
+            .solidBlock { state: BlockState, world: BlockView, pos: BlockPos ->
+                Blocks.never(
+                    state,
+                    world,
+                    pos
+                )
+            })
+
+    val WILLOW_SAPLING: Block = register(
+        "willow_sapling",
+        { settings: AbstractBlock.Settings -> SaplingBlock(ModSaplingGenerator.WILLOW, settings.mapColor(MapColor.DARK_GREEN)
+            .noCollision().ticksRandomly().breakInstantly()
+            .sounds(BlockSoundGroup.GRASS).pistonBehavior(PistonBehavior.DESTROY))
+
+        })
+    val WILLOW_LEAF_VINES: Block = register(
+        "willow_leaf_vine",
+        ::WillowLeafVinesBlock,
+        AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).replaceable().noCollision().ticksRandomly()
+            .strength(0.2f).sounds(BlockSoundGroup.VINE).burnable().pistonBehavior(PistonBehavior.DESTROY)
+    )
 
     fun initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL)
@@ -71,10 +141,11 @@ object ModBlocks {
             }
     }
 
+
     private fun register(
         name: String,
         blockFactory: (AbstractBlock.Settings) -> Block,
-        settings: AbstractBlock.Settings,
+        settings: AbstractBlock.Settings = AbstractBlock.Settings.create(),
         shouldRegisterItem: Boolean = true
     ): Block {
         // Create a registry key for the block
