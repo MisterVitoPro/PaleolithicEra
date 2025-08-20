@@ -57,8 +57,6 @@ object PaleolithicEra : ModInitializer {
         ModEntityType.initialize()
         // Initialize container/GUI screen handlers
         ModScreenHandlers.initialize()
-        // Initialize custom crafting recipes
-        ModRecipes.initialize()
         // Initialize advancement criteria
         ModCriteria.initialize()
         ModItemGroups.register()
@@ -87,6 +85,9 @@ object PaleolithicEra : ModInitializer {
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.WILLOW_LEAF_VINES, 5, 5)
 
         StrippableBlockRegistry.register(ModBlocks.WILLOW_LOG, ModBlocks.STRIPPED_WILLOW_LOG)
+
+        // Initialize custom crafting recipes
+        ModRecipes.initialize()
     }
 
 }
