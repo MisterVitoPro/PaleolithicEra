@@ -22,6 +22,7 @@ public class ClientBlockBreakBlockerMixin {
     private void preventBreakingProgress(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player == null) return;
+        if(player.isCreative()) return;
 
         BlockState state = player.getWorld().getBlockState(pos);
         ItemStack heldItem = player.getMainHandStack();

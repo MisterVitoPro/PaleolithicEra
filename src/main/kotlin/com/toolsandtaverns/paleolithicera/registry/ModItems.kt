@@ -1,6 +1,5 @@
 package com.toolsandtaverns.paleolithicera.registry
 
-import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.entity.BoneSpearEntity
 import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.item.FireDrillItem
@@ -27,7 +26,6 @@ import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.sound.SoundEvents
-import net.minecraft.util.Identifier
 
 /**
  * Registry for all custom items in the Paleolithic Era mod.
@@ -41,7 +39,7 @@ import net.minecraft.util.Identifier
  * Each item is registered with the appropriate settings and factory method.
  */
 object ModItems {
-    val EDIBLE_PLANTS: Map<EdiblePlants, Item> = ModEdiblePlants.registerAll()
+    private val EDIBLE_PLANTS: Map<EdiblePlants, Item> = ModEdiblePlants.registerAll()
 
     val BARK: Item = register("bark", { settings: Item.Settings -> Item(settings) })
     val PLANT_FIBER: Item = register("plant_fiber", { settings: Item.Settings -> Item(settings) })
@@ -160,7 +158,7 @@ object ModItems {
      * @param settings Optional settings to apply to the item (default: empty settings)
      * @return The registered item instance
      */
-    fun register(
+    private fun register(
         name: String,
         itemFactory: (Item.Settings) -> Item,
         settings: Item.Settings = Item.Settings()
@@ -170,5 +168,7 @@ object ModItems {
         Registry.register(Registries.ITEM, itemKey, item)
         return item
     }
+
+    fun getPlantItem(ediblePlant: EdiblePlants): Item = EDIBLE_PLANTS[ediblePlant]!!.asItem()
 
 }

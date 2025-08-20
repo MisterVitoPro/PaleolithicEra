@@ -2,10 +2,13 @@ package com.toolsandtaverns.paleolithicera
 
 import com.toolsandtaverns.paleolithicera.datagen.*
 import com.toolsandtaverns.paleolithicera.datagen.loot.EntityLootTableProvider
-import com.toolsandtaverns.paleolithicera.datagen.loot.LootTableProvider
+import com.toolsandtaverns.paleolithicera.datagen.loot.ModBlockLootTableProvider
 import com.toolsandtaverns.paleolithicera.datagen.recipe.EdiblePlantRecipeProvider
 import com.toolsandtaverns.paleolithicera.datagen.recipe.KnappingRecipeProvider
 import com.toolsandtaverns.paleolithicera.datagen.recipe.VanillaRecipeProvider
+import com.toolsandtaverns.paleolithicera.datagen.tag.ModBlockTagProvider
+import com.toolsandtaverns.paleolithicera.datagen.tag.ModEntityTypeTagProvider
+import com.toolsandtaverns.paleolithicera.datagen.tag.ModItemTagProvider
 import com.toolsandtaverns.paleolithicera.world.ModConfiguredFeatures
 import com.toolsandtaverns.paleolithicera.world.ModPlacedFeatures
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
@@ -38,7 +41,7 @@ object PaleolithicEraDataGeneratorClient : DataGeneratorEntrypoint {
         pack.addProvider(::KnappingRecipeProvider)
         pack.addProvider(::EdiblePlantRecipeProvider)
         // Add loot table generator for creating loot tables
-        pack.addProvider(::LootTableProvider)
+        pack.addProvider(::ModBlockLootTableProvider)
         pack.addProvider(::EntityLootTableProvider)
         // Add registry data generator for other registry data
         pack.addProvider(::ModDynamicRegistryProvider)

@@ -3,13 +3,20 @@ package com.toolsandtaverns.paleolithicera.world
 import com.toolsandtaverns.paleolithicera.block.EdiblePlantBlock
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.util.id
+import com.toolsandtaverns.paleolithicera.world.gen.treedecorator.WillowLeavesTreeDecorator
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.registry.Registerable
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
+import net.minecraft.util.math.Direction
+import net.minecraft.util.math.intprovider.ConstantIntProvider
+import net.minecraft.world.gen.blockpredicate.BlockPredicate
 import net.minecraft.world.gen.feature.*
+import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer
 import net.minecraft.world.gen.stateprovider.BlockStateProvider
+import net.minecraft.world.gen.trunk.StraightTrunkPlacer
 
 object ModConfiguredFeatures {
 
@@ -19,6 +26,7 @@ object ModConfiguredFeatures {
     val WILD_GARLIC_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("wild_garlic_plant")
     val EPHEDRA_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("ephedra_plant")
     val SAGEBRUSH_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("sagebrush_plant")
+    val WILLOW_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("willow")
     val WILD_MINT_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("wild_mint_plant")
     val WILD_GINGER_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("wild_ginger_plant")
 
@@ -63,6 +71,22 @@ object ModConfiguredFeatures {
             WILD_GINGER_PLANT_CONFIGURED_KEY,
             getHerbPatchConfig(ModBlocks.WILD_GINGER_PLANT)
         )
+
+        Feature.TREE.register<TreeFeatureConfig, Feature<TreeFeatureConfig>>(
+            context = context,
+            key = WILLOW_CONFIGURED_KEY,
+            configuration = TreeFeatureConfig.Builder(
+                BlockStateProvider.of(ModBlocks.WILLOW_LOG),
+                StraightTrunkPlacer(4, 5, 2),
+                BlockStateProvider.of(ModBlocks.WILLOW_LEAVES),
+                BlobFoliagePlacer(ConstantIntProvider.create(2),
+                    ConstantIntProvider.create(0),
+                    2),
+                TwoLayersFeatureSize(1, 1, 0))
+                    .decorators(listOf(WillowLeavesTreeDecorator(0.55F)))
+                    .ignoreVines()
+            .build()
+        )
     }
 
     fun registerKey(name: String): RegistryKey<ConfiguredFeature<*, *>> {
@@ -77,18 +101,35 @@ object ModConfiguredFeatures {
         context.register(key, ConfiguredFeature<FC, F>(this, configuration))
     }
 
-    private fun getHerbPatchConfig(block: Block): RandomPatchFeatureConfig {
-        return ConfiguredFeatures.createRandomPatchFeatureConfig(
+    private fun getHerbPatchConfig(block: Block,
+                                   tries: Int = 23,
+                                   xzSpread: Int = 3,
+                                   ySpread: Int = 2,
+                                   predicateBlocks: List<Block> = listOf(Blocks.GRASS_BLOCK)): RandomPatchFeatureConfig {
+        val simpleEntry = PlacedFeatures.createEntry(
             Feature.SIMPLE_BLOCK,
             SimpleBlockFeatureConfig(
-                BlockStateProvider.of(
-                    block.defaultState.with(
-                        EdiblePlantBlock.AGE,
-                        EdiblePlantBlock.MAX_AGE
-                    )
-                )
+                BlockStateProvider.of(block.defaultState.with(EdiblePlantBlock.AGE, EdiblePlantBlock.MAX_AGE))
             ),
-            listOf(Blocks.GRASS_BLOCK)
+            createBlockPredicate(predicateBlocks)
         )
+
+        return RandomPatchFeatureConfig(
+            tries,
+            xzSpread,
+            ySpread,
+            simpleEntry
+        )
+    }
+
+    private fun createBlockPredicate(validGround: List<Block>): BlockPredicate {
+        return if (!validGround.isEmpty()) {
+            BlockPredicate.bothOf(
+                BlockPredicate.IS_AIR,
+                BlockPredicate.matchingBlocks(Direction.DOWN.vector, validGround)
+            )
+        } else {
+            BlockPredicate.IS_AIR
+        }
     }
 }

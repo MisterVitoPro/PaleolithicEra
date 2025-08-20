@@ -1,4 +1,4 @@
-package com.toolsandtaverns.paleolithicera.datagen
+package com.toolsandtaverns.paleolithicera.datagen.tag
 
 import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import com.toolsandtaverns.paleolithicera.registry.ModTags

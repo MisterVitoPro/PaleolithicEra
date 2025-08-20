@@ -115,7 +115,6 @@ object ModWorldgen {
                 BiomeKeys.BIRCH_FOREST,
                 BiomeKeys.CHERRY_GROVE,
                 BiomeKeys.DARK_FOREST,
-                BiomeKeys.FLOWER_FOREST,
                 BiomeKeys.FOREST,
                 BiomeKeys.PLAINS,
                 BiomeKeys.TAIGA,

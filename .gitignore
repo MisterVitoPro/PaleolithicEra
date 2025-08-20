@@ -64,3 +64,4 @@ replay_*.log
 .kotlin/
 /src/main/generated/.cache/
 /remappedSrc/
+/PaleolithicEra.wiki/

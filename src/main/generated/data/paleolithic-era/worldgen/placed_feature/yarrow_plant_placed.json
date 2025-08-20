@@ -2,11 +2,14 @@
   "feature": "paleolithic-era:yarrow_plant",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 50
+      "type": "minecraft:noise_threshold_count",
+      "above_noise": 1,
+      "below_noise": 0,
+      "noise_level": -0.5
     },
     {
-      "type": "minecraft:in_square"
+      "type": "minecraft:rarity_filter",
+      "chance": 50
     },
     {
       "type": "minecraft:heightmap",

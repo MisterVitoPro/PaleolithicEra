@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "paleolithic-era:block/willow_leaves"
+  }
+}

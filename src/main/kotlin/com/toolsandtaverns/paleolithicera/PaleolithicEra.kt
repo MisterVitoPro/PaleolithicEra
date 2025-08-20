@@ -1,18 +1,22 @@
 package com.toolsandtaverns.paleolithicera
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
+import com.toolsandtaverns.paleolithicera.entity.BoarEntity
+import com.toolsandtaverns.paleolithicera.event.BlockDropHandler
 import com.toolsandtaverns.paleolithicera.event.MobLootModifier
 import com.toolsandtaverns.paleolithicera.event.PlantFiberLootModifier
 import com.toolsandtaverns.paleolithicera.event.RockChunkLootModifier
-import com.toolsandtaverns.paleolithicera.entity.BoarEntity
-import com.toolsandtaverns.paleolithicera.event.BlockDropHandler
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiPacket
 import com.toolsandtaverns.paleolithicera.network.payload.HarpoonResultPayload
 import com.toolsandtaverns.paleolithicera.registry.*
+import com.toolsandtaverns.paleolithicera.world.gen.ModTreeGeneration
 import com.toolsandtaverns.paleolithicera.world.gen.ModWorldgen
+import com.toolsandtaverns.paleolithicera.world.gen.treedecorator.ModTreeDecoratorType
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -53,12 +57,10 @@ object PaleolithicEra : ModInitializer {
         ModEntityType.initialize()
         // Initialize container/GUI screen handlers
         ModScreenHandlers.initialize()
-        // Initialize custom crafting recipes
-        ModRecipes.initialize()
         // Initialize advancement criteria
         ModCriteria.initialize()
-
         ModItemGroups.register()
+        ModTreeDecoratorType.initialize()
 
         FabricDefaultAttributeRegistry.register(ModEntityType.BOAR_ENTITY, BoarEntity.createAttributes())
 
@@ -73,9 +75,19 @@ object PaleolithicEra : ModInitializer {
         BlockDropHandler.register()
 
         // Initialize custom world generation features
+        ModTreeGeneration.initialize()
         ModWorldgen.initialize()
 
         ModFuelRegistry.registerFuels()
+
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.WILLOW_LOG, 5, 5)
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.STRIPPED_WILLOW_LOG, 5, 5)
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.WILLOW_LEAF_VINES, 5, 5)
+
+        StrippableBlockRegistry.register(ModBlocks.WILLOW_LOG, ModBlocks.STRIPPED_WILLOW_LOG)
+
+        // Initialize custom crafting recipes
+        ModRecipes.initialize()
     }
 
 }

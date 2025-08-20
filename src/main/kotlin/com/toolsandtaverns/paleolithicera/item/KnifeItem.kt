@@ -2,7 +2,9 @@ package com.toolsandtaverns.paleolithicera.item
 
 import com.google.common.collect.BiMap
 import com.google.common.collect.ImmutableMap
+import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
+import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.block.*
 import net.minecraft.component.DataComponentTypes
@@ -72,9 +74,9 @@ class KnifeItem(
         if (shouldCancelStripAttempt(context)) {
             return ActionResult.PASS
         } else {
-            val optional: Optional<BlockState> =
+            val blockState: Optional<BlockState> =
                 this.tryStrip(world, blockPos, playerEntity, world.getBlockState(blockPos))
-            if (optional.isEmpty) {
+            if (blockState.isEmpty) {
                 return ActionResult.PASS
             } else {
                 val itemStack = context.stack
@@ -82,17 +84,23 @@ class KnifeItem(
                     Criteria.ITEM_USED_ON_BLOCK.trigger(playerEntity, blockPos, itemStack)
                 }
 
-                world.setBlockState(blockPos, optional.get(), Block.NOTIFY_ALL_AND_REDRAW)
+                world.setBlockState(blockPos, blockState.get(), Block.NOTIFY_ALL_AND_REDRAW)
                 world.emitGameEvent(
                     GameEvent.BLOCK_CHANGE,
                     blockPos,
-                    GameEvent.Emitter.of(playerEntity, optional.get())
+                    GameEvent.Emitter.of(playerEntity, blockState.get())
                 )
                 if (playerEntity != null) {
                     itemStack.damage(1, playerEntity, LivingEntity.getSlotForHand(context.hand))
                 }
 
-                Block.dropStack(context.world, context.blockPos, ItemStack(ModItems.BARK))
+
+                val dropStack = if(blockState.get().block == ModBlocks.STRIPPED_WILLOW_LOG)
+                    ItemStack(ModItems.getPlantItem(EdiblePlants.WILLOW_BARK))
+                else
+                    ItemStack(ModItems.BARK)
+
+                Block.dropStack(context.world, context.blockPos, dropStack)
 
                 return ActionResult.SUCCESS
             }
@@ -166,10 +174,10 @@ class KnifeItem(
         player: PlayerEntity?,
         state: BlockState
     ): Optional<BlockState> {
-        val optional: Optional<BlockState> = this.getStrippedState(state)
-        if (optional.isPresent) {
+        val strippedState: Optional<BlockState> = this.getStrippedState(state)
+        if (strippedState.isPresent) {
             world.playSound(player, pos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0f, 1.0f)
-            return optional
+            return strippedState
         } else {
             val optional2 = Oxidizable.getDecreasedOxidationState(state)
             if (optional2.isPresent) {
@@ -177,7 +185,7 @@ class KnifeItem(
                 world.syncWorldEvent(player, WorldEvents.BLOCK_SCRAPED, pos, 0)
                 return optional2
             } else {
-                val unwaxed = (HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get() as BiMap<*, *>)[state.block] as? Block
+                val unwaxed = (HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get())[state.block]
                 return if (unwaxed != null) {
                     world.playSound(player, pos, SoundEvents.ITEM_AXE_WAX_OFF, SoundCategory.BLOCKS, 1.0f, 1.0f)
                     world.syncWorldEvent(player, WorldEvents.WAX_REMOVED, pos, 0)
@@ -223,17 +231,24 @@ class KnifeItem(
                 .put(Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG)
                 .put(Blocks.PALE_OAK_WOOD, Blocks.STRIPPED_PALE_OAK_WOOD)
                 .put(Blocks.PALE_OAK_LOG, Blocks.STRIPPED_PALE_OAK_LOG)
-                .put(Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD).put(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG)
-                .put(Blocks.CHERRY_WOOD, Blocks.STRIPPED_CHERRY_WOOD).put(Blocks.CHERRY_LOG, Blocks.STRIPPED_CHERRY_LOG)
-                .put(Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD).put(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG)
-                .put(Blocks.JUNGLE_WOOD, Blocks.STRIPPED_JUNGLE_WOOD).put(Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG)
-                .put(Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD).put(Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG)
+                .put(Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD)
+                .put(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG)
+                .put(Blocks.CHERRY_WOOD, Blocks.STRIPPED_CHERRY_WOOD)
+                .put(Blocks.CHERRY_LOG, Blocks.STRIPPED_CHERRY_LOG)
+                .put(Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD)
+                .put(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG)
+                .put(Blocks.JUNGLE_WOOD, Blocks.STRIPPED_JUNGLE_WOOD)
+                .put(Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG)
+                .put(Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD)
+                .put(Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG)
                 .put(Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM)
                 .put(Blocks.WARPED_HYPHAE, Blocks.STRIPPED_WARPED_HYPHAE)
                 .put(Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM)
                 .put(Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_HYPHAE)
                 .put(Blocks.MANGROVE_WOOD, Blocks.STRIPPED_MANGROVE_WOOD)
                 .put(Blocks.MANGROVE_LOG, Blocks.STRIPPED_MANGROVE_LOG)
-                .put(Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK).build()
+                .put(Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK)
+                .put(ModBlocks.WILLOW_LOG, ModBlocks.STRIPPED_WILLOW_LOG)
+                .build()
     }
 }

@@ -1,5 +1,6 @@
 package com.toolsandtaverns.paleolithicera.entity
 
+import com.toolsandtaverns.paleolithicera.entity.SpearEntity
 import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.minecraft.entity.EntityType
@@ -14,31 +15,23 @@ import net.minecraft.world.World
 /**
  * Primitive throwable bone spear entity with no magical effects.
  */
-class BoneSpearEntity : PersistentProjectileEntity {
+class BoneSpearEntity : SpearEntity {
 
+    /**
+     * Thrown by a living owner with a specific item stack.
+     */
     constructor(world: World, owner: LivingEntity, stack: ItemStack)
-            : super(ModEntityType.BONE_SPEAR_ENTITY, owner, world, stack, stack) {
-        this.setNoGravity(false)
-    }
+            : super(ModEntityType.BONE_SPEAR_ENTITY as EntityType<out SpearEntity>, owner, world, stack)
 
-    constructor(type: EntityType<out BoneSpearEntity>, world: World)
+    /**
+     * Engine constructor.
+     */
+    constructor(type: EntityType<out SpearEntity>, world: World)
             : super(type, world)
 
-    override fun onEntityHit(hitResult: EntityHitResult) {
-        super.onEntityHit(hitResult)
-        if (!this.world.isClient) {
-            this.discard()
-        }
-    }
-
-    override fun getHitSound(): SoundEvent? {
-        return SoundEvents.ITEM_TRIDENT_HIT_GROUND
-    }
+    // Wooden tier: a shorter slow feels right at the start of the game.
+    override val slownessTickDuration: Int = 20 // 2s
 
     override fun getDefaultItemStack(): ItemStack = ItemStack(ModItems.BONE_SPEAR)
-
-    override fun shouldRender(cameraX: Double, cameraY: Double, cameraZ: Double): Boolean {
-        return true
-    }
 
 }

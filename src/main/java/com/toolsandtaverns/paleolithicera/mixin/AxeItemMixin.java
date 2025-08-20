@@ -1,6 +1,8 @@
 package com.toolsandtaverns.paleolithicera.mixin;
 
+import com.toolsandtaverns.paleolithicera.registry.ModBlocks;
 import com.toolsandtaverns.paleolithicera.registry.ModItems;
+import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,9 +33,13 @@ public class AxeItemMixin {
     private void tryStripping(World world, BlockPos pos, @Nullable PlayerEntity player, BlockState state, CallbackInfoReturnable<Optional<BlockState>> cir) {
         if (!world.isClient && cir.getReturnValue().isPresent()) {
             if (world instanceof ServerWorld) {
-                ItemStack bark = new ItemStack(ModItems.INSTANCE.getBARK(), 1);
+                ItemStack dropStack = new ItemStack(ModItems.INSTANCE.getBARK(), 1);
+
+                if(state.getBlock() == ModBlocks.INSTANCE.getWILLOW_LOG())
+                    dropStack = new ItemStack(ModItems.INSTANCE.getPlantItem(EdiblePlants.WILLOW_BARK), 1);
+
                 BlockPos dropPos = pos.offset(Direction.UP, 0); // Drop at the log's position
-                Block.dropStack(world, dropPos, bark);
+                Block.dropStack(world, dropPos, dropStack);
             }
         }
     }
