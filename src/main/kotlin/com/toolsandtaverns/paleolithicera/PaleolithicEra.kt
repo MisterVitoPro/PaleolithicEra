@@ -77,8 +77,8 @@ object PaleolithicEra : ModInitializer {
         BlockDropHandler.register()
 
         // Initialize custom world generation features
-        ModWorldgen.initialize()
         ModTreeGeneration.initialize()
+        ModWorldgen.initialize()
 
         ModFuelRegistry.registerFuels()
 

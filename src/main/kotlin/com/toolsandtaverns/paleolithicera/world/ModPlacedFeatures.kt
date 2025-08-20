@@ -2,16 +2,29 @@ package com.toolsandtaverns.paleolithicera.world
 
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.util.id
+import net.minecraft.block.Blocks.WATER
+import net.minecraft.fluid.Fluids
 import net.minecraft.registry.Registerable
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
+import net.minecraft.util.math.Direction
+import net.minecraft.util.math.Vec3i
+import net.minecraft.world.Heightmap
+import net.minecraft.world.gen.blockpredicate.BlockPredicate
 import net.minecraft.world.gen.feature.PlacedFeature
 import net.minecraft.world.gen.feature.PlacedFeatures
 import net.minecraft.world.gen.feature.VegetationPlacedFeatures
 import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier
+import net.minecraft.world.gen.placementmodifier.BlockFilterPlacementModifier
+import net.minecraft.world.gen.placementmodifier.CountPlacementModifier
+import net.minecraft.world.gen.placementmodifier.EnvironmentScanPlacementModifier
+import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier
+import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier
 import net.minecraft.world.gen.placementmodifier.PlacementModifier
 import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier
 import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier
+import net.minecraft.world.gen.placementmodifier.SurfaceWaterDepthFilterPlacementModifier
+import org.spongepowered.asm.mixin.Mutable
 
 object ModPlacedFeatures {
 
@@ -50,7 +63,7 @@ object ModPlacedFeatures {
             ELDERBERRY_BUSH_PLACED,
             PlacedFeature(
                 elderberryBushConfigured,
-                getHerbPlantPlacementModifiers(38)
+                getHerbPlantPlacementModifiers()
             )
         )
         context.register(
@@ -71,7 +84,7 @@ object ModPlacedFeatures {
             WILD_GARLIC_PLANT_PLACED,
             PlacedFeature(
                 wildGarlicPlantConfigured,
-                getHerbPlantPlacementModifiers(42)
+                getHerbPlantPlacementModifiers(46)
             )
         )
         context.register(
@@ -85,7 +98,7 @@ object ModPlacedFeatures {
             SAGEBRUSH_PLANT_PLACED,
             PlacedFeature(
                 sagebrushPlantConfigured,
-                getHerbPlantPlacementModifiers(42)
+                getHerbPlantPlacementModifiers(50)
             )
         )
         context.register(
@@ -107,7 +120,14 @@ object ModPlacedFeatures {
             WILLOW_PLACED,
             PlacedFeature(
                 configuredLookup.getOrThrow(ModConfiguredFeatures.WILLOW_CONFIGURED_KEY),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(2, 0.1f, 2), ModBlocks.WILLOW_SAPLING)
+                listOf(
+                    NoiseThresholdCountPlacementModifier.of(-0.6, 0, 1),
+                    RarityFilterPlacementModifier.of(80),
+                    SquarePlacementModifier.of(),
+                    HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES),
+                    BlockFilterPlacementModifier.of(BlockPredicate.wouldSurvive(ModBlocks.WILLOW_SAPLING.defaultState, Vec3i.ZERO)),
+                    BiomePlacementModifier.of()
+                ).toMutableList()
             )
         )
 
@@ -115,10 +135,10 @@ object ModPlacedFeatures {
 
     }
 
-    private fun getHerbPlantPlacementModifiers(rarity: Int = 32): List<PlacementModifier> {
+    private fun getHerbPlantPlacementModifiers(rarity: Int = 40): List<PlacementModifier> {
         return listOf(
+            NoiseThresholdCountPlacementModifier.of(-0.5, 0, 1),
             RarityFilterPlacementModifier.of(rarity),
-            SquarePlacementModifier.of(),
             PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
             BiomePlacementModifier.of()
         )

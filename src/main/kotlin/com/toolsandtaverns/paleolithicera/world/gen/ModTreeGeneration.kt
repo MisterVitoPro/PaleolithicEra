@@ -10,7 +10,7 @@ object ModTreeGeneration {
 
     fun initialize() {
         BiomeModifications.addFeature(
-            BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.MEADOW),
+            BiomeSelectors.includeByKey(BiomeKeys.FOREST, BiomeKeys.RIVER, BiomeKeys.SWAMP, BiomeKeys.MANGROVE_SWAMP),
             GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.WILLOW_PLACED
         )
     }
