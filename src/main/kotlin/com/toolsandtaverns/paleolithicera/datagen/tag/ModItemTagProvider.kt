@@ -67,6 +67,10 @@ class ModItemTagProvider(output: FabricDataOutput, val registries: CompletableFu
         valueLookupBuilder(ModTags.Items.SPEARS)
             .add(ModItems.WOODEN_SPEAR)
             .add(ModItems.BONE_SPEAR)
+        
+        // Add harpoons to combat family (optional categorization)
+        // Keeping within existing scheme; no dedicated tag yet
+        // Could be split later into a HARPOONS tag if needed
 
         // Knives were versatile tools used for everything from food preparation
         // to hide processing and crafting other tools

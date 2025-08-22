@@ -100,6 +100,7 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
         itemModelGenerator.register(ModItems.FIRE_DRILL, Models.HANDHELD)
         itemModelGenerator.register(ModItems.WOODEN_HARPOON, Models.HANDHELD)
+        itemModelGenerator.register(ModItems.BONE_HARPOON, Models.HANDHELD)
         itemModelGenerator.register(ModItems.FLINT_AXE, Models.HANDHELD)
 
         EdiblePlants.entries.forEach { ediblePlants ->

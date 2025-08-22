@@ -59,6 +59,7 @@
 
   "item.paleolithic-era.bark": "Bark",
   "item.paleolithic-era.bone_knife": "Bone Knife",
+  "item.paleolithic-era.bone_harpoon": "Bone Harpoon",
   "item.paleolithic-era.bone_spear": "Bone Spear",
   "item.paleolithic-era.bone_shard": "Bone Shard",
   "item.paleolithic-era.boar_spawn_egg": "Boar Spawn Egg",
@@ -129,6 +130,8 @@
   "tooltip.paleolithic-era.willow_bark": "Salix alba",
   "tooltip.paleolithic-era.wooden_harpoon": "Use near water to fish. Time your strike!",
   "tooltip.paleolithic-era.wooden_harpoon.usage": "[Use] on water block surrounded by water blocks. [Spacebar] to catch",
+  "tooltip.paleolithic-era.bone_harpoon": "Sharper harpoon with better catch odds.",
+  "tooltip.paleolithic-era.bone_harpoon.usage": "[Use] on water block surrounded by water blocks. [Spacebar] to catch",
   "tooltip.paleolithic-era.wooden_spear": "Melee or throw it. Your choice.",
   "tooltip.paleolithic-era.yarrow_herb": "Achillea millefolium",
 

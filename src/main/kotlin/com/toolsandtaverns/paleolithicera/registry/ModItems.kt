@@ -3,9 +3,9 @@ package com.toolsandtaverns.paleolithicera.registry
 import com.toolsandtaverns.paleolithicera.entity.BoneSpearEntity
 import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.item.FireDrillItem
+import com.toolsandtaverns.paleolithicera.item.HarpoonItem
 import com.toolsandtaverns.paleolithicera.item.KnifeItem
 import com.toolsandtaverns.paleolithicera.item.SpearItem
-import com.toolsandtaverns.paleolithicera.item.WoodenHarpoonItem
 import com.toolsandtaverns.paleolithicera.item.material.ModArmorMaterials.HIDE_MATERIAL
 import com.toolsandtaverns.paleolithicera.item.material.ModToolMaterials
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
@@ -102,7 +102,10 @@ object ModItems {
         register("fire_drill", { settings: Item.Settings -> FireDrillItem(settings.maxCount(1).maxDamage(10)) })
 
     val WOODEN_HARPOON =
-        register("wooden_harpoon", { settings: Item.Settings -> WoodenHarpoonItem(settings.maxCount(1).maxDamage(10)) })
+        register("wooden_harpoon", { settings: Item.Settings -> HarpoonItem(settings.maxCount(1).maxDamage(10)) })
+
+    val BONE_HARPOON =
+        register("bone_harpoon", { settings: Item.Settings -> HarpoonItem(settings.maxCount(1).maxDamage(15)) })
 
     val COOKED_ELDERBERRIES: Item = register("cooked_elderberries", { settings ->
         Item(
@@ -145,6 +148,14 @@ object ModItems {
                     itemGroup.add(WOODEN_SPEAR)
                 }
             })
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS)
+            .register(ModifyEntries { itemGroup: FabricItemGroupEntries ->
+            {
+                itemGroup.add(WOODEN_HARPOON)
+                itemGroup.add(BONE_HARPOON)
+            }
+        })
     }
 
     /**
