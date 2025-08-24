@@ -131,6 +131,8 @@ object ModItems {
 
     val BOAR_SPAWN_EGG: Item =
         register("boar_spawn_egg", { setting: Item.Settings -> SpawnEggItem(ModEntityType.BOAR_ENTITY, setting) })
+    val IBEX_SPAWN_EGG: Item =
+        register("ibex_spawn_egg", { setting: Item.Settings -> SpawnEggItem(ModEntityType.IBEX_ENTITY, setting) })
 
 
     /**
@@ -156,6 +158,21 @@ object ModItems {
                 itemGroup.add(BONE_HARPOON)
             }
         })
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS)
+            .register(ModifyEntries { itemGroup: FabricItemGroupEntries ->
+                {
+                    itemGroup.add(BOAR_SPAWN_EGG)
+                    itemGroup.add(IBEX_SPAWN_EGG)
+                }
+            })
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK)
+            .register(ModifyEntries { itemGroup: FabricItemGroupEntries ->
+                {
+                    itemGroup.add(COOKED_ELDERBERRIES)
+                }
+            })
     }
 
     /**

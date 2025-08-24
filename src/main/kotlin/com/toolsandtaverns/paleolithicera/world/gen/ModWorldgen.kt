@@ -119,7 +119,18 @@ object ModWorldgen {
                 BiomeKeys.PLAINS,
                 BiomeKeys.TAIGA,
             ),
-            SpawnGroup.CREATURE, ModEntityType.BOAR_ENTITY, 40, 1, 2
+            SpawnGroup.CREATURE, ModEntityType.BOAR_ENTITY, 38, 1, 2
+        )
+
+        BiomeModifications.addSpawn(
+            BiomeSelectors.includeByKey(
+                BiomeKeys.WINDSWEPT_HILLS,
+                BiomeKeys.JAGGED_PEAKS,
+                BiomeKeys.STONY_PEAKS,
+                BiomeKeys.GROVE,
+                BiomeKeys.SNOWY_SLOPES
+            ),
+            SpawnGroup.CREATURE, ModEntityType.BOAR_ENTITY, 8, 2, 3
         )
     }
 }

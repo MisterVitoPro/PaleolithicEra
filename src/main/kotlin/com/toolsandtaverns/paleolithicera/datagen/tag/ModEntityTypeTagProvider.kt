@@ -90,7 +90,8 @@ class ModEntityTypeTagProvider(
             EntityType.RABBIT,
             EntityType.SHEEP,
             EntityType.WOLF,
-            ModEntityType.BOAR_ENTITY
+            ModEntityType.BOAR_ENTITY,
+            ModEntityType.IBEX_ENTITY
         )
     }
 

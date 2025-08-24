@@ -21,8 +21,6 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
     private val rear_leg_l: ModelPart = root.getChild("rear_leg_l")
     private val rear_leg_r: ModelPart = root.getChild("rear_leg_r")
 
-    val BABY_TRANSFORMER: ModelTransformer = ModelTransformer.scaling(0.45f)
-
     private val walkingAnimation = BoarAnimations.walk.createAnimation(root)
     private val idlingAnimation = BoarAnimations.idle.createAnimation(root)
 

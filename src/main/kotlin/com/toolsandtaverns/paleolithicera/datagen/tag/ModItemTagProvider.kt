@@ -3,6 +3,7 @@ package com.toolsandtaverns.paleolithicera.datagen.tag
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.ModTags
+import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.item.Items
@@ -67,10 +68,6 @@ class ModItemTagProvider(output: FabricDataOutput, val registries: CompletableFu
         valueLookupBuilder(ModTags.Items.SPEARS)
             .add(ModItems.WOODEN_SPEAR)
             .add(ModItems.BONE_SPEAR)
-        
-        // Add harpoons to combat family (optional categorization)
-        // Keeping within existing scheme; no dedicated tag yet
-        // Could be split later into a HARPOONS tag if needed
 
         // Knives were versatile tools used for everything from food preparation
         // to hide processing and crafting other tools
@@ -81,5 +78,9 @@ class ModItemTagProvider(output: FabricDataOutput, val registries: CompletableFu
 
         valueLookupBuilder(ItemTags.PLANKS)
             .add(ModBlocks.WILLOW_PLANKS.asItem())
+
+        valueLookupBuilder(ModTags.Items.IBEX_FOOD)
+            .add(ModItems.getPlantItem(EdiblePlants.YARROW))
+            .add(Items.WHEAT)
     }
 }

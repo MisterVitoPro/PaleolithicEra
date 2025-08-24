@@ -24,7 +24,7 @@ object ModTags {
     object Items {
         val BONE_TOOL_MATERIALS = of("bone_tool_materials")
         val FLINT_TOOL_MATERIALS = of("flint_tool_materials")
-
+        val IBEX_FOOD = of("ibex_food")
         val REPAIRS_HIDE_ARMOR = of("repairs_hide_armor")
 
         val KNIFE = of("knife")

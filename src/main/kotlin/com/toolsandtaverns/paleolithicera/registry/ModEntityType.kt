@@ -4,9 +4,11 @@ import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.entity.*
 import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
+import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.block.Block
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
 import net.minecraft.registry.Registries
@@ -46,6 +48,16 @@ object ModEntityType {
             .create(::CrudeBedBlockEntity, ModBlocks.CRUDE_BED)
             .build()
     )
+
+    val IBEX_ENTITY: EntityType<IbexEntity> by lazy {
+        Registry.register(
+            Registries.ENTITY_TYPE,
+            id("ibex"),
+            EntityType.Builder.create(::IbexEntity, SpawnGroup.CREATURE)
+                .dimensions(0.9f, 1.1f)
+                .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("ibex")))
+        )
+    }
 
     fun initialize() {
         KNAPPING_STATION = register(

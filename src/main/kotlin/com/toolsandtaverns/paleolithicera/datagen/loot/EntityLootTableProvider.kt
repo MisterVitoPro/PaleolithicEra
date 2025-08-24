@@ -28,6 +28,16 @@ class EntityLootTableProvider(
                         .conditionally(EntityPropertiesLootCondition.create(LootContext.EntityTarget.THIS))
                 )
         )
+
+        register(
+            ModEntityType.IBEX_ENTITY, LootTable.builder()
+                .pool(
+                    LootPool.builder()
+                        .rolls(UniformLootNumberProvider.create(1f, 2f))
+                        .with(ItemEntry.builder(Items.MUTTON))
+                        .conditionally(EntityPropertiesLootCondition.create(LootContext.EntityTarget.THIS))
+                )
+        )
     }
 
 

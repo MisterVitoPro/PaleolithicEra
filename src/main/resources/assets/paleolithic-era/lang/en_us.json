@@ -56,6 +56,7 @@
   "container.paleolithic-era.knapping_station": "Knapping Station",
 
   "entity.paleolithic-era.boar": "Wild Boar",
+  "entity.paleolithic-era.ibex": "Ibex",
 
   "item.paleolithic-era.bark": "Bark",
   "item.paleolithic-era.bone_knife": "Bone Knife",
@@ -78,6 +79,7 @@
   "item.paleolithic-era.hide_leggings": "Hide Leggings",
   "item.paleolithic-era.hide_shoes": "Hide Shoes",
   "item.paleolithic-era.hide_tunic": "Hide Tunic",
+  "item.paleolithic-era.ibex_spawn_egg": "Ibex Spawn Egg",
   "item.paleolithic-era.knapping_station": "Knapping Station",
   "item.paleolithic-era.patched_hide": "Patched Hide",
   "item.paleolithic-era.plant_cordage": "Plant Cordage",

@@ -2,6 +2,7 @@ package com.toolsandtaverns.paleolithicera
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.entity.BoarEntity
+import com.toolsandtaverns.paleolithicera.entity.IbexEntity
 import com.toolsandtaverns.paleolithicera.event.BlockDropHandler
 import com.toolsandtaverns.paleolithicera.event.MobLootModifier
 import com.toolsandtaverns.paleolithicera.event.PlantFiberLootModifier
@@ -63,6 +64,7 @@ object PaleolithicEra : ModInitializer {
         ModTreeDecoratorType.initialize()
 
         FabricDefaultAttributeRegistry.register(ModEntityType.BOAR_ENTITY, BoarEntity.createAttributes())
+        FabricDefaultAttributeRegistry.register(ModEntityType.IBEX_ENTITY, IbexEntity.createAttributes())
 
         // Initialize loot table modifiers for custom drops
         PlantFiberLootModifier.initialize() // Adds plant fiber drops to grass

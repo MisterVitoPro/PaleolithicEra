@@ -1,8 +1,11 @@
 package com.toolsandtaverns.paleolithicera
 
+import com.toolsandtaverns.paleolithicera.client.render.IbexRenderer
+import com.toolsandtaverns.paleolithicera.entity.IbexEntity
 import com.toolsandtaverns.paleolithicera.events.ToolTipEvents
 import com.toolsandtaverns.paleolithicera.model.BoarModel
 import com.toolsandtaverns.paleolithicera.model.BoneSpearProjectileModel
+import com.toolsandtaverns.paleolithicera.model.IbexModel
 import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiClient
 import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
@@ -53,6 +56,8 @@ object PaleolithicEraClient : ClientModInitializer {
         // Register the renderer for the wooden spear entity
         // This allows thrown spears to be properly displayed in the world
         EntityModelLayerRegistry.registerModelLayer(BoarModel.BOAR_MODEL_LAYER, BoarModel::texturedModelData)
+        EntityModelLayerRegistry.registerModelLayer(IbexModel.IBEX_MODEL_LAYER, IbexModel::texturedModelData)
+
         EntityModelLayerRegistry.registerModelLayer(
             WoodenSpearProjectileModel.WOOD_SPEAR_MODEL_LAYER,
             WoodenSpearProjectileModel::texturedModelData
@@ -63,6 +68,7 @@ object PaleolithicEraClient : ClientModInitializer {
         )
 
         EntityRendererRegistry.register(ModEntityType.BOAR_ENTITY) { cxt -> BoarRenderer(cxt) }
+        EntityRendererRegistry.register(ModEntityType.IBEX_ENTITY) { cxt -> IbexRenderer(cxt) }
         EntityRendererRegistry.register(ModEntityType.WOODEN_SPEAR_ENTITY) { cxt -> WoodenSpearRenderer(cxt) }
         EntityRendererRegistry.register(ModEntityType.BONE_SPEAR_ENTITY) { cxt -> BoneSpearRenderer(cxt) }
 
