@@ -68,32 +68,9 @@ class ModBlockTagProvider(
         // would have been impossible for Paleolithic humans. This creates an important
         // progression gate where players must craft primitive axes before accessing wood in quantity.
         valueLookupBuilder(ModTags.Blocks.UNBREAKABLE_TAG)
-//            .add(Blocks.SPRUCE_LOG)
-//            .add(Blocks.BIRCH_LOG)
-//            .add(Blocks.JUNGLE_LOG)
-//            .add(Blocks.ACACIA_LOG)
-//            .add(Blocks.DARK_OAK_LOG)
-//            .add(Blocks.MANGROVE_LOG)
-//            .add(Blocks.CHERRY_LOG)
-//            .add(Blocks.BAMBOO_BLOCK)
-//            .add(Blocks.STRIPPED_OAK_LOG)
-//            .add(Blocks.STRIPPED_SPRUCE_LOG)
-//            .add(Blocks.STRIPPED_BIRCH_LOG)
-//            .add(Blocks.STRIPPED_JUNGLE_LOG)
-//            .add(Blocks.STRIPPED_ACACIA_LOG)
-//            .add(Blocks.STRIPPED_DARK_OAK_LOG)
-//            .add(Blocks.STRIPPED_MANGROVE_LOG)
-//            .add(Blocks.STRIPPED_CHERRY_LOG)
             .addOptionalTag(BlockTags.LOGS)
 
         valueLookupBuilder(ModTags.Blocks.REQUIRES_SHOVEL)
-//            .add(Blocks.COARSE_DIRT)
-//            .add(Blocks.DIRT)
-//            .add(Blocks.GRASS_BLOCK)
-//            .add(Blocks.MOSS_BLOCK)
-//            .add(Blocks.MYCELIUM)
-//            .add(Blocks.PODZOL)
-//            .add(Blocks.ROOTED_DIRT)
             .addOptionalTag(BlockTags.DIRT)
 
 

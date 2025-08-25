@@ -34,7 +34,7 @@ object HuntingAdvancements {
                 "hunt_animal",
                 OnKilledCriterion.Conditions.createPlayerKilledEntity(
                     EntityPredicate.Builder.create()
-                        .type(entityTypeRegistry, ModTags.Entity.HUNTABLE_TAG)
+                        .type(entityTypeRegistry, ModTags.Entity.AGGRESSIVE)
                 )
             )
             .rewards(AdvancementRewards.Builder.experience(2))

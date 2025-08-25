@@ -19,6 +19,7 @@ object ModTags {
 
     object Entity {
         val HUNTABLE_TAG: TagKey<EntityType<*>> = TagKey.of(RegistryKeys.ENTITY_TYPE, id("huntable"))
+        val AGGRESSIVE: TagKey<EntityType<*>> = TagKey.of(RegistryKeys.ENTITY_TYPE, id("aggressive"))
     }
 
     object Items {

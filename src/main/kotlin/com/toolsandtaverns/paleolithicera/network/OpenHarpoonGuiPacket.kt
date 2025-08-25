@@ -98,9 +98,7 @@ object OpenHarpoonGuiPacket {
             }
         } else {
             when {
-                rand < 0.30f -> Items.COD       // 30% chance
-                rand < 0.45f -> Items.SALMON    // 15% chance (0.45 - 0.30)
-                rand < 0.48f -> Items.TROPICAL_FISH  // 3% chance (0.48 - 0.45)
+                rand < 0.48f -> Items.COD       // 40% chance
                 else -> null  // 52% chance of no fish (fish escaped)
             }
         }

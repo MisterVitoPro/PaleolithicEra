@@ -1,10 +1,14 @@
 package com.toolsandtaverns.paleolithicera.world.gen
 
 import com.toolsandtaverns.paleolithicera.registry.ModEntityType
+import com.toolsandtaverns.paleolithicera.util.id
 import com.toolsandtaverns.paleolithicera.world.ModPlacedFeatures
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
+import net.fabricmc.fabric.api.biome.v1.ModificationPhase
+import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
+import net.minecraft.util.Identifier
 import net.minecraft.world.biome.BiomeKeys
 import net.minecraft.world.gen.GenerationStep
 
@@ -128,9 +132,11 @@ object ModWorldgen {
                 BiomeKeys.JAGGED_PEAKS,
                 BiomeKeys.STONY_PEAKS,
                 BiomeKeys.GROVE,
+                BiomeKeys.SAVANNA,
+                BiomeKeys.SAVANNA_PLATEAU,
                 BiomeKeys.SNOWY_SLOPES
             ),
-            SpawnGroup.CREATURE, ModEntityType.BOAR_ENTITY, 8, 2, 3
+            SpawnGroup.CREATURE, ModEntityType.IBEX_ENTITY, 15, 2, 3
         )
     }
 }
