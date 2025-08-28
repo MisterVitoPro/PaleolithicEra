@@ -195,6 +195,15 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(ModItems.BONE_SHARD), conditionsFromItem(ModItems.BONE_SHARD))
                     .offerTo(exporter)
 
+                // Bundle of Sticks (for Effigy construction)
+                createShapeless(RecipeCategory.MISC, ModBlocks.BUNDLE_OF_STICKS, 1)
+                    .input(Items.STICK)
+                    .input(Items.STICK)
+                    .input(Items.STICK)
+                    .input(Items.STICK)
+                    .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+                    .offerTo(exporter)
+
                 createShapeless(RecipeCategory.MISC, ModBlocks.WILLOW_PLANKS, 4)
                     .input(ModBlocks.WILLOW_LOG, 1)
                     .criterion(hasItem(ModBlocks.WILLOW_LOG), conditionsFromItem(ModBlocks.WILLOW_LOG))

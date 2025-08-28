@@ -26,6 +26,8 @@ object ModEntityType {
         private set
     lateinit var HIDE_DRYER_BLOCK_ENTITY: BlockEntityType<HideDryerBlockEntity>
         private set
+    lateinit var EFFIGY_OF_PROTECTION_BLOCK_ENTITY: BlockEntityType<EffigyOfProtectionEntity>
+        private set
 
     val BOAR_ENTITY: EntityType<BoarEntity> by lazy {
         Registry.register(
@@ -88,6 +90,12 @@ object ModEntityType {
             "hide_dryer",
             ::HideDryerBlockEntity,
             ModBlocks.HIDE_DRYER
+        )
+
+        EFFIGY_OF_PROTECTION_BLOCK_ENTITY = register(
+            "effigy_of_protection",
+            ::EffigyOfProtectionEntity,
+            ModBlocks.EFFIGY_OF_PROTECTION
         )
 
     }

@@ -77,6 +77,11 @@ class ModBlockTagProvider(
         valueLookupBuilder(BlockTags.SWORD_EFFICIENT)
             .add(ModBlocks.WILLOW_LEAF_VINES)
 
+        // Tool tags: axe-mineable for new wood/bone-like blocks used in the effigy
+        valueLookupBuilder(BlockTags.AXE_MINEABLE)
+            .add(ModBlocks.BUNDLE_OF_STICKS)
+            .add(ModBlocks.EFFIGY_OF_PROTECTION)
+
     }
 
     /**

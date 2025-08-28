@@ -147,6 +147,24 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
             .rewards(AdvancementRewards.Builder.experience(5))
             .build(consumer, "awakening/place_crude_campfire")
 
+        // Effigy placement
+        Advancement.Builder.create()
+            .parent(placeFirePit)
+            .display(
+                ModBlocks.EFFIGY_OF_PROTECTION.asItem(),
+                Text.translatable("advancement.$MOD_ID.awakening.place_effigy.title"),
+                Text.translatable("advancement.$MOD_ID.awakening.place_effigy.description"),
+                null,
+                AdvancementFrame.TASK,
+                true, true, false
+            )
+            .criterion(
+                "placed_effigy_of_protection",
+                ModCriteria.EFFIGY_PLACED.create()
+            )
+            .rewards(AdvancementRewards.Builder.experience(5))
+            .build(consumer, "awakening/place_effigy_of_protection")
+
         val lightCrudeCampfire: AdvancementEntry = Advancement.Builder.create()
             .parent(placeFirePit)
             .display(

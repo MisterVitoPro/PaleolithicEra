@@ -58,6 +58,7 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         blockStateModelGenerator.createLogTexturePool(ModBlocks.WILLOW_LOG).log(ModBlocks.WILLOW_LOG)
         blockStateModelGenerator.createLogTexturePool(ModBlocks.STRIPPED_WILLOW_LOG).log(ModBlocks.STRIPPED_WILLOW_LOG)
 
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BUNDLE_OF_STICKS)
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.WILLOW_PLANKS)
         blockStateModelGenerator.registerSingleton(ModBlocks.WILLOW_LEAVES, TexturedModel.LEAVES)
         blockStateModelGenerator.registerTintableCrossBlockState(ModBlocks.WILLOW_SAPLING, BlockStateModelGenerator.CrossType.NOT_TINTED)

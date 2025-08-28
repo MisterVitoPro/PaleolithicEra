@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:awakening/place_crude_campfire",
+  "criteria": {
+    "placed_effigy_of_protection": {
+      "trigger": "minecraft:placed_effigy_of_protection"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.place_effigy.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:effigy_of_protection"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.place_effigy.title"
+    }
+  },
+  "requirements": [
+    [
+      "placed_effigy_of_protection"
+    ]
+  ],
+  "rewards": {
+    "experience": 5
+  },
+  "sends_telemetry_event": true
+}

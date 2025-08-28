@@ -130,6 +130,8 @@ object PaleolithicEra : ModInitializer {
             ActionResult.PASS
         })
 
+        // Effigy placed advancement is triggered at structure conversion time
+
         // Gate pig/goat spawns until progression is met
         SpawnGate.initialize()
     }
