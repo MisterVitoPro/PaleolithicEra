@@ -51,6 +51,7 @@ enum class EdiblePlants(ediblePlantDef: EdiblePlantDef) {
         )
     ),
     YARROW(
+
         EdiblePlantDef(
             idPath = "yarrow_herb",
             hunger = 1,
@@ -58,7 +59,7 @@ enum class EdiblePlants(ediblePlantDef: EdiblePlantDef) {
             alwaysEdible = false,
             effect = StatusEffects.REGENERATION,
             effectAmplifier = 0,
-            effectDurationTicks = 20 * 3,
+            effectDurationTicks = 20 * 3, // 3 seconds
             effectChance = 1.0f,
             maxStackSize = 64
         )
@@ -71,7 +72,7 @@ enum class EdiblePlants(ediblePlantDef: EdiblePlantDef) {
             alwaysEdible = false,
             effect = StatusEffects.RESISTANCE,
             effectAmplifier = 0,
-            effectDurationTicks = 20 * 5,
+            effectDurationTicks = 20 * 10, // 10 seconds
             effectChance = 1.0f,
             maxStackSize = 64
         )
@@ -97,7 +98,7 @@ enum class EdiblePlants(ediblePlantDef: EdiblePlantDef) {
             alwaysEdible = false,
             effect = StatusEffects.HASTE,
             effectAmplifier = 0,
-            effectDurationTicks = 20 * 5,          // 5 seconds
+            effectDurationTicks = 20 * 10,          // 10 seconds
             effectChance = 1.0f,
             maxStackSize = 64
         )
@@ -110,7 +111,7 @@ enum class EdiblePlants(ediblePlantDef: EdiblePlantDef) {
             alwaysEdible = false,
             effect = StatusEffects.SPEED,
             effectAmplifier = 0,
-            effectDurationTicks = 20 * 5,           // 5 seconds
+            effectDurationTicks = 20 * 10,           // 10 seconds
             effectChance = 1.0f,
             maxStackSize = 64
         )
@@ -123,7 +124,7 @@ enum class EdiblePlants(ediblePlantDef: EdiblePlantDef) {
             alwaysEdible = false,
             effect = StatusEffects.NIGHT_VISION,
             effectAmplifier = 0,
-            effectDurationTicks = 20 * 5,          // 5 seconds
+            effectDurationTicks = 20 * 10,          // 10 seconds
             effectChance = 1.0f,
             maxStackSize = 64
         )
@@ -136,7 +137,7 @@ enum class EdiblePlants(ediblePlantDef: EdiblePlantDef) {
             alwaysEdible = false,
             effect = StatusEffects.RESISTANCE,
             effectAmplifier = 0,
-            effectDurationTicks = 20 * 5,           // 5 seconds
+            effectDurationTicks = 20 * 10,           // 10 seconds
             effectChance = 1.0f,
             maxStackSize = 64
         )
@@ -149,7 +150,7 @@ enum class EdiblePlants(ediblePlantDef: EdiblePlantDef) {
             alwaysEdible = false,
             effect = StatusEffects.SATURATION,      // instant, minor
             effectAmplifier = 0,
-            effectDurationTicks = 1,                // 1 tick
+            effectDurationTicks = 20 * 1,                // 1 tick
             effectChance = 1.0f,
             maxStackSize = 64
         )

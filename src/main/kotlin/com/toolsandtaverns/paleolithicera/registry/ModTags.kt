@@ -19,12 +19,13 @@ object ModTags {
 
     object Entity {
         val HUNTABLE_TAG: TagKey<EntityType<*>> = TagKey.of(RegistryKeys.ENTITY_TYPE, id("huntable"))
+        val AGGRESSIVE: TagKey<EntityType<*>> = TagKey.of(RegistryKeys.ENTITY_TYPE, id("aggressive"))
     }
 
     object Items {
         val BONE_TOOL_MATERIALS = of("bone_tool_materials")
         val FLINT_TOOL_MATERIALS = of("flint_tool_materials")
-
+        val IBEX_FOOD = of("ibex_food")
         val REPAIRS_HIDE_ARMOR = of("repairs_hide_armor")
 
         val KNIFE = of("knife")

@@ -1,6 +1,7 @@
 package com.toolsandtaverns.paleolithicera.network
 
 import com.toolsandtaverns.paleolithicera.network.payload.HarpoonResultPayload
+import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -57,7 +58,7 @@ object OpenHarpoonGuiPacket {
 
         // Handle success case - give rewards if applicable
         if (success) {
-            val reward: Item? = getFishReward()
+            val reward: Item? = getFishReward(item)
             if (reward != null) {
                 // Give the player the caught fish
                 player.giveItemStack(ItemStack(reward))
@@ -85,13 +86,21 @@ object OpenHarpoonGuiPacket {
      *
      * @return The fish item to reward, or null if the fish escaped
      */
-    private fun getFishReward(): Item? {
+    private fun getFishReward(item: Item): Item? {
+        // Improved tier gets better odds
         val rand = Random.nextFloat()
-        return when {
-            rand < 0.30f -> Items.COD       // 30% chance
-            rand < 0.45f -> Items.SALMON    // 15% chance (0.45 - 0.30)
-            rand < 0.48f -> Items.TROPICAL_FISH  // 3% chance (0.48 - 0.45)
-            else -> null  // 52% chance of no fish (fish escaped)
+        return if (ModItems.BONE_HARPOON == item) {
+            when {
+                rand < 0.45f -> Items.COD          // 45%
+                rand < 0.65f -> Items.SALMON       // 20%
+                rand < 0.70f -> Items.TROPICAL_FISH // 5%
+                else -> null                       // 30%
+            }
+        } else {
+            when {
+                rand < 0.48f -> Items.COD       // 40% chance
+                else -> null  // 52% chance of no fish (fish escaped)
+            }
         }
     }
 }

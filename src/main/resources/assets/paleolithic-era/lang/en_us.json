@@ -15,6 +15,8 @@
   "advancement.paleolithic-era.awakening.light_crude_campfire.description": "Crouch down to light the thing. Takes some time to get going. Fire means survival.",
   "advancement.paleolithic-era.awakening.cook_meat.title": "Cooked and Cured",
   "advancement.paleolithic-era.awakening.cook_meat.description": "Use your campfire to cook raw meat. It's safer and tastier this way.",
+  "advancement.paleolithic-era.awakening.place_effigy.title": "Ward the Night",
+  "advancement.paleolithic-era.awakening.place_effigy.description": "Place an effigy that shields nearby players from threats.",
   "advancement.paleolithic-era.awakening.unlock_knapping.title": "Shape the Stone",
   "advancement.paleolithic-era.awakening.unlock_knapping.description": "Craft a Knapping Station to begin shaping sharper tools.",
   "advancement.paleolithic-era.awakening.craft_flint_biface.title": "Ancient Craftsmanship",
@@ -51,14 +53,18 @@
   "block.paleolithic-era.willow_planks": "Willow Planks",
   "block.paleolithic-era.willow_sapling": "Willow Sapling",
   "block.paleolithic-era.yarrow_plant": "Wild Yarrow",
+  "block.paleolithic-era.bundle_of_sticks": "Bundle of Sticks",
+  "block.paleolithic-era.effigy_of_protection": "Effigy of Protection",
 
   "container.paleolithic-era.hide_dryer": "Hide Dryer",
   "container.paleolithic-era.knapping_station": "Knapping Station",
 
   "entity.paleolithic-era.boar": "Wild Boar",
+  "entity.paleolithic-era.ibex": "Ibex",
 
   "item.paleolithic-era.bark": "Bark",
   "item.paleolithic-era.bone_knife": "Bone Knife",
+  "item.paleolithic-era.bone_harpoon": "Bone Harpoon",
   "item.paleolithic-era.bone_spear": "Bone Spear",
   "item.paleolithic-era.bone_shard": "Bone Shard",
   "item.paleolithic-era.boar_spawn_egg": "Boar Spawn Egg",
@@ -77,6 +83,7 @@
   "item.paleolithic-era.hide_leggings": "Hide Leggings",
   "item.paleolithic-era.hide_shoes": "Hide Shoes",
   "item.paleolithic-era.hide_tunic": "Hide Tunic",
+  "item.paleolithic-era.ibex_spawn_egg": "Ibex Spawn Egg",
   "item.paleolithic-era.knapping_station": "Knapping Station",
   "item.paleolithic-era.patched_hide": "Patched Hide",
   "item.paleolithic-era.plant_cordage": "Plant Cordage",
@@ -98,6 +105,8 @@
   "item.paleolithic-era.wooden_spear": "Wooden Spear",
   "item.paleolithic-era.wooden_harpoon": "Wooden Harpoon",
   "item.paleolithic-era.yarrow_herb": "Yarrow Herb",
+  "item.paleolithic-era.bundle_of_sticks": "Bundle of Sticks",
+  "item.paleolithic-era.effigy_of_protection": "Effigy of Protection",
 
   "itemGroup.paleolithic-era.paleolithic_era": "Paleolithic Era",
 
@@ -129,12 +138,15 @@
   "tooltip.paleolithic-era.willow_bark": "Salix alba",
   "tooltip.paleolithic-era.wooden_harpoon": "Use near water to fish. Time your strike!",
   "tooltip.paleolithic-era.wooden_harpoon.usage": "[Use] on water block surrounded by water blocks. [Spacebar] to catch",
+  "tooltip.paleolithic-era.bone_harpoon": "Sharper harpoon with better catch odds.",
+  "tooltip.paleolithic-era.bone_harpoon.usage": "[Use] on water block surrounded by water blocks. [Spacebar] to catch",
   "tooltip.paleolithic-era.wooden_spear": "Melee or throw it. Your choice.",
   "tooltip.paleolithic-era.yarrow_herb": "Achillea millefolium",
 
   "tag.item.paleolithic-era.bone_tool_materials": "Bone Tools",
   "tag.item.paleolithic-era.flint_tool_materials": "Flint Tools",
   "tag.item.paleolithic-era.repairs_hide_armor": "Hide Repair Material",
+  "tag.item.paleolithic-era.ibex_food": "Ibex Food",
   "tag.item.paleolithic-era.knife": "Knife",
   "tag.item.paleolithic-era.spears": "Spears",
   "tag.entity_type.paleolithic-era.huntable": "Huntable"

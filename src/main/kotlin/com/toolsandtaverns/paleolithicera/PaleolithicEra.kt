@@ -2,6 +2,7 @@ package com.toolsandtaverns.paleolithicera
 
 import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.entity.BoarEntity
+import com.toolsandtaverns.paleolithicera.entity.IbexEntity
 import com.toolsandtaverns.paleolithicera.event.BlockDropHandler
 import com.toolsandtaverns.paleolithicera.event.MobLootModifier
 import com.toolsandtaverns.paleolithicera.event.PlantFiberLootModifier
@@ -13,12 +14,24 @@ import com.toolsandtaverns.paleolithicera.world.gen.ModTreeGeneration
 import com.toolsandtaverns.paleolithicera.world.gen.ModWorldgen
 import com.toolsandtaverns.paleolithicera.world.gen.treedecorator.ModTreeDecoratorType
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
+import net.minecraft.block.CampfireBlock
+import net.minecraft.item.FireChargeItem
+import net.minecraft.item.FlintAndSteelItem
+import net.minecraft.state.property.Properties
+import net.minecraft.util.ActionResult
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import com.toolsandtaverns.paleolithicera.event.SpawnGate
+import com.toolsandtaverns.paleolithicera.progression.WorldProgress
+import com.toolsandtaverns.paleolithicera.progression.ProgressionRules
+import net.minecraft.server.world.ServerWorld
+import net.minecraft.item.Items
+import net.minecraft.item.SpawnEggItem
 
 /**
  * Main mod class for the Paleolithic Era mod.
@@ -63,6 +76,7 @@ object PaleolithicEra : ModInitializer {
         ModTreeDecoratorType.initialize()
 
         FabricDefaultAttributeRegistry.register(ModEntityType.BOAR_ENTITY, BoarEntity.createAttributes())
+        FabricDefaultAttributeRegistry.register(ModEntityType.IBEX_ENTITY, IbexEntity.createAttributes())
 
         // Initialize loot table modifiers for custom drops
         PlantFiberLootModifier.initialize() // Adds plant fiber drops to grass
@@ -88,6 +102,38 @@ object PaleolithicEra : ModInitializer {
 
         // Initialize custom crafting recipes
         ModRecipes.initialize()
+
+        // Ensure custom gamerules are registered before any world access
+        // Touch keys to force ProgressionRules object init
+        val campfireRuleKey = ProgressionRules.CAMPFIRE_LIT
+        val knapRuleKey = ProgressionRules.KNAPPING_STATION_PLACED
+
+        // Detect vanilla campfire lighting (e.g., flint and steel)
+        UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->
+            if (!world.isClient) {
+                val pos = hitResult.blockPos
+                val state = world.getBlockState(pos)
+                val item = player.getStackInHand(hand).item
+                if (state.block is CampfireBlock && !state.get(Properties.LIT)) {
+                    if (item is FlintAndSteelItem || item is FireChargeItem) {
+                        WorldProgress.markCampfireLit(world as ServerWorld)
+                    }
+                }
+                // Track spawn egg usage for pig/goat so we can allow those spawns
+                if (world is ServerWorld) {
+                    when (item) {
+                        Items.PIG_SPAWN_EGG -> SpawnGate.noteSpawnEggUse(world, pos, net.minecraft.entity.EntityType.PIG)
+                        Items.GOAT_SPAWN_EGG -> SpawnGate.noteSpawnEggUse(world, pos, net.minecraft.entity.EntityType.GOAT)
+                    }
+                }
+            }
+            ActionResult.PASS
+        })
+
+        // Effigy placed advancement is triggered at structure conversion time
+
+        // Gate pig/goat spawns until progression is met
+        SpawnGate.initialize()
     }
 
 }

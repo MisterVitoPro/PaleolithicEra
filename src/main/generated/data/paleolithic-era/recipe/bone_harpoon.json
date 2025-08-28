@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "paleolithic-era:bone_shard",
+    "H": "paleolithic-era:wooden_harpoon",
+    "P": "paleolithic-era:plant_cordage"
+  },
+  "pattern": [
+    "PB",
+    "HP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:bone_harpoon"
+  }
+}

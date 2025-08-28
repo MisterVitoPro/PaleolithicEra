@@ -16,6 +16,7 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import com.toolsandtaverns.paleolithicera.progression.WorldProgress
 
 class KnappingStationBlock(settings: Settings) : BlockWithEntity(settings) {
 
@@ -68,6 +69,13 @@ class KnappingStationBlock(settings: Settings) : BlockWithEntity(settings) {
             }
         } else {
             null
+        }
+    }
+
+    override fun onPlaced(world: World, pos: BlockPos, state: BlockState, placer: net.minecraft.entity.LivingEntity?, itemStack: net.minecraft.item.ItemStack) {
+        super.onPlaced(world, pos, state, placer, itemStack)
+        if (!world.isClient && world is net.minecraft.server.world.ServerWorld) {
+            WorldProgress.markKnappingStationPlaced(world)
         }
     }
 

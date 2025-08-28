@@ -3,6 +3,7 @@ package com.toolsandtaverns.paleolithicera.datagen.tag
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.ModTags
+import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.item.Items
@@ -77,5 +78,9 @@ class ModItemTagProvider(output: FabricDataOutput, val registries: CompletableFu
 
         valueLookupBuilder(ItemTags.PLANKS)
             .add(ModBlocks.WILLOW_PLANKS.asItem())
+
+        valueLookupBuilder(ModTags.Items.IBEX_FOOD)
+            .add(ModItems.getPlantItem(EdiblePlants.YARROW))
+            .add(Items.WHEAT)
     }
 }

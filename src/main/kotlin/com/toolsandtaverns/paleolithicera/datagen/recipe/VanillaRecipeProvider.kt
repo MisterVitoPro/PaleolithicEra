@@ -69,12 +69,22 @@ class VanillaRecipeProvider(
                     .offerTo(exporter)
 
                 // Wooden Harpoon
-                createShaped(RecipeCategory.COMBAT, ModItems.WOODEN_HARPOON, 1)
+                createShaped(RecipeCategory.TOOLS, ModItems.WOODEN_HARPOON, 1)
                     .pattern("SS")
                     .pattern("WS")
                     .input('S', Items.STICK)
                     .input('W', ModItems.WOODEN_SPEAR)
                     .criterion(hasItem(ModItems.WOODEN_SPEAR), conditionsFromItem(ModItems.WOODEN_SPEAR))
+                    .offerTo(exporter)
+
+                // Bone Harpoon (upgrade from Wooden Harpoon)
+                createShaped(RecipeCategory.TOOLS, ModItems.BONE_HARPOON, 1)
+                    .pattern("PB")
+                    .pattern("HP")
+                    .input('B', ModItems.BONE_SHARD)
+                    .input('P', ModItems.PLANT_CORDAGE)
+                    .input('H', ModItems.WOODEN_HARPOON)
+                    .criterion(hasItem(ModItems.BONE_SHARD), conditionsFromItem(ModItems.BONE_SHARD))
                     .offerTo(exporter)
 
                 // Fire Drill
@@ -162,7 +172,7 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(ModItems.DRY_HIDE), conditionsFromItem(ModItems.DRY_HIDE))
                     .offerTo(exporter)
 
-                createShaped(RecipeCategory.COMBAT, ModItems.FLINT_KNIFE, 1)
+                createShaped(RecipeCategory.TOOLS, ModItems.FLINT_KNIFE, 1)
                     .pattern("PF")
                     .pattern("S ")
                     .input('F', ModItems.FLINT_BIFACE)
@@ -183,6 +193,15 @@ class VanillaRecipeProvider(
                 createShapeless(RecipeCategory.MISC, Items.BONE_MEAL, 1)
                     .input(ModItems.BONE_SHARD)
                     .criterion(hasItem(ModItems.BONE_SHARD), conditionsFromItem(ModItems.BONE_SHARD))
+                    .offerTo(exporter)
+
+                // Bundle of Sticks (for Effigy construction)
+                createShapeless(RecipeCategory.MISC, ModBlocks.BUNDLE_OF_STICKS, 1)
+                    .input(Items.STICK)
+                    .input(Items.STICK)
+                    .input(Items.STICK)
+                    .input(Items.STICK)
+                    .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
                     .offerTo(exporter)
 
                 createShapeless(RecipeCategory.MISC, ModBlocks.WILLOW_PLANKS, 4)

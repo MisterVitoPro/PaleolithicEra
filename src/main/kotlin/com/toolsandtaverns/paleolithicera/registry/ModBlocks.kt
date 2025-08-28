@@ -131,6 +131,21 @@ object ModBlocks {
             .strength(0.2f).sounds(BlockSoundGroup.VINE).burnable().pistonBehavior(PistonBehavior.DESTROY)
     )
 
+    // New Blocks: Effigy structure components
+    val BUNDLE_OF_STICKS: Block = register(
+        "bundle_of_sticks",
+        ::BundleOfSticksBlock,
+        AbstractBlock.Settings.create().strength(0.5f).sounds(BlockSoundGroup.WOOD)
+    )
+    val EFFIGY_OF_PROTECTION: Block = register(
+        "effigy_of_protection",
+        ::EffigyOfProtectionBlock,
+        AbstractBlock.Settings.create().strength(1.5f).sounds(BlockSoundGroup.BONE).nonOpaque()
+    )
+    val EFFIGY_OF_PROTECTION_TOP: Block = registerBlockWithoutBlockItem(
+        "effigy_of_protection_top"
+    ) { settings -> EffigyOfProtectionTopBlock(settings.nonOpaque()) }
+
     fun initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL)
             .register { entries: FabricItemGroupEntries ->
@@ -138,6 +153,8 @@ object ModBlocks {
                 entries.add(CRUDE_CAMPFIRE)
                 entries.add(HIDE_DRYER)
                 entries.add(KNAPPING_STATION)
+                entries.add(BUNDLE_OF_STICKS)
+                entries.add(EFFIGY_OF_PROTECTION)
             }
     }
 

@@ -34,6 +34,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
+import com.toolsandtaverns.paleolithicera.progression.WorldProgress
 import java.util.*
 import java.util.function.Consumer
 import java.util.function.Function
@@ -358,6 +359,8 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
             blockEntity: CrudeCampfireBlockEntity,
             recipeMatchGetter: MatchGetter<SingleStackRecipeInput?, CampfireCookingRecipe?>
         ) {
+            // Mark progression: a campfire has been lit at least once in this world
+            WorldProgress.markCampfireLit(world)
             var bl = false
 
             if (blockEntity.burnTicksRemaining > 0) {

@@ -65,3 +65,4 @@ replay_*.log
 /src/main/generated/.cache/
 /remappedSrc/
 /PaleolithicEra.wiki/
+/AGENTS.md

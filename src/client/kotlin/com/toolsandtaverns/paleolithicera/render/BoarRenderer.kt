@@ -9,8 +9,8 @@ import net.minecraft.client.render.entity.MobEntityRenderer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.Identifier
 
-class BoarRenderer(context: EntityRendererFactory.Context) :
-    MobEntityRenderer<BoarEntity, BoarRenderState, BoarModel>(
+class BoarRenderer(context: EntityRendererFactory.Context)
+    : MobEntityRenderer<BoarEntity, BoarRenderState, BoarModel>(
         context,
         BoarModel(context.getPart(BoarModel.BOAR_MODEL_LAYER)),
         0.5f

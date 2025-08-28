@@ -31,6 +31,9 @@ class ModBlockLootTableProvider(
     override fun generate() {
         addDrop(ModBlocks.KNAPPING_STATION)
         addDrop(ModBlocks.HIDE_DRYER)
+        // Effigy build components
+        addDrop(ModBlocks.BUNDLE_OF_STICKS)
+        addDrop(ModBlocks.EFFIGY_OF_PROTECTION)
         // Herbs
         addPlantDrops(ModItems.getPlantItem(EdiblePlants.ELDERBERRY), ModBlocks.ELDERBERRY_BUSH)
         addPlantDrops(ModItems.getPlantItem(EdiblePlants.CHAMOMILE), ModBlocks.CHAMOMILE_PLANT)

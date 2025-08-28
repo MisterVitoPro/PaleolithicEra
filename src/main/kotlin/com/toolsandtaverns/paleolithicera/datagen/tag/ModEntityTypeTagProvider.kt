@@ -48,12 +48,19 @@ class ModEntityTypeTagProvider(
      * @param lookup Registry wrapper lookup for accessing entity type registries
      */
     override fun configure(lookup: RegistryWrapper.WrapperLookup) {
-        val builder = builder(ModTags.Entity.HUNTABLE_TAG)
+        val huntableBuilder = builder(ModTags.Entity.HUNTABLE_TAG)
+        val aggressiveBuilder = builder(ModTags.Entity.AGGRESSIVE)
 
         huntableAnimals.forEach { entityType ->
             val id: Identifier = EntityType.getId(entityType)
             val key: RegistryKey<EntityType<*>> = RegistryKey.of(RegistryKeys.ENTITY_TYPE, id)
-            builder.add(key)
+            huntableBuilder.add(key)
+        }
+
+        aggressiveAnimals.forEach { entityType ->
+            val id: Identifier = EntityType.getId(entityType)
+            val key: RegistryKey<EntityType<*>> = RegistryKey.of(RegistryKeys.ENTITY_TYPE, id)
+            aggressiveBuilder.add(key)
         }
     }
 
@@ -65,32 +72,33 @@ class ModEntityTypeTagProvider(
          * chosen based on several factors:
          *
          * 1. Historical accuracy - species that existed during the Paleolithic era
-         * 2. Varied sizes - from small game (rabbits) to large prey (cows, horses)
-         * 3. Different environments - representing hunting across various biomes
-         * 4. Risk levels - some animals (wolves, polar bears) present danger to hunters
-         * 5. Resource value - animals providing useful materials like hide, meat, and bone
+         * 2. Different environments - representing hunting across various biomes
+         * 3. Risk levels - some animals (wolves, polar bears) present danger to hunters
+         * 4. Resource value - animals providing useful materials like hide, meat, and bone
          *
          * The diversity of huntable animals encourages players to develop different hunting
          * strategies and tools for different prey, reflecting the adaptive nature of
          * Paleolithic hunting practices across environments.
          */
         val huntableAnimals = listOf(
-            EntityType.ARMADILLO,
             EntityType.CAMEL,
             EntityType.COW,
             EntityType.DONKEY,
-            EntityType.FOX,
-            EntityType.GOAT,
             EntityType.HORSE,
             EntityType.LLAMA,
-            EntityType.MOOSHROOM,
             EntityType.MULE,
             EntityType.PANDA,
             EntityType.POLAR_BEAR,
-            EntityType.RABBIT,
-            EntityType.SHEEP,
             EntityType.WOLF,
-            ModEntityType.BOAR_ENTITY
+            ModEntityType.BOAR_ENTITY,
+            ModEntityType.IBEX_ENTITY
+        )
+
+        val aggressiveAnimals = listOf(
+            EntityType.POLAR_BEAR,
+            EntityType.WOLF,
+            ModEntityType.BOAR_ENTITY,
+            ModEntityType.IBEX_ENTITY
         )
     }
 

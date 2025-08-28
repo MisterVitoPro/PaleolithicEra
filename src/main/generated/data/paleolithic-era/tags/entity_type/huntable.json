@@ -1,20 +1,15 @@
 {
   "values": [
-    "minecraft:armadillo",
     "minecraft:camel",
     "minecraft:cow",
     "minecraft:donkey",
-    "minecraft:fox",
-    "minecraft:goat",
     "minecraft:horse",
     "minecraft:llama",
-    "minecraft:mooshroom",
     "minecraft:mule",
     "minecraft:panda",
     "minecraft:polar_bear",
-    "minecraft:rabbit",
-    "minecraft:sheep",
     "minecraft:wolf",
-    "paleolithic-era:boar"
+    "paleolithic-era:boar",
+    "paleolithic-era:ibex"
   ]
 }
