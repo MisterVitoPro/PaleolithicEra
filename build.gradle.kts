@@ -1,3 +1,6 @@
+import net.fabricmc.loom.task.RemapJarTask
+import net.fabricmc.loom.task.RemapSourcesJarTask
+import org.gradle.kotlin.dsl.named
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -6,6 +9,13 @@ plugins {
 	id("maven-publish")
 	java
 }
+
+// Expose versions from gradle.properties as typed vars
+val minecraft_version: String by project
+val yarn_mappings: String by project
+val loader_version: String by project
+val fabric_version: String by project
+val fabric_kotlin_version: String by project
 
 group = property("maven_group")!!
 version = property("mod_version")!!
@@ -18,11 +28,11 @@ fabricApi {
 
 dependencies {
 	// To change the versions, see the gradle.properties file
-	minecraft("com.mojang:minecraft:${property("minecraft_version")}")
-	mappings("net.fabricmc:yarn:${property("yarn_mappings")}:v2")
-	modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
-	modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}")
-	modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
+	minecraft("com.mojang:minecraft:${minecraft_version}")
+	mappings("net.fabricmc:yarn:${yarn_mappings}:v2")
+	modImplementation("net.fabricmc:fabric-loader:${loader_version}")
+	modImplementation("net.fabricmc.fabric-api:fabric-api:${fabric_version}")
+	modImplementation("net.fabricmc:fabric-language-kotlin:${fabric_kotlin_version}")
 }
 
 loom {
@@ -44,9 +54,23 @@ kotlin {
 tasks {
 
 	processResources {
+		// Ensure changes to these props re-run resource processing
 		inputs.property("version", project.version)
+		inputs.property("minecraft_version", minecraft_version)
+		inputs.property("loader_version", loader_version)
+		inputs.property("fabric_version", fabric_version)
+		inputs.property("fabric_kotlin_version", fabric_kotlin_version)
+
 		filesMatching("fabric.mod.json") {
-			expand(mapOf("version" to project.version))
+			expand(
+				mapOf(
+					"version" to project.version,
+					"minecraft_version" to minecraft_version,
+					"loader_version" to loader_version,
+					"fabric_version" to fabric_version,
+					"fabric_kotlin_version" to fabric_kotlin_version,
+				)
+			)
 		}
 	}
 
@@ -71,6 +95,14 @@ tasks {
 		compilerOptions {
 			jvmTarget = JvmTarget.JVM_21
 		}
+	}
+
+	// Name the remapped jars with MC + mod version
+	named<RemapJarTask>("remapJar") {
+		archiveFileName.set("paleolithic-era-${minecraft_version}-${project.version}.jar")
+	}
+	named<RemapSourcesJarTask>("remapSourcesJar") {
+		archiveFileName.set("paleolithic-era-${minecraft_version}-${project.version}-sources.jar")
 	}
 
 }
