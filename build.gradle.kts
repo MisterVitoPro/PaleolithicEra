@@ -1,4 +1,6 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import net.fabricmc.loom.task.RemapJarTask
+import net.fabricmc.loom.task.RemapSourcesJarTask
 
 plugins {
 	kotlin("jvm")
@@ -71,9 +73,9 @@ kotlin {
             }
         }
 
-	jar {
-		from("LICENSE")
-	}
+    jar {
+        from("LICENSE")
+    }
 
 	publishing {
 		publications {
@@ -88,13 +90,20 @@ kotlin {
 		}
 	}
 
-	compileKotlin {
-		compilerOptions {
-			jvmTarget = JvmTarget.JVM_21
-		}
-	}
+        compileKotlin {
+            compilerOptions {
+                jvmTarget = JvmTarget.JVM_21
+            }
+        }
 
-}
+        // Name the remapped jars with MC + mod version
+        named<RemapJarTask>("remapJar") {
+            archiveFileName.set("paleolithic-era-${minecraft_version}-${project.version}.jar")
+        }
+        named<RemapSourcesJarTask>("remapSourcesJar") {
+            archiveFileName.set("paleolithic-era-${minecraft_version}-${project.version}-sources.jar")
+        }
+    }
 
 java {
 	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task

@@ -56,7 +56,7 @@ class ModBlockTagProvider(
      * @param wrapperLookup Registry wrapper lookup for accessing block registries
      */
     override fun configure(wrapperLookup: RegistryWrapper.WrapperLookup) {
-        valueLookupBuilder(BlockTags.LOGS_THAT_BURN)
+        reverseLookup(BlockTags.LOGS_THAT_BURN)
             .add(ModBlocks.WILLOW_LOG)
             .add(ModBlocks.STRIPPED_WILLOW_LOG)
 
