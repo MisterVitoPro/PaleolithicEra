@@ -16,12 +16,10 @@ import com.toolsandtaverns.paleolithicera.render.*
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreen
 import com.toolsandtaverns.paleolithicera.screen.KnappingStationScreen
 import net.fabricmc.api.ClientModInitializer
-import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry
 import net.minecraft.client.gui.screen.ingame.HandledScreens
-import net.minecraft.client.render.BlockRenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
 
 /**
@@ -78,19 +76,7 @@ object PaleolithicEraClient : ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.KNAPPING, ::KnappingStationScreen)
         HandledScreens.register(ModScreenHandlers.HIDE_DRYER, ::HideDryerScreen)
 
-        // Set the render layers for blocks with transparency
-        // CUTOUT is used for blocks with binary transparency (fully transparent or fully opaque pixels)
-        BlockRenderLayerMap.putBlock(ModBlocks.CRUDE_CAMPFIRE, BlockRenderLayer.CUTOUT)
-        BlockRenderLayerMap.putBlock(ModBlocks.ELDERBERRY_BUSH, BlockRenderLayer.CUTOUT)
-        BlockRenderLayerMap.putBlock(ModBlocks.CHAMOMILE_PLANT, BlockRenderLayer.CUTOUT)
-        BlockRenderLayerMap.putBlock(ModBlocks.YARROW_PLANT, BlockRenderLayer.CUTOUT)
-        BlockRenderLayerMap.putBlock(ModBlocks.WILD_GARLIC_PLANT, BlockRenderLayer.CUTOUT)
-        BlockRenderLayerMap.putBlock(ModBlocks.EPHEDRA_PLANT, BlockRenderLayer.CUTOUT)
-        BlockRenderLayerMap.putBlock(ModBlocks.SAGEBRUSH_PLANT, BlockRenderLayer.CUTOUT)
-        BlockRenderLayerMap.putBlock(ModBlocks.WILD_MINT_PLANT, BlockRenderLayer.CUTOUT)
-        BlockRenderLayerMap.putBlock(ModBlocks.WILD_GARLIC_PLANT, BlockRenderLayer.CUTOUT)
-        BlockRenderLayerMap.putBlock(ModBlocks.WILLOW_SAPLING, BlockRenderLayer.CUTOUT)
-        BlockRenderLayerMap.putBlock(ModBlocks.WILLOW_LEAF_VINES, BlockRenderLayer.CUTOUT)
+        // Render layers configured elsewhere; skip during data generation
 
         // Register client-side network handlers for the harpoon fishing system
         OpenHarpoonGuiClient.register()

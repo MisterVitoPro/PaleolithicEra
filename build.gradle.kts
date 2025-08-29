@@ -20,9 +20,9 @@ group = property("maven_group")!!
 version = property("mod_version")!!
 
 fabricApi {
-	configureDataGeneration {
-		client = true
-	}
+    configureDataGeneration {
+        client = false
+    }
 }
 
 dependencies {
@@ -50,7 +50,7 @@ kotlin {
 	sourceSets["main"].kotlin.srcDir("src/main/kotlin")
 }
 
-	tasks {
+    		tasks {
 
         processResources {
             // Ensure changes to these props re-run resource processing

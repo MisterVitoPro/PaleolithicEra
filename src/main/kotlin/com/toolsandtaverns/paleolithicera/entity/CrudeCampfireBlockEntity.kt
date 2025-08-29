@@ -22,9 +22,7 @@ import net.minecraft.recipe.ServerRecipeManager.MatchGetter
 import net.minecraft.recipe.input.SingleStackRecipeInput
 import net.minecraft.registry.RegistryWrapper.WrapperLookup
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.storage.NbtWriteView
-import net.minecraft.storage.ReadView
-import net.minecraft.storage.WriteView
+// Storage view APIs are unavailable in 1.21.5 mappings; use NBT read/write instead
 import net.minecraft.util.Clearable
 import net.minecraft.util.ErrorReporter
 import net.minecraft.util.ItemScatterer
@@ -100,29 +98,23 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      *
      * @param view The data source to read from
      */
-    override fun readData(view: ReadView) {
-        super.readData(view)
+    override fun readNbt(nbt: NbtCompound, registries: WrapperLookup) {
+        super.readNbt(nbt, registries)
         this.itemsBeingCooked.clear()
-        Inventories.readData(view, this.itemsBeingCooked)
-        view.getOptionalIntArray("CookingTimes").ifPresentOrElse(Consumer { `is`: IntArray? ->
-            System.arraycopy(
-                `is`,
-                0,
-                this.cookingTimes,
-                0,
-                min(this.cookingTotalTimes.size, `is`!!.size)
-            )
-        }) { Arrays.fill(this.cookingTimes, 0) }
-        view.getOptionalIntArray("CookingTotalTimes").ifPresentOrElse(Consumer { `is`: IntArray? ->
-            System.arraycopy(
-                `is`,
-                0,
-                this.cookingTotalTimes,
-                0,
-                min(this.cookingTotalTimes.size, `is`!!.size)
-            )
-        }) { Arrays.fill(this.cookingTotalTimes, 0) }
-        burnTicksRemaining = view.getInt("BurnTicksRemaining", 0)
+        Inventories.readNbt(nbt, this.itemsBeingCooked, registries)
+        val times = nbt.getIntArray("CookingTimes").orElse(IntArray(0))
+        if (times.isNotEmpty()) {
+            System.arraycopy(times, 0, this.cookingTimes, 0, min(this.cookingTimes.size, times.size))
+        } else {
+            Arrays.fill(this.cookingTimes, 0)
+        }
+        val totalTimes = nbt.getIntArray("CookingTotalTimes").orElse(IntArray(0))
+        if (totalTimes.isNotEmpty()) {
+            System.arraycopy(totalTimes, 0, this.cookingTotalTimes, 0, min(this.cookingTotalTimes.size, totalTimes.size))
+        } else {
+            Arrays.fill(this.cookingTotalTimes, 0)
+        }
+        burnTicksRemaining = nbt.getInt("BurnTicksRemaining").orElse(0)
     }
 
     /**
@@ -140,12 +132,12 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      *
      * @param view The data destination to write to
      */
-    override fun writeData(view: WriteView) {
-        super.writeData(view)
-        Inventories.writeData(view, this.itemsBeingCooked, true)
-        view.putIntArray("CookingTimes", this.cookingTimes)
-        view.putIntArray("CookingTotalTimes", this.cookingTotalTimes)
-        view.putInt("BurnTicksRemaining", burnTicksRemaining)
+    override fun writeNbt(nbt: NbtCompound, registries: WrapperLookup) {
+        super.writeNbt(nbt, registries)
+        Inventories.writeNbt(nbt, this.itemsBeingCooked, true, registries)
+        nbt.putIntArray("CookingTimes", this.cookingTimes)
+        nbt.putIntArray("CookingTotalTimes", this.cookingTotalTimes)
+        nbt.putInt("BurnTicksRemaining", burnTicksRemaining)
     }
 
     /**
@@ -171,13 +163,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      * @param registries Registry wrapper for data serialization
      * @return NBT compound containing initial chunk data
      */
-    override fun toInitialChunkDataNbt(registries: WrapperLookup): NbtCompound? {
-        ErrorReporter.Logging(this.reporterContext, LOGGER).use { logging ->
-            val nbtWriteView = NbtWriteView.create(logging, registries)
-            Inventories.writeData(nbtWriteView, this.itemsBeingCooked, true)
-            return nbtWriteView.nbt
-        }
-    }
+    override fun toInitialChunkDataNbt(registries: WrapperLookup): NbtCompound = createNbt(registries)
 
     /**
      * Attempts to add an item to the campfire for cooking.
@@ -310,10 +296,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      *
      * @param view The write view to modify
      */
-    @Deprecated("Deprecated in Java")
-    override fun removeFromCopiedStackData(view: WriteView) {
-        view.remove("Items")
-    }
+    // No copied stack data adjustments needed
 
     /**
      * Starts the burn timer for the crude campfire.

@@ -56,29 +56,28 @@ class ModBlockTagProvider(
      * @param wrapperLookup Registry wrapper lookup for accessing block registries
      */
     override fun configure(wrapperLookup: RegistryWrapper.WrapperLookup) {
-        reverseLookup(BlockTags.LOGS_THAT_BURN)
+        getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
             .add(ModBlocks.WILLOW_LOG)
             .add(ModBlocks.STRIPPED_WILLOW_LOG)
 
-        valueLookupBuilder(BlockTags.LOGS)
+        getOrCreateTagBuilder(BlockTags.LOGS)
             .add(ModBlocks.WILLOW_LOG)
             .add(ModBlocks.STRIPPED_WILLOW_LOG)
 
         // All log types are added to the unbreakable tag, as harvesting trees without tools
         // would have been impossible for Paleolithic humans. This creates an important
         // progression gate where players must craft primitive axes before accessing wood in quantity.
-        valueLookupBuilder(ModTags.Blocks.UNBREAKABLE_TAG)
+        getOrCreateTagBuilder(ModTags.Blocks.UNBREAKABLE_TAG)
             .addOptionalTag(BlockTags.LOGS)
 
-        valueLookupBuilder(ModTags.Blocks.REQUIRES_SHOVEL)
+        getOrCreateTagBuilder(ModTags.Blocks.REQUIRES_SHOVEL)
             .addOptionalTag(BlockTags.DIRT)
 
-
-        valueLookupBuilder(BlockTags.SWORD_EFFICIENT)
+        getOrCreateTagBuilder(BlockTags.SWORD_EFFICIENT)
             .add(ModBlocks.WILLOW_LEAF_VINES)
 
         // Tool tags: axe-mineable for new wood/bone-like blocks used in the effigy
-        valueLookupBuilder(BlockTags.AXE_MINEABLE)
+        getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
             .add(ModBlocks.BUNDLE_OF_STICKS)
             .add(ModBlocks.EFFIGY_OF_PROTECTION)
 

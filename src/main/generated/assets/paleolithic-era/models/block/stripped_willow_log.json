@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "paleolithic-era:block/stripped_willow_log_top",
-    "side": "paleolithic-era:block/stripped_willow_log"
-  }
-}

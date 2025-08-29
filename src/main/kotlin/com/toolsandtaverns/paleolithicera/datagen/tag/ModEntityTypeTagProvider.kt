@@ -48,19 +48,15 @@ class ModEntityTypeTagProvider(
      * @param lookup Registry wrapper lookup for accessing entity type registries
      */
     override fun configure(lookup: RegistryWrapper.WrapperLookup) {
-        val huntableBuilder = builder(ModTags.Entity.HUNTABLE_TAG)
-        val aggressiveBuilder = builder(ModTags.Entity.AGGRESSIVE)
+        val huntableBuilder = getOrCreateTagBuilder(ModTags.Entity.HUNTABLE_TAG)
+        val aggressiveBuilder = getOrCreateTagBuilder(ModTags.Entity.AGGRESSIVE)
 
         huntableAnimals.forEach { entityType ->
-            val id: Identifier = EntityType.getId(entityType)
-            val key: RegistryKey<EntityType<*>> = RegistryKey.of(RegistryKeys.ENTITY_TYPE, id)
-            huntableBuilder.add(key)
+            huntableBuilder.add(entityType)
         }
 
         aggressiveAnimals.forEach { entityType ->
-            val id: Identifier = EntityType.getId(entityType)
-            val key: RegistryKey<EntityType<*>> = RegistryKey.of(RegistryKeys.ENTITY_TYPE, id)
-            aggressiveBuilder.add(key)
+            aggressiveBuilder.add(entityType)
         }
     }
 

@@ -21,16 +21,14 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
     private val rear_leg_l: ModelPart = root.getChild("rear_leg_l")
     private val rear_leg_r: ModelPart = root.getChild("rear_leg_r")
 
-    private val walkingAnimation = BoarAnimations.walk.createAnimation(root)
-    private val idlingAnimation = BoarAnimations.idle.createAnimation(root)
+    // Animations are disabled for 1.21.5 compatibility in this build
 
     override fun setAngles(state: BoarRenderState) {
         super.setAngles(state)
         this.head.pitch = state.pitch * (Math.PI.toFloat() / 180f)
         this.head.yaw = state.relativeHeadYaw * (Math.PI.toFloat() / 180f)
 
-        this.walkingAnimation.applyWalking(state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2f, 2.5f)
-        this.idlingAnimation.apply(state.idleAnimationState, state.age, 1f)
+        // Animation application disabled
     }
 
     companion object {

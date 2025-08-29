@@ -34,7 +34,7 @@ public abstract class LeafAndLogBehaviorMixin {
      */
     @Inject(method = "tryBreakBlock", at = @At("RETURN"))
     private void addStickDrop(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        ServerWorld world = player.getWorld();
+        ServerWorld world = (ServerWorld) player.getWorld();
         BlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof LeavesBlock) { // TODO this is air because its after the block broke
             Random random = world.getRandom();

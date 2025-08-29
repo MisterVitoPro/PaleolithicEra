@@ -21,14 +21,14 @@ class IbexModel(root: ModelPart) : EntityModel<LivingEntityRenderState>(root) {
 //    private val bone: ModelPart = this.head.getChild("bone")
 //    private val bone2: ModelPart = this.head.getChild("bone2")
 
-    private val walkingAnimation = IbexAnimations.walk.createAnimation(root)
+    // Animations disabled for compatibility
 
     override fun setAngles(state: LivingEntityRenderState) {
         super.setAngles(state)
         this.head.pitch = state.pitch * (Math.PI.toFloat() / 180f)
         this.head.yaw = state.relativeHeadYaw * (Math.PI.toFloat() / 180f)
 
-        this.walkingAnimation.applyWalking(state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2f, 2.5f)
+        // Animation application disabled
     }
 
     companion object {

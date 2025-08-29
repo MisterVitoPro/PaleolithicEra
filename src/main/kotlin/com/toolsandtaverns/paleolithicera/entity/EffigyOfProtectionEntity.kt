@@ -9,13 +9,13 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.item.Items
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.ItemScatterer
-import net.minecraft.storage.ReadView
-import net.minecraft.storage.WriteView
+// Storage view APIs removed in these mappings; use NBT read/write
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
@@ -201,16 +201,16 @@ class EffigyOfProtectionEntity(pos: BlockPos, state: BlockState) :
         return String.format("%02d:%02d", m, s)
     }
 
-    override fun readData(view: ReadView) {
-        super.readData(view)
-        Inventories.readData(view, inventory.heldStacks)
-        activeTicks = view.getInt("ActiveTicks", 0)
+    override fun readNbt(nbt: NbtCompound, registries: net.minecraft.registry.RegistryWrapper.WrapperLookup) {
+        super.readNbt(nbt, registries)
+        Inventories.readNbt(nbt, inventory.heldStacks, registries)
+        activeTicks = nbt.getInt("ActiveTicks").orElse(0)
     }
 
-    override fun writeData(view: WriteView) {
-        super.writeData(view)
-        Inventories.writeData(view, inventory.heldStacks)
-        view.putInt("ActiveTicks", activeTicks)
+    override fun writeNbt(nbt: NbtCompound, registries: net.minecraft.registry.RegistryWrapper.WrapperLookup) {
+        super.writeNbt(nbt, registries)
+        Inventories.writeNbt(nbt, inventory.heldStacks, registries)
+        nbt.putInt("ActiveTicks", activeTicks)
     }
 
     override fun onBlockReplaced(pos: BlockPos, oldState: BlockState) {

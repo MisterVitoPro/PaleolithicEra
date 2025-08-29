@@ -46,40 +46,40 @@ class ModItemTagProvider(output: FabricDataOutput, val registries: CompletableFu
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
         // Bone-based materials represent one of the earliest readily available hard materials
         // used by Paleolithic humans for tools and weapons
-        valueLookupBuilder(ModTags.Items.BONE_TOOL_MATERIALS)
+        getOrCreateTagBuilder(ModTags.Items.BONE_TOOL_MATERIALS)
             .add(Items.BONE)
             .add(ModItems.BONE_KNIFE)
             .add(ModItems.BONE_SPEAR)
 
         // Flint tools represent a technological advancement over bone, offering
         // sharper edges and more durable cutting surfaces
-        valueLookupBuilder(ModTags.Items.FLINT_TOOL_MATERIALS)
+        getOrCreateTagBuilder(ModTags.Items.FLINT_TOOL_MATERIALS)
             .add(ModItems.FLINT_KNIFE)
             .add(Items.FLINT)
 
         // Defines materials that can repair hide-based armor, simulating how
         // Paleolithic humans would patch damaged clothing with additional hide pieces
-        valueLookupBuilder(ModTags.Items.REPAIRS_HIDE_ARMOR)
+        getOrCreateTagBuilder(ModTags.Items.REPAIRS_HIDE_ARMOR)
             .add(ModItems.DRY_HIDE)
             .add(ModItems.PATCHED_HIDE)
 
         // Spears were one of the most important hunting and defense tools in the Paleolithic era,
         // with variations made from different available materials
-        valueLookupBuilder(ModTags.Items.SPEARS)
+        getOrCreateTagBuilder(ModTags.Items.SPEARS)
             .add(ModItems.WOODEN_SPEAR)
             .add(ModItems.BONE_SPEAR)
 
         // Knives were versatile tools used for everything from food preparation
         // to hide processing and crafting other tools
-        valueLookupBuilder(ModTags.Items.KNIFE)
+        getOrCreateTagBuilder(ModTags.Items.KNIFE)
             .add(ModItems.FLINT_BIFACE)
             .add(ModItems.BONE_KNIFE)
             .add(ModItems.FLINT_KNIFE)
 
-        valueLookupBuilder(ItemTags.PLANKS)
+        getOrCreateTagBuilder(ItemTags.PLANKS)
             .add(ModBlocks.WILLOW_PLANKS.asItem())
 
-        valueLookupBuilder(ModTags.Items.IBEX_FOOD)
+        getOrCreateTagBuilder(ModTags.Items.IBEX_FOOD)
             .add(ModItems.getPlantItem(EdiblePlants.YARROW))
             .add(Items.WHEAT)
     }
