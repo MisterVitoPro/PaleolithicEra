@@ -1,3 +1,6 @@
+import net.fabricmc.loom.task.RemapJarTask
+import net.fabricmc.loom.task.RemapSourcesJarTask
+import org.gradle.kotlin.dsl.named
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -88,11 +91,19 @@ kotlin {
 		}
 	}
 
-	compileKotlin {
-		compilerOptions {
-			jvmTarget = JvmTarget.JVM_21
+		compileKotlin {
+			compilerOptions {
+				jvmTarget = JvmTarget.JVM_21
+			}
 		}
-	}
+
+		// Name the remapped jars with MC + mod version
+		named<RemapJarTask>("remapJar") {
+			archiveFileName.set("paleolithic-era-${minecraft_version}-${project.version}.jar")
+		}
+		named<RemapSourcesJarTask>("remapSourcesJar") {
+			archiveFileName.set("paleolithic-era-${minecraft_version}-${project.version}-sources.jar")
+		}
 
 }
 
