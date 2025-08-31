@@ -38,9 +38,13 @@ abstract class SpearEntity : PersistentProjectileEntity {
         stack: ItemStack
     ) : super(type, owner, world, stack, stack) {
         this.setNoGravity(false)
+        this.setDamage(baseDamage.toDouble())
     }
 
     // --- Configuration knobs (override per spear material/tier) ---
+
+    /** Base damage dealt by this spear type. */
+    protected open val baseDamage: Float = 2.0f
 
     /** How long the Slowness lasts, in ticks (20 ticks = 1s). */
     protected open val slownessTickDuration: Int = 60 // 3s

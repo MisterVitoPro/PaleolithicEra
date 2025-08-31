@@ -29,8 +29,10 @@ class BoneSpearEntity : SpearEntity {
     constructor(type: EntityType<out SpearEntity>, world: World)
             : super(type, world)
 
-    // Wooden tier: a shorter slow feels right at the start of the game.
-    override val slownessTickDuration: Int = 20 // 2s
+    // Bone tier: slightly better than wooden spear
+    override val baseDamage: Float = 4.0f // Better damage than wooden spear
+    override val slownessTickDuration: Int = 60 // 3s - longer debuff duration
+    override val slownessAmplifier: Int = 1 // Slowness II instead of I
 
     override fun getDefaultItemStack(): ItemStack = ItemStack(ModItems.BONE_SPEAR)
 
