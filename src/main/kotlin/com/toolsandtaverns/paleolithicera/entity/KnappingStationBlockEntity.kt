@@ -162,9 +162,8 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
      * @param pos The position of the block
      * @param oldState The previous blockstate
      */
-    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState) {
+    fun dropItemsOnRemoved(pos: BlockPos) {
         ItemScatterer.spawn(world, pos, inventory)
-        super.onBlockReplaced(pos, oldState)
     }
 
 

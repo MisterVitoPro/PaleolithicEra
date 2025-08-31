@@ -17,7 +17,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.ConsumableComponent
 import net.minecraft.component.type.FoodComponent
-import net.minecraft.component.type.WeaponComponent
+import net.minecraft.item.ArmorItem
 import net.minecraft.item.*
 import net.minecraft.item.consume.UseAction
 import net.minecraft.item.equipment.EquipmentType
@@ -50,27 +50,27 @@ object ModItems {
     val PATCHED_HIDE: Item = register("patched_hide", { settings: Item.Settings -> Item(settings) })
 
     val HIDE_CAP: Item = register("hide_cap", { settings: Item.Settings ->
-        Item(settings.armor(HIDE_MATERIAL, EquipmentType.HELMET))
+        ArmorItem(HIDE_MATERIAL, EquipmentType.HELMET, settings)
     })
     val HIDE_TUNIC: Item = register("hide_tunic", { settings: Item.Settings ->
-        Item(settings.armor(HIDE_MATERIAL, EquipmentType.CHESTPLATE))
+        ArmorItem(HIDE_MATERIAL, EquipmentType.CHESTPLATE, settings)
     })
     val HIDE_LEGGINGS: Item = register("hide_leggings", { settings: Item.Settings ->
-        Item(settings.armor(HIDE_MATERIAL, EquipmentType.LEGGINGS))
+        ArmorItem(HIDE_MATERIAL, EquipmentType.LEGGINGS, settings)
     })
     val HIDE_SHOES: Item = register("hide_shoes", { settings: Item.Settings ->
-        Item(settings.armor(HIDE_MATERIAL, EquipmentType.BOOTS))
+        ArmorItem(HIDE_MATERIAL, EquipmentType.BOOTS, settings)
     })
 
     val WOODEN_SPEAR = register(
         "wooden_spear",
         { settings: Item.Settings ->
             SpearItem(
-                settings.maxDamage(25)
+                settings
+                    .maxDamage(25)
                     .attributeModifiers(SpearItem.createAttributeModifiers(ToolMaterial.WOOD))
                     .component(DataComponentTypes.TOOL, SpearItem.createToolComponent(ToolMaterial.WOOD))
-                    .enchantable(ToolMaterial.WOOD.enchantmentValue())
-                    .component(DataComponentTypes.WEAPON, WeaponComponent(1)),
+                    .enchantable(ToolMaterial.WOOD.enchantmentValue()),
                 ::WoodenSpearEntity
             )
         }

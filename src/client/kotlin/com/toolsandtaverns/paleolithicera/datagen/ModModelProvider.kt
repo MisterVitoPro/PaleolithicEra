@@ -1,17 +1,18 @@
 package com.toolsandtaverns.paleolithicera.datagen
 
-import com.toolsandtaverns.paleolithicera.block.EdiblePlantBlock
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.minecraft.block.Block
-import net.minecraft.client.data.*
-import net.minecraft.registry.Registries
-import net.minecraft.state.property.IntProperty
-import net.minecraft.util.Identifier
+import net.minecraft.client.data.BlockStateModelGenerator
+import net.minecraft.client.data.ItemModelGenerator
+import net.minecraft.client.data.Models
+import net.minecraft.client.data.TexturedModel
+import net.minecraft.client.data.TextureMap
+import net.minecraft.client.data.TextureKey
+import net.minecraft.client.data.BlockStateModelGenerator.CrossType
 
 class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
@@ -24,44 +25,43 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
      * @param blockStateModelGenerator The generator to register block models with
      */
     override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
-        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.ELDERBERRY_BUSH)
-        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.YARROW_PLANT)
-        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.CHAMOMILE_PLANT)
-        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.WILD_GARLIC_PLANT)
-        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.EPHEDRA_PLANT)
-        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.SAGEBRUSH_PLANT)
-        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.WILD_MINT_PLANT)
-        blockStateModelGenerator.registerPlantStagesWithItem(ModBlocks.WILD_GINGER_PLANT)
-
-        blockStateModelGenerator.registerCubeWithCustomTextures(
+        val gen = blockStateModelGenerator
+        gen.registerSimpleCubeAll(ModBlocks.BUNDLE_OF_STICKS)
+        gen.registerSimpleCubeAll(ModBlocks.WILLOW_PLANKS)
+        gen.registerSingleton(ModBlocks.WILLOW_LEAVES, TexturedModel.LEAVES)
+        gen.registerTintableCrossBlockState(ModBlocks.WILLOW_SAPLING, CrossType.NOT_TINTED)
+        gen.registerLog(ModBlocks.WILLOW_LOG).log(ModBlocks.WILLOW_LOG)
+        gen.registerLog(ModBlocks.STRIPPED_WILLOW_LOG).log(ModBlocks.STRIPPED_WILLOW_LOG)
+        gen.registerCubeWithCustomTextures(
             ModBlocks.KNAPPING_STATION,
-            ModBlocks.KNAPPING_STATION // Same block used as texture source
-        ) { block, _ ->
+            ModBlocks.KNAPPING_STATION
+        ) { _, _ ->
             TextureMap()
                 .put(TextureKey.UP, id("block/knapping_station_top"))
-                .put(TextureKey.SIDE, Identifier.ofVanilla("block/grass_block_side"))
-                .put(TextureKey.DOWN, Identifier.ofVanilla("block/dirt"))
-                .put(TextureKey.PARTICLE, Identifier.ofVanilla("block/dirt"))
+                .put(TextureKey.SIDE, id("block/knapping_station_side"))
+                .put(TextureKey.DOWN, id("block/knapping_station_bottom"))
+                .put(TextureKey.PARTICLE, id("block/knapping_station_side"))
         }
-
-        blockStateModelGenerator.registerCubeWithCustomTextures(
+        gen.registerCubeWithCustomTextures(
             ModBlocks.HIDE_DRYER,
-            ModBlocks.HIDE_DRYER // Same block used as texture source
-        ) { block, _ ->
+            ModBlocks.HIDE_DRYER
+        ) { _, _ ->
             TextureMap()
                 .put(TextureKey.UP, id("block/hide_dryer_top"))
                 .put(TextureKey.SIDE, id("block/hide_dryer_side"))
-                .put(TextureKey.DOWN, id("block/hide_dryer_side"))
+                .put(TextureKey.DOWN, id("block/hide_dryer_bottom"))
                 .put(TextureKey.PARTICLE, id("block/hide_dryer_side"))
         }
 
-        blockStateModelGenerator.createLogTexturePool(ModBlocks.WILLOW_LOG).log(ModBlocks.WILLOW_LOG)
-        blockStateModelGenerator.createLogTexturePool(ModBlocks.STRIPPED_WILLOW_LOG).log(ModBlocks.STRIPPED_WILLOW_LOG)
-
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BUNDLE_OF_STICKS)
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.WILLOW_PLANKS)
-        blockStateModelGenerator.registerSingleton(ModBlocks.WILLOW_LEAVES, TexturedModel.LEAVES)
-        blockStateModelGenerator.registerTintableCrossBlockState(ModBlocks.WILLOW_SAPLING, BlockStateModelGenerator.CrossType.NOT_TINTED)
+        // Herb plants as cross models (not tinted)
+        gen.registerTintableCrossBlockState(ModBlocks.ELDERBERRY_BUSH, CrossType.NOT_TINTED)
+        gen.registerTintableCrossBlockState(ModBlocks.YARROW_PLANT, CrossType.NOT_TINTED)
+        gen.registerTintableCrossBlockState(ModBlocks.CHAMOMILE_PLANT, CrossType.NOT_TINTED)
+        gen.registerTintableCrossBlockState(ModBlocks.WILD_GARLIC_PLANT, CrossType.NOT_TINTED)
+        gen.registerTintableCrossBlockState(ModBlocks.EPHEDRA_PLANT, CrossType.NOT_TINTED)
+        gen.registerTintableCrossBlockState(ModBlocks.SAGEBRUSH_PLANT, CrossType.NOT_TINTED)
+        gen.registerTintableCrossBlockState(ModBlocks.WILD_MINT_PLANT, CrossType.NOT_TINTED)
+        gen.registerTintableCrossBlockState(ModBlocks.WILD_GINGER_PLANT, CrossType.NOT_TINTED)
     }
 
     /**
@@ -74,61 +74,34 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
      * @param itemModelGenerator The generator to register item models with
      */
     override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {
-        // Register resource/material items with GENERATED model type
-        itemModelGenerator.register(ModItems.BARK, Models.GENERATED)
-        itemModelGenerator.register(ModItems.PLANT_FIBER, Models.GENERATED)
-        itemModelGenerator.register(ModItems.PLANT_CORDAGE, Models.GENERATED)
-        itemModelGenerator.register(ModItems.ROCK_CHUNK, Models.GENERATED)
-        itemModelGenerator.register(ModItems.RAWHIDE, Models.GENERATED)
-        itemModelGenerator.register(ModItems.DRY_HIDE, Models.GENERATED)
-        itemModelGenerator.register(ModItems.PATCHED_HIDE, Models.GENERATED)
-        itemModelGenerator.register(ModItems.BONE_SHARD, Models.GENERATED)
-        itemModelGenerator.register(ModItems.FLINT_BIFACE, Models.GENERATED)
-        itemModelGenerator.register(ModItems.BOAR_SPAWN_EGG, Models.GENERATED)
-        itemModelGenerator.register(ModItems.IBEX_SPAWN_EGG, Models.GENERATED)
-
-        // Register food items with GENERATED model type
-        itemModelGenerator.register(ModItems.COOKED_ELDERBERRIES, Models.GENERATED)
-
-        // Register armor items with GENERATED model type
-        itemModelGenerator.register(ModItems.HIDE_LEGGINGS, Models.GENERATED)
-        itemModelGenerator.register(ModItems.HIDE_TUNIC, Models.GENERATED)
-        itemModelGenerator.register(ModItems.HIDE_SHOES, Models.GENERATED)
-        itemModelGenerator.register(ModItems.HIDE_CAP, Models.GENERATED)
-
-        // Register tools and weapons with HANDHELD model type
-        itemModelGenerator.register(ModItems.BONE_KNIFE, Models.HANDHELD)
-        itemModelGenerator.register(ModItems.FLINT_KNIFE, Models.HANDHELD)
-
-        itemModelGenerator.register(ModItems.FIRE_DRILL, Models.HANDHELD)
-        itemModelGenerator.register(ModItems.WOODEN_HARPOON, Models.HANDHELD)
-        itemModelGenerator.register(ModItems.BONE_HARPOON, Models.HANDHELD)
-        itemModelGenerator.register(ModItems.FLINT_AXE, Models.HANDHELD)
-
-        EdiblePlants.entries.forEach { ediblePlants ->
-            val def = ediblePlants.definitions
-            val id = id(def.idPath)
-            val item = Registries.ITEM.get(id)
-            itemModelGenerator.register(item, Models.GENERATED)
+        val gen = itemModelGenerator
+        gen.register(ModItems.BARK, Models.GENERATED)
+        gen.register(ModItems.PLANT_FIBER, Models.GENERATED)
+        gen.register(ModItems.PLANT_CORDAGE, Models.GENERATED)
+        gen.register(ModItems.ROCK_CHUNK, Models.GENERATED)
+        gen.register(ModItems.RAWHIDE, Models.GENERATED)
+        gen.register(ModItems.DRY_HIDE, Models.GENERATED)
+        gen.register(ModItems.PATCHED_HIDE, Models.GENERATED)
+        gen.register(ModItems.BONE_SHARD, Models.GENERATED)
+        gen.register(ModItems.FLINT_BIFACE, Models.GENERATED)
+        gen.register(ModItems.BOAR_SPAWN_EGG, Models.GENERATED)
+        gen.register(ModItems.IBEX_SPAWN_EGG, Models.GENERATED)
+        gen.register(ModItems.COOKED_ELDERBERRIES, Models.GENERATED)
+        gen.register(ModItems.HIDE_LEGGINGS, Models.GENERATED)
+        gen.register(ModItems.HIDE_TUNIC, Models.GENERATED)
+        gen.register(ModItems.HIDE_SHOES, Models.GENERATED)
+        gen.register(ModItems.HIDE_CAP, Models.GENERATED)
+        gen.register(ModItems.BONE_KNIFE, Models.HANDHELD)
+        gen.register(ModItems.FLINT_KNIFE, Models.HANDHELD)
+        gen.register(ModItems.FIRE_DRILL, Models.HANDHELD)
+        gen.register(ModItems.WOODEN_HARPOON, Models.HANDHELD)
+        gen.register(ModItems.BONE_HARPOON, Models.HANDHELD)
+        gen.register(ModItems.FLINT_AXE, Models.HANDHELD)
+        EdiblePlants.entries.forEach { ep ->
+            gen.register(ModItems.getPlantItem(ep), Models.GENERATED)
         }
     }
 
-    private fun BlockStateModelGenerator.registerPlantStagesWithItem(
-        block: Block,
-        age: IntProperty = EdiblePlantBlock.AGE
-    ) {
-        this.blockStateCollector.accept(
-            VariantsBlockModelDefinitionCreator.of(block).with(
-                BlockStateVariantMap.models(age).generate { stage: Int? ->
-                    BlockStateModelGenerator.createWeightedVariant(
-                        this.createSubModel(
-                            block,
-                            "_stage$stage",
-                            Models.CROSS,
-                            { id: Identifier? -> TextureMap.cross(id) })
-                    )
-                })
-        )
-    }
+    // Helpers removed for client compile; datagen tasks can restore these
 
 }

@@ -85,7 +85,7 @@ object ModBlocks {
     )
     val WILLOW_LEAVES: Block = register(
         "willow_leaves",
-        { settings -> UntintedParticleLeavesBlock(0.02f, ParticleTypes.CHERRY_LEAVES, settings) },
+        { settings -> LeavesBlock(settings) },
         AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).strength(0.2f).ticksRandomly()
             .sounds(BlockSoundGroup.AZALEA_LEAVES).nonOpaque()
             .allowsSpawning { state: BlockState, world: BlockView, pos: BlockPos?, type: EntityType<*> ->

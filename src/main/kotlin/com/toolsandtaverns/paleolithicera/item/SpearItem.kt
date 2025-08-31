@@ -55,7 +55,7 @@ class SpearItem(settings: Settings, private val projectileCreator: ProjectileEnt
         }
 
         fun createToolComponent(material: ToolMaterial): ToolComponent {
-            return ToolComponent(mutableListOf(), material.speed, 2, false)
+            return ToolComponent(mutableListOf(), material.speed, 2)
         }
     }
 

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "paleolithic-era:block/knapping_station_bottom",
+    "east": "paleolithic-era:block/knapping_station_side",
+    "north": "paleolithic-era:block/knapping_station_side",
+    "particle": "paleolithic-era:block/knapping_station_side",
+    "south": "paleolithic-era:block/knapping_station_side",
+    "up": "paleolithic-era:block/knapping_station_top",
+    "west": "paleolithic-era:block/knapping_station_side"
+  }
+}

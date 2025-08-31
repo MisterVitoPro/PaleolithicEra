@@ -43,8 +43,13 @@ class CrudeBedBlock(settings: Settings) : HorizontalFacingBlock(settings), Block
         val PART: EnumProperty<BedPart> = Properties.BED_PART
         val OCCUPIED: BooleanProperty = Properties.OCCUPIED
         val CODEC: MapCodec<CrudeBedBlock> = createCodec(::CrudeBedBlock)
-        val SHAPES_BY_DIRECTION: MutableMap<Direction, VoxelShape> = Util.make<MutableMap<Direction, VoxelShape>> {
-            VoxelShapes.createHorizontalFacingShapeMap(createColumnShape(16.0, 0.0, 3.0))
+        // Simple low slab shape used for all directions (3px high)
+        val SHAPES_BY_DIRECTION: MutableMap<Direction, VoxelShape> = Util.make(mutableMapOf()) {
+            val slab = VoxelShapes.cuboid(0.0, 0.0, 0.0, 1.0, 3.0 / 16.0, 1.0)
+            it[Direction.NORTH] = slab
+            it[Direction.SOUTH] = slab
+            it[Direction.EAST] = slab
+            it[Direction.WEST] = slab
         }
 
         fun getOppositePartDirection(state: BlockState): Direction {
@@ -140,9 +145,9 @@ class CrudeBedBlock(settings: Settings) : HorizontalFacingBlock(settings), Block
         state: BlockState,
         pos: BlockPos,
         entity: Entity,
-        fallDistance: Double
+        fallDistance: Float
     ) {
-        super.onLandedUpon(world, state, pos, entity, fallDistance * 0.5)
+        super.onLandedUpon(world, state, pos, entity, fallDistance * 0.5f)
     }
 
     override fun getStateForNeighborUpdate(
@@ -202,7 +207,8 @@ class CrudeBedBlock(settings: Settings) : HorizontalFacingBlock(settings), Block
     }
 
     override fun onBreak(world: World, pos: BlockPos, state: BlockState, player: PlayerEntity): BlockState? {
-        if (!world.isClient && player.shouldSkipBlockDrops()) {
+        // Skip duplicate drops when in creative mode
+        if (!world.isClient && player.isCreative) {
             val bedPart = state.get(PART)
             if (bedPart == BedPart.FOOT) {
                 val blockPos = pos.offset(getDirectionTowardsOtherPart(bedPart, state.get(FACING)))

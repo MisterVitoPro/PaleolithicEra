@@ -3,7 +3,6 @@ package com.toolsandtaverns.paleolithicera.block
 import net.minecraft.block.BlockState
 import net.minecraft.block.SweetBerryBushBlock
 import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityCollisionHandler
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -34,7 +33,6 @@ class EdiblePlantBlock(settings: Settings, private val edibleItem: Item) : Sweet
         val isMature = age == MAX_AGE
         if (isMature) {
             val dropStack = ItemStack(edibleItem, 1)
-            dropStack.onCraftByPlayer(player, 1)
             player.giveItemStack(dropStack)
             world.setBlockState(pos, state.with(AGE, 1))
             return ActionResult.SUCCESS
@@ -46,8 +44,7 @@ class EdiblePlantBlock(settings: Settings, private val edibleItem: Item) : Sweet
         state: BlockState,
         world: World,
         pos: BlockPos,
-        entity: Entity,
-        handler: EntityCollisionHandler
+        entity: Entity
     ) {
         // We do not want to damage or slow player
         return

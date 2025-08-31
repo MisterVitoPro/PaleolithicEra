@@ -204,7 +204,7 @@ class EffigyOfProtectionEntity(pos: BlockPos, state: BlockState) :
     override fun readNbt(nbt: NbtCompound, registries: net.minecraft.registry.RegistryWrapper.WrapperLookup) {
         super.readNbt(nbt, registries)
         Inventories.readNbt(nbt, inventory.heldStacks, registries)
-        activeTicks = nbt.getInt("ActiveTicks").orElse(0)
+        activeTicks = nbt.getInt("ActiveTicks")
     }
 
     override fun writeNbt(nbt: NbtCompound, registries: net.minecraft.registry.RegistryWrapper.WrapperLookup) {
@@ -213,9 +213,8 @@ class EffigyOfProtectionEntity(pos: BlockPos, state: BlockState) :
         nbt.putInt("ActiveTicks", activeTicks)
     }
 
-    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState) {
+    fun dropItemsOnRemoved(pos: BlockPos) {
         ItemScatterer.spawn(world as World, pos, inventory)
-        super.onBlockReplaced(pos, oldState)
     }
 
     // Helper extension

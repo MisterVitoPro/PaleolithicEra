@@ -25,8 +25,10 @@ class IbexModel(root: ModelPart) : EntityModel<LivingEntityRenderState>(root) {
 
     override fun setAngles(state: LivingEntityRenderState) {
         super.setAngles(state)
+        // Restore simple head pitch animation from state (degrees -> radians)
         this.head.pitch = state.pitch * (Math.PI.toFloat() / 180f)
-        this.head.yaw = state.relativeHeadYaw * (Math.PI.toFloat() / 180f)
+        // Yaw field varies across mappings; keep neutral yaw for compatibility
+        this.head.yaw = 0f
 
         // Animation application disabled
     }
@@ -42,7 +44,7 @@ class IbexModel(root: ModelPart) : EntityModel<LivingEntityRenderState>(root) {
                     "body",
                     ModelPartBuilder.create().uv(0, 0).cuboid(-5.0f, -12.0f, -1.0f, 10.0f, 9.0f, 19.0f, Dilation(0.0f))
                         .uv(0, 28).cuboid(-2.0f, -13.0f, -3.0f, 4.0f, 11.0f, 9.0f, Dilation(0.0f)),
-                    ModelTransform.origin(0.0f, 22.0f, 0.0f)
+                    ModelTransform.pivot(0.0f, 22.0f, 0.0f)
                 )
 
                 body.addChild(
@@ -54,25 +56,25 @@ class IbexModel(root: ModelPart) : EntityModel<LivingEntityRenderState>(root) {
                 modelPartData.addChild(
                     "front_leg_L",
                     ModelPartBuilder.create().uv(0, 48).cuboid(-1.0f, -1.0f, -1.0f, 2.0f, 6.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(3.0f, 19.0f, 1.0f)
+                    ModelTransform.pivot(3.0f, 19.0f, 1.0f)
                 )
 
                 modelPartData.addChild(
                     "front_leg_R",
                     ModelPartBuilder.create().uv(8, 48).cuboid(-1.0f, -1.0f, -1.0f, 2.0f, 6.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(-3.0f, 19.0f, 1.0f)
+                    ModelTransform.pivot(-3.0f, 19.0f, 1.0f)
                 )
 
                 modelPartData.addChild(
                     "back_leg_R",
                     ModelPartBuilder.create().uv(16, 48).cuboid(-1.0f, -1.0f, -1.0f, 2.0f, 6.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(-3.0f, 19.0f, 16.0f)
+                    ModelTransform.pivot(-3.0f, 19.0f, 16.0f)
                 )
 
                 modelPartData.addChild(
                     "back_leg_L",
                     ModelPartBuilder.create().uv(50, 28).cuboid(-1.0f, -1.0f, -1.0f, 2.0f, 6.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(3.0f, 19.0f, 16.0f)
+                    ModelTransform.pivot(3.0f, 19.0f, 16.0f)
                 )
 
                 val head = modelPartData.addChild(
@@ -81,7 +83,7 @@ class IbexModel(root: ModelPart) : EntityModel<LivingEntityRenderState>(root) {
                         .uv(26, 42).cuboid(-2.0f, -2.0f, -10.0f, 4.0f, 4.0f, 6.0f, Dilation(0.0f))
                         .uv(16, 56).cuboid(-1.0f, 2.0f, -9.75f, 2.0f, 1.0f, 2.0f, Dilation(0.0f))
                         .uv(50, 40).cuboid(0.0f, 3.0f, -9.75f, 1.0f, 1.0f, 1.0f, Dilation(0.0f)),
-                    ModelTransform.origin(0.0f, 11.0f, -2.0f)
+                    ModelTransform.pivot(0.0f, 11.0f, -2.0f)
                 )
 
                 head.addChild(

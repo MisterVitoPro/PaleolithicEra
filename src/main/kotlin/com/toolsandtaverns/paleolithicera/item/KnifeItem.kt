@@ -11,6 +11,7 @@ import net.minecraft.component.DataComponentTypes
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.*
+import net.minecraft.item.Items
 import net.minecraft.registry.tag.BlockTags
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
@@ -45,7 +46,7 @@ class KnifeItem(
     settings: Settings,
     attackDamage: Float = 0.5f,
     attackSpeed: Float = -2.2f,
-) : Item(settings.tool(material, BlockTags.WOOL, attackDamage, attackSpeed, 0.0F)) {
+) : Item(settings) {
 
     /**
      * Handles the behavior when the knife is used on a block, primarily for stripping logs.
@@ -142,9 +143,10 @@ class KnifeItem(
      * @return true if the stripping attempt should be canceled, false otherwise
      */
     private fun shouldCancelStripAttempt(context: ItemUsageContext): Boolean {
-        val playerEntity: PlayerEntity? = context.player
-        return context.hand == Hand.MAIN_HAND && playerEntity?.offHandStack!!
-            .contains(DataComponentTypes.BLOCKS_ATTACKS) && !playerEntity.shouldCancelInteraction()
+        val player: PlayerEntity? = context.player
+        if (context.hand != Hand.MAIN_HAND || player == null) return false
+        val off = player.offHandStack
+        return off.isOf(Items.SHIELD) && player.isUsingItem && !player.shouldCancelInteraction()
     }
 
     /**

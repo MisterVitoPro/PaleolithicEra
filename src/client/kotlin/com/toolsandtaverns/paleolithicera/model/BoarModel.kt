@@ -25,8 +25,10 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
 
     override fun setAngles(state: BoarRenderState) {
         super.setAngles(state)
+        // Restore simple head pitch animation from state (degrees -> radians)
         this.head.pitch = state.pitch * (Math.PI.toFloat() / 180f)
-        this.head.yaw = state.relativeHeadYaw * (Math.PI.toFloat() / 180f)
+        // Yaw field name varies across mappings; keep neutral yaw for compatibility
+        this.head.yaw = 0f
 
         // Animation application disabled
     }
@@ -45,10 +47,10 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
                         .uv(0, 23).cuboid(-3.0f, -7.0f, -5.0f, 7.0f, 1.0f, 10.0f, Dilation(0.0f))
                         .uv(0, 42).cuboid(-2.0f, -8.0f, -4.0f, 5.0f, 1.0f, 6.0f, Dilation(0.0f))
                         .uv(0, 34).cuboid(-3.0f, 3.85f, -5.0f, 7.0f, 1.0f, 7.0f, Dilation(0.0f)),
-                    ModelTransform.origin(0.0f, 15.0f, 0.0f)
+                    ModelTransform.pivot(0.0f, 15.0f, 0.0f)
                 )
 
-                val tail = body.addChild("tail", ModelPartBuilder.create(), ModelTransform.origin(0.5f, -3.0f, 9.5f))
+                val tail = body.addChild("tail", ModelPartBuilder.create(), ModelTransform.pivot(0.5f, -3.0f, 9.5f))
 
                 tail.addChild(
                     "tail_r1",
@@ -60,11 +62,11 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
                     "head",
                     ModelPartBuilder.create().uv(34, 23).cuboid(-3.5f, -4.0f, -3.0f, 7.0f, 8.0f, 4.0f, Dilation(0.0f))
                         .uv(44, 0).cuboid(-2.0f, 0.0f, -6.0f, 4.0f, 3.0f, 3.0f, Dilation(0.0f)),
-                    ModelTransform.origin(0.5f, 14.0f, -7.0f)
+                    ModelTransform.pivot(0.5f, 14.0f, -7.0f)
                 )
 
                 val mouth =
-                    head.addChild("mouth", ModelPartBuilder.create(), ModelTransform.origin(-0.25f, 3.0f, -3.75f))
+                    head.addChild("mouth", ModelPartBuilder.create(), ModelTransform.pivot(-0.25f, 3.0f, -3.75f))
 
                 mouth.addChild(
                     "mouth_r1",
@@ -77,7 +79,7 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
                     "tusk",
                     ModelPartBuilder.create().uv(34, 46).cuboid(3.9f, -0.9f, -0.4f, 1.0f, 2.0f, 1.0f, Dilation(0.0f))
                         .uv(38, 46).cuboid(-0.1f, -0.9f, -0.4f, 1.0f, 2.0f, 1.0f, Dilation(0.0f)),
-                    ModelTransform.origin(-2.4f, 2.0f, -3.6f)
+                    ModelTransform.pivot(-2.4f, 2.0f, -3.6f)
                 )
 
                 tusk.addChild(
@@ -95,27 +97,27 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
                 modelPartData.addChild(
                     "font_leg_l",
                     ModelPartBuilder.create().uv(9, 50).cuboid(0.25f, 0.0f, -1.25f, 2.0f, 5.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(2.5f, 19.0f, -4.5f)
+                    ModelTransform.pivot(2.5f, 19.0f, -4.5f)
                 )
 
                 modelPartData.addChild(
                     "front_leg_r",
                     ModelPartBuilder.create().uv(9, 50).cuboid(-1.25f, 0.0f, -1.5f, 2.0f, 5.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(-2.5f, 19.0f, -4.25f)
+                    ModelTransform.pivot(-2.5f, 19.0f, -4.25f)
                 )
 
                 modelPartData.addChild(
                     "rear_leg_l",
                     ModelPartBuilder.create().uv(43, 6).cuboid(-2.0f, -1.0f, -1.0f, 3.0f, 3.0f, 3.0f, Dilation(0.0f))
                         .uv(0, 50).cuboid(-1.5f, 1.0f, -0.5f, 2.0f, 4.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(3.0f, 19.0f, 5.5f)
+                    ModelTransform.pivot(3.0f, 19.0f, 5.5f)
                 )
 
                 modelPartData.addChild(
                     "rear_leg_r",
                     ModelPartBuilder.create().uv(50, 12).cuboid(-1.0f, -1.0f, -1.0f, 3.0f, 3.0f, 3.0f, Dilation(0.0f))
                         .uv(0, 50).cuboid(-0.5f, 1.0f, -0.5f, 2.0f, 4.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(-2.0f, 19.0f, 5.5f)
+                    ModelTransform.pivot(-2.0f, 19.0f, 5.5f)
                 )
                 return TexturedModelData.of(modelData, 64, 64)
             }

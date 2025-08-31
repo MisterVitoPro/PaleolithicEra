@@ -21,7 +21,7 @@ version = property("mod_version")!!
 
 fabricApi {
     configureDataGeneration {
-        client = false
+        client = true
     }
 }
 
@@ -111,3 +111,4 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 }
+

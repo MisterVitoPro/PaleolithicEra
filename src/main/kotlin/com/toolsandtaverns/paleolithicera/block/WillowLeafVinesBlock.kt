@@ -37,18 +37,24 @@ class WillowLeafVinesBlock(settings: Settings) : Block(settings) {
     }
 
     private fun createShapeFunction(): Function<BlockState, VoxelShape> {
-        val map = VoxelShapes.createFacingShapeMap(createCuboidZShape(16.0, 0.0, 1.0))
-        return this.createShapeFunction { state: BlockState ->
-            var voxelShape = VoxelShapes.empty()
-            val var3 = FACING_PROPERTIES.entries.iterator()
+        // Build a thin face shape for each horizontal direction
+        val faceShapes = mutableMapOf<Direction, VoxelShape>()
+        val thickness = 1.0 / 16.0
+        faceShapes[Direction.NORTH] = VoxelShapes.cuboid(0.0, 0.0, 0.0, 1.0, 1.0, thickness)
+        faceShapes[Direction.SOUTH] = VoxelShapes.cuboid(0.0, 0.0, 1.0 - thickness, 1.0, 1.0, 1.0)
+        faceShapes[Direction.WEST] = VoxelShapes.cuboid(0.0, 0.0, 0.0, thickness, 1.0, 1.0)
+        faceShapes[Direction.EAST] = VoxelShapes.cuboid(1.0 - thickness, 0.0, 0.0, 1.0, 1.0, 1.0)
+        faceShapes[Direction.UP] = VoxelShapes.cuboid(0.0, 1.0 - thickness, 0.0, 1.0, 1.0, 1.0)
 
-            while (var3.hasNext()) {
-                val entry: MutableMap.MutableEntry<Direction, BooleanProperty> = var3.next()
-                if (state.get(entry.value) as Boolean) {
-                    voxelShape = VoxelShapes.union(voxelShape, map[entry.key])
+        return Function { state: BlockState ->
+            var shape = VoxelShapes.empty()
+            for ((dir, prop) in FACING_PROPERTIES) {
+                if (state.get(prop)) {
+                    val part = faceShapes[dir]
+                    if (part != null) shape = VoxelShapes.union(shape, part)
                 }
             }
-            if (voxelShape.isEmpty) VoxelShapes.fullCube() else voxelShape
+            if (shape.isEmpty) VoxelShapes.fullCube() else shape
         }
     }
 

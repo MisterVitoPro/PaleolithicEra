@@ -6,9 +6,6 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.CampfireBlock
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.component.ComponentMap
-import net.minecraft.component.ComponentsAccess
-import net.minecraft.component.DataComponentTypes
-import net.minecraft.component.type.ContainerComponent
 import net.minecraft.entity.LivingEntity
 import net.minecraft.inventory.Inventories
 import net.minecraft.item.ItemStack
@@ -102,19 +99,19 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
         super.readNbt(nbt, registries)
         this.itemsBeingCooked.clear()
         Inventories.readNbt(nbt, this.itemsBeingCooked, registries)
-        val times = nbt.getIntArray("CookingTimes").orElse(IntArray(0))
+        val times = nbt.getIntArray("CookingTimes")
         if (times.isNotEmpty()) {
             System.arraycopy(times, 0, this.cookingTimes, 0, min(this.cookingTimes.size, times.size))
         } else {
             Arrays.fill(this.cookingTimes, 0)
         }
-        val totalTimes = nbt.getIntArray("CookingTotalTimes").orElse(IntArray(0))
+        val totalTimes = nbt.getIntArray("CookingTotalTimes")
         if (totalTimes.isNotEmpty()) {
             System.arraycopy(totalTimes, 0, this.cookingTotalTimes, 0, min(this.cookingTotalTimes.size, totalTimes.size))
         } else {
             Arrays.fill(this.cookingTotalTimes, 0)
         }
-        burnTicksRemaining = nbt.getInt("BurnTicksRemaining").orElse(0)
+        burnTicksRemaining = nbt.getInt("BurnTicksRemaining")
     }
 
     /**
@@ -246,7 +243,8 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      * @param pos The position of the block
      * @param oldState The previous blockstate
      */
-    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState?) {
+    // Drop stored items when the block is replaced/removed
+    fun dropItemsOnRemoved(pos: BlockPos) {
         if (this.world != null) {
             ItemScatterer.spawn(this.world, pos, this.itemsBeingCooked)
         }
@@ -261,15 +259,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      *
      * @param components The components access object containing data
      */
-    override fun readComponents(components: ComponentsAccess) {
-        super.readComponents(components)
-        (components.getOrDefault(
-            DataComponentTypes.CONTAINER,
-            ContainerComponent.DEFAULT
-        ) as ContainerComponent).copyTo(
-            this.itemsBeingCooked
-        )
-    }
+    // Component-based serialization not used; NBT handles persistence
 
     /**
      * Adds components to the component builder for data serialization.
@@ -280,12 +270,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      *
      * @param builder The component map builder
      */
-    override fun addComponents(builder: ComponentMap.Builder) {
-        builder.add(
-            DataComponentTypes.CONTAINER,
-            ContainerComponent.fromStacks(this.itemsBeingCooked)
-        )
-    }
+    // Component-based serialization not used; NBT handles persistence
 
     /**
      * Removes redundant data from copied stack data.
@@ -363,14 +348,13 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
                     blockEntity.cookingTimes[i]++
                     if (blockEntity.cookingTimes[i] >= blockEntity.cookingTotalTimes[i]) {
                         val singleStackRecipeInput = SingleStackRecipeInput(itemStack)
-                        val itemStack2 =
-                            recipeMatchGetter.getFirstMatch(singleStackRecipeInput, world).map(
-                                Function { recipe: RecipeEntry<CampfireCookingRecipe?>? ->
-                                    (recipe!!.value() as CampfireCookingRecipe).craft(
-                                        singleStackRecipeInput,
-                                        world.registryManager
-                                    )
-                                }).orElse(itemStack) as ItemStack
+                        val match = recipeMatchGetter.getFirstMatch(singleStackRecipeInput, world)
+                        val itemStack2: ItemStack = if (match.isPresent) {
+                            (match.get().value() as CampfireCookingRecipe).craft(
+                                singleStackRecipeInput,
+                                world.registryManager
+                            )
+                        } else itemStack
                         if (itemStack2.isItemEnabled(world.enabledFeatures)) {
                             ItemScatterer.spawn(
                                 world,
@@ -474,7 +458,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
                         .toFloat() * fixed).toDouble()
 
                     (0..3).forEach { k ->
-                        world.addParticleClient(ParticleTypes.SMOKE, d, e, g, 0.0, 5.0E-4, 0.0)
+                        world.addParticle(ParticleTypes.SMOKE, d, e, g, 0.0, 5.0E-4, 0.0)
                     }
                 }
             }

@@ -18,7 +18,7 @@ class BoneSpearProjectileModel(root: ModelPart) : EntityModel<EntityRenderState>
                 modelData.root.addChild(
                     "main",
                     ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -24.0F, 0.0F, 1.0F, 24.0F, 1.0F, Dilation(0.0f)),
-                    ModelTransform.origin(0.0f, 20f, 0.0f)
+                    ModelTransform.pivot(0.0f, 20f, 0.0f)
                 )
                 return TexturedModelData.of(modelData, 64, 64)
             }
