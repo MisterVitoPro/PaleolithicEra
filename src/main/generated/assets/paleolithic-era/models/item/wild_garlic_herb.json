@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "paleolithic-era:item/wild_garlic_herb"
+  }
+}

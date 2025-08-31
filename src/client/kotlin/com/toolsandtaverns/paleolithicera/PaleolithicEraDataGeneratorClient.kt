@@ -1,6 +1,8 @@
 package com.toolsandtaverns.paleolithicera
 
-import com.toolsandtaverns.paleolithicera.datagen.*
+import com.toolsandtaverns.paleolithicera.datagen.ModAdvancementProvider
+import com.toolsandtaverns.paleolithicera.datagen.ModDynamicRegistryProvider
+import com.toolsandtaverns.paleolithicera.datagen.ModModelProvider
 import com.toolsandtaverns.paleolithicera.datagen.loot.EntityLootTableProvider
 import com.toolsandtaverns.paleolithicera.datagen.loot.ModBlockLootTableProvider
 import com.toolsandtaverns.paleolithicera.datagen.recipe.EdiblePlantRecipeProvider
@@ -22,6 +24,7 @@ object PaleolithicEraDataGeneratorClient : DataGeneratorEntrypoint {
         pack.addProvider(::ModItemTagProvider)
         pack.addProvider(::VanillaRecipeProvider)
         pack.addProvider(::KnappingRecipeProvider)
+        pack.addProvider(::ModModelProvider)
         pack.addProvider(::EdiblePlantRecipeProvider)
         pack.addProvider(::ModBlockLootTableProvider)
         pack.addProvider(::EntityLootTableProvider)

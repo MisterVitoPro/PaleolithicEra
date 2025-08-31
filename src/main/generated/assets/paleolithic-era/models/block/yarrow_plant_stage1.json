@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "paleolithic-era:block/yarrow_plant_stage1"
+  }
+}

@@ -19,9 +19,11 @@ val fabric_kotlin_version: String by project
 group = property("maven_group")!!
 version = property("mod_version")!!
 
+// Enable client-side datagen (needed for FabricModelProvider/Model gen)
 fabricApi {
     configureDataGeneration {
-        client = false
+        // Include client classes/providers on the datagen run classpath
+        client = true
     }
 }
 

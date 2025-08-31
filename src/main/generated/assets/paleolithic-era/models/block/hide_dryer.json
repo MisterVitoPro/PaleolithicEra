@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "paleolithic-era:block/hide_dryer_side",
+    "east": "paleolithic-era:block/hide_dryer_side",
+    "north": "paleolithic-era:block/hide_dryer_side",
+    "particle": "paleolithic-era:block/hide_dryer_side",
+    "south": "paleolithic-era:block/hide_dryer_side",
+    "up": "paleolithic-era:block/hide_dryer_top",
+    "west": "paleolithic-era:block/hide_dryer_side"
+  }
+}
