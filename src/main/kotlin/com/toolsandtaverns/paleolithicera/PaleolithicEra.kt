@@ -4,6 +4,7 @@ import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.entity.BoarEntity
 import com.toolsandtaverns.paleolithicera.entity.IbexEntity
 import com.toolsandtaverns.paleolithicera.event.BlockDropHandler
+import com.toolsandtaverns.paleolithicera.event.HotbarReplacementHandler
 import com.toolsandtaverns.paleolithicera.event.MobLootModifier
 import com.toolsandtaverns.paleolithicera.event.PlantFiberLootModifier
 import com.toolsandtaverns.paleolithicera.event.RockChunkLootModifier
@@ -87,6 +88,9 @@ object PaleolithicEra : ModInitializer {
         OpenHarpoonGuiPacket.register()
 
         BlockDropHandler.register()
+
+        // Register hotbar replacement system for auto-replacing consumed/broken items
+        HotbarReplacementHandler.register()
 
         // Initialize custom world generation features
         ModTreeGeneration.initialize()

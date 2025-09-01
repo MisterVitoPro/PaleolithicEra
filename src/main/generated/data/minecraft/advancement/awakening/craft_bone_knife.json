@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:awakening/hunt_aggressive",
   "criteria": {
-    "craft_bone_knife": {
+    "has_craft_bone_knife": {
       "conditions": {
         "items": [
           {
@@ -26,7 +26,7 @@
   },
   "requirements": [
     [
-      "craft_bone_knife"
+      "has_craft_bone_knife"
     ]
   ],
   "rewards": {

@@ -30,28 +30,38 @@ object PaleolithicEraDataGeneratorClient : DataGeneratorEntrypoint {
      * This method sets up data generators for creating JSON files for various game components
      * including recipes, loot tables, models, block/item tags, and advancements.
      *
+     * Providers are ordered by dependency:
+     * 1. Tags (needed by recipes and loot tables)
+     * 2. Registry data (needed by other providers)
+     * 3. Recipes and loot tables (core gameplay data)
+     * 4. Models (client-side assets)
+     * 5. Advancements (depends on items/blocks existing)
+     *
      * @param fabricDataGenerator The data generator provided by Fabric
      */
     override fun onInitializeDataGenerator(fabricDataGenerator: FabricDataGenerator) {
         val pack: FabricDataGenerator.Pack = fabricDataGenerator.createPack()
-        // Add item tag generator for creating item tags
-        pack.addProvider(::ModItemTagProvider)
-        // Add recipe generators for creating vanilla-style crafting recipes
+        
+        // PHASE 1: Tag Providers (other providers depend on these)
+        pack.addProvider(::ModBlockTagProvider)
+        pack.addProvider(::ModItemTagProvider)  
+        pack.addProvider(::ModEntityTypeTagProvider)
+        
+        // PHASE 2: Registry Data Provider (defines dynamic registry content)
+        pack.addProvider(::ModDynamicRegistryProvider)
+        
+        // PHASE 3: Core Game Data Providers (recipes, loot tables)
         pack.addProvider(::VanillaRecipeProvider)
         pack.addProvider(::KnappingRecipeProvider)
         pack.addProvider(::EdiblePlantRecipeProvider)
-        // Add loot table generator for creating loot tables
         pack.addProvider(::ModBlockLootTableProvider)
         pack.addProvider(::EntityLootTableProvider)
-        // Add registry data generator for other registry data
-        pack.addProvider(::ModDynamicRegistryProvider)
-        // Add model generator for creating block and item models (only one allowed)
+        
+        // PHASE 4: Client Assets Provider
         pack.addProvider(::ModModelProvider)
-        // Add block tag generator for creating block tags
-        pack.addProvider(::ModBlockTagProvider)
-        // Add entity type tag generator for creating entity type tags
-        pack.addProvider(::ModEntityTypeTagProvider)
-        // Add advancement generator for creating advancements
+        
+        // PHASE 5: Advancement Provider (depends on all items/blocks/recipes existing)
+        // This ensures advancements can reference all mod content
         pack.addProvider(::ModAdvancementProvider)
     }
 

@@ -52,11 +52,6 @@ class SlingItem(settings: Settings) : Item(settings), ProjectileItem {
             return ActionResult.FAIL
         }
         
-        // Check if sling will break
-        if (itemStack.willBreakNextUse()) {
-            return ActionResult.FAIL
-        }
-        
         user.setCurrentHand(hand)
         return ActionResult.CONSUME
     }
@@ -75,9 +70,6 @@ class SlingItem(settings: Settings) : Item(settings), ProjectileItem {
         user.incrementStat(Stats.USED.getOrCreateStat(this))
         
         if (world is ServerWorld) {
-            // Damage the sling
-            stack.damage(1, user)
-            
             // Calculate velocity based on charge time
             val velocity = calculateVelocity(chargeTime)
             
@@ -114,6 +106,12 @@ class SlingItem(settings: Settings) : Item(settings), ProjectileItem {
                 0.5f, 
                 0.4f / (random.nextFloat() * 0.4f + 0.8f)
             )
+            
+            // Damage the sling AFTER successful use - this ensures durability is consumed
+            // even if the item breaks, preventing infinite usage at low durability
+            // Find which hand is holding the sling
+            val hand = if (user.mainHandStack == stack) Hand.MAIN_HAND else Hand.OFF_HAND
+            stack.damage(1, user, LivingEntity.getSlotForHand(hand))
             
             return true
         }

@@ -4,12 +4,16 @@ import com.toolsandtaverns.paleolithicera.Constants.MOD_ID
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModCriteria
 import com.toolsandtaverns.paleolithicera.registry.ModItems
+import com.toolsandtaverns.paleolithicera.registry.ModTags
 import net.minecraft.advancement.*
 import net.minecraft.advancement.criterion.InventoryChangedCriterion
+import net.minecraft.advancement.criterion.OnKilledCriterion
 import net.minecraft.advancement.criterion.TickCriterion
 import net.minecraft.data.advancement.AdvancementTabGenerator
 import net.minecraft.item.Items
+import net.minecraft.predicate.entity.EntityPredicate
 import net.minecraft.registry.Registries
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
@@ -112,6 +116,42 @@ object PaleolithicEraAdvancementTab : AdvancementTabGenerator {
             )
             .rewards(AdvancementRewards.Builder.experience(2))
             .build(consumer, "awakening/craft_flint_biface")
+
+        val craftSling = Advancement.Builder.create()
+            .parent(craftKnapping)
+            .display(
+                ModItems.SLING,
+                Text.translatable("advancement.$MOD_ID.awakening.craft_sling.title"),
+                Text.translatable("advancement.$MOD_ID.awakening.craft_sling.description"),
+                null,
+                AdvancementFrame.TASK,
+                true, true, false
+            )
+            .criterion(
+                "craft_sling", InventoryChangedCriterion.Conditions.items(ModItems.SLING)
+            )
+            .rewards(AdvancementRewards.Builder.experience(2))
+            .build(consumer, "awakening/craft_sling")
+
+        val slingHostileHit = Advancement.Builder.create()
+            .parent(craftSling)
+            .display(
+                ModItems.PEBBLE,
+                Text.translatable("advancement.$MOD_ID.awakening.sling_hostile_hit.title"),
+                Text.translatable("advancement.$MOD_ID.awakening.sling_hostile_hit.description"),
+                null,
+                AdvancementFrame.GOAL,
+                true, true, false
+            )
+            .criterion(
+                "sling_kill_hostile",
+                OnKilledCriterion.Conditions.createPlayerKilledEntity(
+                    EntityPredicate.Builder.create()
+                        .type(registries.getOrThrow(RegistryKeys.ENTITY_TYPE), ModTags.Entity.AGGRESSIVE)
+                )
+            )
+            .rewards(AdvancementRewards.Builder.experience(3))
+            .build(consumer, "awakening/sling_hostile_hit")
 
         // Gather Plant Fiber
         val gatherPlantFiber: AdvancementEntry = Advancement.Builder.create()
