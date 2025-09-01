@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rock_chunk": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:rock_chunk"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_rock_chunk"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "paleolithic-era:knap_rock_chunk_to_pebbles"
+    ]
+  }
+}

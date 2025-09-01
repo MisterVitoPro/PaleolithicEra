@@ -79,6 +79,7 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.PLANT_FIBER, Models.GENERATED)
         itemModelGenerator.register(ModItems.PLANT_CORDAGE, Models.GENERATED)
         itemModelGenerator.register(ModItems.ROCK_CHUNK, Models.GENERATED)
+        itemModelGenerator.register(ModItems.PEBBLE, Models.GENERATED)
         itemModelGenerator.register(ModItems.RAWHIDE, Models.GENERATED)
         itemModelGenerator.register(ModItems.DRY_HIDE, Models.GENERATED)
         itemModelGenerator.register(ModItems.PATCHED_HIDE, Models.GENERATED)
@@ -104,6 +105,7 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.WOODEN_HARPOON, Models.HANDHELD)
         itemModelGenerator.register(ModItems.BONE_HARPOON, Models.HANDHELD)
         itemModelGenerator.register(ModItems.FLINT_AXE, Models.HANDHELD)
+        itemModelGenerator.register(ModItems.SLING, Models.HANDHELD)
 
         EdiblePlants.entries.forEach { ediblePlants ->
             val def = ediblePlants.definitions

@@ -71,6 +71,11 @@ object PaleolithicEraClient : ClientModInitializer {
         EntityRendererRegistry.register(ModEntityType.IBEX_ENTITY) { cxt -> IbexRenderer(cxt) }
         EntityRendererRegistry.register(ModEntityType.WOODEN_SPEAR_ENTITY) { cxt -> WoodenSpearRenderer(cxt) }
         EntityRendererRegistry.register(ModEntityType.BONE_SPEAR_ENTITY) { cxt -> BoneSpearRenderer(cxt) }
+        
+        // Register simple renderer for pebble entity using FlyingItemEntityRenderer
+        EntityRendererRegistry.register(ModEntityType.PEBBLE_ENTITY) { ctx ->
+            net.minecraft.client.render.entity.FlyingItemEntityRenderer(ctx)
+        }
 
         // Register the screen for the knapping station
         // This connects the container handler to its GUI implementation

@@ -5,6 +5,7 @@ import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.item.FireDrillItem
 import com.toolsandtaverns.paleolithicera.item.HarpoonItem
 import com.toolsandtaverns.paleolithicera.item.KnifeItem
+import com.toolsandtaverns.paleolithicera.item.SlingItem
 import com.toolsandtaverns.paleolithicera.item.SpearItem
 import com.toolsandtaverns.paleolithicera.item.material.ModArmorMaterials.HIDE_MATERIAL
 import com.toolsandtaverns.paleolithicera.item.material.ModToolMaterials
@@ -45,6 +46,7 @@ object ModItems {
     val PLANT_FIBER: Item = register("plant_fiber", { settings: Item.Settings -> Item(settings) })
     val PLANT_CORDAGE: Item = register("plant_cordage", { settings: Item.Settings -> Item(settings) })
     val ROCK_CHUNK: Item = register("rock_chunk", { settings: Item.Settings -> Item(settings) })
+    val PEBBLE: Item = register("pebble", { settings: Item.Settings -> Item(settings) })
     val RAWHIDE: Item = register("rawhide", { settings: Item.Settings -> Item(settings) })
     val DRY_HIDE: Item = register("dry_hide", { settings: Item.Settings -> Item(settings) })
     val PATCHED_HIDE: Item = register("patched_hide", { settings: Item.Settings -> Item(settings) })
@@ -107,6 +109,8 @@ object ModItems {
     val BONE_HARPOON =
         register("bone_harpoon", { settings: Item.Settings -> HarpoonItem(settings.maxCount(1).maxDamage(15)) })
 
+    val SLING: Item = register("sling", { settings: Item.Settings -> SlingItem(settings.maxCount(1).maxDamage(20)) })
+
     val COOKED_ELDERBERRIES: Item = register("cooked_elderberries", { settings ->
         Item(
             settings
@@ -148,6 +152,7 @@ object ModItems {
                 {
                     itemGroup.add(BONE_SPEAR)
                     itemGroup.add(WOODEN_SPEAR)
+                    itemGroup.add(SLING)
                 }
             })
 

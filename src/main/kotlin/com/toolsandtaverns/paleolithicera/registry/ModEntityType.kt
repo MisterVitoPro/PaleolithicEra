@@ -24,6 +24,8 @@ object ModEntityType {
         private set
     lateinit var BONE_SPEAR_ENTITY: EntityType<BoneSpearEntity>
         private set
+    lateinit var PEBBLE_ENTITY: EntityType<PebbleEntity>
+        private set
     lateinit var HIDE_DRYER_BLOCK_ENTITY: BlockEntityType<HideDryerBlockEntity>
         private set
     lateinit var EFFIGY_OF_PROTECTION_BLOCK_ENTITY: BlockEntityType<EffigyOfProtectionEntity>
@@ -84,6 +86,14 @@ object ModEntityType {
             EntityType.Builder.create(::BoneSpearEntity, SpawnGroup.MISC)
                 .dimensions(0.5f, 0.5f)
                 .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("bone_spear")))
+        )
+
+        PEBBLE_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE,
+            id("pebble"),
+            EntityType.Builder.create(::PebbleEntity, SpawnGroup.MISC)
+                .dimensions(0.25f, 0.25f)
+                .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, id("pebble")))
         )
 
         HIDE_DRYER_BLOCK_ENTITY = register(

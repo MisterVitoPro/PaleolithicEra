@@ -87,6 +87,17 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(ModItems.BONE_SHARD), conditionsFromItem(ModItems.BONE_SHARD))
                     .offerTo(exporter)
 
+                // Sling - 2x2 pattern with DryHide, sticks, and fiber cordage
+                createShaped(RecipeCategory.COMBAT, ModItems.SLING, 1)
+                    .pattern("DS")
+                    .pattern("SC")
+                    .input('D', ModItems.DRY_HIDE)
+                    .input('S', Items.STICK)
+                    .input('C', ModItems.PLANT_CORDAGE)
+                    .criterion(hasItem(ModItems.DRY_HIDE), conditionsFromItem(ModItems.DRY_HIDE))
+                    .criterion(hasItem(ModItems.PLANT_CORDAGE), conditionsFromItem(ModItems.PLANT_CORDAGE))
+                    .offerTo(exporter)
+
                 // Fire Drill
                 createShaped(RecipeCategory.TOOLS, ModItems.FIRE_DRILL, 1)
                     .pattern("SF")

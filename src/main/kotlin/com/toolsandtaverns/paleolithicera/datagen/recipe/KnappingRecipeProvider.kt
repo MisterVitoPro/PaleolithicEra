@@ -70,6 +70,15 @@ class KnappingRecipeProvider(
                     criterionName = "has_bone",
                     criterion = InventoryChangedCriterion.Conditions.items(ModItems.BONE_SHARD)
                 )
+
+                // Rock Chunk -> Pebbles (2)
+                buildDefaultKnapRecipe(
+                    exporter = exporter,
+                    recipeId = "knap_rock_chunk_to_pebbles",
+                    recipe = KnapRecipe(Ingredient.ofItem(ModItems.ROCK_CHUNK), ItemStack(ModItems.PEBBLE, 2)),
+                    criterionName = "has_rock_chunk",
+                    criterion = InventoryChangedCriterion.Conditions.items(ModItems.ROCK_CHUNK)
+                )
             }
         }
     }
