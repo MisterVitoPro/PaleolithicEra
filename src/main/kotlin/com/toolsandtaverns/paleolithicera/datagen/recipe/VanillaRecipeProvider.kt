@@ -89,10 +89,9 @@ class VanillaRecipeProvider(
 
                 // Sling - 2x2 pattern with DryHide, sticks, and fiber cordage
                 createShaped(RecipeCategory.COMBAT, ModItems.SLING, 1)
-                    .pattern("DS")
-                    .pattern("SC")
+                    .pattern("DC")
+                    .pattern("CC")
                     .input('D', ModItems.DRY_HIDE)
-                    .input('S', Items.STICK)
                     .input('C', ModItems.PLANT_CORDAGE)
                     .criterion(hasItem(ModItems.DRY_HIDE), conditionsFromItem(ModItems.DRY_HIDE))
                     .criterion(hasItem(ModItems.PLANT_CORDAGE), conditionsFromItem(ModItems.PLANT_CORDAGE))
