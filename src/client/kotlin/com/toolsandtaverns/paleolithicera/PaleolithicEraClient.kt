@@ -9,13 +9,17 @@ import com.toolsandtaverns.paleolithicera.model.IbexModel
 import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiClient
 import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
+import com.toolsandtaverns.paleolithicera.particle.PebbleImpactParticle
+import com.toolsandtaverns.paleolithicera.particle.StoneDustParticle
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModEntityType
+import com.toolsandtaverns.paleolithicera.registry.ModParticleTypes
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
 import com.toolsandtaverns.paleolithicera.render.*
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreen
 import com.toolsandtaverns.paleolithicera.screen.KnappingStationScreen
 import net.fabricmc.api.ClientModInitializer
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
@@ -76,6 +80,10 @@ object PaleolithicEraClient : ClientModInitializer {
         EntityRendererRegistry.register(ModEntityType.PEBBLE_ENTITY) { ctx ->
             net.minecraft.client.render.entity.FlyingItemEntityRenderer(ctx)
         }
+        
+        // Register particle factories for custom particle effects
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.PEBBLE_IMPACT, PebbleImpactParticle::Factory)
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.STONE_DUST, StoneDustParticle::Factory)
 
         // Register the screen for the knapping station
         // This connects the container handler to its GUI implementation

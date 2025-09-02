@@ -60,7 +60,7 @@ object PlantFiberLootModifier {
                             ItemPredicate.Builder.create().tag(itemLookup, ModTags.Items.KNIFE)
                         )
                     )
-                    .conditionally(RandomChanceLootCondition.builder(0.4f)) // 40% drop chance
+                    .conditionally(RandomChanceLootCondition.builder(0.3f))
 
                 // Create a loot pool with one roll and no bonus rolls
                 val fiberPool = LootPool.builder()

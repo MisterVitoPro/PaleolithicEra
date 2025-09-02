@@ -16,6 +16,7 @@ import net.minecraft.item.ToolMaterial
 import net.minecraft.item.consume.UseAction
 import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
@@ -25,6 +26,7 @@ import net.minecraft.util.Hand
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Position
 import net.minecraft.world.World
+import com.toolsandtaverns.paleolithicera.event.HotbarReplacementHandler
 
 class SpearItem(settings: Settings, private val projectileCreator: ProjectileEntity.ProjectileCreator<*>) :
     Item(settings),
@@ -32,7 +34,7 @@ class SpearItem(settings: Settings, private val projectileCreator: ProjectileEnt
 
     companion object {
         private const val BASE_ATTACK_SPEED = -2.9
-        private const val THROW_SPEED = 2.5f
+        private const val THROW_SPEED = 2.3f
 
         fun createAttributeModifiers(material: ToolMaterial): AttributeModifiersComponent {
             return AttributeModifiersComponent.builder().add(
@@ -78,6 +80,8 @@ class SpearItem(settings: Settings, private val projectileCreator: ProjectileEnt
         user.incrementStat(Stats.USED.getOrCreateStat(this))
         if (world is ServerWorld) {
             stack.damage(1, user)
+            val originalStack = stack.copy()
+            val slotIndex = user.inventory.selectedSlot
             val itemStack = stack.splitUnlessCreative(1, user)
             val spearEntity = ProjectileEntity.spawnWithVelocity(
                 projectileCreator,
@@ -92,6 +96,10 @@ class SpearItem(settings: Settings, private val projectileCreator: ProjectileEnt
                 spearEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY
             }
             world.playSoundFromEntity(null, spearEntity, sound.value(), SoundCategory.PLAYERS, 1.0f, 1.0f)
+            
+            // Trigger replacement immediately after throwing
+            HotbarReplacementHandler.checkAndReplaceItem(user as ServerPlayerEntity, slotIndex, originalStack)
+            
             return true
         }
         return false

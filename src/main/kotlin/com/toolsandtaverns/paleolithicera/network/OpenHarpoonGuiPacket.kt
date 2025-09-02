@@ -45,16 +45,19 @@ object OpenHarpoonGuiPacket {
      * @param success Whether the player successfully caught a fish
      */
     private fun handleResult(player: ServerPlayerEntity, success: Boolean) {
-        val stack = player.getStackInHand(Hand.MAIN_HAND)
-        val item = player.getStackInHand(Hand.MAIN_HAND).item
+        val stack: ItemStack = player.getStackInHand(Hand.MAIN_HAND)
+        val item: Item = stack.item
         val slot = ServerPlayerEntity.getSlotForHand(Hand.MAIN_HAND)
 
         // Damage the harpoon and handle potential breakage
-        stack.damage(1, player)
+        stack.damage(1, player, Hand.MAIN_HAND)
         if (stack.isEmpty) {
             // Notify the client that the item broke for proper visual/sound effects
             player.sendEquipmentBreakStatus(item, slot)
         }
+        
+        // Update the stack in the player's inventory to ensure changes are synced
+        player.setStackInHand(Hand.MAIN_HAND, stack)
 
         // Handle success case - give rewards if applicable
         if (success) {

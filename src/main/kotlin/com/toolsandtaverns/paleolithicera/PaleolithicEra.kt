@@ -69,6 +69,8 @@ object PaleolithicEra : ModInitializer {
         ModBlocks.initialize()
         // Initialize entity types (including block entities)
         ModEntityType.initialize()
+        // Initialize particle types for custom effects
+        ModParticleTypes.initialize()
         // Initialize container/GUI screen handlers
         ModScreenHandlers.initialize()
         // Initialize advancement criteria

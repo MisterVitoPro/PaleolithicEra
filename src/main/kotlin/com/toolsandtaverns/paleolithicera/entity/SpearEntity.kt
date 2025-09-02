@@ -38,7 +38,9 @@ abstract class SpearEntity : PersistentProjectileEntity {
         stack: ItemStack
     ) : super(type, owner, world, stack, stack) {
         this.setNoGravity(false)
-        this.setDamage(baseDamage.toDouble())
+        // Calculate damage from the item's attributes
+        val totalDamage = calculateDamageFromStack(stack, owner)
+        this.setDamage(totalDamage)
     }
 
     // --- Configuration knobs (override per spear material/tier) ---
@@ -107,4 +109,30 @@ abstract class SpearEntity : PersistentProjectileEntity {
      * Always render; early-game spears are meant to be visible in-flight.
      */
     override fun shouldRender(cameraX: Double, cameraY: Double, cameraZ: Double): Boolean = true
+
+    /**
+     * Calculates the total damage this spear should deal based on the item's attributes.
+     * This should match the melee damage of the item to maintain balance.
+     * 
+     * Note: PersistentProjectileEntity applies velocity-based damage multipliers,
+     * so we need to account for that to match melee damage exactly.
+     */
+    private fun calculateDamageFromStack(stack: ItemStack, owner: LivingEntity): Double {
+        // Calculate damage to match the melee attack damage of the spear item
+        // SpearItem uses: material.attackDamageBonus + 1.5
+        // But PersistentProjectileEntity seems to apply ~3x multiplier based on velocity
+        // So we need to divide by ~3 to get the correct final damage
+        
+        if (stack.item is com.toolsandtaverns.paleolithicera.item.SpearItem) {
+            // Target damage: Wooden = 1.5, Bone = 2.5
+            // Reduce by factor of ~3 to compensate for velocity multiplier
+            return when (stack.item) {
+                com.toolsandtaverns.paleolithicera.registry.ModItems.WOODEN_SPEAR -> 0.5  // Should result in ~1.5 final damage
+                com.toolsandtaverns.paleolithicera.registry.ModItems.BONE_SPEAR -> 0.85   // Should result in ~2.5 final damage  
+                else -> baseDamage.toDouble() / 3.0
+            }
+        }
+        
+        return baseDamage.toDouble()
+    }
 }

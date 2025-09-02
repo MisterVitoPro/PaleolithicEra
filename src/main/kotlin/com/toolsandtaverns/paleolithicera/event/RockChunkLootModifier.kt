@@ -36,7 +36,7 @@ object RockChunkLootModifier {
                     .with(
                         AlternativeEntry.builder(
                             ItemEntry.builder(ROCK_CHUNK)
-                                .conditionally(RandomChanceLootCondition.builder(0.20f)),
+                                .conditionally(RandomChanceLootCondition.builder(0.15f)),
                             ItemEntry.builder(Blocks.SAND.asItem())
                         )
                     )

@@ -31,12 +31,12 @@ object MobLootModifier {
                 builder.pool(
                     LootPool.builder()
                         .with(ItemEntry.builder(RAWHIDE))
-                        .rolls(ConstantLootNumberProvider.create(0.5f)) // 50% chance
+                        .rolls(ConstantLootNumberProvider.create(0.5f))
                 )
                     .pool(
                         LootPool.builder()
                             .with(ItemEntry.builder(Items.BONE))
-                            .rolls(ConstantLootNumberProvider.create(0.6f)) // 60% chance
+                            .rolls(ConstantLootNumberProvider.create(0.6f))
                     )
             }
         }

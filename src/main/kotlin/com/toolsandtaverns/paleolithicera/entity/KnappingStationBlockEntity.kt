@@ -28,6 +28,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraft.particle.ParticleTypes
 import java.util.*
 
 /**
@@ -180,8 +181,9 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
      * The method:
      * 1. Checks if valid input exists and output slot is empty
      * 2. Increments the knapping progress counter
-     * 3. Completes the craft once sufficient progress is made (20 ticks)
-     * 4. Resets the counter and updates the world state
+     * 3. Shows particle effects to indicate knapping work in progress
+     * 4. Completes the craft once sufficient progress is made (20 ticks)
+     * 5. Resets the counter and updates the world state
      *
      * This direct player interaction requirement reflects the hands-on nature of Paleolithic
      * crafting techniques, where tool creation was a skilled, manual process.
@@ -194,7 +196,41 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
 
         if (!input.isEmpty && output.isEmpty) {
             knappingTicks++
-            if (world !is ServerWorld) return
+            
+            // Show particle effects during the knapping process to give visual feedback
+            if (world is ServerWorld) {
+                val serverWorld = world as ServerWorld
+                // Spawn particles from the top center of the block
+                val particleX = pos.x + 0.5
+                val particleY = pos.y + 1.1  // Slightly above the top of the block
+                val particleZ = pos.z + 0.5
+                
+                // Create stone dust particles to show knapping work in progress
+                serverWorld.spawnParticles(
+                    ParticleTypes.SMOKE,  // Gray smoke particles to represent stone dust
+                    particleX,
+                    particleY, 
+                    particleZ,
+                    2,      // Fewer particles per interaction
+                    0.2,    // X spread
+                    0.05,   // Y spread  
+                    0.2,    // Z spread
+                    0.01    // Speed (slow rise)
+                )
+                
+                // Add some small stone chip particles
+                serverWorld.spawnParticles(
+                    ParticleTypes.CRIT,  // Critical hit particles for stone chips
+                    particleX,
+                    particleY,
+                    particleZ,
+                    1,      // Just 1-2 particles per strike
+                    0.3,    // X spread
+                    0.05,   // Y spread
+                    0.3,    // Z spread
+                    0.05    // Speed
+                )
+            }
 
             if (knappingTicks >= 20) {
                 if (!inventory.getStack(INPUT_SLOT).isEmpty) {
@@ -202,7 +238,9 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
                 }
                 knappingTicks = 0
                 markDirty()
-                world.chunkManager.markForUpdate(pos)
+                if (world is ServerWorld) {
+                    world.chunkManager.markForUpdate(pos)
+                }
             }
         }
     }

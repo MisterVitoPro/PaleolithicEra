@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.ProjectileItem
 import net.minecraft.item.consume.UseAction
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.stat.Stats
@@ -22,6 +23,7 @@ import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import kotlin.math.cos
 import kotlin.math.sin
+import com.toolsandtaverns.paleolithicera.event.HotbarReplacementHandler
 
 /**
  * Sling weapon item that uses pebbles as ammunition.
@@ -111,7 +113,15 @@ class SlingItem(settings: Settings) : Item(settings), ProjectileItem {
             // even if the item breaks, preventing infinite usage at low durability
             // Find which hand is holding the sling
             val hand = if (user.mainHandStack == stack) Hand.MAIN_HAND else Hand.OFF_HAND
+            val originalStack = stack.copy()
+            val slotIndex = if (hand == Hand.MAIN_HAND) user.inventory.selectedSlot else 40
+            
             stack.damage(1, user, LivingEntity.getSlotForHand(hand))
+            
+            // If the sling broke, trigger replacement
+            if (stack.isEmpty) {
+                HotbarReplacementHandler.checkAndReplaceItem(user as ServerPlayerEntity, slotIndex, originalStack)
+            }
             
             return true
         }

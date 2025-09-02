@@ -33,6 +33,14 @@ dependencies {
 	modImplementation("net.fabricmc:fabric-loader:${loader_version}")
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${fabric_version}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${fabric_kotlin_version}")
+	
+	// Testing dependencies
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
+	testImplementation("org.mockito:mockito-core:5.5.0")
+	testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
+	testImplementation("net.fabricmc:fabric-loader-junit:${loader_version}")
+	testImplementation(kotlin("test"))
 }
 
 loom {
@@ -95,6 +103,10 @@ tasks {
 		compilerOptions {
 			jvmTarget = JvmTarget.JVM_21
 		}
+	}
+	
+	test {
+		useJUnitPlatform()
 	}
 
 	// Name the remapped jars with MC + mod version
