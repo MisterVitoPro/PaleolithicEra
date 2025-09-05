@@ -1,0 +1,8 @@
+{
+  "type": "paleolithic-era:food_drying",
+  "ingredient": "minecraft:beef",
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:dried_beef"
+  }
+}

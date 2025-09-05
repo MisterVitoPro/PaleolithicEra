@@ -15,7 +15,13 @@ import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import com.toolsandtaverns.paleolithicera.registry.ModParticleTypes
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
-import com.toolsandtaverns.paleolithicera.render.*
+import com.toolsandtaverns.paleolithicera.render.BoarRenderer
+import com.toolsandtaverns.paleolithicera.render.BoneSpearRenderer
+import com.toolsandtaverns.paleolithicera.render.CrudeCampfireBlockEntityRenderer
+import com.toolsandtaverns.paleolithicera.render.FoodDryerBlockEntityRenderer
+import com.toolsandtaverns.paleolithicera.render.KnappingStationBlockEntityRenderer
+import com.toolsandtaverns.paleolithicera.render.WoodenSpearRenderer
+import com.toolsandtaverns.paleolithicera.screen.FoodDryerScreen
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreen
 import com.toolsandtaverns.paleolithicera.screen.KnappingStationScreen
 import net.fabricmc.api.ClientModInitializer
@@ -56,6 +62,7 @@ object PaleolithicEraClient : ClientModInitializer {
         // This renderer displays cooking items above the campfire
         BlockEntityRendererFactories.register(ModEntityType.CRUDE_CAMPFIRE, ::CrudeCampfireBlockEntityRenderer)
         BlockEntityRendererFactories.register(ModEntityType.KNAPPING_STATION, ::KnappingStationBlockEntityRenderer)
+        BlockEntityRendererFactories.register(ModEntityType.FOOD_DRYER_BLOCK_ENTITY, ::FoodDryerBlockEntityRenderer)
 
         // Register the renderer for the wooden spear entity
         // This allows thrown spears to be properly displayed in the world
@@ -90,6 +97,7 @@ object PaleolithicEraClient : ClientModInitializer {
 
         HandledScreens.register(ModScreenHandlers.KNAPPING, ::KnappingStationScreen)
         HandledScreens.register(ModScreenHandlers.HIDE_DRYER, ::HideDryerScreen)
+        HandledScreens.register(ModScreenHandlers.FOOD_DRYER, ::FoodDryerScreen)
 
         // Set the render layers for blocks with transparency
         // CUTOUT is used for blocks with binary transparency (fully transparent or fully opaque pixels)
@@ -107,6 +115,8 @@ object PaleolithicEraClient : ClientModInitializer {
 
         // Register client-side network handlers for the harpoon fishing system
         OpenHarpoonGuiClient.register()
+        
+        
         ToolTipEvents.register()
     }
 }

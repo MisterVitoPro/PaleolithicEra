@@ -2,6 +2,7 @@ import net.fabricmc.loom.task.RemapJarTask
 import net.fabricmc.loom.task.RemapSourcesJarTask
 import org.gradle.kotlin.dsl.named
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.time.Duration
 
 plugins {
 	kotlin("jvm")
@@ -84,6 +85,14 @@ tasks {
 
 	jar {
 		from("LICENSE")
+		// Exclude test files from the jar to prevent bloating
+		exclude("**/test/**")
+		exclude("**/*Test.class")
+		exclude("**/*Test$*.class")
+		exclude("**/TestUtils.class")
+		exclude("**/TestUtils$*.class")
+		exclude("**/TestTags.class")
+		exclude("**/TestTags$*.class")
 	}
 
 	publishing {
@@ -107,6 +116,109 @@ tasks {
 	
 	test {
 		useJUnitPlatform()
+		
+		// Configure tagged test execution
+		systemProperty("junit.jupiter.conditions.deactivate", "org.junit.*DisabledCondition")
+		
+		// Configure test output
+		testLogging {
+			events("passed", "skipped", "failed", "standard_out", "standard_error")
+			exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+			showCauses = true
+			showExceptions = true
+			showStackTraces = true
+		}
+		
+		// Increase memory for tests
+		maxHeapSize = "1G"
+		
+		// Set timeouts
+		timeout.set(Duration.ofMinutes(10))
+	}
+	
+	// Task to run only P0 (critical) tests
+	register<Test>("testP0") {
+		description = "Runs P0 (critical) tests only"
+		group = "verification"
+		useJUnitPlatform {
+			includeTags("p0")
+		}
+		testLogging {
+			events("passed", "skipped", "failed")
+		}
+	}
+	
+	// Task to run only P1 (important) tests  
+	register<Test>("testP1") {
+		description = "Runs P1 (important) tests only"
+		group = "verification"
+		useJUnitPlatform {
+			includeTags("p1")
+		}
+		testLogging {
+			events("passed", "skipped", "failed")
+		}
+	}
+	
+	// Task to run only P2 (nice-to-have) tests
+	register<Test>("testP2") {
+		description = "Runs P2 (nice-to-have) tests only"  
+		group = "verification"
+		useJUnitPlatform {
+			includeTags("p2")
+		}
+		testLogging {
+			events("passed", "skipped", "failed")
+		}
+	}
+	
+	// Task to run integration tests
+	register<Test>("testIntegration") {
+		description = "Runs integration tests only"
+		group = "verification" 
+		useJUnitPlatform {
+			includeTags("integration")
+		}
+		testLogging {
+			events("passed", "skipped", "failed")
+		}
+	}
+	
+	// Task to run unit tests
+	register<Test>("testUnit") {
+		description = "Runs unit tests only"
+		group = "verification"
+		useJUnitPlatform {
+			includeTags("unit")
+		}
+		testLogging {
+			events("passed", "skipped", "failed")
+		}
+	}
+	
+	// Task to run performance tests
+	register<Test>("testPerformance") {
+		description = "Runs performance tests only"
+		group = "verification"
+		useJUnitPlatform {
+			includeTags("performance")
+		}
+		testLogging {
+			events("passed", "skipped", "failed")
+		}
+		maxHeapSize = "2G" // More memory for performance tests
+	}
+	
+	// Task to run quick tests (P0 + unit tests)
+	register<Test>("testQuick") {
+		description = "Runs quick tests (P0 + unit tests)"
+		group = "verification"
+		useJUnitPlatform {
+			includeTags("p0", "unit")
+		}
+		testLogging {
+			events("passed", "skipped", "failed")
+		}
 	}
 
 	// Name the remapped jars with MC + mod version

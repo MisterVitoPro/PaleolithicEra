@@ -1,6 +1,16 @@
 package com.toolsandtaverns.paleolithicera.registry
 
-import com.toolsandtaverns.paleolithicera.block.*
+import com.toolsandtaverns.paleolithicera.block.BundleOfSticksBlock
+import com.toolsandtaverns.paleolithicera.block.CrudeCampFireBlock
+import com.toolsandtaverns.paleolithicera.block.EdiblePlantBlock
+import com.toolsandtaverns.paleolithicera.block.EffigyOfProtectionBlock
+import com.toolsandtaverns.paleolithicera.block.EffigyOfProtectionTopBlock
+import com.toolsandtaverns.paleolithicera.block.FoodDryerBlock
+import com.toolsandtaverns.paleolithicera.block.FoodDryerTopBlock
+import com.toolsandtaverns.paleolithicera.block.HideDryerBlock
+import com.toolsandtaverns.paleolithicera.block.KnappingStationBlock
+import com.toolsandtaverns.paleolithicera.block.ModSaplingGenerator
+import com.toolsandtaverns.paleolithicera.block.WillowLeafVinesBlock
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import com.toolsandtaverns.paleolithicera.util.RegistryHelpers
 import com.toolsandtaverns.paleolithicera.util.id
@@ -25,12 +35,6 @@ import net.minecraft.world.BlockView
 
 object ModBlocks {
 
-    val CRUDE_BED: Block = register(
-        "crude_bed",
-        ::CrudeBedBlock,
-        AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOD).strength(0.2F).nonOpaque().burnable()
-            .pistonBehavior(PistonBehavior.DESTROY)
-    )
     val CRUDE_CAMPFIRE: Block = register(
         "crude_campfire",
         ::CrudeCampFireBlock,
@@ -85,7 +89,7 @@ object ModBlocks {
     )
     val WILLOW_LEAVES: Block = register(
         "willow_leaves",
-        { settings -> UntintedParticleLeavesBlock(0.02f, ParticleTypes.CHERRY_LEAVES, settings) },
+        ::Block,
         AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).strength(0.2f).ticksRandomly()
             .sounds(BlockSoundGroup.AZALEA_LEAVES).nonOpaque()
             .allowsSpawning { state: BlockState, world: BlockView, pos: BlockPos?, type: EntityType<*> ->
@@ -146,15 +150,24 @@ object ModBlocks {
         "effigy_of_protection_top"
     ) { settings -> EffigyOfProtectionTopBlock(settings.nonOpaque()) }
 
+    val FOOD_DRYER: Block = register(
+        "food_dryer",
+        ::FoodDryerBlock,
+        AbstractBlock.Settings.create().strength(1.5f).sounds(BlockSoundGroup.WOOD).nonOpaque()
+    )
+    val FOOD_DRYER_TOP: Block = registerBlockWithoutBlockItem(
+        "food_dryer_top"
+    ) { settings -> FoodDryerTopBlock(settings.nonOpaque()) }
+
     fun initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL)
             .register { entries: FabricItemGroupEntries ->
-                entries.add(CRUDE_BED)
                 entries.add(CRUDE_CAMPFIRE)
                 entries.add(HIDE_DRYER)
                 entries.add(KNAPPING_STATION)
                 entries.add(BUNDLE_OF_STICKS)
                 entries.add(EFFIGY_OF_PROTECTION)
+                entries.add(FOOD_DRYER)
             }
     }
 

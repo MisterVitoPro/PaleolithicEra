@@ -1,0 +1,103 @@
+{
+  "format_version": "1.21.6",
+  "credit": "Made with Blockbench by MisterVitoPro",
+  "parent": "block/block",
+  "texture_size": [16, 16],
+  "textures": {
+    "all": "minecraft:block/oak_planks",
+    "particle": "minecraft:block/oak_planks"
+  },
+  "elements": [
+    {
+      "name": "Base Platform",
+      "from": [0, 0, 0],
+      "to": [16, 2, 16],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Post FL",
+      "from": [1, 2, 1],
+      "to": [3, 16, 3],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Post FR",
+      "from": [13, 2, 1],
+      "to": [15, 16, 3],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Post BL",
+      "from": [1, 2, 13],
+      "to": [3, 16, 15],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Post BR",
+      "from": [13, 2, 13],
+      "to": [15, 16, 15],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Front Beam",
+      "from": [1, 12, 3],
+      "to": [15, 14, 5],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Back Beam",
+      "from": [1, 12, 11],
+      "to": [15, 14, 13],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    }
+  ]
+}

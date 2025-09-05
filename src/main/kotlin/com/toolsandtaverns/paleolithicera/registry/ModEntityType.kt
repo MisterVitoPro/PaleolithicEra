@@ -1,6 +1,15 @@
 package com.toolsandtaverns.paleolithicera.registry
 
-import com.toolsandtaverns.paleolithicera.entity.*
+import com.toolsandtaverns.paleolithicera.entity.BoarEntity
+import com.toolsandtaverns.paleolithicera.entity.BoneSpearEntity
+import com.toolsandtaverns.paleolithicera.entity.CrudeCampfireBlockEntity
+import com.toolsandtaverns.paleolithicera.entity.EffigyOfProtectionEntity
+import com.toolsandtaverns.paleolithicera.entity.FoodDryerBlockEntity
+import com.toolsandtaverns.paleolithicera.entity.HideDryerBlockEntity
+import com.toolsandtaverns.paleolithicera.entity.IbexEntity
+import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
+import com.toolsandtaverns.paleolithicera.entity.PebbleEntity
+import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.minecraft.block.Block
@@ -30,6 +39,8 @@ object ModEntityType {
         private set
     lateinit var EFFIGY_OF_PROTECTION_BLOCK_ENTITY: BlockEntityType<EffigyOfProtectionEntity>
         private set
+    lateinit var FOOD_DRYER_BLOCK_ENTITY: BlockEntityType<FoodDryerBlockEntity>
+        private set
 
     val BOAR_ENTITY: EntityType<BoarEntity> by lazy {
         Registry.register(
@@ -41,13 +52,6 @@ object ModEntityType {
         )
     }
 
-    val CRUDE_BED: BlockEntityType<CrudeBedBlockEntity> = Registry.register(
-        Registries.BLOCK_ENTITY_TYPE,
-        id("crude_bed"),
-        FabricBlockEntityTypeBuilder
-            .create(::CrudeBedBlockEntity, ModBlocks.CRUDE_BED)
-            .build()
-    )
 
     val IBEX_ENTITY: EntityType<IbexEntity> by lazy {
         Registry.register(
@@ -106,6 +110,12 @@ object ModEntityType {
             "effigy_of_protection",
             ::EffigyOfProtectionEntity,
             ModBlocks.EFFIGY_OF_PROTECTION
+        )
+
+        FOOD_DRYER_BLOCK_ENTITY = register(
+            "food_dryer",
+            ::FoodDryerBlockEntity,
+            ModBlocks.FOOD_DRYER
         )
 
     }

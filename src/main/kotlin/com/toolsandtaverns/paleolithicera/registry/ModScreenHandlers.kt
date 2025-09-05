@@ -1,5 +1,6 @@
 package com.toolsandtaverns.paleolithicera.registry
 
+import com.toolsandtaverns.paleolithicera.screen.FoodDryerScreenHandler
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreenHandler
 import com.toolsandtaverns.paleolithicera.screen.KnappingScreenHandler
 import com.toolsandtaverns.paleolithicera.util.id
@@ -14,6 +15,8 @@ object ModScreenHandlers {
     lateinit var KNAPPING: ScreenHandlerType<KnappingScreenHandler>
         private set
     lateinit var HIDE_DRYER: ScreenHandlerType<HideDryerScreenHandler>
+        private set
+    lateinit var FOOD_DRYER: ScreenHandlerType<FoodDryerScreenHandler>
         private set
 
     fun initialize() {
@@ -30,6 +33,14 @@ object ModScreenHandlers {
             id("hide_dryer"),
             ExtendedScreenHandlerType(
                 { syncId, inventory, pos -> HideDryerScreenHandler(syncId, inventory, pos) },
+                BlockPos.PACKET_CODEC
+            )
+        )
+        FOOD_DRYER = Registry.register(
+            Registries.SCREEN_HANDLER,
+            id("food_dryer"),
+            ExtendedScreenHandlerType(
+                { syncId, inventory, pos -> FoodDryerScreenHandler(syncId, inventory, pos) },
                 BlockPos.PACKET_CODEC
             )
         )

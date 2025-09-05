@@ -107,6 +107,14 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.FLINT_AXE, Models.HANDHELD)
         itemModelGenerator.register(ModItems.SLING, Models.HANDHELD)
 
+        itemModelGenerator.register(ModItems.DRIED_COD, Models.GENERATED)
+        itemModelGenerator.register(ModItems.DRIED_BEEF, Models.GENERATED)
+        itemModelGenerator.register(ModItems.DRIED_PORK, Models.GENERATED)
+        itemModelGenerator.register(ModItems.DRIED_MUTTON, Models.GENERATED)
+        itemModelGenerator.register(ModItems.DRIED_RABBIT, Models.GENERATED)
+        itemModelGenerator.register(ModItems.DRIED_CHICKEN, Models.GENERATED)
+        itemModelGenerator.register(ModItems.DRIED_SALMON, Models.GENERATED)
+
         EdiblePlants.entries.forEach { ediblePlants ->
             val def = ediblePlants.definitions
             val id = id(def.idPath)

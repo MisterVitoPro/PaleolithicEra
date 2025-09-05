@@ -62,6 +62,7 @@ object PaleolithicEra : ModInitializer {
 
         // Register the packet codec for client-to-server harpoon result communication
         PayloadTypeRegistry.playC2S().register(HarpoonResultPayload.ID, HarpoonResultPayload.CODEC)
+        
 
         // Initialize item registry with custom items
         ModItems.initialize()
