@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": { "model": "paleolithic-era:block/effigy_of_protection" }
+    "facing=north": { "model": "paleolithic-era:block/effigy_of_protection" },
+    "facing=south": { "model": "paleolithic-era:block/effigy_of_protection", "y": 180 },
+    "facing=west": { "model": "paleolithic-era:block/effigy_of_protection", "y": 270 },
+    "facing=east": { "model": "paleolithic-era:block/effigy_of_protection", "y": 90 }
   }
 }
 

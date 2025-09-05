@@ -104,12 +104,117 @@ Notes:
 
 ---
 
+## Testing
+
+This project includes a comprehensive test suite to ensure reliability and prevent regressions. Tests are organized by priority levels and can be run individually or in groups.
+
+### Test Priority Levels
+
+- **P0 (Critical)**: Essential functionality that must always work (mod initialization, core mechanics)
+- **P1 (Important)**: Important functionality that should work reliably (UI, entities, world generation)  
+- **P2 (Nice-to-have)**: Additional functionality and edge cases (particle effects, advanced interactions)
+
+### Running Tests
+
+#### Run All Tests
+```bash
+./gradlew test
+```
+
+#### Run Tests by Priority Level
+```bash
+# Critical tests only - fastest feedback
+./gradlew testP0
+
+# Important tests only
+./gradlew testP1
+
+# Nice-to-have tests only  
+./gradlew testP2
+
+# Quick tests (P0 + unit tests) - good for development
+./gradlew testQuick
+```
+
+#### Run Tests by Type
+```bash
+# Unit tests only
+./gradlew testUnit
+
+# Integration tests only
+./gradlew testIntegration
+
+# Performance tests only
+./gradlew testPerformance
+```
+
+#### Run Tests with Detailed Output
+```bash
+./gradlew test --info
+./gradlew testP0 --info
+```
+
+### Test Coverage
+
+The test suite covers:
+
+#### P0 (Critical) Tests
+- Mod initialization and registration
+- Item registry functionality  
+- Core knapping station mechanics
+- World progression system
+- Basic inventory operations
+
+#### P1 (Important) Tests
+- Spear item functionality and combat mechanics
+- Loot modifier systems (plant fiber, rock chunks, mob drops)
+- Recipe and crafting workflows
+- Entity behaviors (boar, ibex)
+- Screen handlers and UI components
+
+#### P2 (Nice-to-have) Tests
+- Advanced entity interactions
+- Particle effects and rendering components
+- Data generation validation
+- Performance characteristics
+- Edge case handling
+
+#### Integration Tests
+- Complete knapping workflow from materials to tools
+- Progression system integration with gameplay mechanics
+- Multi-system interactions and error handling
+- Resource management and scarcity scenarios
+
+#### Performance Tests  
+- Inventory operation performance
+- Knapping action timing
+- Memory usage stability
+- Concurrent access handling
+- Scalability verification
+
+### Test Development Guidelines
+
+When adding new features:
+1. Write P0 tests for critical functionality first
+2. Add P1 tests for important user-facing features  
+3. Include P2 tests for edge cases and nice-to-have scenarios
+4. Create integration tests for multi-system features
+5. Add performance tests for resource-intensive operations
+
+### Continuous Integration
+
+The test suite is designed to work in CI environments:
+- `testP0` for quick feedback on pull requests
+- `test` for full validation before merging
+- `testPerformance` for performance regression detection
+
 ## Developer Notes
 - **Mod ID:** `paleolithic-era`
 - **Language/Stack:** Fabric + Kotlin
 - **Entrypoints:** main, client, and datagen are registered.
 - **Data:** Loot tables and recipe providers are in place for plants (elderberries/yarrow) and early items.
 - **Worldgen hooks:** Biome modifications register plant features and entity spawns.
+- **Testing:** Comprehensive test suite with tagged priorities (P0/P1/P2) for reliable development and CI/CD
 
 ---
 

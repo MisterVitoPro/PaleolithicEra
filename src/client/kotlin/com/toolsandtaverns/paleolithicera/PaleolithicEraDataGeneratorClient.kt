@@ -4,6 +4,7 @@ import com.toolsandtaverns.paleolithicera.datagen.*
 import com.toolsandtaverns.paleolithicera.datagen.loot.EntityLootTableProvider
 import com.toolsandtaverns.paleolithicera.datagen.loot.ModBlockLootTableProvider
 import com.toolsandtaverns.paleolithicera.datagen.recipe.EdiblePlantRecipeProvider
+import com.toolsandtaverns.paleolithicera.datagen.recipe.FoodDryingRecipeProvider
 import com.toolsandtaverns.paleolithicera.datagen.recipe.KnappingRecipeProvider
 import com.toolsandtaverns.paleolithicera.datagen.recipe.VanillaRecipeProvider
 import com.toolsandtaverns.paleolithicera.datagen.tag.ModBlockTagProvider
@@ -54,6 +55,7 @@ object PaleolithicEraDataGeneratorClient : DataGeneratorEntrypoint {
         pack.addProvider(::VanillaRecipeProvider)
         pack.addProvider(::KnappingRecipeProvider)
         pack.addProvider(::EdiblePlantRecipeProvider)
+        pack.addProvider(::FoodDryingRecipeProvider)
         pack.addProvider(::ModBlockLootTableProvider)
         pack.addProvider(::EntityLootTableProvider)
         

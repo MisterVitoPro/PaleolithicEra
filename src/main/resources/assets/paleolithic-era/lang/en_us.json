@@ -35,19 +35,21 @@
   "advancement.paleolithic-era.awakening.wear_hide_armor.description": "Limited coverage, but anything will help at this point.",
   "advancement.paleolithic-era.awakening.craft_wooden_harpoon.title": "Here Fishy, Fishy",
   "advancement.paleolithic-era.awakening.craft_wooden_harpoon.description": "Craft a Wooden Harpoon for fishing.",
-  "advancement.paleolithic-era.awakening.crude_bed.title": "Rest for the Weary",
-  "advancement.paleolithic-era.awakening.crude_bed.description": "Craft a crude bed to survive for the night",
   "advancement.paleolithic-era.awakening.craft_bone_spear.title": "Take 'em Out",
   "advancement.paleolithic-era.awakening.craft_bone_spear.description": "Craft a Bone Spear to protect you.",
   "advancement.paleolithic-era.awakening.craft_sling.title": "David's Tool",
   "advancement.paleolithic-era.awakening.craft_sling.description": "Craft a sling for ranged combat using pebbles as ammunition.",
   "advancement.paleolithic-era.awakening.sling_hostile_hit.title": "Stone's Throw",
   "advancement.paleolithic-era.awakening.sling_hostile_hit.description": "Slay a hostile mob using your sling and pebbles.",
+  "advancement.paleolithic-era.awakening.place_food_dryer.title": "Preservation Station",
+  "advancement.paleolithic-era.awakening.place_food_dryer.description": "Craft and place a food dryer to preserve your food for long journeys.",
+  "advancement.paleolithic-era.awakening.collect_all_dried_foods.title": "Master Preserver",
+  "advancement.paleolithic-era.awakening.collect_all_dried_foods.description": "Collect all types of dried foods. A true challenge for survival experts!",
 
   "block.paleolithic-era.chamomile_plant": "Wild Chamomile",
-  "block.paleolithic-era.crude_bed": "Crude Bed",
   "block.paleolithic-era.crude_campfire": "Crude Campfire",
   "block.paleolithic-era.elderberry_bush": "Elderberry Bush",
+  "block.paleolithic-era.food_dryer": "Food Dryer",
   "block.paleolithic-era.hide_dryer": "Hide Dryer",
   "block.paleolithic-era.knapping_station": "Knapping Station",
   "block.paleolithic-era.stripped_willow_log": "Stripped Willow Log",
@@ -60,6 +62,9 @@
   "block.paleolithic-era.bundle_of_sticks": "Bundle of Sticks",
   "block.paleolithic-era.effigy_of_protection": "Effigy of Protection",
 
+  "container.paleolithic-era.food_dryer": "Food Dryer",
+
+  "gui.paleolithic-era.food_dryer.progress": "Drying: %d%%",
   "container.paleolithic-era.hide_dryer": "Hide Dryer",
   "container.paleolithic-era.knapping_station": "Knapping Station",
 
@@ -83,6 +88,7 @@
   "item.paleolithic-era.flint_biface": "Flint Biface",
   "item.paleolithic-era.fire_drill": "Fire Drill",
   "item.paleolithic-era.hide_cap": "Hide Cap",
+  "item.paleolithic-era.food_dryer": "Food Dryer",
   "item.paleolithic-era.hide_dryer": "Hide Dryer",
   "item.paleolithic-era.hide_leggings": "Hide Leggings",
   "item.paleolithic-era.hide_shoes": "Hide Shoes",
@@ -113,6 +119,14 @@
   "item.paleolithic-era.yarrow_herb": "Yarrow Herb",
   "item.paleolithic-era.bundle_of_sticks": "Bundle of Sticks",
   "item.paleolithic-era.effigy_of_protection": "Effigy of Protection",
+  
+  "item.paleolithic-era.dried_beef": "Dried Beef",
+  "item.paleolithic-era.dried_pork": "Dried Pork",
+  "item.paleolithic-era.dried_chicken": "Dried Chicken",
+  "item.paleolithic-era.dried_mutton": "Dried Mutton",
+  "item.paleolithic-era.dried_rabbit": "Dried Rabbit",
+  "item.paleolithic-era.dried_cod": "Dried Cod",
+  "item.paleolithic-era.dried_salmon": "Dried Salmon",
 
   "itemGroup.paleolithic-era.paleolithic_era": "Paleolithic Era",
 
@@ -132,6 +146,8 @@
   "tooltip.paleolithic-era.ephedra_herb": "Ephedra",
   "tooltip.paleolithic-era.fire_drill": "Light up your campfire",
   "tooltip.paleolithic-era.fire_drill.usage": "[Sneak + Use](Hold) to start a fire.",
+  "tooltip.paleolithic-era.food_dryer": "Used for preserving food by air-drying process.",
+  "tooltip.paleolithic-era.food_dryer.usage": "Place up to 4 food items and wait for them to dry. Works slower at night and stops in rain.",
   "tooltip.paleolithic-era.hide_dryer": "Used for drying animal rawhide into usable dry hide.",
   "tooltip.paleolithic-era.hide_dryer.usage": "Place Rawhide and wait for it to dry.",
   "tooltip.paleolithic-era.knapping_station": "Used for shaping flint and bone into tools.",
@@ -143,6 +159,14 @@
   "tooltip.paleolithic-era.wild_mint_herb": "Mentha",
   "tooltip.paleolithic-era.willow_bark": "Salix alba",
   "tooltip.paleolithic-era.wooden_harpoon": "Use near water to fish. Time your strike!",
+  
+  "tooltip.paleolithic-era.dried_beef": "Preserved beef jerky. Nutritious travel food.",
+  "tooltip.paleolithic-era.dried_pork": "Dried pork strips. Good preserved protein source.",
+  "tooltip.paleolithic-era.dried_chicken": "Dried poultry meat. Light and portable sustenance.",
+  "tooltip.paleolithic-era.dried_mutton": "Preserved lamb meat. Rich flavor even when dried.",
+  "tooltip.paleolithic-era.dried_rabbit": "Small game jerky. Lean preserved meat.",
+  "tooltip.paleolithic-era.dried_cod": "Salt-dried fish. Maritime preservation technique.",
+  "tooltip.paleolithic-era.dried_salmon": "Smoked and dried fish. Rich in preserved oils.",
   "tooltip.paleolithic-era.wooden_harpoon.usage": "[Use] on water block surrounded by water blocks. [Spacebar] to catch",
   "tooltip.paleolithic-era.bone_harpoon": "Sharper harpoon with better catch odds.",
   "tooltip.paleolithic-era.bone_harpoon.usage": "[Use] on water block surrounded by water blocks. [Spacebar] to catch",
@@ -155,5 +179,8 @@
   "tag.item.paleolithic-era.ibex_food": "Ibex Food",
   "tag.item.paleolithic-era.knife": "Knife",
   "tag.item.paleolithic-era.spears": "Spears",
-  "tag.entity_type.paleolithic-era.huntable": "Huntable"
+  "tag.entity_type.paleolithic-era.huntable": "Huntable",
+
+  "key.paleolithic-era.wake_up": "Wake Up from Bed",
+  "category.paleolithic-era.general": "Paleolithic Era"
 }

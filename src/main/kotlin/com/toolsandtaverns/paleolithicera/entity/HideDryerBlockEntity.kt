@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
@@ -18,6 +19,8 @@ import net.minecraft.registry.RegistryWrapper
 import net.minecraft.screen.PropertyDelegate
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.storage.ReadView
+import net.minecraft.storage.WriteView
 import net.minecraft.text.Text
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.math.BlockPos
@@ -245,5 +248,39 @@ class HideDryerBlockEntity(
      * @return NBT compound containing initial chunk data
      */
     override fun toInitialChunkDataNbt(registries: RegistryWrapper.WrapperLookup): NbtCompound = createNbt(registries)
+
+    /**
+     * Reads the entity's data from NBT or component storage.
+     *
+     * Loads the hide dryer's inventory contents and drying progress from persistent storage,
+     * ensuring that drying operations are properly restored when the world is loaded.
+     * This is essential for maintaining the player's hide processing state across game sessions.
+     *
+     * @param view The data source to read from
+     */
+    override fun readData(view: ReadView) {
+        super.readData(view)
+        Inventories.readData(view, inventory.heldStacks)
+        
+        // Read the drying progress
+        progress = view.getFloat("DryingProgress", 0.0f)
+    }
+
+    /**
+     * Writes the entity's data to NBT or component storage.
+     *
+     * Saves the hide dryer's inventory contents and drying progress to persistent storage,
+     * ensuring that valuable rawhide and drying progress are not lost when the world is
+     * unloaded. This is particularly important for the time-consuming hide drying process.
+     *
+     * @param view The data destination to write to
+     */
+    override fun writeData(view: WriteView) {
+        super.writeData(view)
+        Inventories.writeData(view, inventory.heldStacks)
+        
+        // Write the drying progress
+        view.putFloat("DryingProgress", progress)
+    }
 
 }

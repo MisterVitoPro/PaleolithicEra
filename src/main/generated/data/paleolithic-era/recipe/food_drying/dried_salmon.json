@@ -1,0 +1,8 @@
+{
+  "type": "paleolithic-era:food_drying",
+  "ingredient": "minecraft:salmon",
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:dried_salmon"
+  }
+}

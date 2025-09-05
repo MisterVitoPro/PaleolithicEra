@@ -1,0 +1,127 @@
+{
+  "format_version": "1.21.6",
+  "parent": "block/block",
+  "textures": {
+    "all": "minecraft:block/oak_planks",
+    "particle": "paleolithic-era:block/food_dryer"
+  },
+  "elements": [
+    {
+      "name": "Post FL Ext",
+      "from": [1, 0, 1],
+      "to": [3, 8, 3],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Post FR Ext",
+      "from": [13, 0, 1],
+      "to": [15, 8, 3],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Post BL Ext",
+      "from": [1, 0, 13],
+      "to": [3, 8, 15],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Post BR Ext",
+      "from": [13, 0, 13],
+      "to": [15, 8, 15],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Top Frame Front",
+      "from": [1, 6, 1],
+      "to": [15, 8, 3],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Top Frame Back",
+      "from": [1, 6, 13],
+      "to": [15, 8, 15],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Top Frame Left",
+      "from": [1, 6, 3],
+      "to": [3, 8, 13],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Top Frame Right",
+      "from": [13, 6, 3],
+      "to": [15, 8, 13],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "name": "Central Cross Beam",
+      "from": [3, 6, 7],
+      "to": [13, 8, 9],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" }
+      }
+    }
+  ]
+}

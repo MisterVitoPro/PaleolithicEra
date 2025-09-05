@@ -19,6 +19,7 @@ import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.ConsumableComponent
 import net.minecraft.component.type.FoodComponent
 import net.minecraft.component.type.WeaponComponent
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.*
 import net.minecraft.item.consume.UseAction
 import net.minecraft.item.equipment.EquipmentType
@@ -131,6 +132,150 @@ object ModItems {
         )
     })
 
+    // Dried Food Items - preserved versions with longer shelf life but lower nutrition than cooked
+
+
+    // Dried meat items for common Minecraft foods
+    val DRIED_BEEF: Item = register("dried_beef", { settings ->
+        Item(
+            settings
+                .component(
+                    DataComponentTypes.FOOD, FoodComponent.Builder()
+                        .nutrition(6)  // Less than cooked steak (8) but more than raw (3)
+                        .saturationModifier(0.6f)  // Lower saturation than cooked
+                        .build()
+                )
+                .component(
+                    DataComponentTypes.CONSUMABLE, ConsumableComponent.builder()
+                        .consumeSeconds(1.6f)
+                        .useAction(UseAction.EAT)
+                        .sound(SoundEvents.ENTITY_GENERIC_EAT)
+                        .consumeParticles(true)
+                        .build()
+                )
+        )
+    })
+
+    val DRIED_PORK: Item = register("dried_pork", { settings ->
+        Item(
+            settings
+                .component(
+                    DataComponentTypes.FOOD, FoodComponent.Builder()
+                        .nutrition(6)  // Less than cooked pork (8) but more than raw (3)
+                        .saturationModifier(0.6f)
+                        .build()
+                )
+                .component(
+                    DataComponentTypes.CONSUMABLE, ConsumableComponent.builder()
+                        .consumeSeconds(1.6f)
+                        .useAction(UseAction.EAT)
+                        .sound(SoundEvents.ENTITY_GENERIC_EAT)
+                        .consumeParticles(true)
+                        .build()
+                )
+        )
+    })
+
+    val DRIED_CHICKEN: Item = register("dried_chicken", { settings ->
+        Item(
+            settings
+                .component(
+                    DataComponentTypes.FOOD, FoodComponent.Builder()
+                        .nutrition(4)  // Less than cooked chicken (6) but more than raw (2)
+                        .saturationModifier(0.4f)
+                        .build()
+                )
+                .component(
+                    DataComponentTypes.CONSUMABLE, ConsumableComponent.builder()
+                        .consumeSeconds(1.6f)
+                        .useAction(UseAction.EAT)
+                        .sound(SoundEvents.ENTITY_GENERIC_EAT)
+                        .consumeParticles(true)
+                        .build()
+                )
+        )
+    })
+
+    val DRIED_MUTTON: Item = register("dried_mutton", { settings ->
+        Item(
+            settings
+                .component(
+                    DataComponentTypes.FOOD, FoodComponent.Builder()
+                        .nutrition(4)  // Less than cooked mutton (6) but more than raw (2)
+                        .saturationModifier(0.4f)
+                        .build()
+                )
+                .component(
+                    DataComponentTypes.CONSUMABLE, ConsumableComponent.builder()
+                        .consumeSeconds(1.6f)
+                        .useAction(UseAction.EAT)
+                        .sound(SoundEvents.ENTITY_GENERIC_EAT)
+                        .consumeParticles(true)
+                        .build()
+                )
+        )
+    })
+
+    val DRIED_RABBIT: Item = register("dried_rabbit", { settings ->
+        Item(
+            settings
+                .component(
+                    DataComponentTypes.FOOD, FoodComponent.Builder()
+                        .nutrition(3)  // Less than cooked rabbit (5) but more than raw (3)
+                        .saturationModifier(0.4f)
+                        .build()
+                )
+                .component(
+                    DataComponentTypes.CONSUMABLE, ConsumableComponent.builder()
+                        .consumeSeconds(1.6f)
+                        .useAction(UseAction.EAT)
+                        .sound(SoundEvents.ENTITY_GENERIC_EAT)
+                        .consumeParticles(true)
+                        .build()
+                )
+        )
+    })
+
+    val DRIED_COD: Item = register("dried_cod", { settings ->
+        Item(
+            settings
+                .component(
+                    DataComponentTypes.FOOD, FoodComponent.Builder()
+                        .nutrition(3)  // Less than cooked cod (5) but more than raw (2)
+                        .saturationModifier(0.3f)
+                        .build()
+                )
+                .component(
+                    DataComponentTypes.CONSUMABLE, ConsumableComponent.builder()
+                        .consumeSeconds(1.6f)
+                        .useAction(UseAction.EAT)
+                        .sound(SoundEvents.ENTITY_GENERIC_EAT)
+                        .consumeParticles(true)
+                        .build()
+                )
+        )
+    })
+
+    val DRIED_SALMON: Item = register("dried_salmon", { settings ->
+        Item(
+            settings
+                .component(
+                    DataComponentTypes.FOOD, FoodComponent.Builder()
+                        .nutrition(4)  // Less than cooked salmon (6) but more than raw (2)
+                        .saturationModifier(0.5f)
+                        .build()
+                )
+                .component(
+                    DataComponentTypes.CONSUMABLE, ConsumableComponent.builder()
+                        .consumeSeconds(1.6f)
+                        .useAction(UseAction.EAT)
+                        .sound(SoundEvents.ENTITY_GENERIC_EAT)
+                        .consumeParticles(true)
+                        .build()
+                )
+        )
+    })
+
     val TAB_ICON_ITEM: Item = register("tab_icon", { settings: Item.Settings -> Item(settings.maxCount(1)) })
 
     val BOAR_SPAWN_EGG: Item =
@@ -176,6 +321,15 @@ object ModItems {
             .register(ModifyEntries { itemGroup: FabricItemGroupEntries ->
                 {
                     itemGroup.add(COOKED_ELDERBERRIES)
+                    
+                    // Add all dried meats
+                    itemGroup.add(DRIED_BEEF)
+                    itemGroup.add(DRIED_PORK)
+                    itemGroup.add(DRIED_CHICKEN)
+                    itemGroup.add(DRIED_MUTTON)
+                    itemGroup.add(DRIED_RABBIT)
+                    itemGroup.add(DRIED_COD)
+                    itemGroup.add(DRIED_SALMON)
                 }
             })
     }

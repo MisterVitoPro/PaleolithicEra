@@ -1,0 +1,115 @@
+{
+  "parent": "minecraft:awakening/place_food_dryer",
+  "criteria": {
+    "dried_beef": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:dried_beef"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "dried_chicken": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:dried_chicken"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "dried_cod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:dried_cod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "dried_mutton": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:dried_mutton"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "dried_pork": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:dried_pork"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "dried_rabbit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:dried_rabbit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "dried_salmon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:dried_salmon"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.collect_all_dried_foods.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:dried_beef"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.collect_all_dried_foods.title"
+    }
+  },
+  "requirements": [
+    [
+      "dried_beef"
+    ],
+    [
+      "dried_pork"
+    ],
+    [
+      "dried_chicken"
+    ],
+    [
+      "dried_mutton"
+    ],
+    [
+      "dried_rabbit"
+    ],
+    [
+      "dried_cod"
+    ],
+    [
+      "dried_salmon"
+    ]
+  ],
+  "rewards": {
+    "experience": 10
+  },
+  "sends_telemetry_event": true
+}

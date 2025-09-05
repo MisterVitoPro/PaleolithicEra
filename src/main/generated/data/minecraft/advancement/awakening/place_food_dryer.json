@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:awakening/place_crude_campfire",
+  "criteria": {
+    "placed_food_dryer": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:food_dryer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.paleolithic-era.awakening.place_food_dryer.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "paleolithic-era:food_dryer"
+    },
+    "title": {
+      "translate": "advancement.paleolithic-era.awakening.place_food_dryer.title"
+    }
+  },
+  "requirements": [
+    [
+      "placed_food_dryer"
+    ]
+  ],
+  "rewards": {
+    "experience": 3
+  },
+  "sends_telemetry_event": true
+}

@@ -47,7 +47,7 @@ class VanillaRecipeProvider(
                     .pattern("S ")
                     .input('B', ModItems.BONE_SHARD)
                     .input('S', Items.STICK)
-                    .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
+                    .criterion(hasItem(ModItems.BONE_SHARD), conditionsFromItem(ModItems.BONE_SHARD))
                     .offerTo(exporter)
 
                 // Bone Spear
@@ -191,7 +191,7 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(ModItems.BONE_KNIFE), conditionsFromItem(ModItems.BONE_KNIFE))
                     .offerTo(exporter)
 
-                createShaped(RecipeCategory.COMBAT, ModItems.FLINT_AXE, 1)
+                createShaped(RecipeCategory.TOOLS, ModItems.FLINT_AXE, 1)
                     .pattern("PF")
                     .pattern("SF")
                     .input('F', ModItems.FLINT_BIFACE)
@@ -205,7 +205,7 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(ModItems.BONE_SHARD), conditionsFromItem(ModItems.BONE_SHARD))
                     .offerTo(exporter)
 
-                // Bundle of Sticks (for Effigy construction)
+                // Bundle of Sticks
                 createShapeless(RecipeCategory.MISC, ModBlocks.BUNDLE_OF_STICKS, 1)
                     .input(Items.STICK)
                     .input(Items.STICK)
@@ -219,14 +219,13 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(ModBlocks.WILLOW_LOG), conditionsFromItem(ModBlocks.WILLOW_LOG))
                     .offerTo(exporter)
 
-//                createShaped(RecipeCategory.COMBAT, ModBlocks.CRUDE_BED, 1)
-//                    .pattern("RP")
-//                    .pattern("FF")
-//                    .input('P', ModItems.PATCHED_HIDE)
-//                    .input('F', ModItems.PLANT_FIBER)
-//                    .input('R', ModItems.ROCK_CHUNK)
-//                    .criterion(hasItem(ModItems.BONE_KNIFE), conditionsFromItem(ModItems.BONE_KNIFE))
-//                    .offerTo(exporter)
+                createShaped(RecipeCategory.MISC, ModBlocks.FOOD_DRYER, 1)
+                    .pattern("SS")
+                    .pattern("BB")
+                    .input('S', Items.STICK)
+                    .input('B', ModBlocks.BUNDLE_OF_STICKS)
+                    .criterion(hasItem(ModBlocks.BUNDLE_OF_STICKS), conditionsFromItem(ModBlocks.BUNDLE_OF_STICKS))
+                    .offerTo(exporter)
 
             }
         }

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "paleolithic-era:bundle_of_sticks",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "SS",
+    "BB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:food_dryer"
+  }
+}

@@ -5,7 +5,7 @@
   "texture_size": [64, 64],
   "textures": {
     "2": "paleolithic-era:block/effigy_of_protection",
-    "particle": "paleolithic-era:block/effigy_of_protection"
+    "particle": "minecraft:block/gravel"
   },
   "elements": [
     {
