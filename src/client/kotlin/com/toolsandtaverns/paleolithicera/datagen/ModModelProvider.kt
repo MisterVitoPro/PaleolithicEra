@@ -106,6 +106,8 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         itemModelGenerator.register(ModItems.BONE_HARPOON, Models.HANDHELD)
         itemModelGenerator.register(ModItems.FLINT_AXE, Models.HANDHELD)
         itemModelGenerator.register(ModItems.SLING, Models.HANDHELD)
+        itemModelGenerator.register(ModItems.WATER_SACK, Models.HANDHELD)
+        itemModelGenerator.register(ModItems.FILLED_WATER_SACK, Models.HANDHELD)
 
         itemModelGenerator.register(ModItems.DRIED_COD, Models.GENERATED)
         itemModelGenerator.register(ModItems.DRIED_BEEF, Models.GENERATED)

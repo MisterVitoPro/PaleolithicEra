@@ -2,11 +2,7 @@ package com.toolsandtaverns.paleolithicera.registry
 
 import com.toolsandtaverns.paleolithicera.entity.BoneSpearEntity
 import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
-import com.toolsandtaverns.paleolithicera.item.FireDrillItem
-import com.toolsandtaverns.paleolithicera.item.HarpoonItem
-import com.toolsandtaverns.paleolithicera.item.KnifeItem
-import com.toolsandtaverns.paleolithicera.item.SlingItem
-import com.toolsandtaverns.paleolithicera.item.SpearItem
+import com.toolsandtaverns.paleolithicera.item.*
 import com.toolsandtaverns.paleolithicera.item.material.ModArmorMaterials.HIDE_MATERIAL
 import com.toolsandtaverns.paleolithicera.item.material.ModToolMaterials
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
@@ -16,10 +12,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries
 import net.minecraft.component.DataComponentTypes
-import net.minecraft.component.type.ConsumableComponent
-import net.minecraft.component.type.FoodComponent
-import net.minecraft.component.type.WeaponComponent
-import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.component.type.*
 import net.minecraft.item.*
 import net.minecraft.item.consume.UseAction
 import net.minecraft.item.equipment.EquipmentType
@@ -111,6 +104,13 @@ object ModItems {
         register("bone_harpoon", { settings: Item.Settings -> HarpoonItem(settings.maxCount(1).maxDamage(15)) })
 
     val SLING: Item = register("sling", { settings: Item.Settings -> SlingItem(settings.maxCount(1).maxDamage(20)) })
+
+    val WATER_SACK: Item = register("water_sack", { settings: Item.Settings -> WaterSackItem(settings.maxCount(1)) })
+    val FILLED_WATER_SACK: Item = register("filled_water_sack", { settings: Item.Settings -> 
+        FilledWaterSackItem(
+            settings.maxCount(1).component(DataComponentTypes.CONSUMABLE, ConsumableComponents.DRINK).useRemainder(WATER_SACK)
+        )
+    })
 
     val COOKED_ELDERBERRIES: Item = register("cooked_elderberries", { settings ->
         Item(
@@ -306,6 +306,8 @@ object ModItems {
             {
                 itemGroup.add(WOODEN_HARPOON)
                 itemGroup.add(BONE_HARPOON)
+                itemGroup.add(WATER_SACK)
+                itemGroup.add(FILLED_WATER_SACK)
             }
         })
 

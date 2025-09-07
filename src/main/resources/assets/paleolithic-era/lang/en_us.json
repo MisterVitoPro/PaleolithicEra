@@ -104,6 +104,8 @@
   "item.paleolithic-era.raw_elderberries": "Raw Elderberries",
   "item.paleolithic-era.sagebrush_herb": "Sagebrush Herb",
   "item.paleolithic-era.sling": "Sling",
+  "item.paleolithic-era.water_sack": "Water Sack",
+  "item.paleolithic-era.filled_water_sack": "Filled Water Sack",
   "item.paleolithic-era.stripped_willow_log": "Stripped Willow Log",
   "item.paleolithic-era.wild_garlic_herb": "Wild Garlic",
   "item.paleolithic-era.wild_ginger_herb": "Wild Ginger",
@@ -171,6 +173,8 @@
   "tooltip.paleolithic-era.bone_harpoon": "Sharper harpoon with better catch odds.",
   "tooltip.paleolithic-era.bone_harpoon.usage": "[Use] on water block surrounded by water blocks. [Spacebar] to catch",
   "tooltip.paleolithic-era.wooden_spear": "Melee or throw it. Your choice.",
+  "tooltip.paleolithic-era.water_sack": "Primitive water container. Right-click water to fill.",
+  "tooltip.paleolithic-era.filled_water_sack": "Water-filled hide sack. Drink to restore thirst.",
   "tooltip.paleolithic-era.yarrow_herb": "Achillea millefolium",
 
   "tag.item.paleolithic-era.bone_tool_materials": "Bone Tools",

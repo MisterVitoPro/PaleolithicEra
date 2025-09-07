@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "paleolithic-era:plant_cordage",
+    "H": "paleolithic-era:plant_cordage",
+    "P": "paleolithic-era:patched_hide"
+  },
+  "pattern": [
+    "C ",
+    "PH"
+  ],
+  "result": {
+    "count": 1,
+    "id": "paleolithic-era:water_sack"
+  }
+}

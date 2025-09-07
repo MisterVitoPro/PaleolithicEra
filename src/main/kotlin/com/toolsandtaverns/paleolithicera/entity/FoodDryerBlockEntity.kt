@@ -6,6 +6,7 @@ import com.toolsandtaverns.paleolithicera.registry.ModEntityType
 import com.toolsandtaverns.paleolithicera.registry.ModRecipes
 import com.toolsandtaverns.paleolithicera.screen.FoodDryerScreenHandler
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory
+import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -145,7 +146,7 @@ class FoodDryerBlockEntity(
         if (anySlotChanged) {
             markDirty()
             // Sync to client for rendering updates
-            world.updateListeners(pos, cachedState, cachedState, net.minecraft.block.Block.NOTIFY_ALL)
+            world.updateListeners(pos, cachedState, cachedState, Block.NOTIFY_ALL)
         }
     }
 
