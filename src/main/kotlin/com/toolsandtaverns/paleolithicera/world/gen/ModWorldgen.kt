@@ -138,5 +138,22 @@ object ModWorldgen {
             ),
             SpawnGroup.CREATURE, ModEntityType.IBEX_ENTITY, 15, 2, 3
         )
+
+        // Add small caves to mountainous and hilly biomes
+        BiomeModifications.addFeature(
+            BiomeSelectors.includeByKey(
+                BiomeKeys.WINDSWEPT_HILLS,
+                BiomeKeys.WINDSWEPT_FOREST,
+                BiomeKeys.WINDSWEPT_GRAVELLY_HILLS,
+                BiomeKeys.STONY_PEAKS,
+                BiomeKeys.JAGGED_PEAKS,
+                BiomeKeys.FROZEN_PEAKS,
+                BiomeKeys.GROVE,
+                BiomeKeys.SNOWY_SLOPES,
+                BiomeKeys.PLAINS
+            ),
+            GenerationStep.Feature.SURFACE_STRUCTURES,
+            ModPlacedFeatures.SMALL_CAVE_PLACED
+        )
     }
 }

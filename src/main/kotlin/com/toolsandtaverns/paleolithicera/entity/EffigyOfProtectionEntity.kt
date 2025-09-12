@@ -54,12 +54,11 @@ class EffigyOfProtectionEntity(pos: BlockPos, state: BlockState) :
             if (world.time % 10L == 0L) {
                 spawnRingParticles(world)
             }
-            // Notify nearby players periodically with remaining total time on the aura
-            if (world.time % 20L == 0L) {
-                notifyPlayers(world)
-            }
-        } else {
-            // Inactive: no notifications
+        }
+        
+        // Always check for highlighted players and notify them regardless of active state
+        if (world.time % 20L == 0L) {
+            notifyPlayersWhenHighlighted(world)
         }
     }
 
@@ -188,6 +187,27 @@ class EffigyOfProtectionEntity(pos: BlockPos, state: BlockState) :
             if (hit is BlockHitResult) {
                 val hp = hit.blockPos
                 if (hp == this.pos || hp == this.pos.up()) {
+                    player.sendMessage(msg, true)
+                }
+            }
+        }
+    }
+
+    fun notifyPlayersWhenHighlighted(world: ServerWorld) {
+        val center = Vec3d.ofCenter(pos)
+        val aabb = Box.from(center).expand(radius)
+        val players = world.getEntitiesByClass(PlayerEntity::class.java, aabb) { true }
+        for (player in players) {
+            // Only show when the player is highlighting this effigy (crosshair on it)
+            val hit = player.raycast(6.0, 0.0f, false)
+            if (hit is BlockHitResult) {
+                val hp = hit.blockPos
+                if (hp == this.pos || hp == this.pos.up()) {
+                    val msg = if (getFuelTimeInTicks() > 0) {
+                        Text.literal("Effigy of Protection Aura: ${formatTicks(getFuelTimeInTicks())}")
+                    } else {
+                        Text.literal("Feed me bones...")
+                    }
                     player.sendMessage(msg, true)
                 }
             }
