@@ -227,6 +227,17 @@ class VanillaRecipeProvider(
                     .criterion(hasItem(ModBlocks.BUNDLE_OF_STICKS), conditionsFromItem(ModBlocks.BUNDLE_OF_STICKS))
                     .offerTo(exporter)
 
+                // Water Sack - made from patched hide and plant cordage
+                createShaped(RecipeCategory.TOOLS, ModItems.WATER_SACK, 1)
+                    .pattern("C ")
+                    .pattern("PH")
+                    .input('P', ModItems.PATCHED_HIDE)
+                    .input('C', ModItems.PLANT_CORDAGE)
+                    .input('H', ModItems.PLANT_CORDAGE)
+                    .criterion(hasItem(ModItems.PATCHED_HIDE), conditionsFromItem(ModItems.PATCHED_HIDE))
+                    .criterion(hasItem(ModItems.PLANT_CORDAGE), conditionsFromItem(ModItems.PLANT_CORDAGE))
+                    .offerTo(exporter)
+
             }
         }
     }

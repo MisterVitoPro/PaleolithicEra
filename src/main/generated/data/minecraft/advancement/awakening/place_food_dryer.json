@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:awakening/place_crude_campfire",
+  "parent": "minecraft:awakening/get_stick",
   "criteria": {
     "placed_food_dryer": {
       "conditions": {

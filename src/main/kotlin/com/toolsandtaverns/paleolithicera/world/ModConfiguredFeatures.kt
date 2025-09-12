@@ -2,6 +2,7 @@ package com.toolsandtaverns.paleolithicera.world
 
 import com.toolsandtaverns.paleolithicera.block.EdiblePlantBlock
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
+import com.toolsandtaverns.paleolithicera.registry.ModFeatures
 import com.toolsandtaverns.paleolithicera.util.id
 import com.toolsandtaverns.paleolithicera.world.gen.treedecorator.WillowLeavesTreeDecorator
 import net.minecraft.block.Block
@@ -29,6 +30,7 @@ object ModConfiguredFeatures {
     val WILLOW_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("willow")
     val WILD_MINT_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("wild_mint_plant")
     val WILD_GINGER_PLANT_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("wild_ginger_plant")
+    val SMALL_CAVE_CONFIGURED_KEY: RegistryKey<ConfiguredFeature<*, *>> = registerKey("small_cave")
 
     fun bootstrap(context: Registerable<ConfiguredFeature<*, *>>) {
         Feature.RANDOM_PATCH.register<RandomPatchFeatureConfig, Feature<RandomPatchFeatureConfig>>(
@@ -86,6 +88,12 @@ object ModConfiguredFeatures {
                     .decorators(listOf(WillowLeavesTreeDecorator(0.55F)))
                     .ignoreVines()
             .build()
+        )
+
+        ModFeatures.SMALL_CAVE_FEATURE.register(
+            context = context,
+            key = SMALL_CAVE_CONFIGURED_KEY,
+            configuration = DefaultFeatureConfig.INSTANCE
         )
     }
 

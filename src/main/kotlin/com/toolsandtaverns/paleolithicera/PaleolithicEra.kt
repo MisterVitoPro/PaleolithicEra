@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory
 import com.toolsandtaverns.paleolithicera.event.SpawnGate
 import com.toolsandtaverns.paleolithicera.progression.WorldProgress
 import com.toolsandtaverns.paleolithicera.progression.ProgressionRules
+import com.toolsandtaverns.paleolithicera.util.CauldronBehaviorRegistry
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.item.Items
 import net.minecraft.item.SpawnEggItem
@@ -70,6 +71,8 @@ object PaleolithicEra : ModInitializer {
         ModBlocks.initialize()
         // Initialize entity types (including block entities)
         ModEntityType.initialize()
+        // Initialize custom features for world generation
+        ModFeatures.initialize()
         // Initialize particle types for custom effects
         ModParticleTypes.initialize()
         // Initialize container/GUI screen handlers
@@ -137,10 +140,10 @@ object PaleolithicEra : ModInitializer {
             ActionResult.PASS
         })
 
-        // Effigy placed advancement is triggered at structure conversion time
-
         // Gate pig/goat spawns until progression is met
         SpawnGate.initialize()
+
+        CauldronBehaviorRegistry.initialize()
     }
 
 }

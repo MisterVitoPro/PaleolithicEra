@@ -48,6 +48,9 @@ object ModPlacedFeatures {
     val WILLOW_PLACED: RegistryKey<PlacedFeature> =
         RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("willow_placed"))
 
+    val SMALL_CAVE_PLACED: RegistryKey<PlacedFeature> =
+        RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("small_cave_placed"))
+
     fun bootstrap(context: Registerable<PlacedFeature>) {
         val configuredLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE)
         val elderberryBushConfigured = configuredLookup.getOrThrow(ModConfiguredFeatures.ELDERBERRY_BUSH_CONFIGURED_KEY)
@@ -131,8 +134,23 @@ object ModPlacedFeatures {
             )
         )
 
+        context.register(
+            SMALL_CAVE_PLACED,
+            PlacedFeature(
+                configuredLookup.getOrThrow(ModConfiguredFeatures.SMALL_CAVE_CONFIGURED_KEY),
+                getCavePlacementModifiers()
+            )
+        )
 
+    }
 
+    private fun getCavePlacementModifiers(): List<PlacementModifier> {
+        return listOf(
+            RarityFilterPlacementModifier.of(5), // 150 - Very rare caves
+            SquarePlacementModifier.of(),
+            HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES),
+            BiomePlacementModifier.of()
+        )
     }
 
     private fun getHerbPlantPlacementModifiers(rarity: Int = 40): List<PlacementModifier> {

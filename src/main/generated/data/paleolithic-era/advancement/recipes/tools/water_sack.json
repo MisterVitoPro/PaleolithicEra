@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_patched_hide": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:patched_hide"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_plant_cordage": {
+      "conditions": {
+        "items": [
+          {
+            "items": "paleolithic-era:plant_cordage"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "paleolithic-era:water_sack"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_patched_hide",
+      "has_plant_cordage"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "paleolithic-era:water_sack"
+    ]
+  }
+}
