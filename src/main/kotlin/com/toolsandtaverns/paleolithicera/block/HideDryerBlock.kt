@@ -73,8 +73,8 @@ class HideDryerBlock(settings: Settings) : BlockWithEntity(settings) {
     }
 
     companion object {
-        val CODEC: MapCodec<KnappingStationBlock> by lazy {
-            createCodec { KnappingStationBlock(Settings.create().strength(2.0f)) }
+        val CODEC: MapCodec<HideDryerBlock> by lazy {
+            createCodec(::HideDryerBlock)
         }
     }
 

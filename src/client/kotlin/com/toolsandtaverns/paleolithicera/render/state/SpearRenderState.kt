@@ -1,3 +1,5 @@
+package com.toolsandtaverns.paleolithicera.render.state
+
 import net.minecraft.client.render.entity.state.EntityRenderState
 
 /**

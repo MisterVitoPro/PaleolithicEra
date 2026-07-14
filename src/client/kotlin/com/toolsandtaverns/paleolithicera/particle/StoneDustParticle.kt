@@ -22,6 +22,9 @@ class StoneDustParticle(
     velocityZ: Double
 ) : SpriteBillboardParticle(world, x, y, z, velocityX, velocityY, velocityZ) {
 
+    private val initialScale: Float
+    private val initialAlpha: Float
+
     companion object {
         // Color range for fine dust - lighter than debris particles
         private const val MIN_RED = 0.6f
@@ -54,6 +57,8 @@ class StoneDustParticle(
         
         // Start more transparent since it's fine dust
         this.alpha = 0.4f + world.random.nextFloat() * 0.3f
+        initialScale = scale
+        initialAlpha = alpha
         
         // Much less gravity - dust floats
         this.gravityStrength = GRAVITY_MODIFIER
@@ -78,10 +83,10 @@ class StoneDustParticle(
         
         // Fade out more gradually than debris
         val lifeProgress = this.age.toFloat() / this.maxAge.toFloat()
-        this.alpha = MathHelper.lerp(lifeProgress, 0.4f, 0.0f)
+        this.alpha = MathHelper.lerp(lifeProgress, initialAlpha, 0.0f)
         
         // Dust particles don't shrink as much
-        this.scale = MathHelper.lerp(lifeProgress, scale, scale * 0.8f)
+        this.scale = MathHelper.lerp(lifeProgress, initialScale, initialScale * 0.8f)
     }
 
     /**

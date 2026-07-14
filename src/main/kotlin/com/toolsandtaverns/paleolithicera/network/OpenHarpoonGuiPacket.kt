@@ -1,14 +1,19 @@
 package com.toolsandtaverns.paleolithicera.network
 
 import com.toolsandtaverns.paleolithicera.network.payload.HarpoonResultPayload
+import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
+import com.toolsandtaverns.paleolithicera.item.HarpoonItem
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
+import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.random.Random
 
 /**
@@ -18,6 +23,38 @@ import kotlin.random.Random
  * processes results, and provides appropriate rewards.
  */
 object OpenHarpoonGuiPacket {
+    private const val START_DELAY_TICKS = 10L
+    private const val ATTEMPT_TIMEOUT_TICKS = 20L * 60L
+
+    private data class PendingAttempt(
+        val id: Long,
+        val item: Item,
+        val hand: Hand,
+        val startTick: Long,
+        val expiresAt: Long,
+        val targetStartStep: Int
+    )
+
+    private val pendingAttempts = ConcurrentHashMap<UUID, PendingAttempt>()
+
+    fun beginAttempt(player: ServerPlayerEntity, item: Item, hand: Hand): OpenHarpoonGuiPayload {
+        val startTick = player.world.time + START_DELAY_TICKS
+        val targetStartStep = Random.nextInt(
+            0,
+            HarpoonMinigameRules.SLIDER_MAX_STEP - HarpoonMinigameRules.TARGET_WIDTH_STEPS + 1
+        )
+        val attempt = PendingAttempt(
+            id = Random.nextLong(),
+            item = item,
+            hand = hand,
+            startTick = startTick,
+            expiresAt = startTick + ATTEMPT_TIMEOUT_TICKS,
+            targetStartStep = targetStartStep
+        )
+        pendingAttempts[player.uuid] = attempt
+        return OpenHarpoonGuiPayload(attempt.id, attempt.startTick, attempt.targetStartStep)
+    }
+
     /**
      * Registers network packet receivers for harpoon fishing.
      *
@@ -28,7 +65,10 @@ object OpenHarpoonGuiPacket {
         // Register a receiver for the harpoon result payload sent from client
         ServerPlayNetworking.registerGlobalReceiver(HarpoonResultPayload.ID) { payload, context ->
             val player = context.player()
-            handleResult(player, payload.success)
+            handleResult(player, payload.attemptId)
+        }
+        ServerPlayConnectionEvents.DISCONNECT.register { handler, _ ->
+            pendingAttempts.remove(handler.player.uuid)
         }
     }
 
@@ -42,22 +82,31 @@ object OpenHarpoonGuiPacket {
      * 4. If unsuccessful or if the fish escaped, displays an appropriate message
      *
      * @param player The player who attempted fishing
-     * @param success Whether the player successfully caught a fish
+     * @param attemptId The server-issued identifier for the completed attempt
      */
-    private fun handleResult(player: ServerPlayerEntity, success: Boolean) {
-        val stack: ItemStack = player.getStackInHand(Hand.MAIN_HAND)
+    private fun handleResult(player: ServerPlayerEntity, attemptId: Long) {
+        val attempt = pendingAttempts[player.uuid] ?: return
+        if (attempt.id != attemptId || !pendingAttempts.remove(player.uuid, attempt)) return
+
+        val stack: ItemStack = player.getStackInHand(attempt.hand)
         val item: Item = stack.item
-        val slot = ServerPlayerEntity.getSlotForHand(Hand.MAIN_HAND)
+        if (player.world.time > attempt.expiresAt || item !is HarpoonItem || item !== attempt.item) return
+        val slot = ServerPlayerEntity.getSlotForHand(attempt.hand)
+        val success = HarpoonMinigameRules.isSuccessful(
+            attempt.targetStartStep,
+            attempt.startTick,
+            player.world.time
+        )
 
         // Damage the harpoon and handle potential breakage
-        stack.damage(1, player, Hand.MAIN_HAND)
+        stack.damage(1, player, attempt.hand)
         if (stack.isEmpty) {
             // Notify the client that the item broke for proper visual/sound effects
             player.sendEquipmentBreakStatus(item, slot)
         }
         
         // Update the stack in the player's inventory to ensure changes are synced
-        player.setStackInHand(Hand.MAIN_HAND, stack)
+        player.setStackInHand(attempt.hand, stack)
 
         // Handle success case - give rewards if applicable
         if (success) {

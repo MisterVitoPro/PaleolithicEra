@@ -59,6 +59,11 @@ class FoodDryerBlockEntity(
      */
     val inventory = object : SimpleInventory(SLOT_COUNT) {
         override fun getMaxCountPerStack(): Int = 1 // Each slot can only hold 1 item
+
+        override fun markDirty() {
+            super.markDirty()
+            this@FoodDryerBlockEntity.markDirty()
+        }
         
         override fun canInsert(stack: ItemStack): Boolean {
             return isValidInput(stack)

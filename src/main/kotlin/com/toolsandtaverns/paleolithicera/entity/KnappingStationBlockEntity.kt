@@ -69,7 +69,12 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
      * The limited inventory size reflects the primitive nature of the knapping process,
      * focusing on transforming a single resource rather than complex multi-material crafting.
      */
-    private val inventory = SimpleInventory(2)
+    private val inventory = object : SimpleInventory(2) {
+        override fun markDirty() {
+            super.markDirty()
+            this@KnappingStationBlockEntity.markDirty()
+        }
+    }
 
     /**
      * Counter that tracks the progress of the current knapping operation in ticks.

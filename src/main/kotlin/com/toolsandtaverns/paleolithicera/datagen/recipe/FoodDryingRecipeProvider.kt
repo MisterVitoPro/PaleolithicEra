@@ -2,17 +2,17 @@ package com.toolsandtaverns.paleolithicera.datagen.recipe
 
 import com.toolsandtaverns.paleolithicera.recipe.FoodDryingRecipe
 import com.toolsandtaverns.paleolithicera.registry.ModItems
-import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.data.recipe.RecipeExporter
 import net.minecraft.data.recipe.RecipeGenerator
+import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
+import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
-import net.minecraft.util.Identifier
 import java.util.concurrent.CompletableFuture
 
 /**
@@ -36,16 +36,16 @@ class FoodDryingRecipeProvider(
         return object : RecipeGenerator(registryLookup, exporter) {
             override fun generate() {
                 // Create dried versions of vanilla Minecraft meats
-                createMeatDryingRecipe(Items.BEEF, ModItems.DRIED_BEEF, 600)
-                createMeatDryingRecipe(Items.PORKCHOP, ModItems.DRIED_PORK, 600)
-                createMeatDryingRecipe(Items.CHICKEN, ModItems.DRIED_CHICKEN, 500)
-                createMeatDryingRecipe(Items.MUTTON, ModItems.DRIED_MUTTON, 500)
-                createMeatDryingRecipe(Items.RABBIT, ModItems.DRIED_RABBIT, 400)
-                createMeatDryingRecipe(Items.COD, ModItems.DRIED_COD, 350)
-                createMeatDryingRecipe(Items.SALMON, ModItems.DRIED_SALMON, 400)
+                createMeatDryingRecipe(Items.BEEF, ModItems.DRIED_BEEF)
+                createMeatDryingRecipe(Items.PORKCHOP, ModItems.DRIED_PORK)
+                createMeatDryingRecipe(Items.CHICKEN, ModItems.DRIED_CHICKEN)
+                createMeatDryingRecipe(Items.MUTTON, ModItems.DRIED_MUTTON)
+                createMeatDryingRecipe(Items.RABBIT, ModItems.DRIED_RABBIT)
+                createMeatDryingRecipe(Items.COD, ModItems.DRIED_COD)
+                createMeatDryingRecipe(Items.SALMON, ModItems.DRIED_SALMON)
             }
 
-            private fun createMeatDryingRecipe(input: net.minecraft.item.Item, output: net.minecraft.item.Item, dryingTime: Int) {
+            private fun createMeatDryingRecipe(input: Item, output: Item) {
                 val recipe = FoodDryingRecipe(
                     Ingredient.ofItems(input),
                     output.defaultStack
@@ -58,9 +58,8 @@ class FoodDryingRecipeProvider(
                 )
             }
 
-            private fun getRecipeName(output: net.minecraft.item.Item): String {
-                val itemId = output.registryEntry.registryKey().value.path
-                return itemId.removePrefix("paleolithic-era:")
+            private fun getRecipeName(output: Item): String {
+                return Registries.ITEM.getId(output).path
             }
         }
     }

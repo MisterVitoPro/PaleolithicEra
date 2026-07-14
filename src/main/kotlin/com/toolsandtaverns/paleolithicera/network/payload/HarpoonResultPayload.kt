@@ -7,7 +7,7 @@ import net.minecraft.network.packet.CustomPayload
 import net.minecraft.network.packet.CustomPayload.Id
 import net.minecraft.network.packet.CustomPayload.Type
 
-data class HarpoonResultPayload(val success: Boolean) : CustomPayload {
+data class HarpoonResultPayload(val attemptId: Long) : CustomPayload {
     override fun getId(): Id<HarpoonResultPayload> = ID
 
     companion object {
@@ -15,8 +15,8 @@ data class HarpoonResultPayload(val success: Boolean) : CustomPayload {
 
         val CODEC: PacketCodec<PacketByteBuf, HarpoonResultPayload> =
             PacketCodec.of(
-                { payload, buf -> buf.writeBoolean(payload.success) },
-                { buf -> HarpoonResultPayload(buf.readBoolean()) }
+                { payload, buf -> buf.writeLong(payload.attemptId) },
+                { buf -> HarpoonResultPayload(buf.readLong()) }
             )
 
         val TYPE: Type<PacketByteBuf, HarpoonResultPayload> = Type(ID, CODEC)

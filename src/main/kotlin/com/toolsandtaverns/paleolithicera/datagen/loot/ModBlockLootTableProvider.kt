@@ -68,6 +68,9 @@ class ModBlockLootTableProvider(
             leavesDrops(ModBlocks.WILLOW_LEAVES, ModBlocks.WILLOW_SAPLING, 0.0625f)
         )
 
+        // Utility/containers
+        addDrop(ModBlocks.GROUND_STORAGE)
+
     }
 
     private fun addBarkToLogDrop(log: Block, bark: Item) {

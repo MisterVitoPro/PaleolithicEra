@@ -88,6 +88,8 @@ class BoarChargeAndRamGoal(
         if (distSq <= 2.25) { // ~1.5 blocks radius window
             val world = entity.world
             if (world is ServerWorld) {
+
+
                 if (entity.tryAttack(world, t)) {
                     // Small attack animation for clarity
                     entity.swingHand(Hand.MAIN_HAND, true)

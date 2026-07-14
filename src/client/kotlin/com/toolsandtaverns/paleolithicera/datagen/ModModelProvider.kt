@@ -62,6 +62,18 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.WILLOW_PLANKS)
         blockStateModelGenerator.registerSingleton(ModBlocks.WILLOW_LEAVES, TexturedModel.LEAVES)
         blockStateModelGenerator.registerTintableCrossBlockState(ModBlocks.WILLOW_SAPLING, BlockStateModelGenerator.CrossType.NOT_TINTED)
+
+        // Ground Storage: simple cube using vanilla dirt textures
+        blockStateModelGenerator.registerCubeWithCustomTextures(
+            ModBlocks.GROUND_STORAGE,
+            ModBlocks.GROUND_STORAGE
+        ) { _, _ ->
+            TextureMap()
+                .put(TextureKey.UP, Identifier.ofVanilla("block/dirt"))
+                .put(TextureKey.SIDE, Identifier.ofVanilla("block/dirt"))
+                .put(TextureKey.DOWN, Identifier.ofVanilla("block/dirt"))
+                .put(TextureKey.PARTICLE, Identifier.ofVanilla("block/dirt"))
+        }
     }
 
     /**

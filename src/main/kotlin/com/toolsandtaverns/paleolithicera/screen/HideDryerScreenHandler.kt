@@ -2,12 +2,14 @@ package com.toolsandtaverns.paleolithicera.screen
 
 import com.toolsandtaverns.paleolithicera.entity.HideDryerBlockEntity
 import com.toolsandtaverns.paleolithicera.registry.ModItems
+import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.slot.Slot
 import net.minecraft.util.math.BlockPos
 
@@ -22,6 +24,7 @@ class HideDryerScreenHandler(
 
     private val entity = playerInventory.player.world.getBlockEntity(pos) as HideDryerBlockEntity
     private val inventory: SimpleInventory = entity.inventory
+    private val context = ScreenHandlerContext.create(playerInventory.player.world, pos)
 
     init {
         checkSize(inventory, 2)
@@ -99,7 +102,7 @@ class HideDryerScreenHandler(
         }
     }
 
-    override fun canUse(player: PlayerEntity): Boolean = inventory.canPlayerUse(player)
+    override fun canUse(player: PlayerEntity): Boolean = canUse(context, player, ModBlocks.HIDE_DRYER)
 
     /**
      * Returns progress as a percent from 0 to 100.

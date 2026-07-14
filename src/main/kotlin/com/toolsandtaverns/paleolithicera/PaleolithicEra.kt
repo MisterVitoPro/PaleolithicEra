@@ -10,6 +10,7 @@ import com.toolsandtaverns.paleolithicera.event.PlantFiberLootModifier
 import com.toolsandtaverns.paleolithicera.event.RockChunkLootModifier
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiPacket
 import com.toolsandtaverns.paleolithicera.network.payload.HarpoonResultPayload
+import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
 import com.toolsandtaverns.paleolithicera.registry.*
 import com.toolsandtaverns.paleolithicera.world.gen.ModTreeGeneration
 import com.toolsandtaverns.paleolithicera.world.gen.ModWorldgen
@@ -61,8 +62,9 @@ object PaleolithicEra : ModInitializer {
     override fun onInitialize() {
         LOGGER.info("Initializing Paleolithic Era")
 
-        // Register the packet codec for client-to-server harpoon result communication
+        // Register harpoon payload codecs on both physical sides during common initialization.
         PayloadTypeRegistry.playC2S().register(HarpoonResultPayload.ID, HarpoonResultPayload.CODEC)
+        PayloadTypeRegistry.playS2C().register(OpenHarpoonGuiPayload.ID, OpenHarpoonGuiPayload.CODEC)
         
 
         // Initialize item registry with custom items
@@ -120,10 +122,19 @@ object PaleolithicEra : ModInitializer {
 
         // Detect vanilla campfire lighting (e.g., flint and steel)
         UseBlockCallback.EVENT.register(UseBlockCallback { player, world, hand, hitResult ->
+            val pos = hitResult.blockPos
+            val state = world.getBlockState(pos)
+            val item = player.getStackInHand(hand).item
+
+            // The crude campfire is intentionally lit only by completing the fire-drill use action.
+            // CampfireBlock's vanilla interaction would otherwise let flint and fire charges bypass it.
+            if (state.isOf(ModBlocks.CRUDE_CAMPFIRE) &&
+                (item is FlintAndSteelItem || item is FireChargeItem)
+            ) {
+                return@UseBlockCallback ActionResult.FAIL
+            }
+
             if (!world.isClient) {
-                val pos = hitResult.blockPos
-                val state = world.getBlockState(pos)
-                val item = player.getStackInHand(hand).item
                 if (state.block is CampfireBlock && !state.get(Properties.LIT)) {
                     if (item is FlintAndSteelItem || item is FireChargeItem) {
                         WorldProgress.markCampfireLit(world as ServerWorld)

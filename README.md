@@ -211,6 +211,9 @@ The test suite is designed to work in CI environments:
 ## Developer Notes
 - **Mod ID:** `paleolithic-era`
 - **Language/Stack:** Fabric + Kotlin
+- **Java:** JDK 21 is selected for both the Gradle daemon and compilation. Install any JDK 21 distribution and
+  run builds through `./gradlew` (`gradlew.bat` on Windows); Gradle's checked-in daemon criteria will locate it
+  even if `JAVA_HOME` points to a newer JDK.
 - **Entrypoints:** main, client, and datagen are registered.
 - **Data:** Loot tables and recipe providers are in place for plants (elderberries/yarrow) and early items.
 - **Worldgen hooks:** Biome modifications register plant features and entity spawns.

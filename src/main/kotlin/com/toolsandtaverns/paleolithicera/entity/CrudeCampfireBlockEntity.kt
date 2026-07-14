@@ -363,13 +363,18 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
             WorldProgress.markCampfireLit(world)
             var bl = false
 
-            if (blockEntity.burnTicksRemaining > 0) {
-                blockEntity.burnTicksRemaining--
+            if (blockEntity.burnTicksRemaining <= 0) {
+                world.setBlockState(pos, state.with(CampfireBlock.LIT, false), 3)
+                return
+            }
 
-                if (blockEntity.burnTicksRemaining == 0) {
-                    world.setBlockState(pos, state.with(CampfireBlock.LIT, false), 3)
-                    return
-                }
+            blockEntity.burnTicksRemaining--
+            if (world.time % 20L == 0L) {
+                blockEntity.markDirty()
+            }
+            if (blockEntity.burnTicksRemaining == 0) {
+                world.setBlockState(pos, state.with(CampfireBlock.LIT, false), 3)
+                return
             }
 
 

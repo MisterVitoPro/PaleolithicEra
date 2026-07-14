@@ -12,7 +12,11 @@ import net.minecraft.item.Items
 import net.minecraft.util.ActionResult
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
+import net.minecraft.util.math.random.Random
 import net.minecraft.util.shape.VoxelShape
+import net.minecraft.world.WorldView
+import net.minecraft.world.tick.ScheduledTickView
 
 /**
  * Invisible top half of the Effigy, used for tall interaction and selection.
@@ -40,6 +44,26 @@ class EffigyOfProtectionTopBlock(settings: Settings) : Block(settings) {
         context: net.minecraft.block.ShapeContext
     ): VoxelShape {
         return UPPER_SHAPE
+    }
+
+    override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean =
+        world.getBlockState(pos.down()).isOf(ModBlocks.EFFIGY_OF_PROTECTION)
+
+    override fun getStateForNeighborUpdate(
+        state: BlockState,
+        world: WorldView,
+        tickView: ScheduledTickView?,
+        pos: BlockPos,
+        direction: Direction?,
+        neighborPos: BlockPos?,
+        neighborState: BlockState?,
+        random: Random?
+    ): BlockState? {
+        return if (direction == Direction.DOWN && !canPlaceAt(state, world, pos)) {
+            net.minecraft.block.Blocks.AIR.defaultState
+        } else {
+            super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random)
+        }
     }
 
     override fun onUse(
@@ -84,7 +108,7 @@ class EffigyOfProtectionTopBlock(settings: Settings) : Block(settings) {
             val below = pos.down()
             val st = world.getBlockState(below)
             if (st.isOf(ModBlocks.EFFIGY_OF_PROTECTION)) {
-                world.breakBlock(below, !player.shouldCancelInteraction(), player)
+                world.breakBlock(below, !player.isCreative, player)
             }
         }
         return super.onBreak(world, pos, state, player)

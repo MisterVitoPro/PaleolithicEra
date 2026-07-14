@@ -91,7 +91,6 @@ class KnappingStationScreen(
      * @param mouseY Current mouse Y position
      */
     override fun drawForeground(context: DrawContext, mouseX: Int, mouseY: Int) {
-        super.drawForeground(context, mouseX, mouseY)
         // Draw the title at the top center (dark gray color)
         context.drawText(textRenderer, title, titleX, titleY, 0x404040, false)
         // Draw the player inventory label above the inventory slots

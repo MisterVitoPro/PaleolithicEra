@@ -15,14 +15,9 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.stat.Stats
-import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
-import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.item.consume.UseAction
-import net.minecraft.component.type.TooltipDisplayComponent
-import net.minecraft.item.tooltip.TooltipType
-import java.util.function.Consumer
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
 import net.minecraft.entity.Entity
@@ -130,17 +125,5 @@ class FilledWaterSackItem(settings: Settings) : Item(settings) {
 
     override fun getUseAction(stack: ItemStack): UseAction {
         return UseAction.DRINK
-    }
-
-    @Deprecated("Overrides a deprecated method", level = DeprecationLevel.HIDDEN)
-    override fun appendTooltip(
-        stack: ItemStack,
-        context: TooltipContext,
-        displayComponent: TooltipDisplayComponent,
-        textConsumer: Consumer<Text>,
-        type: TooltipType
-    ) {
-        textConsumer.accept(Text.translatable("tooltip.paleolithic-era.filled_water_sack").formatted(Formatting.GRAY))
-        super.appendTooltip(stack, context, displayComponent, textConsumer, type)
     }
 }

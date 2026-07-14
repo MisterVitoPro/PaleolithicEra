@@ -70,9 +70,8 @@ class HideDryerBlockEntity(
         val input = inventory.getStack(0)
         val output = inventory.getStack(1)
 
-        // Stop and reset if raining and dryer is exposed
+        // Pause while exposed to rain. Progress resumes once conditions improve.
         if (world.isRaining && world.isSkyVisible(pos)) {
-            progress = 0f
             return
         }
 
@@ -81,6 +80,9 @@ class HideDryerBlockEntity(
         ) {
             val dryingSpeed = if (world.isDay) 1.0f else 0.25f
             progress += dryingSpeed
+            if (world.time % 20L == 0L) {
+                markDirty()
+            }
 
             if (progress >= DRYING_DURATION_TICKS) {
                 input.decrement(1)
@@ -92,8 +94,9 @@ class HideDryerBlockEntity(
                 progress = 0f
                 markDirty()
             }
-        } else {
+        } else if (progress != 0f) {
             progress = 0f
+            markDirty()
         }
     }
 
@@ -112,7 +115,12 @@ class HideDryerBlockEntity(
      * This minimal inventory reflects the straightforward nature of the drying process,
      * which transforms a single input resource into a processed version without additional ingredients.
      */
-    val inventory = SimpleInventory(2)
+    val inventory = object : SimpleInventory(2) {
+        override fun markDirty() {
+            super.markDirty()
+            this@HideDryerBlockEntity.markDirty()
+        }
+    }
 
     /**
      * Property delegate that exposes the drying progress to the screen handler system.

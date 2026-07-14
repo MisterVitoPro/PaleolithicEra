@@ -72,6 +72,7 @@ class ModBlockTagProvider(
 
         valueLookupBuilder(ModTags.Blocks.REQUIRES_SHOVEL)
             .addOptionalTag(BlockTags.DIRT)
+            .add(ModBlocks.GROUND_STORAGE)
 
 
         valueLookupBuilder(BlockTags.SWORD_EFFICIENT)
@@ -81,6 +82,10 @@ class ModBlockTagProvider(
         valueLookupBuilder(BlockTags.AXE_MINEABLE)
             .add(ModBlocks.BUNDLE_OF_STICKS)
             .add(ModBlocks.EFFIGY_OF_PROTECTION)
+
+        // Shovel mineable for ground storage (dirt-based block)
+        valueLookupBuilder(BlockTags.SHOVEL_MINEABLE)
+            .add(ModBlocks.GROUND_STORAGE)
 
     }
 

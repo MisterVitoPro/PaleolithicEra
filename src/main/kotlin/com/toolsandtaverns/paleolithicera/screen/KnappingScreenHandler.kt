@@ -2,10 +2,12 @@ package com.toolsandtaverns.paleolithicera.screen
 
 import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
+import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.slot.Slot
 import net.minecraft.util.math.BlockPos
 
@@ -20,6 +22,7 @@ class KnappingScreenHandler(
 ) : ScreenHandler(ModScreenHandlers.KNAPPING, syncId) {
 
     private val inventory = blockEntity.getInventory()
+    private val context = ScreenHandlerContext.create(playerInventory.player.world, blockEntity.pos)
 
     constructor(syncId: Int, inventory: PlayerInventory, pos: BlockPos) : this(
         syncId,
@@ -54,7 +57,7 @@ class KnappingScreenHandler(
         }
     }
 
-    override fun canUse(player: PlayerEntity): Boolean = true
+    override fun canUse(player: PlayerEntity): Boolean = canUse(context, player, ModBlocks.KNAPPING_STATION)
 
     override fun quickMove(player: PlayerEntity, index: Int): ItemStack {
         val slot = slots.getOrNull(index) ?: return ItemStack.EMPTY

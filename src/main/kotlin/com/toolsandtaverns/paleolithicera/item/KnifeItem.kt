@@ -142,8 +142,8 @@ class KnifeItem(
      * @return true if the stripping attempt should be canceled, false otherwise
      */
     private fun shouldCancelStripAttempt(context: ItemUsageContext): Boolean {
-        val playerEntity: PlayerEntity? = context.player
-        return context.hand == Hand.MAIN_HAND && playerEntity?.offHandStack!!
+        val playerEntity = context.player ?: return false
+        return context.hand == Hand.MAIN_HAND && playerEntity.offHandStack
             .contains(DataComponentTypes.BLOCKS_ATTACKS) && !playerEntity.shouldCancelInteraction()
     }
 

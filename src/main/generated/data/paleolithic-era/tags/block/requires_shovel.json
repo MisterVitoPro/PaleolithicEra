@@ -3,6 +3,7 @@
     {
       "id": "#minecraft:dirt",
       "required": false
-    }
+    },
+    "paleolithic-era:ground_storage"
   ]
 }

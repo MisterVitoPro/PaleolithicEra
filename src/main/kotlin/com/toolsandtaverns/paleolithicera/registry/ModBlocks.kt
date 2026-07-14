@@ -8,6 +8,7 @@ import com.toolsandtaverns.paleolithicera.block.EffigyOfProtectionTopBlock
 import com.toolsandtaverns.paleolithicera.block.FoodDryerBlock
 import com.toolsandtaverns.paleolithicera.block.FoodDryerTopBlock
 import com.toolsandtaverns.paleolithicera.block.HideDryerBlock
+import com.toolsandtaverns.paleolithicera.block.GroundStorageBlock
 import com.toolsandtaverns.paleolithicera.block.KnappingStationBlock
 import com.toolsandtaverns.paleolithicera.block.ModSaplingGenerator
 import com.toolsandtaverns.paleolithicera.block.WillowLeafVinesBlock
@@ -159,6 +160,15 @@ object ModBlocks {
         "food_dryer_top"
     ) { settings -> FoodDryerTopBlock(settings.nonOpaque()) }
 
+    val GROUND_STORAGE: Block = register(
+        "ground_storage",
+        ::GroundStorageBlock,
+        AbstractBlock.Settings.create()
+            .mapColor(MapColor.DIRT_BROWN)
+            .strength(0.5f)
+            .sounds(BlockSoundGroup.GRAVEL)
+    )
+
     fun initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL)
             .register { entries: FabricItemGroupEntries ->
@@ -168,6 +178,7 @@ object ModBlocks {
                 entries.add(BUNDLE_OF_STICKS)
                 entries.add(EFFIGY_OF_PROTECTION)
                 entries.add(FOOD_DRYER)
+                entries.add(GROUND_STORAGE)
             }
     }
 

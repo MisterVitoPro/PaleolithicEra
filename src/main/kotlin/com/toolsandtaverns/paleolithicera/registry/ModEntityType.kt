@@ -9,6 +9,7 @@ import com.toolsandtaverns.paleolithicera.entity.HideDryerBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.IbexEntity
 import com.toolsandtaverns.paleolithicera.entity.KnappingStationBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.PebbleEntity
+import com.toolsandtaverns.paleolithicera.entity.GroundStorageBlockEntity
 import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -40,6 +41,8 @@ object ModEntityType {
     lateinit var EFFIGY_OF_PROTECTION_BLOCK_ENTITY: BlockEntityType<EffigyOfProtectionEntity>
         private set
     lateinit var FOOD_DRYER_BLOCK_ENTITY: BlockEntityType<FoodDryerBlockEntity>
+        private set
+    lateinit var GROUND_STORAGE_BLOCK_ENTITY: BlockEntityType<com.toolsandtaverns.paleolithicera.entity.GroundStorageBlockEntity>
         private set
 
     val BOAR_ENTITY: EntityType<BoarEntity> by lazy {
@@ -116,6 +119,12 @@ object ModEntityType {
             "food_dryer",
             ::FoodDryerBlockEntity,
             ModBlocks.FOOD_DRYER
+        )
+
+        GROUND_STORAGE_BLOCK_ENTITY = register(
+            "ground_storage",
+            ::GroundStorageBlockEntity,
+            ModBlocks.GROUND_STORAGE
         )
 
     }

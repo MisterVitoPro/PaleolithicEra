@@ -59,7 +59,6 @@ class HideDryerScreen(
     }
 
     override fun drawForeground(context: DrawContext, mouseX: Int, mouseY: Int) {
-        super.drawForeground(context, mouseX, mouseY)
         context.drawText(textRenderer, title, titleX, titleY, Colors.DARK_GRAY, false)
         context.drawText(textRenderer, playerInventory.displayName, 8, backgroundHeight - 94, 0x404040, false)
     }

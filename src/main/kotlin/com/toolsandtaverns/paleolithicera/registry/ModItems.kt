@@ -82,9 +82,12 @@ object ModItems {
         "bone_spear",
         { settings: Item.Settings ->
             SpearItem(
-                settings.attributeModifiers(SpearItem.createAttributeModifiers(ModToolMaterials.BONE_MATERIAL))
+                settings.maxDamage(30)
+                    .attributeModifiers(SpearItem.createAttributeModifiers(ModToolMaterials.BONE_MATERIAL))
                     .component(DataComponentTypes.TOOL, SpearItem.createToolComponent(ModToolMaterials.BONE_MATERIAL))
-                    .enchantable(ModToolMaterials.BONE_MATERIAL.enchantmentValue()), ::BoneSpearEntity
+                    .enchantable(ModToolMaterials.BONE_MATERIAL.enchantmentValue())
+                    .component(DataComponentTypes.WEAPON, WeaponComponent(1)),
+                ::BoneSpearEntity
             )
         })
     val BONE_SHARD: Item = register("bone_shard", { settings: Item.Settings -> Item(settings) })
