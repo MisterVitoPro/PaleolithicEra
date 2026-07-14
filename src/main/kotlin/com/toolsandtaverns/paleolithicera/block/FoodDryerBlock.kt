@@ -84,7 +84,9 @@ class FoodDryerBlock(settings: Settings) : BlockWithEntity(settings) {
 
     override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
         val above = pos.up()
-        return super.canPlaceAt(state, world, pos) && world.getBlockState(above).isAir
+        val aboveState = world.getBlockState(above)
+        return super.canPlaceAt(state, world, pos) &&
+            (aboveState.isAir || aboveState.isOf(ModBlocks.FOOD_DRYER_TOP))
     }
 
     override fun <T : BlockEntity> getTicker(

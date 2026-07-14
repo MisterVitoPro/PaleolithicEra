@@ -1,6 +1,6 @@
 package com.toolsandtaverns.paleolithicera.item
 
-import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
+import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiPacket
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.component.type.TooltipDisplayComponent
 import net.minecraft.entity.player.PlayerEntity
@@ -41,7 +41,8 @@ open class HarpoonItem(settings: Settings) : Item(settings) {
                 val blockPos = (hitResult as BlockHitResult).blockPos
                 if (isValidWaterPatch(world, blockPos)) {
                     if (user is ServerPlayerEntity) {
-                        ServerPlayNetworking.send(user, OpenHarpoonGuiPayload)
+                        val payload = OpenHarpoonGuiPacket.beginAttempt(user, this, hand)
+                        ServerPlayNetworking.send(user, payload)
                     }
                     return ActionResult.SUCCESS
                 }

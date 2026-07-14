@@ -1,8 +1,8 @@
 package com.toolsandtaverns.paleolithicera.render
 
-import SpearRenderState
 import com.toolsandtaverns.paleolithicera.entity.BoneSpearEntity
 import com.toolsandtaverns.paleolithicera.model.BoneSpearProjectileModel
+import com.toolsandtaverns.paleolithicera.render.state.SpearRenderState
 import com.toolsandtaverns.paleolithicera.util.id
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider
@@ -73,7 +73,7 @@ class BoneSpearRenderer(
 
         val vertexConsumer = ItemRenderer.getItemGlintConsumer(
             vertexConsumerProvider,
-            this.model.getLayer(id("textures/entity/wooden_spear.png")), //TODO need to change when getting bone spear model
+            this.model.getLayer(id("textures/entity/bone_spear.png")),
             false,
             false
         )

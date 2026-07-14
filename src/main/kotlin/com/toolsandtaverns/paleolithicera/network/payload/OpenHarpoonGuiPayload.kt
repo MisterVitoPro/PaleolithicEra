@@ -7,13 +7,32 @@ import net.minecraft.network.packet.CustomPayload
 import net.minecraft.network.packet.CustomPayload.Id
 import net.minecraft.network.packet.CustomPayload.Type
 
-object OpenHarpoonGuiPayload : CustomPayload {
-    val ID = id("open_harpoon_gui")
+data class OpenHarpoonGuiPayload(
+    val attemptId: Long,
+    val startTick: Long,
+    val targetStartStep: Int
+) : CustomPayload {
+    override fun getId(): Id<OpenHarpoonGuiPayload> = ID
 
-    override fun getId(): Id<OpenHarpoonGuiPayload> =
-        Id(ID)
+    companion object {
+        val ID: Id<OpenHarpoonGuiPayload> = Id(id("open_harpoon_gui"))
 
-    val TYPE: Type<PacketByteBuf, OpenHarpoonGuiPayload> =
-        Type(getId(), PacketCodec.unit(this))
+        val CODEC: PacketCodec<PacketByteBuf, OpenHarpoonGuiPayload> =
+            PacketCodec.of(
+                { payload, buf ->
+                    buf.writeLong(payload.attemptId)
+                    buf.writeLong(payload.startTick)
+                    buf.writeVarInt(payload.targetStartStep)
+                },
+                { buf ->
+                    OpenHarpoonGuiPayload(
+                        buf.readLong(),
+                        buf.readLong(),
+                        buf.readVarInt()
+                    )
+                }
+            )
 
+        val TYPE: Type<PacketByteBuf, OpenHarpoonGuiPayload> = Type(ID, CODEC)
+    }
 }

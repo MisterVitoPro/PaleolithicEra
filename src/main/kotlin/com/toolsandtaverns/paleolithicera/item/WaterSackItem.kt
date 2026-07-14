@@ -3,7 +3,6 @@ package com.toolsandtaverns.paleolithicera.item
 import com.toolsandtaverns.paleolithicera.registry.ModItems
 import net.minecraft.advancement.criterion.Criteria
 import net.minecraft.component.type.PotionContentsComponent
-import net.minecraft.component.type.TooltipDisplayComponent
 import net.minecraft.entity.AreaEffectCloudEntity
 import net.minecraft.entity.Entity
 import net.minecraft.entity.boss.dragon.EnderDragonEntity
@@ -12,22 +11,18 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemUsage
 import net.minecraft.item.Items
-import net.minecraft.item.tooltip.TooltipType
 import net.minecraft.potion.Potions
 import net.minecraft.registry.tag.FluidTags
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.stat.Stats
-import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
-import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.HitResult
 import net.minecraft.world.RaycastContext
 import net.minecraft.world.World
 import net.minecraft.world.event.GameEvent
-import java.util.function.Consumer
 import java.util.function.Predicate
 
 class WaterSackItem(settings: Settings) : Item(settings) {
@@ -99,17 +94,5 @@ class WaterSackItem(settings: Settings) : Item(settings) {
     private fun fill(stack: ItemStack?, player: PlayerEntity, outputStack: ItemStack?): ItemStack? {
         player.incrementStat(Stats.USED.getOrCreateStat(this))
         return ItemUsage.exchangeStack(stack, player, outputStack)
-    }
-
-    @Deprecated("Overrides a deprecated method", level = DeprecationLevel.HIDDEN)
-    override fun appendTooltip(
-        stack: ItemStack,
-        context: TooltipContext,
-        displayComponent: TooltipDisplayComponent,
-        textConsumer: Consumer<Text>,
-        type: TooltipType
-    ) {
-        textConsumer.accept(Text.translatable("tooltip.paleolithic-era.water_sack").formatted(Formatting.GRAY))
-        super.appendTooltip(stack, context, displayComponent, textConsumer, type)
     }
 }

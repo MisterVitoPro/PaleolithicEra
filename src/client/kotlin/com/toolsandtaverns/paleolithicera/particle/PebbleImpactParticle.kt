@@ -23,6 +23,9 @@ class PebbleImpactParticle(
     velocityZ: Double
 ) : SpriteBillboardParticle(world, x, y, z, velocityX, velocityY, velocityZ) {
 
+    private val initialScale: Float
+    private val initialAlpha: Float
+
     companion object {
         // Color range for stone debris - browns and grays
         private const val MIN_RED = 0.4f
@@ -55,6 +58,8 @@ class PebbleImpactParticle(
         
         // Set initial alpha with slight transparency
         this.alpha = 0.8f + world.random.nextFloat() * 0.2f
+        initialScale = scale
+        initialAlpha = alpha
         
         // Apply gravity to make particles fall naturally
         this.gravityStrength = GRAVITY_MODIFIER
@@ -66,7 +71,7 @@ class PebbleImpactParticle(
     }
 
     override fun getType(): ParticleTextureSheet {
-        return ParticleTextureSheet.PARTICLE_SHEET_OPAQUE
+        return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT
     }
 
     override fun tick() {
@@ -79,10 +84,10 @@ class PebbleImpactParticle(
         
         // Fade out over lifetime
         val lifeProgress = this.age.toFloat() / this.maxAge.toFloat()
-        this.alpha = MathHelper.lerp(lifeProgress, 0.8f, 0.0f)
+        this.alpha = MathHelper.lerp(lifeProgress, initialAlpha, 0.0f)
         
         // Slightly shrink particles over time
-        this.scale = MathHelper.lerp(lifeProgress, scale, scale * 0.5f)
+        this.scale = MathHelper.lerp(lifeProgress, initialScale, initialScale * 0.5f)
     }
 
     /**

@@ -14,6 +14,10 @@ import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
 import net.minecraft.world.World
+import net.minecraft.world.WorldView
+import net.minecraft.world.tick.ScheduledTickView
+import net.minecraft.util.math.Direction
+import net.minecraft.util.math.random.Random
 
 /**
  * Top half of the Food Dryer structure.
@@ -47,6 +51,26 @@ class FoodDryerTopBlock(settings: Settings) : Block(settings) {
         return SHAPE
     }
 
+    override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean =
+        world.getBlockState(pos.down()).isOf(ModBlocks.FOOD_DRYER)
+
+    override fun getStateForNeighborUpdate(
+        state: BlockState,
+        world: WorldView,
+        tickView: ScheduledTickView?,
+        pos: BlockPos,
+        direction: Direction?,
+        neighborPos: BlockPos?,
+        neighborState: BlockState?,
+        random: Random?
+    ): BlockState? {
+        return if (direction == Direction.DOWN && !canPlaceAt(state, world, pos)) {
+            net.minecraft.block.Blocks.AIR.defaultState
+        } else {
+            super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random)
+        }
+    }
+
     override fun onUse(
         state: BlockState,
         world: World,
@@ -76,7 +100,7 @@ class FoodDryerTopBlock(settings: Settings) : Block(settings) {
             val below = pos.down()
             val belowState = world.getBlockState(below)
             if (belowState.isOf(ModBlocks.FOOD_DRYER)) {
-                world.breakBlock(below, !player.shouldCancelInteraction(), player)
+                world.breakBlock(below, !player.isCreative, player)
             }
         }
         return super.onBreak(world, pos, state, player)

@@ -50,6 +50,9 @@ class EffigyOfProtectionEntity(pos: BlockPos, state: BlockState) :
 
         if (activeTicks > 0) {
             activeTicks--
+            if (world.time % 20L == 0L) {
+                markDirty()
+            }
             applyProtection(world)
             if (world.time % 10L == 0L) {
                 spawnRingParticles(world)

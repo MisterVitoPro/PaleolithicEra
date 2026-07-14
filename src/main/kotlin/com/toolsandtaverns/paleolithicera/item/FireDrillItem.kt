@@ -97,12 +97,12 @@ class FireDrillItem(settings: Settings) : Item(settings) {
                 blockEntity?.startBurnTimer()
 
                 // Grant the advancement for lighting a crude campfire (server-side only)
-                if (!world.isClient && user is ServerPlayerEntity) {
+                if (!world.isClient && user is ServerPlayerEntity && state.isOf(ModBlocks.CRUDE_CAMPFIRE)) {
                     ModCriteria.LIT_CRUDE_CAMPFIRE.trigger(user)
                 }
 
                 // Damage the fire drill item by 1 durability point
-                stack.damage(1, user, Hand.MAIN_HAND)
+                stack.damage(1, user, user.activeHand)
             }
         }
 

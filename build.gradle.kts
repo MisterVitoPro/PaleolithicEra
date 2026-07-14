@@ -1,6 +1,7 @@
 import net.fabricmc.loom.task.RemapJarTask
 import net.fabricmc.loom.task.RemapSourcesJarTask
 import org.gradle.kotlin.dsl.named
+import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.time.Duration
 
@@ -101,7 +102,7 @@ tasks {
 				artifact(remapJar) {
 					builtBy(remapJar)
 				}
-				artifact(kotlinSourcesJar) {
+				artifact(remapSourcesJar) {
 					builtBy(remapSourcesJar)
 				}
 			}
@@ -116,9 +117,6 @@ tasks {
 	
 	test {
 		useJUnitPlatform()
-		
-		// Configure tagged test execution
-		systemProperty("junit.jupiter.conditions.deactivate", "org.junit.*DisabledCondition")
 		
 		// Configure test output
 		testLogging {
@@ -140,6 +138,8 @@ tasks {
 	register<Test>("testP0") {
 		description = "Runs P0 (critical) tests only"
 		group = "verification"
+		testClassesDirs = sourceSets["test"].output.classesDirs
+		classpath = sourceSets["test"].runtimeClasspath
 		useJUnitPlatform {
 			includeTags("p0")
 		}
@@ -152,6 +152,8 @@ tasks {
 	register<Test>("testP1") {
 		description = "Runs P1 (important) tests only"
 		group = "verification"
+		testClassesDirs = sourceSets["test"].output.classesDirs
+		classpath = sourceSets["test"].runtimeClasspath
 		useJUnitPlatform {
 			includeTags("p1")
 		}
@@ -164,6 +166,8 @@ tasks {
 	register<Test>("testP2") {
 		description = "Runs P2 (nice-to-have) tests only"  
 		group = "verification"
+		testClassesDirs = sourceSets["test"].output.classesDirs
+		classpath = sourceSets["test"].runtimeClasspath
 		useJUnitPlatform {
 			includeTags("p2")
 		}
@@ -176,6 +180,8 @@ tasks {
 	register<Test>("testIntegration") {
 		description = "Runs integration tests only"
 		group = "verification" 
+		testClassesDirs = sourceSets["test"].output.classesDirs
+		classpath = sourceSets["test"].runtimeClasspath
 		useJUnitPlatform {
 			includeTags("integration")
 		}
@@ -188,6 +194,8 @@ tasks {
 	register<Test>("testUnit") {
 		description = "Runs unit tests only"
 		group = "verification"
+		testClassesDirs = sourceSets["test"].output.classesDirs
+		classpath = sourceSets["test"].runtimeClasspath
 		useJUnitPlatform {
 			includeTags("unit")
 		}
@@ -200,6 +208,8 @@ tasks {
 	register<Test>("testPerformance") {
 		description = "Runs performance tests only"
 		group = "verification"
+		testClassesDirs = sourceSets["test"].output.classesDirs
+		classpath = sourceSets["test"].runtimeClasspath
 		useJUnitPlatform {
 			includeTags("performance")
 		}
@@ -213,6 +223,8 @@ tasks {
 	register<Test>("testQuick") {
 		description = "Runs quick tests (P0 + unit tests)"
 		group = "verification"
+		testClassesDirs = sourceSets["test"].output.classesDirs
+		classpath = sourceSets["test"].runtimeClasspath
 		useJUnitPlatform {
 			includeTags("p0", "unit")
 		}
@@ -232,6 +244,10 @@ tasks {
 }
 
 java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+
 	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
 	// if it is present.
 	// If you remove this line, sources will not be generated.

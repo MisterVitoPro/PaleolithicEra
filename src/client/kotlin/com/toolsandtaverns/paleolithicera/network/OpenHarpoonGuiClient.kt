@@ -17,14 +17,13 @@ object OpenHarpoonGuiClient {
     /**
      * Sends the result of a fishing attempt to the server.
      *
-     * Called when the player completes the fishing minigame (by pressing space),
-     * sending whether they succeeded or failed to the server for reward processing.
+     * Called when the player strikes in the fishing minigame. The server determines
+     * success from its own attempt parameters and receipt time.
      *
-     * @param success Whether the player successfully caught a fish
+     * @param attemptId The identifier issued by the server for this attempt
      */
-    fun sendResult(success: Boolean) {
-        // Send a packet to the server containing the success/failure status
-        ClientPlayNetworking.send(HarpoonResultPayload(success))
+    fun sendResult(attemptId: Long) {
+        ClientPlayNetworking.send(HarpoonResultPayload(attemptId))
     }
 
     /**
@@ -35,11 +34,11 @@ object OpenHarpoonGuiClient {
      */
     fun register() {
         // Register a handler for the server packet that opens the fishing GUI
-        ClientPlayNetworking.registerGlobalReceiver(OpenHarpoonGuiPayload.getId()) { _, _ ->
+        ClientPlayNetworking.registerGlobalReceiver(OpenHarpoonGuiPayload.ID) { payload, _ ->
             // Execute on the main client thread for thread safety
             MinecraftClient.getInstance().execute {
                 // Open the harpoon fishing minigame screen
-                MinecraftClient.getInstance().setScreen(HarpoonFishingScreen())
+                MinecraftClient.getInstance().setScreen(HarpoonFishingScreen(payload))
             }
         }
     }

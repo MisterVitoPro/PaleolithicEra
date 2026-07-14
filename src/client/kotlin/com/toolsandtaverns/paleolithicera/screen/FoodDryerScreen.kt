@@ -87,8 +87,6 @@ class FoodDryerScreen(
     }
 
     override fun drawForeground(context: DrawContext, mouseX: Int, mouseY: Int) {
-        super.drawForeground(context, mouseX, mouseY)
-        
         // Draw title
         context.drawText(
             textRenderer, 

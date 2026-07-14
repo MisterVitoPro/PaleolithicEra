@@ -1,8 +1,8 @@
 package com.toolsandtaverns.paleolithicera.render
 
-import SpearRenderState
 import com.toolsandtaverns.paleolithicera.entity.WoodenSpearEntity
 import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
+import com.toolsandtaverns.paleolithicera.render.state.SpearRenderState
 import com.toolsandtaverns.paleolithicera.util.id
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.VertexConsumerProvider

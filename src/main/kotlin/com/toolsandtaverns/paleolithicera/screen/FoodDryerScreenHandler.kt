@@ -4,12 +4,14 @@ import com.toolsandtaverns.paleolithicera.entity.FoodDryerBlockEntity
 import com.toolsandtaverns.paleolithicera.recipe.FoodDryingRecipe
 import com.toolsandtaverns.paleolithicera.recipe.FoodDryingRecipeInput
 import com.toolsandtaverns.paleolithicera.registry.ModRecipes
+import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModScreenHandlers
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.slot.Slot
 import net.minecraft.util.math.BlockPos
 
@@ -28,6 +30,7 @@ class FoodDryerScreenHandler(
 
     private val entity = playerInventory.player.world.getBlockEntity(pos) as FoodDryerBlockEntity
     private val inventory: SimpleInventory = entity.inventory
+    private val context = ScreenHandlerContext.create(playerInventory.player.world, pos)
 
     init {
         checkSize(inventory, FoodDryerBlockEntity.SLOT_COUNT)
@@ -145,7 +148,7 @@ class FoodDryerScreenHandler(
         return match.isPresent
     }
 
-    override fun canUse(player: PlayerEntity): Boolean = inventory.canPlayerUse(player)
+    override fun canUse(player: PlayerEntity): Boolean = canUse(context, player, ModBlocks.FOOD_DRYER)
 
     /**
      * Returns scaled progress for a specific slot for GUI rendering.

@@ -4,12 +4,10 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
 import net.fabricmc.fabric.api.event.player.UseItemCallback
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Hand
 import net.minecraft.util.ActionResult
-import net.minecraft.world.World
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
@@ -24,12 +22,18 @@ object HotbarReplacementHandler {
 
     // Track recent replacement actions to prevent infinite loops
     private val recentReplacements = ConcurrentHashMap<UUID, MutableSet<ReplacementAction>>()
+
+    // Checks are driven by server ticks. Re-submitting a Runnable to MinecraftServer.execute
+    // can execute it again in the same tick and spin forever while waiting for time to advance.
+    private val pendingChecks = ConcurrentHashMap<PendingCheckKey, PendingReplacementCheck>()
     
     // Cooldown period in ticks to prevent rapid successive replacements
     private const val REPLACEMENT_COOLDOWN_TICKS = 5L
     
     // Server tick counter for timestamp tracking
     private var serverTicks = 0L
+
+    private const val MAX_USE_CHECK_TICKS = 1200L
     
     /**
      * Data class to track replacement actions and prevent loops.
@@ -40,18 +44,29 @@ object HotbarReplacementHandler {
         val timestamp: Long
     )
 
+    private data class PendingCheckKey(val playerId: UUID, val slotIndex: Int)
+
+    private data class PendingReplacementCheck(
+        val player: ServerPlayerEntity,
+        val slotIndex: Int,
+        val originalStack: ItemStack,
+        val checkAt: Long,
+        val expiresAt: Long
+    )
+
     /**
      * Registers all event handlers for hotbar replacement functionality.
      */
     fun register() {
         // Monitor server ticks for cleanup
-        ServerTickEvents.END_SERVER_TICK.register { server ->
+        ServerTickEvents.END_SERVER_TICK.register {
             serverTicks++
             cleanupOldReplacements()
+            processPendingChecks()
         }
 
         // Handle tool breaking during block mining
-        PlayerBlockBreakEvents.BEFORE.register(PlayerBlockBreakEvents.Before { world, player, pos, state, blockEntity ->
+        PlayerBlockBreakEvents.BEFORE.register(PlayerBlockBreakEvents.Before { world, player, _, _, _ ->
             if (!world.isClient && player is ServerPlayerEntity) {
                 val heldStack = player.mainHandStack
                 
@@ -60,10 +75,8 @@ object HotbarReplacementHandler {
                     val originalStack = heldStack.copy()
                     val slotIndex = player.inventory.selectedSlot
                     
-                    // Schedule replacement for after the tool breaks
-                    world.server?.execute {
-                        checkAndReplaceItem(player, slotIndex, originalStack)
-                    }
+                    // Check on the next tick, after durability and inventory state are updated.
+                    scheduleDelayedCheck(player, slotIndex, originalStack, 1L)
                 }
             }
             true // Allow the block break to continue
@@ -86,7 +99,7 @@ object HotbarReplacementHandler {
                     }
                     
                     // Schedule check for after the item is used with appropriate delay
-                    scheduleDelayedCheck(world, player, slotIndex, originalStack, 1L)
+                    scheduleDelayedCheck(player, slotIndex, originalStack, 1L)
                 }
             }
             ActionResult.PASS
@@ -94,9 +107,10 @@ object HotbarReplacementHandler {
 
 
         // Clean up tracking when players disconnect
-        ServerPlayConnectionEvents.DISCONNECT.register { handler, server ->
+        ServerPlayConnectionEvents.DISCONNECT.register { handler, _ ->
             val playerId = handler.player.uuid
             recentReplacements.remove(playerId)
+            pendingChecks.keys.removeIf { it.playerId == playerId }
         }
     }
 
@@ -108,6 +122,7 @@ object HotbarReplacementHandler {
         recentReplacements.values.forEach { playerReplacements ->
             playerReplacements.removeIf { it.timestamp < cutoffTime }
         }
+        recentReplacements.entries.removeIf { it.value.isEmpty() }
     }
 
     /**
@@ -136,38 +151,57 @@ object HotbarReplacementHandler {
      * Schedules a delayed check for item replacement, useful for items that 
      * don't immediately update inventory state.
      */
-    private fun scheduleDelayedCheck(world: World, player: ServerPlayerEntity, slotIndex: Int, originalStack: ItemStack, ticksDelay: Long) {
-        // Schedule the check to happen after specified delay
-        val targetTick = serverTicks + ticksDelay
-        
-        // Register a one-time tick event
-        val checkRunnable = object : Runnable {
-            override fun run() {
-                if (serverTicks >= targetTick) {
-                    // Perform the replacement check
-                    val currentStack = when (slotIndex) {
-                        40 -> player.offHandStack
-                        in 0..8 -> player.inventory.getStack(slotIndex)
-                        else -> ItemStack.EMPTY
-                    }
-                    
-                    // Check if replacement is needed
-                    val needsReplacement = currentStack.isEmpty || 
-                        (currentStack.count < originalStack.count) ||
-                        (currentStack.isDamageable && currentStack.damage > originalStack.damage) ||
-                        currentStack.item != originalStack.item
-                    
-                    if (needsReplacement) {
-                        checkAndReplaceItem(player, slotIndex, originalStack)
-                    }
-                } else {
-                    // Reschedule for next tick if not ready yet
-                    world.server?.execute(this)
-                }
+    private fun scheduleDelayedCheck(
+        player: ServerPlayerEntity,
+        slotIndex: Int,
+        originalStack: ItemStack,
+        ticksDelay: Long
+    ) {
+        val checkAt = serverTicks + ticksDelay
+        pendingChecks[PendingCheckKey(player.uuid, slotIndex)] = PendingReplacementCheck(
+            player,
+            slotIndex,
+            originalStack,
+            checkAt,
+            checkAt + MAX_USE_CHECK_TICKS
+        )
+    }
+
+    private fun processPendingChecks() {
+        pendingChecks.entries.removeIf { (_, pending) ->
+            if (serverTicks < pending.checkAt) return@removeIf false
+
+            val player = pending.player
+            if (player.isRemoved) {
+                return@removeIf true
             }
+
+            val currentStack = getStack(player, pending.slotIndex)
+            val stackChanged = currentStack.isEmpty ||
+                currentStack.item != pending.originalStack.item ||
+                currentStack.count < pending.originalStack.count ||
+                (currentStack.isDamageable && currentStack.damage > pending.originalStack.damage)
+
+            if (stackChanged) {
+                checkAndReplaceItem(player, pending.slotIndex, pending.originalStack)
+                return@removeIf true
+            }
+
+            // Food and drink update the inventory only when their use animation finishes.
+            // Keep observing while the same hand is active, but bound the lifetime.
+            val isStillUsingSlot = player.isUsingItem && when (pending.slotIndex) {
+                40 -> player.activeHand == Hand.OFF_HAND
+                in 0..8 -> player.activeHand == Hand.MAIN_HAND && player.inventory.selectedSlot == pending.slotIndex
+                else -> false
+            }
+            !isStillUsingSlot || serverTicks >= pending.expiresAt
         }
-        
-        world.server?.execute(checkRunnable)
+    }
+
+    private fun getStack(player: ServerPlayerEntity, slotIndex: Int): ItemStack = when (slotIndex) {
+        40 -> player.offHandStack
+        in 0..8 -> player.inventory.getStack(slotIndex)
+        else -> ItemStack.EMPTY
     }
 
 

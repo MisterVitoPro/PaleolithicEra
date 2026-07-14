@@ -6,6 +6,7 @@ import net.minecraft.recipe.input.RecipeInput
 class KnapRecipeInput(val input: ItemStack) : RecipeInput {
 
     override fun getStackInSlot(slot: Int): ItemStack {
+        require(slot == 0) { "No item for slot $slot" }
         return input
     }
 

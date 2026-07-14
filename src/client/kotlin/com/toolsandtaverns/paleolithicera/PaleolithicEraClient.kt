@@ -8,7 +8,6 @@ import com.toolsandtaverns.paleolithicera.model.BoneSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.model.IbexModel
 import com.toolsandtaverns.paleolithicera.model.WoodenSpearProjectileModel
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiClient
-import com.toolsandtaverns.paleolithicera.network.payload.OpenHarpoonGuiPayload
 import com.toolsandtaverns.paleolithicera.particle.PebbleImpactParticle
 import com.toolsandtaverns.paleolithicera.particle.StoneDustParticle
 import com.toolsandtaverns.paleolithicera.registry.ModBlocks
@@ -24,12 +23,12 @@ import com.toolsandtaverns.paleolithicera.render.WoodenSpearRenderer
 import com.toolsandtaverns.paleolithicera.screen.FoodDryerScreen
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreen
 import com.toolsandtaverns.paleolithicera.screen.KnappingStationScreen
+import com.toolsandtaverns.paleolithicera.screen.GroundStorageScreen
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry
 import net.minecraft.client.gui.screen.ingame.HandledScreens
 import net.minecraft.client.render.BlockRenderLayer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories
@@ -52,12 +51,6 @@ object PaleolithicEraClient : ClientModInitializer {
      * - Block render layers for blocks with transparency
      */
     override fun onInitializeClient() {
-        // Register the network packet type for opening the harpoon GUI
-        PayloadTypeRegistry.playS2C().register(
-            OpenHarpoonGuiPayload.id,
-            OpenHarpoonGuiPayload.TYPE.codec()
-        )
-
         // Register the custom renderer for the crude campfire block entity
         // This renderer displays cooking items above the campfire
         BlockEntityRendererFactories.register(ModEntityType.CRUDE_CAMPFIRE, ::CrudeCampfireBlockEntityRenderer)
@@ -98,6 +91,7 @@ object PaleolithicEraClient : ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.KNAPPING, ::KnappingStationScreen)
         HandledScreens.register(ModScreenHandlers.HIDE_DRYER, ::HideDryerScreen)
         HandledScreens.register(ModScreenHandlers.FOOD_DRYER, ::FoodDryerScreen)
+        HandledScreens.register(ModScreenHandlers.GROUND_STORAGE, ::GroundStorageScreen)
 
         // Set the render layers for blocks with transparency
         // CUTOUT is used for blocks with binary transparency (fully transparent or fully opaque pixels)
@@ -109,9 +103,11 @@ object PaleolithicEraClient : ClientModInitializer {
         BlockRenderLayerMap.putBlock(ModBlocks.EPHEDRA_PLANT, BlockRenderLayer.CUTOUT)
         BlockRenderLayerMap.putBlock(ModBlocks.SAGEBRUSH_PLANT, BlockRenderLayer.CUTOUT)
         BlockRenderLayerMap.putBlock(ModBlocks.WILD_MINT_PLANT, BlockRenderLayer.CUTOUT)
-        BlockRenderLayerMap.putBlock(ModBlocks.WILD_GARLIC_PLANT, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.WILD_GINGER_PLANT, BlockRenderLayer.CUTOUT)
         BlockRenderLayerMap.putBlock(ModBlocks.WILLOW_SAPLING, BlockRenderLayer.CUTOUT)
         BlockRenderLayerMap.putBlock(ModBlocks.WILLOW_LEAF_VINES, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.WILLOW_LEAVES, BlockRenderLayer.CUTOUT)
+        BlockRenderLayerMap.putBlock(ModBlocks.EFFIGY_OF_PROTECTION, BlockRenderLayer.CUTOUT)
 
         // Register client-side network handlers for the harpoon fishing system
         OpenHarpoonGuiClient.register()

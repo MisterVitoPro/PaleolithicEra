@@ -3,6 +3,7 @@ package com.toolsandtaverns.paleolithicera.registry
 import com.toolsandtaverns.paleolithicera.screen.FoodDryerScreenHandler
 import com.toolsandtaverns.paleolithicera.screen.HideDryerScreenHandler
 import com.toolsandtaverns.paleolithicera.screen.KnappingScreenHandler
+import com.toolsandtaverns.paleolithicera.screen.GroundStorageScreenHandler
 import com.toolsandtaverns.paleolithicera.util.id
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType
 import net.minecraft.registry.Registries
@@ -17,6 +18,8 @@ object ModScreenHandlers {
     lateinit var HIDE_DRYER: ScreenHandlerType<HideDryerScreenHandler>
         private set
     lateinit var FOOD_DRYER: ScreenHandlerType<FoodDryerScreenHandler>
+        private set
+    lateinit var GROUND_STORAGE: ScreenHandlerType<GroundStorageScreenHandler>
         private set
 
     fun initialize() {
@@ -41,6 +44,14 @@ object ModScreenHandlers {
             id("food_dryer"),
             ExtendedScreenHandlerType(
                 { syncId, inventory, pos -> FoodDryerScreenHandler(syncId, inventory, pos) },
+                BlockPos.PACKET_CODEC
+            )
+        )
+        GROUND_STORAGE = Registry.register(
+            Registries.SCREEN_HANDLER,
+            id("ground_storage"),
+            ExtendedScreenHandlerType(
+                { syncId, inventory, pos -> GroundStorageScreenHandler(syncId, inventory, pos) },
                 BlockPos.PACKET_CODEC
             )
         )

@@ -1,3 +1,5 @@
+package com.toolsandtaverns.paleolithicera.model
+
 import net.minecraft.client.render.entity.animation.*
 
 /**
