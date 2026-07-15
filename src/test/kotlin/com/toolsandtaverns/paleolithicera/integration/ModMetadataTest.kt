@@ -58,10 +58,12 @@ class ModMetadataTest {
     @Test
     fun `metadata requires the supported runtime versions`() {
         val dependencies = metadata.getAsJsonObject("depends")
+        val minecraftVersion = requireNotNull(System.getProperty("paleolithic.minecraftVersion"))
+        val loaderVersion = requireNotNull(System.getProperty("paleolithic.loaderVersion"))
 
         assertEquals(">=21", dependencies["java"].asString)
-        assertEquals("~1.21.7", dependencies["minecraft"].asString)
-        assertEquals(">=0.16.14", dependencies["fabricloader"].asString)
+        assertEquals("=$minecraftVersion", dependencies["minecraft"].asString)
+        assertEquals(">=$loaderVersion", dependencies["fabricloader"].asString)
         assertFalse(metadata["version"].asString.contains('$'), "resource placeholders must be expanded")
     }
 

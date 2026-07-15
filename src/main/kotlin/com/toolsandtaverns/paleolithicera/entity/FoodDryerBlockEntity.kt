@@ -24,8 +24,10 @@ import net.minecraft.screen.PropertyDelegate
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
+//? if >=1.21.6 {
 import net.minecraft.storage.ReadView
 import net.minecraft.storage.WriteView
+//?}
 import net.minecraft.text.Text
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.math.BlockPos
@@ -255,10 +257,15 @@ class FoodDryerBlockEntity(
     }
 
 
-    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState) {
+    fun dropItems(world: World, pos: BlockPos) {
         ItemScatterer.spawn(world, pos, inventory)
-        super.onBlockReplaced(pos, oldState)
     }
+
+    //? if >1.21.4 {
+    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState) {
+        world?.let { dropItems(it, pos) }
+        super.onBlockReplaced(pos, oldState)
+    }//?}
 
     override fun getScreenOpeningData(player: ServerPlayerEntity): BlockPos {
         return this.pos
@@ -291,6 +298,7 @@ class FoodDryerBlockEntity(
      *
      * @param view The data source to read from
      */
+    //? if >=1.21.6 {
     override fun readData(view: net.minecraft.storage.ReadView) {
         super.readData(view)
         Inventories.readData(view, inventory.heldStacks)
@@ -300,6 +308,22 @@ class FoodDryerBlockEntity(
             slotProgress[slot] = view.getFloat("SlotProgress$slot", 0.0f)
         }
     }
+    //?} else if >1.21.4 {
+    /*override fun readNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
+        super.readNbt(nbt, registries)
+        Inventories.readNbt(nbt, inventory.heldStacks, registries)
+        for (slot in 0 until SLOT_COUNT) {
+            slotProgress[slot] = nbt.getFloat("SlotProgress$slot").orElse(0.0f)
+        }
+    }*///?}
+    //? if <=1.21.4 {
+    /*override fun readNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
+        super.readNbt(nbt, registries)
+        Inventories.readNbt(nbt, inventory.heldStacks, registries)
+        for (slot in 0 until SLOT_COUNT) {
+            slotProgress[slot] = nbt.getFloat("SlotProgress$slot")
+        }
+    }*///?}
 
     /**
      * Writes the entity's data to NBT or component storage.
@@ -310,6 +334,7 @@ class FoodDryerBlockEntity(
      *
      * @param view The data destination to write to
      */
+    //? if >=1.21.6 {
     override fun writeData(view: net.minecraft.storage.WriteView) {
         super.writeData(view)
         Inventories.writeData(view, inventory.heldStacks)
@@ -319,6 +344,14 @@ class FoodDryerBlockEntity(
             view.putFloat("SlotProgress$slot", slotProgress[slot])
         }
     }
+    //?} else {
+    /*override fun writeNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
+        super.writeNbt(nbt, registries)
+        Inventories.writeNbt(nbt, inventory.heldStacks, registries)
+        for (slot in 0 until SLOT_COUNT) {
+            nbt.putFloat("SlotProgress$slot", slotProgress[slot])
+        }
+    }*///?}
 
 
     /**

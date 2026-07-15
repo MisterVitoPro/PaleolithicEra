@@ -37,6 +37,7 @@ class WillowLeafVinesBlock(settings: Settings) : Block(settings) {
     }
 
     private fun createShapeFunction(): Function<BlockState, VoxelShape> {
+        //? if >1.21.4 {
         val map = VoxelShapes.createFacingShapeMap(createCuboidZShape(16.0, 0.0, 1.0))
         return this.createShapeFunction { state: BlockState ->
             var voxelShape = VoxelShapes.empty()
@@ -50,6 +51,24 @@ class WillowLeafVinesBlock(settings: Settings) : Block(settings) {
             }
             if (voxelShape.isEmpty) VoxelShapes.fullCube() else voxelShape
         }
+        //?} else {
+        /*val faceShapes = mutableMapOf<Direction, VoxelShape>()
+        val thickness = 1.0 / 16.0
+        faceShapes[Direction.NORTH] = VoxelShapes.cuboid(0.0, 0.0, 0.0, 1.0, 1.0, thickness)
+        faceShapes[Direction.SOUTH] = VoxelShapes.cuboid(0.0, 0.0, 1.0 - thickness, 1.0, 1.0, 1.0)
+        faceShapes[Direction.WEST] = VoxelShapes.cuboid(0.0, 0.0, 0.0, thickness, 1.0, 1.0)
+        faceShapes[Direction.EAST] = VoxelShapes.cuboid(1.0 - thickness, 0.0, 0.0, 1.0, 1.0, 1.0)
+        faceShapes[Direction.UP] = VoxelShapes.cuboid(0.0, 1.0 - thickness, 0.0, 1.0, 1.0, 1.0)
+
+        return Function { state: BlockState ->
+            var shape = VoxelShapes.empty()
+            for ((direction, property) in FACING_PROPERTIES) {
+                if (state.get(property)) {
+                    faceShapes[direction]?.let { shape = VoxelShapes.union(shape, it) }
+                }
+            }
+            if (shape.isEmpty) VoxelShapes.fullCube() else shape
+        }*///?}
     }
 
     override fun getOutlineShape(

@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityType
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
 import java.util.concurrent.CompletableFuture
 
@@ -37,6 +38,12 @@ class ModEntityTypeTagProvider(
     registries: CompletableFuture<RegistryWrapper.WrapperLookup>
 ) : FabricTagProvider.EntityTypeTagProvider(output, registries) {
 
+    private fun tagBuilder(tag: TagKey<EntityType<*>>) =
+        //? if >=1.21.6 {
+        builder(tag)
+        //?} else {
+        /*getOrCreateTagBuilder(tag)*///?}
+
     /**
      * Configures the entity type tags for the Paleolithic Era mod.
      *
@@ -48,19 +55,25 @@ class ModEntityTypeTagProvider(
      * @param lookup Registry wrapper lookup for accessing entity type registries
      */
     override fun configure(lookup: RegistryWrapper.WrapperLookup) {
-        val huntableBuilder = builder(ModTags.Entity.HUNTABLE_TAG)
-        val aggressiveBuilder = builder(ModTags.Entity.AGGRESSIVE)
+        val huntableBuilder = tagBuilder(ModTags.Entity.HUNTABLE_TAG)
+        val aggressiveBuilder = tagBuilder(ModTags.Entity.AGGRESSIVE)
 
         huntableAnimals.forEach { entityType ->
+            //? if >=1.21.6 {
             val id: Identifier = EntityType.getId(entityType)
             val key: RegistryKey<EntityType<*>> = RegistryKey.of(RegistryKeys.ENTITY_TYPE, id)
             huntableBuilder.add(key)
+            //?} else {
+            /*huntableBuilder.add(entityType)*///?}
         }
 
         aggressiveAnimals.forEach { entityType ->
+            //? if >=1.21.6 {
             val id: Identifier = EntityType.getId(entityType)
             val key: RegistryKey<EntityType<*>> = RegistryKey.of(RegistryKeys.ENTITY_TYPE, id)
             aggressiveBuilder.add(key)
+            //?} else {
+            /*aggressiveBuilder.add(entityType)*///?}
         }
     }
 

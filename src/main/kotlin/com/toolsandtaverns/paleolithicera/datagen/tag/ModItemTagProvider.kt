@@ -6,9 +6,11 @@ import com.toolsandtaverns.paleolithicera.registry.ModTags
 import com.toolsandtaverns.paleolithicera.registry.custom.EdiblePlants
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
+import net.minecraft.item.Item
 import net.minecraft.item.Items
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.ItemTags
+import net.minecraft.registry.tag.TagKey
 import java.util.concurrent.CompletableFuture
 
 /**
@@ -34,6 +36,12 @@ import java.util.concurrent.CompletableFuture
 class ModItemTagProvider(output: FabricDataOutput, val registries: CompletableFuture<RegistryWrapper.WrapperLookup>) :
     FabricTagProvider.ItemTagProvider(output, registries) {
 
+    private fun tagBuilder(tag: TagKey<Item>) =
+        //? if >=1.21.6 {
+        valueLookupBuilder(tag)
+        //?} else {
+        /*getOrCreateTagBuilder(tag)*///?}
+
     /**
      * Configures all item tags for the Paleolithic Era mod.
      *
@@ -46,40 +54,40 @@ class ModItemTagProvider(output: FabricDataOutput, val registries: CompletableFu
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
         // Bone-based materials represent one of the earliest readily available hard materials
         // used by Paleolithic humans for tools and weapons
-        valueLookupBuilder(ModTags.Items.BONE_TOOL_MATERIALS)
+        tagBuilder(ModTags.Items.BONE_TOOL_MATERIALS)
             .add(Items.BONE)
             .add(ModItems.BONE_KNIFE)
             .add(ModItems.BONE_SPEAR)
 
         // Flint tools represent a technological advancement over bone, offering
         // sharper edges and more durable cutting surfaces
-        valueLookupBuilder(ModTags.Items.FLINT_TOOL_MATERIALS)
+        tagBuilder(ModTags.Items.FLINT_TOOL_MATERIALS)
             .add(ModItems.FLINT_KNIFE)
             .add(Items.FLINT)
 
         // Defines materials that can repair hide-based armor, simulating how
         // Paleolithic humans would patch damaged clothing with additional hide pieces
-        valueLookupBuilder(ModTags.Items.REPAIRS_HIDE_ARMOR)
+        tagBuilder(ModTags.Items.REPAIRS_HIDE_ARMOR)
             .add(ModItems.DRY_HIDE)
             .add(ModItems.PATCHED_HIDE)
 
         // Spears were one of the most important hunting and defense tools in the Paleolithic era,
         // with variations made from different available materials
-        valueLookupBuilder(ModTags.Items.SPEARS)
+        tagBuilder(ModTags.Items.SPEARS)
             .add(ModItems.WOODEN_SPEAR)
             .add(ModItems.BONE_SPEAR)
 
         // Knives were versatile tools used for everything from food preparation
         // to hide processing and crafting other tools
-        valueLookupBuilder(ModTags.Items.KNIFE)
+        tagBuilder(ModTags.Items.KNIFE)
             .add(ModItems.FLINT_BIFACE)
             .add(ModItems.BONE_KNIFE)
             .add(ModItems.FLINT_KNIFE)
 
-        valueLookupBuilder(ItemTags.PLANKS)
+        tagBuilder(ItemTags.PLANKS)
             .add(ModBlocks.WILLOW_PLANKS.asItem())
 
-        valueLookupBuilder(ModTags.Items.IBEX_FOOD)
+        tagBuilder(ModTags.Items.IBEX_FOOD)
             .add(ModItems.getPlantItem(EdiblePlants.YARROW))
             .add(Items.WHEAT)
     }

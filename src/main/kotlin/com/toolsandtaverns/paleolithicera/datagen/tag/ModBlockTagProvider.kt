@@ -4,12 +4,14 @@ import com.toolsandtaverns.paleolithicera.registry.ModBlocks
 import com.toolsandtaverns.paleolithicera.registry.ModTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
+import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.RegistryWrapper
 import net.minecraft.registry.tag.BlockTags
 import net.minecraft.registry.tag.ItemTags
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.Identifier
 import java.util.concurrent.CompletableFuture
 
@@ -41,6 +43,12 @@ class ModBlockTagProvider(
     registriesFuture: CompletableFuture<RegistryWrapper.WrapperLookup>
 ) : FabricTagProvider.BlockTagProvider(output, registriesFuture) {
 
+    private fun tagBuilder(tag: TagKey<Block>) =
+        //? if >=1.21.6 {
+        valueLookupBuilder(tag)
+        //?} else {
+        /*getOrCreateTagBuilder(tag)*///?}
+
     /**
      * Configures all block tags for the Paleolithic Era mod.
      *
@@ -56,35 +64,35 @@ class ModBlockTagProvider(
      * @param wrapperLookup Registry wrapper lookup for accessing block registries
      */
     override fun configure(wrapperLookup: RegistryWrapper.WrapperLookup) {
-        valueLookupBuilder(BlockTags.LOGS_THAT_BURN)
+        tagBuilder(BlockTags.LOGS_THAT_BURN)
             .add(ModBlocks.WILLOW_LOG)
             .add(ModBlocks.STRIPPED_WILLOW_LOG)
 
-        valueLookupBuilder(BlockTags.LOGS)
+        tagBuilder(BlockTags.LOGS)
             .add(ModBlocks.WILLOW_LOG)
             .add(ModBlocks.STRIPPED_WILLOW_LOG)
 
         // All log types are added to the unbreakable tag, as harvesting trees without tools
         // would have been impossible for Paleolithic humans. This creates an important
         // progression gate where players must craft primitive axes before accessing wood in quantity.
-        valueLookupBuilder(ModTags.Blocks.UNBREAKABLE_TAG)
+        tagBuilder(ModTags.Blocks.UNBREAKABLE_TAG)
             .addOptionalTag(BlockTags.LOGS)
 
-        valueLookupBuilder(ModTags.Blocks.REQUIRES_SHOVEL)
+        tagBuilder(ModTags.Blocks.REQUIRES_SHOVEL)
             .addOptionalTag(BlockTags.DIRT)
             .add(ModBlocks.GROUND_STORAGE)
 
 
-        valueLookupBuilder(BlockTags.SWORD_EFFICIENT)
+        tagBuilder(BlockTags.SWORD_EFFICIENT)
             .add(ModBlocks.WILLOW_LEAF_VINES)
 
         // Tool tags: axe-mineable for new wood/bone-like blocks used in the effigy
-        valueLookupBuilder(BlockTags.AXE_MINEABLE)
+        tagBuilder(BlockTags.AXE_MINEABLE)
             .add(ModBlocks.BUNDLE_OF_STICKS)
             .add(ModBlocks.EFFIGY_OF_PROTECTION)
 
         // Shovel mineable for ground storage (dirt-based block)
-        valueLookupBuilder(BlockTags.SHOVEL_MINEABLE)
+        tagBuilder(BlockTags.SHOVEL_MINEABLE)
             .add(ModBlocks.GROUND_STORAGE)
 
     }

@@ -23,6 +23,20 @@ class KnappingStationBlock(settings: Settings) : BlockWithEntity(settings) {
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity =
         KnappingStationBlockEntity(pos, state)
 
+    //? if <=1.21.4 {
+    /*override fun onStateReplaced(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        newState: BlockState,
+        moved: Boolean
+    ) {
+        if (!state.isOf(newState.block)) {
+            (world.getBlockEntity(pos) as? KnappingStationBlockEntity)?.dropItems(world, pos)
+        }
+        super.onStateReplaced(state, world, pos, newState, moved)
+    }*///?}
+
     override fun createScreenHandlerFactory(
         state: BlockState,
         world: World,

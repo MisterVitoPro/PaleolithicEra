@@ -28,6 +28,20 @@ class GroundStorageBlock(settings: Settings) : BlockWithEntity(settings) {
     override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity =
         GroundStorageBlockEntity(pos, state)
 
+    //? if <=1.21.4 {
+    /*override fun onStateReplaced(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        newState: BlockState,
+        moved: Boolean
+    ) {
+        if (!state.isOf(newState.block)) {
+            (world.getBlockEntity(pos) as? GroundStorageBlockEntity)?.dropItems(world, pos)
+        }
+        super.onStateReplaced(state, world, pos, newState, moved)
+    }*///?}
+
     override fun getRenderType(state: BlockState): BlockRenderType = BlockRenderType.MODEL
 
     override fun createScreenHandlerFactory(

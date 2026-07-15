@@ -4,7 +4,6 @@ import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
-import net.minecraft.util.Colors
 
 /** Client GUI for the eight-slot ground storage container. */
 class GroundStorageScreen(
@@ -85,8 +84,8 @@ class GroundStorageScreen(
     }
 
     override fun drawForeground(context: DrawContext, mouseX: Int, mouseY: Int) {
-        context.drawText(textRenderer, title, titleX, titleY, Colors.DARK_GRAY, false)
-        context.drawText(textRenderer, playerInventory.displayName, 8, playerInventoryTitleY, Colors.DARK_GRAY, false)
+        context.drawText(textRenderer, title, titleX, titleY, 0x404040, false)
+        context.drawText(textRenderer, playerInventory.displayName, 8, playerInventoryTitleY, 0x404040, false)
     }
 
     override fun render(context: DrawContext, mouseX: Int, mouseY: Int, delta: Float) {

@@ -1,6 +1,12 @@
 package com.toolsandtaverns.paleolithicera.model
 
-import net.minecraft.client.render.entity.animation.*
+//? if >=1.21.6 {
+import net.minecraft.client.render.entity.animation.AnimationDefinition
+//?} else {
+/*import net.minecraft.client.render.entity.animation.Animation*///?}
+import net.minecraft.client.render.entity.animation.AnimationHelper
+import net.minecraft.client.render.entity.animation.Keyframe
+import net.minecraft.client.render.entity.animation.Transformation
 
 /**
  * Made with Blockbench 4.12.6
@@ -8,7 +14,10 @@ import net.minecraft.client.render.entity.animation.*
  * @author Author
  */
 object IbexAnimations {
+    //? if >=1.21.6 {
     val walk: AnimationDefinition = AnimationDefinition.Builder.create(1.0f).looping()
+    //?} else {
+    /*val walk: Animation = Animation.Builder.create(1.0f).looping()*///?}
         .addBoneAnimation(
             "front_leg_L", Transformation(
                 Transformation.Targets.ROTATE,

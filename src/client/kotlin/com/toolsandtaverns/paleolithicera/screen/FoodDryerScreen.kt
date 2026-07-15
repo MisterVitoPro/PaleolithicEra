@@ -1,12 +1,14 @@
 package com.toolsandtaverns.paleolithicera.screen
 
 import com.toolsandtaverns.paleolithicera.util.id
+//? if >=1.21.6 {
 import net.minecraft.client.gl.RenderPipelines
+//?}
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
+import net.minecraft.client.render.RenderLayer
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
-import net.minecraft.util.Colors
 import net.minecraft.util.Identifier
 
 /**
@@ -47,7 +49,10 @@ class FoodDryerScreen(
     override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {
         // Draw main GUI background
         context.drawTexture(
+            //? if >=1.21.6 {
             RenderPipelines.GUI_TEXTURED,
+            //?} else {
+            /*RenderLayer::getGuiTextured,*///?}
             TEXTURE,
             x, y,
             0f, 0f,
@@ -63,7 +68,10 @@ class FoodDryerScreen(
                 
                 // Draw progress bar background
                 context.drawTexture(
+                    //? if >=1.21.6 {
                     RenderPipelines.GUI_TEXTURED,
+                    //?} else {
+                    /*RenderLayer::getGuiTextured,*///?}
                     TEXTURE,
                     x + progressX,
                     y + progressY,
@@ -74,7 +82,10 @@ class FoodDryerScreen(
                 
                 // Draw progress fill
                 context.drawTexture(
+                    //? if >=1.21.6 {
                     RenderPipelines.GUI_TEXTURED,
+                    //?} else {
+                    /*RenderLayer::getGuiTextured,*///?}
                     TEXTURE,
                     x + progressX,
                     y + progressY,
@@ -93,7 +104,7 @@ class FoodDryerScreen(
             title, 
             titleX, 
             titleY, 
-            Colors.DARK_GRAY, 
+            0x404040,
             false
         )
         
@@ -103,7 +114,7 @@ class FoodDryerScreen(
             playerInventory.displayName, 
             8, 
             playerInventoryTitleY, 
-            Colors.DARK_GRAY, 
+            0x404040,
             false
         )
     }

@@ -22,8 +22,10 @@ import net.minecraft.registry.RegistryWrapper
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
+//? if >=1.21.6 {
 import net.minecraft.storage.ReadView
 import net.minecraft.storage.WriteView
+//?}
 import net.minecraft.text.Text
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.math.BlockPos
@@ -93,10 +95,16 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
      *
      * @param view The data source to read from
      */
+    //? if >=1.21.6 {
     override fun readData(view: ReadView) {
         Inventories.readData(view, inventory.heldStacks)
         super.readData(view)
     }
+    //?} else {
+    /*override fun readNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
+        Inventories.readNbt(nbt, inventory.heldStacks, registries)
+        super.readNbt(nbt, registries)
+    }*///?}
 
     /**
      * Writes the entity's data to NBT or component storage.
@@ -108,10 +116,16 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
      *
      * @param view The data destination to write to
      */
+    //? if >=1.21.6 {
     override fun writeData(view: WriteView) {
         super.writeData(view)
         Inventories.writeData(view, inventory.heldStacks)
     }
+    //?} else {
+    /*override fun writeNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
+        super.writeNbt(nbt, registries)
+        Inventories.writeNbt(nbt, inventory.heldStacks, registries)
+    }*///?}
 
     /**
      * Provides access to the knapping station's inventory.
@@ -169,10 +183,15 @@ class KnappingStationBlockEntity(pos: BlockPos, state: BlockState) :
      * @param pos The position of the block
      * @param oldState The previous blockstate
      */
-    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState) {
+    fun dropItems(world: World, pos: BlockPos) {
         ItemScatterer.spawn(world, pos, inventory)
-        super.onBlockReplaced(pos, oldState)
     }
+
+    //? if >1.21.4 {
+    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState) {
+        world?.let { dropItems(it, pos) }
+        super.onBlockReplaced(pos, oldState)
+    }//?}
 
 
     /**

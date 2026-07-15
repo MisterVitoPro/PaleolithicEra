@@ -1,6 +1,9 @@
 package com.toolsandtaverns.paleolithicera.model
 
+//? if >=1.21.6 {
 import net.minecraft.client.render.entity.animation.AnimationDefinition
+//?} else {
+/*import net.minecraft.client.render.entity.animation.Animation*///?}
 import net.minecraft.client.render.entity.animation.AnimationHelper
 import net.minecraft.client.render.entity.animation.Keyframe
 import net.minecraft.client.render.entity.animation.Transformation
@@ -12,7 +15,10 @@ import net.minecraft.client.render.entity.animation.Transformation
  */
 object BoarAnimations {
 
+    //? if >=1.21.6 {
     val idle: AnimationDefinition = AnimationDefinition.Builder.create(3.0f).looping()
+    //?} else {
+    /*val idle: Animation = Animation.Builder.create(3.0f).looping()*///?}
         .addBoneAnimation(
             "head", Transformation(
                 Transformation.Targets.ROTATE,
@@ -90,7 +96,10 @@ object BoarAnimations {
         )
         .build()
 
+    //? if >=1.21.6 {
     val walk: AnimationDefinition = AnimationDefinition.Builder.create(1.5f).looping()
+    //?} else {
+    /*val walk: Animation = Animation.Builder.create(1.5f).looping()*///?}
         .addBoneAnimation(
             "font_leg_l", Transformation(
                 Transformation.Targets.ROTATE,

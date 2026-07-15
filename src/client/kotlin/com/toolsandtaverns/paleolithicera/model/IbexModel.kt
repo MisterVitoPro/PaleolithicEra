@@ -7,6 +7,9 @@ import net.minecraft.client.model.*
 import net.minecraft.client.render.entity.model.EntityModel
 import net.minecraft.client.render.entity.model.EntityModelLayer
 import net.minecraft.client.render.entity.state.LivingEntityRenderState
+//? if <=1.21.4 {
+/*import net.minecraft.client.render.entity.animation.AnimationHelper
+import org.joml.Vector3f*///?}
 
 // Made with Blockbench 4.12.6
 // Exported for Minecraft version 1.17+ for Yarn
@@ -21,14 +24,30 @@ class IbexModel(root: ModelPart) : EntityModel<LivingEntityRenderState>(root) {
 //    private val bone: ModelPart = this.head.getChild("bone")
 //    private val bone2: ModelPart = this.head.getChild("bone2")
 
+    //? if >=1.21.6 {
     private val walkingAnimation = IbexAnimations.walk.createAnimation(root)
+    //?}
 
     override fun setAngles(state: LivingEntityRenderState) {
         super.setAngles(state)
         this.head.pitch = state.pitch * (Math.PI.toFloat() / 180f)
+        //? if >1.21.4 {
         this.head.yaw = state.relativeHeadYaw * (Math.PI.toFloat() / 180f)
+        //? if <=1.21.4 {
+        /*this.head.yaw = state.yawDegrees * (Math.PI.toFloat() / 180f)*///?}
 
+        //? if >=1.21.6 {
         this.walkingAnimation.applyWalking(state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2f, 2.5f)
+        //?} else if >1.21.4 {
+        /*this.animateWalking(IbexAnimations.walk, state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2f, 2.5f)*///?}
+        //?} else {
+        /*AnimationHelper.animate(
+            this,
+            IbexAnimations.walk,
+            (state.limbFrequency * 50f * 2f).toLong(),
+            minOf(state.limbAmplitudeMultiplier * 2.5f, 1f),
+            Vector3f()
+        )*///?}
     }
 
     companion object {
@@ -42,7 +61,7 @@ class IbexModel(root: ModelPart) : EntityModel<LivingEntityRenderState>(root) {
                     "body",
                     ModelPartBuilder.create().uv(0, 0).cuboid(-5.0f, -12.0f, -1.0f, 10.0f, 9.0f, 19.0f, Dilation(0.0f))
                         .uv(0, 28).cuboid(-2.0f, -13.0f, -3.0f, 4.0f, 11.0f, 9.0f, Dilation(0.0f)),
-                    ModelTransform.origin(0.0f, 22.0f, 0.0f)
+                    origin(0.0f, 22.0f, 0.0f)
                 )
 
                 body.addChild(
@@ -54,25 +73,25 @@ class IbexModel(root: ModelPart) : EntityModel<LivingEntityRenderState>(root) {
                 modelPartData.addChild(
                     "front_leg_L",
                     ModelPartBuilder.create().uv(0, 48).cuboid(-1.0f, -1.0f, -1.0f, 2.0f, 6.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(3.0f, 19.0f, 1.0f)
+                    origin(3.0f, 19.0f, 1.0f)
                 )
 
                 modelPartData.addChild(
                     "front_leg_R",
                     ModelPartBuilder.create().uv(8, 48).cuboid(-1.0f, -1.0f, -1.0f, 2.0f, 6.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(-3.0f, 19.0f, 1.0f)
+                    origin(-3.0f, 19.0f, 1.0f)
                 )
 
                 modelPartData.addChild(
                     "back_leg_R",
                     ModelPartBuilder.create().uv(16, 48).cuboid(-1.0f, -1.0f, -1.0f, 2.0f, 6.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(-3.0f, 19.0f, 16.0f)
+                    origin(-3.0f, 19.0f, 16.0f)
                 )
 
                 modelPartData.addChild(
                     "back_leg_L",
                     ModelPartBuilder.create().uv(50, 28).cuboid(-1.0f, -1.0f, -1.0f, 2.0f, 6.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(3.0f, 19.0f, 16.0f)
+                    origin(3.0f, 19.0f, 16.0f)
                 )
 
                 val head = modelPartData.addChild(
@@ -81,7 +100,7 @@ class IbexModel(root: ModelPart) : EntityModel<LivingEntityRenderState>(root) {
                         .uv(26, 42).cuboid(-2.0f, -2.0f, -10.0f, 4.0f, 4.0f, 6.0f, Dilation(0.0f))
                         .uv(16, 56).cuboid(-1.0f, 2.0f, -9.75f, 2.0f, 1.0f, 2.0f, Dilation(0.0f))
                         .uv(50, 40).cuboid(0.0f, 3.0f, -9.75f, 1.0f, 1.0f, 1.0f, Dilation(0.0f)),
-                    ModelTransform.origin(0.0f, 11.0f, -2.0f)
+                    origin(0.0f, 11.0f, -2.0f)
                 )
 
                 head.addChild(
@@ -151,5 +170,12 @@ class IbexModel(root: ModelPart) : EntityModel<LivingEntityRenderState>(root) {
                 )
                 return TexturedModelData.of(modelData, 128, 128)
             }
+
+        private fun origin(x: Float, y: Float, z: Float): ModelTransform {
+            //? if >1.21.4 {
+            return ModelTransform.origin(x, y, z)
+            //?} else {
+            /*return ModelTransform.pivot(x, y, z)*///?}
+        }
     }
 }

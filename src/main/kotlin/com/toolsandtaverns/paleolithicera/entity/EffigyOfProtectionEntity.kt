@@ -10,12 +10,16 @@ import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.registry.RegistryWrapper
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.ItemScatterer
+//? if >=1.21.6 {
 import net.minecraft.storage.ReadView
 import net.minecraft.storage.WriteView
+//?}
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
@@ -224,22 +228,47 @@ class EffigyOfProtectionEntity(pos: BlockPos, state: BlockState) :
         return String.format("%02d:%02d", m, s)
     }
 
+    //? if >=1.21.6 {
     override fun readData(view: ReadView) {
         super.readData(view)
         Inventories.readData(view, inventory.heldStacks)
         activeTicks = view.getInt("ActiveTicks", 0)
     }
+    //?} else if >1.21.4 {
+    /*override fun readNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
+        super.readNbt(nbt, registries)
+        Inventories.readNbt(nbt, inventory.heldStacks, registries)
+        activeTicks = nbt.getInt("ActiveTicks").orElse(0)
+    }*///?}
+    //? if <=1.21.4 {
+    /*override fun readNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
+        super.readNbt(nbt, registries)
+        Inventories.readNbt(nbt, inventory.heldStacks, registries)
+        activeTicks = nbt.getInt("ActiveTicks")
+    }*///?}
 
+    //? if >=1.21.6 {
     override fun writeData(view: WriteView) {
         super.writeData(view)
         Inventories.writeData(view, inventory.heldStacks)
         view.putInt("ActiveTicks", activeTicks)
     }
+    //?} else {
+    /*override fun writeNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
+        super.writeNbt(nbt, registries)
+        Inventories.writeNbt(nbt, inventory.heldStacks, registries)
+        nbt.putInt("ActiveTicks", activeTicks)
+    }*///?}
 
-    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState) {
-        ItemScatterer.spawn(world as World, pos, inventory)
-        super.onBlockReplaced(pos, oldState)
+    fun dropItems(world: World, pos: BlockPos) {
+        ItemScatterer.spawn(world, pos, inventory)
     }
+
+    //? if >1.21.4 {
+    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState) {
+        world?.let { dropItems(it, pos) }
+        super.onBlockReplaced(pos, oldState)
+    }//?}
 
     // Helper extension
     private fun Vec3d.isInRadius(center: Vec3d, r: Double): Boolean = this.squaredDistanceTo(center) <= r * r

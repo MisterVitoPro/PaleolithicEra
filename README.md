@@ -106,6 +106,38 @@ Notes:
 
 ## Testing
 
+### Multi-version workspace
+
+Paleolithic Era uses [Stonecutter](https://plugins.gradle.org/plugin/dev.kikugie.stonecutter) to maintain
+Minecraft 1.21.4, 1.21.5, 1.21.6, and 1.21.7 from one branch and one shared `src/` tree. Per-version dependency
+coordinates live under `versions/<minecraft-version>/gradle.properties`.
+
+Root verification tasks run against every supported version:
+
+```bash
+./gradlew build
+./gradlew testQuick
+```
+
+Qualify a task to work with one version:
+
+```bash
+./gradlew :1.21.7:build
+./gradlew :1.21.7:runClient
+./gradlew :1.21.7:runServer
+```
+
+Stonecutter conditionals in shared Kotlin sources are rewritten when the active development version changes:
+
+```bash
+./gradlew stonecutterSwitchTo1.21.4
+./gradlew stonecutterSwitchTo1.21.7
+```
+
+Minecraft 1.21.7 is the checked-in VCS version. Always switch back to it before committing. Run data generation only
+on that node (`./gradlew :1.21.7:runDatagen`) because every node shares `src/main/generated`; the older nodes'
+datagen tasks are disabled to prevent accidental cross-version overwrites.
+
 This project includes a comprehensive test suite to ensure reliability and prevent regressions. Tests are organized by priority levels and can be run individually or in groups.
 
 ### Test Priority Levels
@@ -211,6 +243,7 @@ The test suite is designed to work in CI environments:
 ## Developer Notes
 - **Mod ID:** `paleolithic-era`
 - **Language/Stack:** Fabric + Kotlin
+- **Versions:** Stonecutter builds Minecraft 1.21.4 through 1.21.7 from the shared source tree.
 - **Java:** JDK 21 is selected for both the Gradle daemon and compilation. Install any JDK 21 distribution and
   run builds through `./gradlew` (`gradlew.bat` on Windows); Gradle's checked-in daemon criteria will locate it
   even if `JAVA_HOME` points to a newer JDK.

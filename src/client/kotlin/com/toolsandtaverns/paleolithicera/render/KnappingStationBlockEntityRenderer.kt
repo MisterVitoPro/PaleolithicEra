@@ -7,7 +7,10 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.util.math.MatrixStack
+//? if >1.21.4 {
 import net.minecraft.item.ItemDisplayContext
+//?} else {
+/*import net.minecraft.item.ModelTransformationMode*///?}
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.RotationAxis
 import net.minecraft.util.math.Vec3d
@@ -27,8 +30,11 @@ class KnappingStationBlockEntityRenderer(
         matrices: MatrixStack,
         vertexConsumers: VertexConsumerProvider,
         light: Int,
+        //? if >1.21.4 {
         overlay: Int,
         cameraPos: Vec3d?
+        //?} else {
+        /*overlay: Int*///?}
     ) {
         val input: ItemStack = entity.getInventory().getStack(0)
         val output: ItemStack = entity.getInventory().getStack(1)
@@ -43,7 +49,10 @@ class KnappingStationBlockEntityRenderer(
             matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180f))
             itemRenderer.renderItem(
                 input,
+                //? if >1.21.4 {
                 ItemDisplayContext.FIXED,
+                //?} else {
+                /*ModelTransformationMode.FIXED,*///?}
                 lightLevel,
                 overlay,
                 matrices,
@@ -62,7 +71,10 @@ class KnappingStationBlockEntityRenderer(
             matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180f))
             itemRenderer.renderItem(
                 output,
+                //? if >1.21.4 {
                 ItemDisplayContext.FIXED,
+                //?} else {
+                /*ModelTransformationMode.FIXED,*///?}
                 lightLevel,
                 overlay,
                 matrices,
