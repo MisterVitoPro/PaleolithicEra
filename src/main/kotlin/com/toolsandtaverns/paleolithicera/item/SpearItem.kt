@@ -57,7 +57,10 @@ class SpearItem(settings: Settings, private val projectileCreator: ProjectileEnt
         }
 
         fun createToolComponent(material: ToolMaterial): ToolComponent {
+            //? if >1.21.4 {
             return ToolComponent(mutableListOf(), material.speed, 2, false)
+            //?} else {
+            /*return ToolComponent(mutableListOf(), material.speed, 2)*///?}
         }
     }
 

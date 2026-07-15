@@ -37,7 +37,10 @@ class WaterSackItem(settings: Settings) : Item(settings) {
             val areaEffectCloudEntity = list[0] as AreaEffectCloudEntity
             areaEffectCloudEntity.radius = areaEffectCloudEntity.radius - 0.5f
             world.playSound(
+                //? if >1.21.4 {
                 null as Entity?,
+                //?} else {
+                /*null as PlayerEntity?,*///?}
                 user.x,
                 user.y,
                 user.z,
@@ -60,7 +63,10 @@ class WaterSackItem(settings: Settings) : Item(settings) {
             } else {
                 if (blockHitResult.type == HitResult.Type.BLOCK) {
                     val blockPos = blockHitResult.blockPos
+                    //? if >1.21.4 {
                     if (!world.canEntityModifyAt(user, blockPos)) {
+                    //?} else {
+                    /*if (!world.canPlayerModifyAt(user, blockPos)) {*///?}
                         return ActionResult.PASS
                     }
 

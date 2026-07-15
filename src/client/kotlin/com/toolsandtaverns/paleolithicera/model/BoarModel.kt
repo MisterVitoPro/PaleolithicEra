@@ -6,6 +6,9 @@ import net.minecraft.client.model.*
 import net.minecraft.client.render.entity.model.EntityModel
 import net.minecraft.client.render.entity.model.EntityModelLayer
 import net.minecraft.client.render.entity.model.ModelTransformer
+//? if <=1.21.4 {
+/*import net.minecraft.client.render.entity.animation.AnimationHelper
+import org.joml.Vector3f*///?}
 
 // Made with Blockbench 4.12.5
 // Exported for Minecraft version 1.17+ for Yarn
@@ -21,16 +24,40 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
     private val rear_leg_l: ModelPart = root.getChild("rear_leg_l")
     private val rear_leg_r: ModelPart = root.getChild("rear_leg_r")
 
+    //? if >=1.21.6 {
     private val walkingAnimation = BoarAnimations.walk.createAnimation(root)
     private val idlingAnimation = BoarAnimations.idle.createAnimation(root)
+    //?}
 
     override fun setAngles(state: BoarRenderState) {
         super.setAngles(state)
         this.head.pitch = state.pitch * (Math.PI.toFloat() / 180f)
+        //? if >1.21.4 {
         this.head.yaw = state.relativeHeadYaw * (Math.PI.toFloat() / 180f)
+        //? if <=1.21.4 {
+        /*this.head.yaw = state.yawDegrees * (Math.PI.toFloat() / 180f)*///?}
 
+        //? if >=1.21.6 {
         this.walkingAnimation.applyWalking(state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2f, 2.5f)
         this.idlingAnimation.apply(state.idleAnimationState, state.age, 1f)
+        //?} else if >1.21.4 {
+        /*this.animateWalking(BoarAnimations.walk, state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2f, 2.5f)
+        this.animate(state.idleAnimationState, BoarAnimations.idle, state.age, 1f)*///?}
+        //?} else {
+        /*AnimationHelper.animate(
+            this,
+            BoarAnimations.walk,
+            (state.limbFrequency * 50f * 2f).toLong(),
+            minOf(state.limbAmplitudeMultiplier * 2.5f, 1f),
+            Vector3f()
+        )
+        AnimationHelper.animate(
+            this,
+            BoarAnimations.idle,
+            state.idleAnimationState.getTimeInMilliseconds(state.age),
+            1f,
+            Vector3f()
+        )*///?}
     }
 
     companion object {
@@ -47,10 +74,10 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
                         .uv(0, 23).cuboid(-3.0f, -7.0f, -5.0f, 7.0f, 1.0f, 10.0f, Dilation(0.0f))
                         .uv(0, 42).cuboid(-2.0f, -8.0f, -4.0f, 5.0f, 1.0f, 6.0f, Dilation(0.0f))
                         .uv(0, 34).cuboid(-3.0f, 3.85f, -5.0f, 7.0f, 1.0f, 7.0f, Dilation(0.0f)),
-                    ModelTransform.origin(0.0f, 15.0f, 0.0f)
+                    origin(0.0f, 15.0f, 0.0f)
                 )
 
-                val tail = body.addChild("tail", ModelPartBuilder.create(), ModelTransform.origin(0.5f, -3.0f, 9.5f))
+                val tail = body.addChild("tail", ModelPartBuilder.create(), origin(0.5f, -3.0f, 9.5f))
 
                 tail.addChild(
                     "tail_r1",
@@ -62,11 +89,11 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
                     "head",
                     ModelPartBuilder.create().uv(34, 23).cuboid(-3.5f, -4.0f, -3.0f, 7.0f, 8.0f, 4.0f, Dilation(0.0f))
                         .uv(44, 0).cuboid(-2.0f, 0.0f, -6.0f, 4.0f, 3.0f, 3.0f, Dilation(0.0f)),
-                    ModelTransform.origin(0.5f, 14.0f, -7.0f)
+                    origin(0.5f, 14.0f, -7.0f)
                 )
 
                 val mouth =
-                    head.addChild("mouth", ModelPartBuilder.create(), ModelTransform.origin(-0.25f, 3.0f, -3.75f))
+                    head.addChild("mouth", ModelPartBuilder.create(), origin(-0.25f, 3.0f, -3.75f))
 
                 mouth.addChild(
                     "mouth_r1",
@@ -79,7 +106,7 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
                     "tusk",
                     ModelPartBuilder.create().uv(34, 46).cuboid(3.9f, -0.9f, -0.4f, 1.0f, 2.0f, 1.0f, Dilation(0.0f))
                         .uv(38, 46).cuboid(-0.1f, -0.9f, -0.4f, 1.0f, 2.0f, 1.0f, Dilation(0.0f)),
-                    ModelTransform.origin(-2.4f, 2.0f, -3.6f)
+                    origin(-2.4f, 2.0f, -3.6f)
                 )
 
                 tusk.addChild(
@@ -97,29 +124,36 @@ class BoarModel(root: ModelPart) : EntityModel<BoarRenderState>(root) {
                 modelPartData.addChild(
                     "font_leg_l",
                     ModelPartBuilder.create().uv(9, 50).cuboid(0.25f, 0.0f, -1.25f, 2.0f, 5.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(2.5f, 19.0f, -4.5f)
+                    origin(2.5f, 19.0f, -4.5f)
                 )
 
                 modelPartData.addChild(
                     "front_leg_r",
                     ModelPartBuilder.create().uv(9, 50).cuboid(-1.25f, 0.0f, -1.5f, 2.0f, 5.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(-2.5f, 19.0f, -4.25f)
+                    origin(-2.5f, 19.0f, -4.25f)
                 )
 
                 modelPartData.addChild(
                     "rear_leg_l",
                     ModelPartBuilder.create().uv(43, 6).cuboid(-2.0f, -1.0f, -1.0f, 3.0f, 3.0f, 3.0f, Dilation(0.0f))
                         .uv(0, 50).cuboid(-1.5f, 1.0f, -0.5f, 2.0f, 4.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(3.0f, 19.0f, 5.5f)
+                    origin(3.0f, 19.0f, 5.5f)
                 )
 
                 modelPartData.addChild(
                     "rear_leg_r",
                     ModelPartBuilder.create().uv(50, 12).cuboid(-1.0f, -1.0f, -1.0f, 3.0f, 3.0f, 3.0f, Dilation(0.0f))
                         .uv(0, 50).cuboid(-0.5f, 1.0f, -0.5f, 2.0f, 4.0f, 2.0f, Dilation(0.0f)),
-                    ModelTransform.origin(-2.0f, 19.0f, 5.5f)
+                    origin(-2.0f, 19.0f, 5.5f)
                 )
                 return TexturedModelData.of(modelData, 64, 64)
             }
+
+        private fun origin(x: Float, y: Float, z: Float): ModelTransform {
+            //? if >1.21.4 {
+            return ModelTransform.origin(x, y, z)
+            //?} else {
+            /*return ModelTransform.pivot(x, y, z)*///?}
+        }
     }
 }

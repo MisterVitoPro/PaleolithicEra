@@ -1,12 +1,14 @@
 package com.toolsandtaverns.paleolithicera.screen
 
 import com.toolsandtaverns.paleolithicera.util.id
+//? if >=1.21.6 {
 import net.minecraft.client.gl.RenderPipelines
+//?}
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
+import net.minecraft.client.render.RenderLayer
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
-import net.minecraft.util.Colors
 import net.minecraft.util.Identifier
 
 /**
@@ -35,7 +37,10 @@ class HideDryerScreen(
     override fun drawBackground(context: DrawContext, delta: Float, mouseX: Int, mouseY: Int) {
         // Draw background texture
         context.drawTexture(
+            //? if >=1.21.6 {
             RenderPipelines.GUI_TEXTURED,
+            //?} else {
+            /*RenderLayer::getGuiTextured,*///?}
             TEXTURE,
             x, y,
             0f, 0f,
@@ -47,7 +52,10 @@ class HideDryerScreen(
         val progressWidth = handler.getScaledProgress(PROGRESS_BAR_WIDTH)
         if (progressWidth > 0) {
             context.drawTexture(
+                //? if >=1.21.6 {
                 RenderPipelines.GUI_TEXTURED,
+                //?} else {
+                /*RenderLayer::getGuiTextured,*///?}
                 TEXTURE,
                 x + PROGRESS_BAR_X,
                 y + PROGRESS_BAR_Y,
@@ -59,7 +67,7 @@ class HideDryerScreen(
     }
 
     override fun drawForeground(context: DrawContext, mouseX: Int, mouseY: Int) {
-        context.drawText(textRenderer, title, titleX, titleY, Colors.DARK_GRAY, false)
+        context.drawText(textRenderer, title, titleX, titleY, 0x404040, false)
         context.drawText(textRenderer, playerInventory.displayName, 8, backgroundHeight - 94, 0x404040, false)
     }
 

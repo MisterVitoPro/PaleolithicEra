@@ -50,7 +50,10 @@ public abstract class BlockBreakingPreventionMixin {
         if (action != PlayerActionC2SPacket.Action.START_DESTROY_BLOCK) return;
         if(player.isCreative()) return;
 
+        //? if >=1.21.6 {
         ServerWorld world = player.getWorld();
+        //?} else {
+        /*ServerWorld world = (ServerWorld) player.getWorld();*///?}
         BlockState state = player.getWorld().getBlockState(pos);
 
 

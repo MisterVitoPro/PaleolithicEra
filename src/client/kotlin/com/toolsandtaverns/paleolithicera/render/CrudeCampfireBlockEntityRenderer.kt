@@ -8,7 +8,10 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.util.math.MatrixStack
+//? if >1.21.4 {
 import net.minecraft.item.ItemDisplayContext
+//?} else {
+/*import net.minecraft.item.ModelTransformationMode*///?}
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.RotationAxis
 import net.minecraft.util.math.Vec3d
@@ -42,8 +45,11 @@ class CrudeCampfireBlockEntityRenderer(
         matrices: MatrixStack?,
         vertexConsumers: VertexConsumerProvider?,
         light: Int,
+        //? if >1.21.4 {
         overlay: Int,
         cameraPos: Vec3d?
+        //?} else {
+        /*overlay: Int*///?}
     ) {
         // Safety check for null values
         if (entity.world == null || matrices == null || vertexConsumers == null) return
@@ -85,7 +91,10 @@ class CrudeCampfireBlockEntityRenderer(
             // Render the actual item
             itemRenderer.renderItem(
                 stack,                  // The item to render
+                //? if >1.21.4 {
                 ItemDisplayContext.FIXED, // Display as a fixed item in world
+                //?} else {
+                /*ModelTransformationMode.FIXED,*///?}
                 light,                  // Light level from the parameter
                 overlay,                // Overlay texture coordinates
                 matrices,               // Transformation matrix

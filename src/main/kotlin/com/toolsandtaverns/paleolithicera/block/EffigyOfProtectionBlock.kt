@@ -102,6 +102,20 @@ class EffigyOfProtectionBlock(settings: Settings) : BlockWithEntity(settings) {
         return EffigyOfProtectionEntity(pos, state)
     }
 
+    //? if <=1.21.4 {
+    /*override fun onStateReplaced(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        newState: BlockState,
+        moved: Boolean
+    ) {
+        if (!state.isOf(newState.block)) {
+            (world.getBlockEntity(pos) as? EffigyOfProtectionEntity)?.dropItems(world, pos)
+        }
+        super.onStateReplaced(state, world, pos, newState, moved)
+    }*///?}
+
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
         val pos = ctx.blockPos
         val world = ctx.world

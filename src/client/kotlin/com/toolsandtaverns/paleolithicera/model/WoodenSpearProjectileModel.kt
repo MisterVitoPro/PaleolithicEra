@@ -18,7 +18,10 @@ class WoodenSpearProjectileModel(root: ModelPart) : EntityModel<EntityRenderStat
                 modelData.root.addChild(
                     "main",
                     ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -24.0F, 0.0F, 1.0F, 24.0F, 1.0F, Dilation(0.0f)),
+                    //? if >1.21.4 {
                     ModelTransform.origin(0.0f, 20f, 0.0f)
+                    //?} else {
+                    /*ModelTransform.pivot(0.0f, 20f, 0.0f)*///?}
                 )
                 return TexturedModelData.of(modelData, 64, 64)
             }

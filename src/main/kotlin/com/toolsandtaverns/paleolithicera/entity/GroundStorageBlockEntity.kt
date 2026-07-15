@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventories
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.Packet
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
@@ -20,6 +21,7 @@ import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
 
 /**
  * Block entity for Ground Storage. Stores up to 8 stackable items.
@@ -52,20 +54,37 @@ class GroundStorageBlockEntity(pos: BlockPos, state: BlockState) :
         player: PlayerEntity
     ): ScreenHandler = GroundStorageScreenHandler(syncId, playerInventory, this)
 
-    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState) {
+    fun dropItems(world: World, pos: BlockPos) {
         ItemScatterer.spawn(world, pos, inventory)
-        super.onBlockReplaced(pos, oldState)
     }
 
+    //? if >1.21.4 {
+    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState) {
+        world?.let { dropItems(it, pos) }
+        super.onBlockReplaced(pos, oldState)
+    }//?}
+
+    //? if >=1.21.6 {
     override fun readData(view: net.minecraft.storage.ReadView) {
         super.readData(view)
         Inventories.readData(view, inventory.heldStacks)
     }
+    //?} else {
+    /*override fun readNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
+        super.readNbt(nbt, registries)
+        Inventories.readNbt(nbt, inventory.heldStacks, registries)
+    }*///?}
 
+    //? if >=1.21.6 {
     override fun writeData(view: net.minecraft.storage.WriteView) {
         super.writeData(view)
         Inventories.writeData(view, inventory.heldStacks)
     }
+    //?} else {
+    /*override fun writeNbt(nbt: NbtCompound, registries: RegistryWrapper.WrapperLookup) {
+        super.writeNbt(nbt, registries)
+        Inventories.writeNbt(nbt, inventory.heldStacks, registries)
+    }*///?}
 
     override fun toUpdatePacket(): Packet<ClientPlayPacketListener> =
         BlockEntityUpdateS2CPacket.create(this)

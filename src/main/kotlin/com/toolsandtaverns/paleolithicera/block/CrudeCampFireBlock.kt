@@ -41,6 +41,20 @@ class CrudeCampFireBlock(settings: Settings) : CampfireBlock(false, 1, settings)
         return CrudeCampfireBlockEntity(pos, state)
     }
 
+    //? if <=1.21.4 {
+    /*override fun onStateReplaced(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        newState: BlockState,
+        moved: Boolean
+    ) {
+        if (!state.isOf(newState.block)) {
+            (world.getBlockEntity(pos) as? CrudeCampfireBlockEntity)?.dropItems(world, pos)
+        }
+        super.onStateReplaced(state, world, pos, newState, moved)
+    }*///?}
+
     override fun <T : BlockEntity?> getTicker(
         world: World,
         state: BlockState,

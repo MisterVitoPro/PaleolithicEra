@@ -7,7 +7,10 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderer
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory
 import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.util.math.MatrixStack
+//? if >1.21.4 {
 import net.minecraft.item.ItemDisplayContext
+//?} else {
+/*import net.minecraft.item.ModelTransformationMode*///?}
 import net.minecraft.util.math.RotationAxis
 import net.minecraft.util.math.Vec3d
 import kotlin.math.sin
@@ -42,8 +45,11 @@ class FoodDryerBlockEntityRenderer(
         matrices: MatrixStack,
         vertexConsumers: VertexConsumerProvider,
         light: Int,
+        //? if >1.21.4 {
         overlay: Int,
         cameraPos: Vec3d?
+        //?} else {
+        /*overlay: Int*///?}
     ) {
         val renderData = entity.getRenderingData()
         if (renderData.isEmpty()) return
@@ -76,7 +82,10 @@ class FoodDryerBlockEntityRenderer(
             // Render the item
             itemRenderer.renderItem(
                 data.stack,
+                //? if >1.21.4 {
                 ItemDisplayContext.FIXED,
+                //?} else {
+                /*ModelTransformationMode.FIXED,*///?}
                 lightLevel,
                 overlay,
                 matrices,

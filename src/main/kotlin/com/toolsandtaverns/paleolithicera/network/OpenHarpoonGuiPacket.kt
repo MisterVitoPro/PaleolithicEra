@@ -99,7 +99,10 @@ object OpenHarpoonGuiPacket {
         )
 
         // Damage the harpoon and handle potential breakage
+        //? if >=1.21.6 {
         stack.damage(1, player, attempt.hand)
+        //?} else {
+        /*stack.damage(1, player, slot)*///?}
         if (stack.isEmpty) {
             // Notify the client that the item broke for proper visual/sound effects
             player.sendEquipmentBreakStatus(item, slot)

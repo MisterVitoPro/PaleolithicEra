@@ -46,16 +46,28 @@ object ModItems {
     val PATCHED_HIDE: Item = register("patched_hide", { settings: Item.Settings -> Item(settings) })
 
     val HIDE_CAP: Item = register("hide_cap", { settings: Item.Settings ->
+        //? if >1.21.4 {
         Item(settings.armor(HIDE_MATERIAL, EquipmentType.HELMET))
+        //?} else {
+        /*ArmorItem(HIDE_MATERIAL, EquipmentType.HELMET, settings)*///?}
     })
     val HIDE_TUNIC: Item = register("hide_tunic", { settings: Item.Settings ->
+        //? if >1.21.4 {
         Item(settings.armor(HIDE_MATERIAL, EquipmentType.CHESTPLATE))
+        //?} else {
+        /*ArmorItem(HIDE_MATERIAL, EquipmentType.CHESTPLATE, settings)*///?}
     })
     val HIDE_LEGGINGS: Item = register("hide_leggings", { settings: Item.Settings ->
+        //? if >1.21.4 {
         Item(settings.armor(HIDE_MATERIAL, EquipmentType.LEGGINGS))
+        //?} else {
+        /*ArmorItem(HIDE_MATERIAL, EquipmentType.LEGGINGS, settings)*///?}
     })
     val HIDE_SHOES: Item = register("hide_shoes", { settings: Item.Settings ->
+        //? if >1.21.4 {
         Item(settings.armor(HIDE_MATERIAL, EquipmentType.BOOTS))
+        //?} else {
+        /*ArmorItem(HIDE_MATERIAL, EquipmentType.BOOTS, settings)*///?}
     })
 
     val WOODEN_SPEAR = register(
@@ -66,7 +78,10 @@ object ModItems {
                     .attributeModifiers(SpearItem.createAttributeModifiers(ToolMaterial.WOOD))
                     .component(DataComponentTypes.TOOL, SpearItem.createToolComponent(ToolMaterial.WOOD))
                     .enchantable(ToolMaterial.WOOD.enchantmentValue())
+                    //? if >1.21.4 {
                     .component(DataComponentTypes.WEAPON, WeaponComponent(1)),
+                    //?} else {
+                    /*,*///?}
                 ::WoodenSpearEntity
             )
         }
@@ -86,7 +101,10 @@ object ModItems {
                     .attributeModifiers(SpearItem.createAttributeModifiers(ModToolMaterials.BONE_MATERIAL))
                     .component(DataComponentTypes.TOOL, SpearItem.createToolComponent(ModToolMaterials.BONE_MATERIAL))
                     .enchantable(ModToolMaterials.BONE_MATERIAL.enchantmentValue())
+                    //? if >1.21.4 {
                     .component(DataComponentTypes.WEAPON, WeaponComponent(1)),
+                    //?} else {
+                    /*,*///?}
                 ::BoneSpearEntity
             )
         })

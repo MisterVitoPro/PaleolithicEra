@@ -102,7 +102,10 @@ class FireDrillItem(settings: Settings) : Item(settings) {
                 }
 
                 // Damage the fire drill item by 1 durability point
+                //? if >=1.21.6 {
                 stack.damage(1, user, user.activeHand)
+                //?} else {
+                /*stack.damage(1, user, LivingEntity.getSlotForHand(user.activeHand))*///?}
             }
         }
 

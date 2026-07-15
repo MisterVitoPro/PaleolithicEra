@@ -2,6 +2,7 @@ package com.toolsandtaverns.paleolithicera.item
 
 import com.toolsandtaverns.paleolithicera.network.OpenHarpoonGuiPacket
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
+//? if >1.21.4
 import net.minecraft.component.type.TooltipDisplayComponent
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.fluid.Fluids
@@ -18,6 +19,7 @@ import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.RaycastContext
 import net.minecraft.world.World
+//? if >1.21.4
 import java.util.function.Consumer
 
 /**
@@ -63,6 +65,7 @@ open class HarpoonItem(settings: Settings) : Item(settings) {
     }
 
     @Deprecated("Overrides a deprecated method", level = DeprecationLevel.HIDDEN)
+    //? if >1.21.4 {
     override fun appendTooltip(
         stack: ItemStack,
         context: TooltipContext,
@@ -78,5 +81,20 @@ open class HarpoonItem(settings: Settings) : Item(settings) {
             )
         }
     }
+    //?} else {
+    /*override fun appendTooltip(
+        stack: ItemStack,
+        context: TooltipContext,
+        tooltip: MutableList<Text>,
+        type: TooltipType
+    ) {
+        if (type.isAdvanced && stack.isDamaged) {
+            val durability = stack.maxDamage - stack.damage
+            tooltip.add(
+                Text.translatable("item.durability", durability, stack.maxDamage)
+                    .formatted(Formatting.DARK_GRAY)
+            )
+        }
+    }*///?}
 }
 

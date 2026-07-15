@@ -45,7 +45,12 @@ class KnifeItem(
     settings: Settings,
     attackDamage: Float = 0.5f,
     attackSpeed: Float = -2.2f,
-) : Item(settings.tool(material, BlockTags.WOOL, attackDamage, attackSpeed, 0.0F)) {
+) : Item(
+    //? if >1.21.4 {
+    settings.tool(material, BlockTags.WOOL, attackDamage, attackSpeed, 0.0F)
+    //?} else {
+    /*material.applyToolSettings(settings, BlockTags.WOOL, attackDamage, attackSpeed)*///?}
+) {
 
     /**
      * Handles the behavior when the knife is used on a block, primarily for stripping logs.
@@ -142,9 +147,14 @@ class KnifeItem(
      * @return true if the stripping attempt should be canceled, false otherwise
      */
     private fun shouldCancelStripAttempt(context: ItemUsageContext): Boolean {
+        //? if >1.21.4 {
         val playerEntity = context.player ?: return false
         return context.hand == Hand.MAIN_HAND && playerEntity.offHandStack
             .contains(DataComponentTypes.BLOCKS_ATTACKS) && !playerEntity.shouldCancelInteraction()
+        //?} else {
+        /*val player = context.player ?: return false
+        return context.hand == Hand.MAIN_HAND && player.offHandStack.isOf(Items.SHIELD) &&
+            player.isUsingItem && !player.shouldCancelInteraction()*///?}
     }
 
     /**

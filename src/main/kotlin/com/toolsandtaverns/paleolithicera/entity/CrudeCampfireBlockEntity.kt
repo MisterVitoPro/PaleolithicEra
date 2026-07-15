@@ -1,11 +1,14 @@
 package com.toolsandtaverns.paleolithicera.entity
 
-import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
 import com.toolsandtaverns.paleolithicera.registry.ModEntityType
+//? if >=1.21.6 {
+import com.toolsandtaverns.paleolithicera.PaleolithicEra.LOGGER
+//?}
 import net.minecraft.block.BlockState
 import net.minecraft.block.CampfireBlock
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.component.ComponentMap
+//? if >1.21.4
 import net.minecraft.component.ComponentsAccess
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.ContainerComponent
@@ -22,11 +25,15 @@ import net.minecraft.recipe.ServerRecipeManager.MatchGetter
 import net.minecraft.recipe.input.SingleStackRecipeInput
 import net.minecraft.registry.RegistryWrapper.WrapperLookup
 import net.minecraft.server.world.ServerWorld
+//? if >=1.21.6 {
 import net.minecraft.storage.NbtWriteView
 import net.minecraft.storage.ReadView
 import net.minecraft.storage.WriteView
+//?}
 import net.minecraft.util.Clearable
+//? if >=1.21.6 {
 import net.minecraft.util.ErrorReporter
+//?}
 import net.minecraft.util.ItemScatterer
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.BlockPos
@@ -100,6 +107,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      *
      * @param view The data source to read from
      */
+    //? if >=1.21.6 {
     override fun readData(view: ReadView) {
         super.readData(view)
         this.itemsBeingCooked.clear()
@@ -124,6 +132,44 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
         }) { Arrays.fill(this.cookingTotalTimes, 0) }
         burnTicksRemaining = view.getInt("BurnTicksRemaining", 0)
     }
+    //?} else if >1.21.4 {
+    /*override fun readNbt(nbt: NbtCompound, registries: WrapperLookup) {
+        super.readNbt(nbt, registries)
+        itemsBeingCooked.clear()
+        Inventories.readNbt(nbt, itemsBeingCooked, registries)
+        val times = nbt.getIntArray("CookingTimes").orElse(IntArray(0))
+        if (times.isNotEmpty()) {
+            System.arraycopy(times, 0, cookingTimes, 0, min(cookingTimes.size, times.size))
+        } else {
+            Arrays.fill(cookingTimes, 0)
+        }
+        val totalTimes = nbt.getIntArray("CookingTotalTimes").orElse(IntArray(0))
+        if (totalTimes.isNotEmpty()) {
+            System.arraycopy(totalTimes, 0, cookingTotalTimes, 0, min(cookingTotalTimes.size, totalTimes.size))
+        } else {
+            Arrays.fill(cookingTotalTimes, 0)
+        }
+        burnTicksRemaining = nbt.getInt("BurnTicksRemaining").orElse(0)
+    }*///?}
+    //? if <=1.21.4 {
+    /*override fun readNbt(nbt: NbtCompound, registries: WrapperLookup) {
+        super.readNbt(nbt, registries)
+        itemsBeingCooked.clear()
+        Inventories.readNbt(nbt, itemsBeingCooked, registries)
+        val times = nbt.getIntArray("CookingTimes")
+        if (times.isNotEmpty()) {
+            System.arraycopy(times, 0, cookingTimes, 0, min(cookingTimes.size, times.size))
+        } else {
+            Arrays.fill(cookingTimes, 0)
+        }
+        val totalTimes = nbt.getIntArray("CookingTotalTimes")
+        if (totalTimes.isNotEmpty()) {
+            System.arraycopy(totalTimes, 0, cookingTotalTimes, 0, min(cookingTotalTimes.size, totalTimes.size))
+        } else {
+            Arrays.fill(cookingTotalTimes, 0)
+        }
+        burnTicksRemaining = nbt.getInt("BurnTicksRemaining")
+    }*///?}
 
     /**
      * Writes the entity's data to NBT or component storage.
@@ -140,6 +186,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      *
      * @param view The data destination to write to
      */
+    //? if >=1.21.6 {
     override fun writeData(view: WriteView) {
         super.writeData(view)
         Inventories.writeData(view, this.itemsBeingCooked, true)
@@ -147,6 +194,14 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
         view.putIntArray("CookingTotalTimes", this.cookingTotalTimes)
         view.putInt("BurnTicksRemaining", burnTicksRemaining)
     }
+    //?} else {
+    /*override fun writeNbt(nbt: NbtCompound, registries: WrapperLookup) {
+        super.writeNbt(nbt, registries)
+        Inventories.writeNbt(nbt, itemsBeingCooked, true, registries)
+        nbt.putIntArray("CookingTimes", cookingTimes)
+        nbt.putIntArray("CookingTotalTimes", cookingTotalTimes)
+        nbt.putInt("BurnTicksRemaining", burnTicksRemaining)
+    }*///?}
 
     /**
      * Creates a packet to send this block entity's data to clients.
@@ -171,6 +226,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      * @param registries Registry wrapper for data serialization
      * @return NBT compound containing initial chunk data
      */
+    //? if >=1.21.6 {
     override fun toInitialChunkDataNbt(registries: WrapperLookup): NbtCompound? {
         ErrorReporter.Logging(this.reporterContext, LOGGER).use { logging ->
             val nbtWriteView = NbtWriteView.create(logging, registries)
@@ -178,6 +234,8 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
             return nbtWriteView.nbt
         }
     }
+    //?} else {
+    /*override fun toInitialChunkDataNbt(registries: WrapperLookup): NbtCompound = createNbt(registries)*///?}
 
     /**
      * Attempts to add an item to the campfire for cooking.
@@ -260,11 +318,14 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      * @param pos The position of the block
      * @param oldState The previous blockstate
      */
-    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState?) {
-        if (this.world != null) {
-            ItemScatterer.spawn(this.world, pos, this.itemsBeingCooked)
-        }
+    fun dropItems(world: World, pos: BlockPos) {
+        ItemScatterer.spawn(world, pos, itemsBeingCooked)
     }
+
+    //? if >1.21.4 {
+    override fun onBlockReplaced(pos: BlockPos, oldState: BlockState?) {
+        world?.let { dropItems(it, pos) }
+    }//?}
 
     /**
      * Reads component data from the component system.
@@ -275,6 +336,7 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      *
      * @param components The components access object containing data
      */
+    //? if >1.21.4 {
     override fun readComponents(components: ComponentsAccess) {
         super.readComponents(components)
         (components.getOrDefault(
@@ -310,10 +372,12 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
      *
      * @param view The write view to modify
      */
+    //? if >=1.21.6 {
     @Deprecated("Deprecated in Java")
     override fun removeFromCopiedStackData(view: WriteView) {
         view.remove("Items")
-    }
+    }//?}
+    //?}
 
     /**
      * Starts the burn timer for the crude campfire.
@@ -496,7 +560,10 @@ class CrudeCampfireBlockEntity(pos: BlockPos, state: BlockState?) :
                         .toFloat() * fixed).toDouble()
 
                     (0..3).forEach { k ->
+                        //? if >1.21.4 {
                         world.addParticleClient(ParticleTypes.SMOKE, d, e, g, 0.0, 5.0E-4, 0.0)
+                        //?} else {
+                        /*world.addParticle(ParticleTypes.SMOKE, d, e, g, 0.0, 5.0E-4, 0.0)*///?}
                     }
                 }
             }

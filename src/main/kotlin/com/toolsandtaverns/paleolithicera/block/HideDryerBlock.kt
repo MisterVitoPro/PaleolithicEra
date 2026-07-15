@@ -38,6 +38,20 @@ class HideDryerBlock(settings: Settings) : BlockWithEntity(settings) {
         return HideDryerBlockEntity(pos, state)
     }
 
+    //? if <=1.21.4 {
+    /*override fun onStateReplaced(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        newState: BlockState,
+        moved: Boolean
+    ) {
+        if (!state.isOf(newState.block)) {
+            (world.getBlockEntity(pos) as? HideDryerBlockEntity)?.dropItems(world, pos)
+        }
+        super.onStateReplaced(state, world, pos, newState, moved)
+    }*///?}
+
     override fun getRenderType(state: BlockState): BlockRenderType {
         return BlockRenderType.MODEL
     }

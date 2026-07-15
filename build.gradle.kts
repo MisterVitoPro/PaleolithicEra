@@ -7,7 +7,7 @@ import java.time.Duration
 
 plugins {
 	kotlin("jvm")
-	id("fabric-loom")
+	id("net.fabricmc.fabric-loom-remap")
 	id("maven-publish")
 	java
 }
@@ -25,6 +25,7 @@ version = property("mod_version")!!
 fabricApi {
 	configureDataGeneration {
 		client = true
+		outputDirectory = rootProject.file("src/main/generated")
 	}
 }
 
@@ -64,6 +65,11 @@ kotlin {
 tasks {
 
 	processResources {
+		dependsOn(project.tasks.matching { it.name == "stonecutterGenerate" })
+
+		// Fabric datagen's cache is build bookkeeping, not a runtime resource.
+		exclude(".cache/**")
+
 		// Ensure changes to these props re-run resource processing
 		inputs.property("version", project.version)
 		inputs.property("minecraft_version", minecraft_version)
@@ -85,7 +91,7 @@ tasks {
 	}
 
 	jar {
-		from("LICENSE")
+		from(rootProject.file("LICENSE"))
 		// Exclude test files from the jar to prevent bloating
 		exclude("**/test/**")
 		exclude("**/*Test.class")
@@ -99,6 +105,7 @@ tasks {
 	publishing {
 		publications {
 			create<MavenPublication>("mavenJava") {
+				artifactId = "${property("archives_base_name")}-${minecraft_version}"
 				artifact(remapJar) {
 					builtBy(remapJar)
 				}
@@ -252,4 +259,14 @@ java {
 	// if it is present.
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
+}
+
+tasks.withType<org.gradle.api.tasks.testing.Test>().configureEach {
+	systemProperty("paleolithic.minecraftVersion", minecraft_version)
+	systemProperty("paleolithic.loaderVersion", loader_version)
+}
+
+// Generated assets are shared by every node and are authored from the VCS version only.
+tasks.matching { it.name == "runDatagen" }.configureEach {
+	enabled = minecraft_version == "1.21.7"
 }

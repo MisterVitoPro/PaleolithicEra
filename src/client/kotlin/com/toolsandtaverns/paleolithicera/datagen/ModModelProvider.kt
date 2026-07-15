@@ -55,8 +55,12 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 .put(TextureKey.PARTICLE, id("block/hide_dryer_side"))
         }
 
+        //? if >1.21.4 {
         blockStateModelGenerator.createLogTexturePool(ModBlocks.WILLOW_LOG).log(ModBlocks.WILLOW_LOG)
         blockStateModelGenerator.createLogTexturePool(ModBlocks.STRIPPED_WILLOW_LOG).log(ModBlocks.STRIPPED_WILLOW_LOG)
+        //?} else {
+        /*blockStateModelGenerator.registerLog(ModBlocks.WILLOW_LOG).log(ModBlocks.WILLOW_LOG)
+        blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_WILLOW_LOG).log(ModBlocks.STRIPPED_WILLOW_LOG)*///?}
 
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BUNDLE_OF_STICKS)
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.WILLOW_PLANKS)
@@ -141,6 +145,7 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
         block: Block,
         age: IntProperty = EdiblePlantBlock.AGE
     ) {
+        //? if >1.21.4 {
         this.blockStateCollector.accept(
             VariantsBlockModelDefinitionCreator.of(block).with(
                 BlockStateVariantMap.models(age).generate { stage: Int? ->
@@ -153,6 +158,17 @@ class ModModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                     )
                 })
         )
+        //?} else {
+        /*val variants = BlockStateVariantMap.create(age).register { stage ->
+            val modelId = Models.CROSS.upload(
+                block,
+                "_stage$stage",
+                TextureMap.cross(ModelIds.getBlockSubModelId(block, "_stage$stage")),
+                this.modelCollector
+            )
+            BlockStateVariant.create().put(VariantSettings.MODEL, modelId)
+        }
+        this.blockStateCollector.accept(VariantsBlockStateSupplier.create(block).coordinate(variants))*///?}
     }
 
 }

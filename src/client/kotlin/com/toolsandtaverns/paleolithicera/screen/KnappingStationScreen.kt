@@ -1,9 +1,12 @@
 package com.toolsandtaverns.paleolithicera.screen
 
 import com.toolsandtaverns.paleolithicera.util.id
+//? if >=1.21.6 {
 import net.minecraft.client.gl.RenderPipelines
+//?}
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
+import net.minecraft.client.render.RenderLayer
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
 
@@ -61,7 +64,10 @@ class KnappingStationScreen(
 
         // Draw the background texture using the GUI render pipeline
         context.drawTexture(
+            //? if >=1.21.6 {
             RenderPipelines.GUI_TEXTURED, // Use the GUI texture pipeline for proper rendering
+            //?} else {
+            /*RenderLayer::getGuiTextured,*///?}
             TEXTURE,                      // The texture to draw
             x, y,                         // Screen position to draw at
             0f, 0f,                       // Starting UV coordinates in the texture
